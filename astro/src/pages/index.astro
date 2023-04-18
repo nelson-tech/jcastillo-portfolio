@@ -1,6 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+import { getDirectusClient } from '../utils/getDirectusClient';
+
+const directus = await getDirectusClient()
+
+const menuItems = (await directus.items("menu_items").readByQuery({fields: "*"}))?.data
+
 ---
 
 <Layout title="Welcome to Astro.">
