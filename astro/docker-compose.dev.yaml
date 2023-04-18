@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  astro_dev:
+    container_name: ${PROJECT_NAME?err}_astro_dev
+    image: ${PROJECT_NAME?err}_astro_dev
+    restart: on-failure
+    build:
+      context: ./
+      dockerfile: ./Dockerfile.dev
+    volumes:
+      - "./:/app"
+    command: >
+      bash -c "npm run dev"
+    networks:
+      - nginx
+
+networks:
+  nginx:
+    external: true
