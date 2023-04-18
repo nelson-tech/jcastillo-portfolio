@@ -1,0 +1,7 @@
+{
+  "CACHE_ENABLED": "true",
+  "CACHE_STORE": "redis",
+  "CACHE_REDIS": "redis://api-cache:6379",
+  "CORS_ENABLED": "true",
+  "CORS_ORIGIN": "true"
+}

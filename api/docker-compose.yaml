@@ -1,0 +1,121 @@
+version: "3.8"
+
+services:
+  directus:
+    container_name: ${PROJECT_NAME?err}_api
+    image: directus/directus:${DIRECTUS_VERSION?err}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./directus/config.json:/directus/config.json
+    environment:
+      PUID: 1000
+      PGID: 1000
+      KEY: ${DIRECTUS_KEY?err}
+      SECRET: ${DIRECTUS_SECRET?err}
+      ADMIN_EMAIL: ${DIRECTUS_ADMIN_EMAIL?err}
+      ADMIN_PASSWORD: ${DIRECTUS_ADMIN_PASSWORD?err}
+      PUBLIC_URL: "https://${API_DOMAIN?err}"
+      CONFIG_PATH: ${DIRECTUS_CONFIG_PATH?err}
+      DB_HOST: "api-db"
+      DB_PORT: ${DB_PORT?err}
+      DB_CLIENT: "mysql"
+      DB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD?err}
+      DB_DATABASE: ${DB_DATABASE?err}
+      DB_USER: ${DB_USER?err}
+      DB_PASSWORD: ${DB_PASSWORD?err}
+      STORAGE_LOCATIONS: ${STORAGE_LOCATIONS?err}
+      STORAGE_AWS_DRIVER: ${STORAGE_AWS_DRIVER?err}
+      STORAGE_AWS_ROOT: ${STORAGE_AWS_ROOT?err}
+      STORAGE_AWS_BUCKET: ${STORAGE_AWS_BUCKET?err}
+      STORAGE_AWS_REGION: ${STORAGE_AWS_REGION?err}
+      STORAGE_AWS_KEY: ${STORAGE_AWS_KEY?err}
+      STORAGE_AWS_SECRET: ${STORAGE_AWS_SECRET?err}
+    networks:
+      - nginx
+      - api
+    depends_on:
+      - api-cache
+      - api-db
+
+  api-cache:
+    container_name: ${PROJECT_NAME?err}_api_cache
+    image: redis:${REDIS_VERSION?err}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - api
+
+  api-db:
+    container_name: ${PROJECT_NAME?err}_api_db
+    image: mariadb:${MARIADB_VERSION?err}
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE?err}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD?err}
+      MYSQL_USER: ${DB_USER?err}
+      MYSQL_PASSWORD: ${DB_PASSWORD?err}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - api_db:/var/lib/mysql
+    networks:
+      - api
+
+  api-backup:
+    container_name: ${PROJECT_NAME?err}_api_db_backup
+    image: databack/mysql-backup:${MYSQL_BACKUP_VERSION?err}
+    environment:
+      DB_SERVER: api-db
+      DB_USER: ${DB_USER?err}
+      DB_PASS: ${DB_PASSWORD?err}
+      DB_NAMES: ${DB_DATABASE?err}
+      SINGLE_DATABASE: "true"
+      DB_DUMP_TARGET: ${DB_BACKUP_TARGET?err}
+      # # Uncomment for instant, one-time backup (will exit after upload)
+      # RUN_ONCE: "true"
+      DB_DUMP_BEGIN: "0700"
+      AWS_ACCESS_KEY_ID: ${S3_ACCESS_KEY?err}
+      AWS_SECRET_ACCESS_KEY: ${S3_ACCESS_SECRET?err}
+      AWS_DEFAULT_REGION: ${S3_REGION?err}
+      COMPRESSION: bzip2
+      DB_DUMP_KEEP_PERMISSIONS: "false"
+      NICE: "true"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - api
+    depends_on:
+      - api-db
+
+  # mysql-restore:
+  #   container_name: ${PROJECT_NAME?err}_api_db_restore
+  #   image: databack/mysql-backup:${MYSQL_BACKUP_VERSION?err}
+  #   environment:
+  #     DB_SERVER: api-db
+  #     DB_USER: ${DB_USER?err}
+  #     DB_PASS: ${DB_PASSWORD?err}
+  #     DB_NAMES: ${DB_DATABASE?err}
+  #     SINGLE_DATABASE: "true"
+  #     ## IMPORTANT: Update filename with intended restore ##
+  #     DB_RESTORE_TARGET: ${DB_BACKUP_TARGET?err}/db_backup_2023-03-15T06:17:58Z.tbz2
+  #     AWS_ACCESS_KEY_ID: ${S3_ACCESS_KEY?err}
+  #     AWS_SECRET_ACCESS_KEY: ${S3_ACCESS_SECRET?err}
+  #     AWS_DEFAULT_REGION: ${S3_REGION?err}
+  #     COMPRESSION: bzip2
+  #   volumes:
+  #     - /etc/localtime:/etc/localtime:ro
+  #   networks:
+  #     - api
+  #   depends_on:
+  #     - api-db
+
+volumes:
+  api_db:
+    name: ${PROJECT_NAME?err}_api_db
+
+networks:
+  nginx:
+    external: true
+  api:
+    name: ${PROJECT_NAME?err}_api
+  internal:
+    name: ${PROJECT_NAME?err}_internal
