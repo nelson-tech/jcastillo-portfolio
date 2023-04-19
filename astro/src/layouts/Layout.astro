@@ -1,6 +1,24 @@
 ---
+import { getDirectusClient } from "../utils/getDirectusClient";
+
+const directus = await getDirectusClient();
+
+const menuItems = (
+  await directus.items("menu_items").readByQuery({
+    fields: ["id", "label", "path"],
+    filter: { status: "published" },
+  })
+)?.data;
+
+const footerIcons = (
+  await directus.items("footer_icons").readByQuery({
+    fields: ["id", "brand", "link"],
+    filter: { status: "published" },
+  })
+)?.data;
+
 export interface Props {
-	title: string;
+  title: string;
 }
 
 const { title } = Astro.props;
@@ -8,28 +26,74 @@ const { title } = Astro.props;
 
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script
+      src="https://kit.fontawesome.com/b4e4107e2e.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body
+    class="bg-white min-h-screen flex flex-col justify-between bg-gradient-to-tr from-slate-300 to-slate-50"
+  >
+    <header>
+      <nav class="py-8 px-8 flex items-center justify-between">
+        <img src="Jose Castillo logo.png" class="h-16 md:h-20" />
+        <ul class="hidden md:flex md:gap-4">
+          {
+            menuItems?.map((menuItem) => {
+              return (
+                <li>
+                  <a
+                    href={menuItem.path}
+                    class="p-2 text-gray-400 hover:text-highlight transition-all"
+                  >
+                    {menuItem.label}
+                  </a>
+                </li>
+              );
+            })
+          }
+        </ul>
+        <i class="fa-solid fa-bars md:hidden"></i>
+      </nav>
+    </header>
+    <slot />
+    <footer class="footer bg-white border-t-2 border-black mt-8 py-12">
+      <div class="social flex justify-center gap-4">
+        {
+          footerIcons?.map((icon) => {
+            return (
+              <a
+                href={icon.link}
+                target="_blank"
+                class="hover:animate-pulse"
+                title={icon.brand}
+              >
+                <i
+                  class={`fab fa-${icon.brand.toLowerCase()} fa-2x hover:animate-pulse`}
+                />
+              </a>
+            );
+          })
+        }
+      </div>
+    </footer>
+  </body>
 </html>
 <style is:global>
-	:root {
-		--accent: 124, 58, 237;
-		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background-color: #F6F6F6;
-	}
-	code {
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-			Bitstream Vera Sans Mono, Courier New, monospace;
-	}
+  :root {
+    --accent: 124, 58, 237;
+    --accent-gradient: linear-gradient(
+      45deg,
+      rgb(var(--accent)),
+      #da62c4 30%,
+      white 60%
+    );
+  }
 </style>
