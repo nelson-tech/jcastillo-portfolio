@@ -43,7 +43,8 @@ const { title } = Astro.props;
   >
     <header>
       <nav class="py-8 px-8 flex items-center justify-between">
-        <img src="Jose Castillo logo.png" class="h-16 md:h-20" />
+        <a href="/"><img src="Jose Castillo logo.png" class="h-16 md:h-20" /></a
+        >
         <ul class="hidden md:flex md:gap-4">
           {
             menuItems?.map((menuItem) => {
@@ -60,7 +61,9 @@ const { title } = Astro.props;
             })
           }
         </ul>
-        <i class="fa-solid fa-bars md:hidden"></i>
+        <div class="md:hidden">
+          <MenuButton client:load />
+        </div>
       </nav>
     </header>
     <slot />
@@ -84,6 +87,7 @@ const { title } = Astro.props;
         }
       </div>
     </footer>
+    <MobileMenu menuItems={menuItems} client:load />
   </body>
 </html>
 <style is:global>
