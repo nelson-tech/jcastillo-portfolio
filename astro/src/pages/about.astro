@@ -1,0 +1,42 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getDirectusClient } from "../utils/getDirectusClient";
+
+const directus = await getDirectusClient();
+
+const aboutData = await directus.singleton("about").read({
+  fields: ["id", "image", "content", "resume"],
+});
+
+const apiURL = import.meta.env.PUBLIC_DIRECTUS_URL;
+---
+
+<Layout title="About">
+  <div class="flex flex-col md:flex-row items-center justify-around">
+    <div class="flex items-center basis-1/2 justify-center">
+      <img
+        src={`${apiURL}/assets/${aboutData?.image}`}
+        class="max-h-[60vh] object-contain p-8"
+      />
+    </div>
+    <div
+      class="flex flex-col justify-center basis-1/2 p-16 text-center tracking-wider leading-loose text-gray-700"
+    >
+      <div set:html={aboutData?.content} />
+      <button
+        class="flex cursor-default justify-center items-center mx-auto mt-8 border-2 border-highlight text-highlight rounded px-6 py-4 bg-white overflow-hidden"
+      >
+        Resumé:
+        <a href={`${apiURL}/assets/${aboutData?.resume}?download`} download>
+          <i
+            class="fas fa-file-arrow-down fa-xl ml-2 p-4 hover:text-green-500 transition-colors"
+          ></i></a
+        >
+        <a href={`${apiURL}/assets/${aboutData?.resume}`}>
+          <i class="fas fa-eye fa-xl p-4 hover:text-green-500 transition-colors"
+          ></i></a
+        >
+      </button>
+    </div>
+  </div>
+</Layout>
