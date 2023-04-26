@@ -1,0 +1,30 @@
+---
+import type { Collections } from "../utils/types/directus";
+
+export interface Props {
+  category: Collections["work_categories"];
+}
+const { category } = Astro.props;
+
+const apiURL = import.meta.env.PUBLIC_DIRECTUS_URL;
+---
+
+<div class="aspect-video group relative">
+  <img
+    src={`${apiURL}/assets/${category.image}`}
+    class="group-hover:grayscale transition-all duration-500 object-fill w-full h-full"
+  />
+  <div
+    class="absolute inset-0 z-10 bg-black opacity-0 group-hover:opacity-100 transition-all bg-opacity-50 duration-500"
+  >
+    <a
+      href={`/work/${category.slug}`}
+      class="w-full h-full flex justify-center items-center"
+    >
+      <span
+        class="text-4xl text-white -translate-y-4 group-hover:translate-y-0 transition-all duration-500 text-center"
+        >{category.name}</span
+      >
+    </a>
+  </div>
+</div>
