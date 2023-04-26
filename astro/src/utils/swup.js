@@ -9,7 +9,7 @@ const swup = new Swup({
   plugins: [
     new SwupA11yPlugin(),
     new SwupScriptsPlugin(),
-    new SwupProgressPlugin(),
+    // new SwupProgressPlugin(),
     new SwupHeadPlugin(),
     new SwupSlideTheme(),
   ],
