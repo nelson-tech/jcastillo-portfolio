@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "JoseCastillo",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -10,6 +10,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/node": "^5.1.1",
     "@astrojs/svelte": "^2.1.0",
     "@astrojs/tailwind": "^3.1.1",
     "@directus/sdk": "^10.3.3",
@@ -25,6 +26,8 @@
     "@swup/progress-plugin": "^2.0.0",
     "@swup/scripts-plugin": "^1.1.0",
     "@swup/slide-theme": "^1.0.5",
+    "svelte-carousel": "^1.0.25",
+    "svelte-lightbox": "^1.1.1",
     "swup": "^3.0.6"
   }
 }
