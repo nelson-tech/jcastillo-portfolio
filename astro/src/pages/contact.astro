@@ -5,7 +5,7 @@ import { getDirectusClient } from "../utils/getDirectusClient";
 const directus = await getDirectusClient();
 
 const contactData = await directus.singleton("contact").read({
-  fields: ["id", "content", "email", "phone"],
+  fields: ["content", "email", "phone"],
 });
 ---
 
@@ -16,14 +16,17 @@ const contactData = await directus.singleton("contact").read({
     <div
       class="flex flex-col justify-center basis-1/2 mt-8 md:mt-0 p-8 text-center tracking-wider leading-loose md:ml-8"
     >
-      <div set:html={contactData?.content} />
+      <div
+        set:html={contactData?.content}
+        class="[&>h2]:font-bold [&>h2]:text-4xl [&>p]:mt-8 [&>p]:text-xl"
+      />
     </div>
     <div
       class="flex flex-col justify-center basis-1/2 mt-8 md:mt-0 text-center tracking-wider leading-loose"
     >
       <a
         href={`mailto:${contactData?.email}`}
-        class="w-72 p-8 rounded border mb-8 border-highlight group bg-white mx-auto hover:bg-gradient-to-tr from-slate-50 to-white transition-all hover:text-highlight"
+        class="w-72 p-8 rounded border mb-8 border-highlight group mx-auto hover:bg-gradient-to-tr from-slate-50 to-white transition-all hover:text-highlight"
       >
         <i class="fas fa-envelope fa-lg group-hover:scale-125 transition-all"
         ></i>
@@ -32,7 +35,7 @@ const contactData = await directus.singleton("contact").read({
       </a>
       <a
         href={`tel:${contactData?.phone}`}
-        class="p-8 w-72 rounded border mb-8 border-highlight group bg-white mx-auto hover:bg-gradient-to-tr from-slate-50 to-slate-white transition-all hover:text-highlight"
+        class="p-8 w-72 rounded border mb-8 border-highlight group mx-auto hover:bg-gradient-to-tr from-slate-50 to-slate-white transition-all hover:text-highlight"
       >
         <i class="fas fa-phone fa-lg group-hover:scale-125 transition-all"></i>
         <i
