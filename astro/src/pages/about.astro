@@ -5,7 +5,7 @@ import { getDirectusClient } from "../utils/getDirectusClient";
 const directus = await getDirectusClient();
 
 const aboutData = await directus.singleton("about").read({
-  fields: ["id", "image", "content", "resume"],
+  fields: ["image", "content", "resume"],
 });
 
 const apiURL = import.meta.env.PUBLIC_DIRECTUS_URL;
@@ -22,9 +22,12 @@ const apiURL = import.meta.env.PUBLIC_DIRECTUS_URL;
     <div
       class="flex flex-col justify-center basis-1/2 p-16 text-center tracking-wider leading-loose text-gray-700"
     >
-      <div set:html={aboutData?.content} />
+      <div
+        set:html={aboutData?.content}
+        class="[&>h2]:text-4xl [&>h2]:mb-4 [&>h2]:font-bold [&>p]:text-xl"
+      />
       <button
-        class="flex cursor-default justify-center items-center mx-auto mt-8 border-2 border-highlight text-highlight rounded px-6 py-4 bg-white overflow-hidden"
+        class="flex cursor-default justify-center items-center mx-auto mt-8 text-highlight rounded px-6 py-4 overflow-hidden"
       >
         Resumé:
         <a href={`${apiURL}/assets/${aboutData?.resume}?download`} download>
@@ -32,10 +35,10 @@ const apiURL = import.meta.env.PUBLIC_DIRECTUS_URL;
             class="fas fa-file-arrow-down fa-xl ml-2 p-4 hover:text-green-500 transition-colors"
           ></i></a
         >
-        <a href={`${apiURL}/assets/${aboutData?.resume}`}>
+        <!-- <a href={`${apiURL}/assets/${aboutData?.resume}`}>
           <i class="fas fa-eye fa-xl p-4 hover:text-green-500 transition-colors"
           ></i></a
-        >
+        > -->
       </button>
     </div>
   </div>
