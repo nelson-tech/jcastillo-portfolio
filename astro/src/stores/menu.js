@@ -1,3 +1,3 @@
-import { atom } from "nanostores";
+import { writable } from "svelte/store";
 
-export const isMenuOpen = atom(false);
+export const isMenuOpen = writable(false);
