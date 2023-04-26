@@ -36,7 +36,7 @@ services:
       DB_NAMES: ${DB_DATABASE?err}
       SINGLE_DATABASE: "true"
       ## IMPORTANT: Update filename with intended restore ##
-      DB_RESTORE_TARGET: ${DB_BACKUP_TARGET?err}/db_backup_2023-03-15T06:17:58Z.tbz2
+      DB_RESTORE_TARGET: ${DB_BACKUP_TARGET?err}/${DB_BACKUP_FILENAME?err}
       AWS_ACCESS_KEY_ID: ${S3_ACCESS_KEY?err}
       AWS_SECRET_ACCESS_KEY: ${S3_ACCESS_SECRET?err}
       AWS_DEFAULT_REGION: ${S3_REGION?err}
