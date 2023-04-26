@@ -1,17 +1,16 @@
 ---
-import type { Collections } from "../utils/types/directus";
+import { assetUrl } from "../utils/constants";
 
 export interface Props {
-  category: Collections["work_categories"];
+  category: WorkCategory;
 }
 const { category } = Astro.props;
-
-const apiURL = import.meta.env.PUBLIC_DIRECTUS_URL;
 ---
 
 <div class="aspect-video group relative">
   <img
-    src={`${apiURL}/assets/${category.image}`}
+    src={`${assetUrl}/${category.image.filename_disk}`}
+    alt={category.image.title ?? ""}
     class="group-hover:grayscale transition-all duration-500 object-fill w-full h-full"
   />
   <div

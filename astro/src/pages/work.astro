@@ -7,7 +7,7 @@ const directus = await getDirectusClient();
 
 const categories = (
   await directus.items("work_categories").readByQuery({
-    fields: ["name", "slug", "image", "status"],
+    fields: ["name", "slug", "image.*", "status"],
     filter: { status: "published" },
   })
 )?.data;
@@ -19,7 +19,8 @@ const categories = (
   >
     {
       categories?.map((category) => {
-        if (category) return <ProjectCard category={category} />;
+        if (category)
+          return <ProjectCard category={category as unknown as WorkCategory} />;
       })
     }
   </div>
