@@ -1,0 +1,69 @@
+---
+import PublicationCarousel from "../../components/PublicationCarousel.svelte";
+import Layout from "../../layouts/Layout.astro";
+import { getDirectusClient } from "../../utils/getDirectusClient";
+
+const directus = await getDirectusClient();
+
+const projects = await directus.singleton("academic_projects").read({
+  fields: ["*"],
+});
+---
+
+<Layout title="Public Diplomacy">
+  <div class="mx-4 md:mx-8 mt-16">
+    <div
+      id="publications"
+      class="pb-8 mb-8 border-b border-highlight border-opacity-50"
+    >
+      <h2 class="w-full text-center text-4xl font-bold text-highlight mb-8">
+        Academic Publications & Organization Support
+      </h2>
+      {
+        projects?.academic_publications && (
+          <div class="max-w-2xl mx-auto">
+            <PublicationCarousel
+              publications={projects.academic_publications}
+              client:load
+            />
+          </div>
+        )
+      }
+      <!-- <div class="text-center text-lg">
+        {
+          projects?.academic_publications.map((publication: AP_Publication) => {
+            return (
+              <div class="mb-16">
+                <p class="mb-4">{publication.text}</p>
+                <a
+                  href={publication.link}
+                  target="_blank"
+                  class="text-highlight hover:text-green-500 transition-colors"
+                >
+                  {publication.label}
+                </a>
+              </div>
+            );
+          })
+        }
+      </div> -->
+    </div>
+    <div id="podcasts">
+      <h2 class="w-full text-center text-4xl font-bold text-highlight mb-8">
+        Podcasts
+      </h2>
+      <div class="flex flex-wrap">
+        {
+          projects?.podcasts.map((podcast: AP_Podcasts) => {
+            return (
+              <div class="m-4 md:m-8 md:flex-1">
+                <p class="text-lg mb-4">{podcast.label}</p>
+                <div set:html={podcast.html} />
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+  </div>
+</Layout>

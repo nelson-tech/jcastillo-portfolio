@@ -1,0 +1,73 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getDirectusClient } from "../../utils/getDirectusClient";
+
+const directus = await getDirectusClient();
+
+const projects = await directus.singleton("music_projects").read({
+  fields: ["*"],
+});
+
+const apiURL = import.meta.env.PUBLIC_DIRECTUS_URL;
+---
+
+<Layout title="Music">
+  <div class="mx-4 md:mx-8">
+    <div class="flex justify-center">
+      <a href={projects?.link} target="_blank">
+        <img src={`${apiURL}/assets/${projects?.image}`} /></a
+      >
+    </div>
+    <div class="flex flex-wrap">
+      {
+        projects?.spotify.map((artist: Spotify) => {
+          return (
+            <iframe
+              style="border-radius:12px"
+              src={`https://open.spotify.com/embed/artist/${artist?.artist_id}?utm_source=generator`}
+              class="p-4 flex-1"
+              height="400"
+              frameborder="0"
+              allowfullscreen=""
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+            />
+          );
+        })
+      }
+    </div>
+    <div id="press-releases" class="my-8 text-xl">
+      <h4 class="text-center">
+        {projects?.text}
+      </h4>
+      <div class="text-center">
+        {
+          projects?.links.map((link: PressReview) => {
+            return (
+              <p class="font-bold">
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener"
+                  data-cke-saved-href={link.url}
+                >
+                  {link.label}
+                </a>
+              </p>
+            );
+          })
+        }
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  #press-releases p {
+    @apply mt-4;
+  }
+
+  #press-releases a {
+    @apply text-highlight hover:text-green-500 transition-colors;
+  }
+</style>

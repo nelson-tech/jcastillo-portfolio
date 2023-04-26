@@ -1,0 +1,36 @@
+---
+import Photograph from "../../components/Photograph.svelte";
+import Layout from "../../layouts/Layout.astro";
+import { getDirectusClient } from "../../utils/getDirectusClient";
+
+const directus = await getDirectusClient();
+
+const photographs = (
+  await directus.items("photographs").readByQuery({
+    fields: ["*"],
+    filter: { status: "published" },
+  })
+).data;
+---
+
+<Layout title="Photography">
+  <div>
+    <h2 class="text-4xl font-bold text-center text-highlight my-4">
+      Photography
+    </h2>
+    <p class="text-lg text-center">All Pictures by Jose Castillo.</p>
+    {
+      photographs && (
+        <div class="flex flex-wrap justify-center items-center">
+          {photographs.map((photograph) => {
+            return (
+              <div class="flex-1 max-w-96 max-h-96 min-w-[8rem] mx-8 mt-8 flex justify-center">
+                <Photograph photograph={photograph} client:load />
+              </div>
+            );
+          })}
+        </div>
+      )
+    }
+  </div>
+</Layout>
