@@ -11,6 +11,11 @@ type AP_Publication = {
 };
 
 type AcademicPublications = {
+  page_title: string;
+  page_header: string;
+  page_description: string;
+  academic_publications_header: string;
   academic_publications: AP_Publication[];
+  podcasts_header: string;
   podcasts: AP_Podcasts[];
 };

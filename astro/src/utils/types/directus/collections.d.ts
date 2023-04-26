@@ -13,9 +13,9 @@ type FooterIcon = {
 } & Status;
 
 type About = {
-  image: string;
+  image: API_Asset;
   content: string;
-  resume: string;
+  resume: API_Asset;
 };
 
 type Contact = {
@@ -23,12 +23,6 @@ type Contact = {
   email: string;
   phone: string;
 };
-
-type WorkCategory = {
-  name: string;
-  slug: string;
-  image: string;
-} & Status;
 
 type Collections = {
   menu_items: MenuItem;
@@ -38,6 +32,6 @@ type Collections = {
   work_categories: WorkCategory;
   music_projects: MusicProjects;
   academic_projects: AcademicPublications;
-  photographs: API_Photograph;
+  photography_projects: Photography_Projects;
   videos: API_Videos;
 };

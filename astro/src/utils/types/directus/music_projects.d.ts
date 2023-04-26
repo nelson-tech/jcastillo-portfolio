@@ -1,5 +1,5 @@
 type Hero = {
-  image: string;
+  image: API_Asset;
   link: string;
 };
 
@@ -20,6 +20,9 @@ type Reviews = {
 
 type MusicProjects = {
   id: ID;
+  page_title: string;
+  page_header: string;
+  page_description: string;
   spotify: Spotify[];
 } & Reviews &
   Hero;

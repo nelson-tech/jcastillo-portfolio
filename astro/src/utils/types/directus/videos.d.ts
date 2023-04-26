@@ -13,7 +13,13 @@ type API_Video = {
 
 type API_Videos = {
   id: ID;
+  page_title: string;
+  page_header: string;
+  page_description: string;
+  vr_header: string;
   vr: API_Video[];
+  editing_header: string;
   editing: API_Video[];
+  commercial_header: string;
   commercial: API_Video[];
 };
