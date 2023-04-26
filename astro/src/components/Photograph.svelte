@@ -1,15 +1,14 @@
 <script lang="ts">
   import { Lightbox } from "svelte-lightbox";
+  import { assetUrl } from "../utils/constants";
 
-  export let photograph: API_Photograph;
-
-  const apiURL = import.meta.env.PUBLIC_DIRECTUS_URL;
+  export let photograph: API_Asset;
 </script>
 
 <Lightbox>
   <img
-    src={`${apiURL}/assets/${photograph.image}`}
-    alt={photograph.alt}
+    src={`${assetUrl}/${photograph.filename_disk}`}
+    alt={photograph.title}
     class="object-contain rounded-sm md:rounded max-w-96 max-h-96"
   />
 </Lightbox>

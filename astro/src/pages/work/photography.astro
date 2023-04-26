@@ -1,31 +1,41 @@
 ---
+import PageHeader from "../../components/PageHeader.astro";
 import Photograph from "../../components/Photograph.svelte";
 import Layout from "../../layouts/Layout.astro";
 import { getDirectusClient } from "../../utils/getDirectusClient";
 
 const directus = await getDirectusClient();
 
-const photographs = (
-  await directus.items("photographs").readByQuery({
-    fields: ["*"],
-    filter: { status: "published" },
-  })
-).data;
+const photographyData = await directus.singleton("photography_projects").read({
+  fields: ["page_title", "page_header", "page_description", "images.*.*"],
+});
+
+console.log(photographyData?.images[0]);
 ---
 
 <Layout title="Photography">
   <div>
-    <h2 class="text-4xl font-bold text-center text-highlight my-4">
-      Photography
-    </h2>
-    <p class="text-lg text-center">All Pictures by Jose Castillo.</p>
     {
-      photographs && (
+      photographyData?.page_header && (
+        <PageHeader
+          header={photographyData.page_header}
+          description={photographyData.page_description}
+        />
+      )
+    }
+
+    {
+      photographyData?.images && (
         <div class="flex flex-wrap justify-center items-center">
-          {photographs.map((photograph) => {
+          {photographyData.images.map((photograph) => {
             return (
               <div class="flex-1 max-w-96 max-h-96 min-w-[8rem] mx-8 mt-8 flex justify-center">
-                <Photograph photograph={photograph} client:load />
+                <Photograph
+                  photograph={
+                    photograph.directus_files_id as unknown as API_Asset
+                  }
+                  client:load
+                />
               </div>
             );
           })}
