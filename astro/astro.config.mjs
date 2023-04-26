@@ -8,11 +8,11 @@ import node from "@astrojs/node";
 export default defineConfig({
   server: {
     port: 3333,
-    host: true
+    host: true,
   },
   integrations: [tailwind(), svelte()],
   output: "server",
   adapter: node({
-    mode: "standalone"
-  })
+    mode: "standalone",
+  }),
 });
