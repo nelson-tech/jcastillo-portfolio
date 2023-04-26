@@ -1,64 +1,94 @@
 ---
+import PageHeader from "../../components/PageHeader.astro";
 import Layout from "../../layouts/Layout.astro";
+import { assetUrl } from "../../utils/constants";
 import { getDirectusClient } from "../../utils/getDirectusClient";
 
 const directus = await getDirectusClient();
 
 const projects = await directus.singleton("music_projects").read({
-  fields: ["*"],
+  fields: [
+    "page_title",
+    "page_header",
+    "page_description",
+    "image.*",
+    "link",
+    "text",
+    "links",
+    "spotify",
+  ],
 });
-
-const apiURL = import.meta.env.PUBLIC_DIRECTUS_URL;
 ---
 
-<Layout title="Music">
+<Layout title={projects?.page_title ?? "Music"}>
   <div class="mx-4 md:mx-8">
-    <div class="flex justify-center">
-      <a href={projects?.link} target="_blank">
-        <img src={`${apiURL}/assets/${projects?.image}`} /></a
-      >
-    </div>
-    <div class="flex flex-wrap">
-      {
-        projects?.spotify.map((artist: Spotify) => {
-          return (
-            <iframe
-              style="border-radius:12px"
-              src={`https://open.spotify.com/embed/artist/${artist?.artist_id}?utm_source=generator`}
-              class="p-4 flex-1"
-              height="400"
-              frameborder="0"
-              allowfullscreen=""
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              loading="lazy"
+    {
+      projects?.page_header && (
+        <PageHeader
+          header={projects.page_header}
+          description={projects.page_description}
+        />
+      )
+    }
+    {
+      projects?.image && (
+        <div class="flex justify-center">
+          <a
+            href={projects.link ?? "#"}
+            target="_blank"
+            title={projects.image.title ?? ""}
+          >
+            <img
+              src={`${assetUrl}/${projects.image.filename_disk}`}
+              alt={projects.image.title ?? ""}
             />
-          );
-        })
-      }
-    </div>
-    <div id="press-releases" class="my-8 text-xl">
-      <h4 class="text-center">
-        {projects?.text}
-      </h4>
-      <div class="text-center">
-        {
-          projects?.links.map((link: PressReview) => {
+          </a>
+        </div>
+      )
+    }
+    {
+      projects?.spotify && (
+        <div class="flex flex-wrap">
+          {projects.spotify.map((artist: Spotify) => {
             return (
-              <p class="font-bold">
-                <a
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener"
-                  data-cke-saved-href={link.url}
-                >
-                  {link.label}
-                </a>
-              </p>
+              <iframe
+                style="border-radius:12px"
+                src={`https://open.spotify.com/embed/artist/${artist?.artist_id}?utm_source=generator`}
+                class="p-4 flex-1"
+                height="400"
+                frameborder="0"
+                allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+              />
             );
-          })
-        }
-      </div>
-    </div>
+          })}
+        </div>
+      )
+    }
+    {
+      projects?.links && (
+        <div id="press-releases" class="my-8 text-xl">
+          {projects.text && <h4 class="text-center">{projects.text}</h4>}
+          <div class="text-center">
+            {projects.links.map((link: PressReview) => {
+              return (
+                <p class="font-bold">
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener"
+                    data-cke-saved-href={link.url}
+                  >
+                    {link.label}
+                  </a>
+                </p>
+              );
+            })}
+          </div>
+        </div>
+      )
+    }
   </div>
 </Layout>
 

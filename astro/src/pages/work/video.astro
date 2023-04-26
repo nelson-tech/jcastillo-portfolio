@@ -1,4 +1,5 @@
 ---
+import PageHeader from "../../components/PageHeader.astro";
 import Video from "../../components/Video.astro";
 import Layout from "../../layouts/Layout.astro";
 import { getDirectusClient } from "../../utils/getDirectusClient";
@@ -8,8 +9,14 @@ const directus = await getDirectusClient();
 const videos = await directus.singleton("videos").read({
   fields: [
     "id",
+    "page_title",
+    "page_header",
+    "page_description",
+    "vr_header",
     "vr.video_links_id.*.*",
+    "editing_header",
     "editing.video_links_id.*.*",
+    "commercial_header",
     "commercial.video_links_id.*.*",
   ],
 });
@@ -20,19 +27,21 @@ console.log(
 );
 ---
 
-<Layout title="Video">
+<Layout title={videos?.page_title ?? "Video"}>
   <div class="mx-4 md:mx-8">
-    <h2 class="text-4xl font-bold text-center text-highlight my-4">
-      Video Work
-    </h2>
-    <p class="text-lg text-center">
-      All footage captured, produced and/or edited by Jose Castillo.
-    </p>
+    {
+      videos?.page_header && (
+        <PageHeader
+          header={videos?.page_header}
+          description={videos?.page_description}
+        />
+      )
+    }
     <div id="videos" class="mt-8">
       {
         videos?.vr && (
           <div id="vr" class="text-2xl text-center font-bold text-highlight">
-            <h3>VR 360 Production</h3>
+            {videos?.vr_header && <h3>{videos.vr_header}</h3>}
             <div class="flex flex-wrap gap-4 justify-center items-center mt-8">
               {videos.vr.map((vr) => {
                 return (
@@ -51,7 +60,7 @@ console.log(
             id="editing"
             class="text-2xl text-center font-bold text-highlight mt-8"
           >
-            <h3>Video Editing</h3>
+            {videos?.editing_header && <h3>{videos.editing_header}</h3>}
             <div class="flex flex-wrap gap-4 justify-center items-center mt-8">
               {videos.editing.map((edit) => {
                 return (
@@ -70,7 +79,7 @@ console.log(
             id="commercial"
             class="text-2xl text-center font-bold text-highlight mt-8"
           >
-            <h3>Original Commercial Productions</h3>
+            {videos?.commercial_header && <h3>{videos.commercial_header}</h3>}
             <div class="flex flex-wrap gap-4 justify-center items-center mt-8">
               {videos.commercial.map((commercial: API_Video) => {
                 return (

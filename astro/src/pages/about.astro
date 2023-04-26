@@ -1,21 +1,21 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { assetUrl } from "../utils/constants";
 import { getDirectusClient } from "../utils/getDirectusClient";
 
 const directus = await getDirectusClient();
 
 const aboutData = await directus.singleton("about").read({
-  fields: ["image", "content", "resume"],
+  fields: ["image.*", "content", "resume.*"],
 });
-
-const apiURL = import.meta.env.PUBLIC_DIRECTUS_URL;
 ---
 
 <Layout title="About">
   <div class="flex flex-col md:flex-row items-center justify-around">
     <div class="flex items-center basis-1/2 justify-center">
       <img
-        src={`${apiURL}/assets/${aboutData?.image}`}
+        src={`${assetUrl}/${aboutData?.image.filename_disk}`}
+        alt={aboutData?.image.title ?? ""}
         class="max-h-[60vh] object-contain p-8"
       />
     </div>
@@ -26,20 +26,24 @@ const apiURL = import.meta.env.PUBLIC_DIRECTUS_URL;
         set:html={aboutData?.content}
         class="[&>h2]:text-4xl [&>h2]:mb-4 [&>h2]:font-bold [&>p]:text-xl"
       />
-      <button
-        class="flex cursor-default justify-center items-center mx-auto mt-8 text-highlight rounded px-6 py-4 overflow-hidden"
-      >
-        Resumé:
-        <a href={`${apiURL}/assets/${aboutData?.resume}?download`} download>
-          <i
-            class="fas fa-file-arrow-down fa-xl ml-2 p-4 hover:text-green-500 transition-colors"
-          ></i></a
-        >
-        <!-- <a href={`${apiURL}/assets/${aboutData?.resume}`}>
-          <i class="fas fa-eye fa-xl p-4 hover:text-green-500 transition-colors"
-          ></i></a
-        > -->
-      </button>
+      {
+        aboutData?.resume && (
+          <button class="flex cursor-default justify-center items-center mx-auto mt-8 text-highlight rounded px-6 py-4 overflow-hidden">
+            Resumé:
+            {false && (
+              <a
+                href={`${assetUrl}/${aboutData?.resume.filename_disk}?download`}
+                download={aboutData?.resume.filename_download}
+              >
+                <i class="fas fa-file-arrow-down fa-xl ml-2 p-4 hover:text-green-500 transition-colors" />
+              </a>
+            )}
+            <a href={`${assetUrl}/${aboutData?.resume.filename_disk}`}>
+              <i class="fas fa-eye fa-xl p-4 hover:text-green-500 transition-colors" />
+            </a>
+          </button>
+        )
+      }
     </div>
   </div>
 </Layout>
