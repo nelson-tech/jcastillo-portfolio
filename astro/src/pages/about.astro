@@ -1,9 +1,9 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import { assetUrl } from "../utils/constants";
-import { getDirectusClient } from "../utils/getDirectusClient";
+import Layout from "@layouts/Layout.astro"
+import { assetUrl } from "@lib/constants"
+import getAPIClient from "@lib/api/getClient"
 
-const directus = await getDirectusClient();
+const directus = await getAPIClient();
 
 const aboutData = await directus.singleton("about").read({
   fields: ["image.*", "content", "resume.*"],

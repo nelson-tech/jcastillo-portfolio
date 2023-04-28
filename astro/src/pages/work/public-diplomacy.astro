@@ -1,13 +1,13 @@
 ---
-import PublicationCarousel from "../../components/PublicationCarousel.svelte";
-import Layout from "../../layouts/Layout.astro";
-import { getDirectusClient } from "../../utils/getDirectusClient";
+import PublicationCarousel from "@components/PublicationCarousel.svelte"
+import Layout from "@layouts/Layout.astro"
+import getAPIClient from "@lib/api/getClient"
 
-const directus = await getDirectusClient();
+const directus = await getAPIClient()
 
 const projects = await directus.singleton("academic_projects").read({
   fields: ["*"],
-});
+})
 ---
 
 <Layout title="Public Diplomacy">
@@ -16,9 +16,13 @@ const projects = await directus.singleton("academic_projects").read({
       id="publications"
       class="pb-8 mb-8 border-b border-highlight border-opacity-50"
     >
-      <h2 class="w-full text-center text-4xl font-bold text-highlight mb-8">
-        Academic Publications & Organization Support
-      </h2>
+      {
+        projects?.academic_publications_header && (
+          <h2 class="w-full text-center text-4xl font-bold text-highlight mb-8">
+            {projects.academic_publications_header}
+          </h2>
+        )
+      }
       {
         projects?.academic_publications && (
           <div class="max-w-2xl mx-auto">
@@ -29,24 +33,6 @@ const projects = await directus.singleton("academic_projects").read({
           </div>
         )
       }
-      <!-- <div class="text-center text-lg">
-        {
-          projects?.academic_publications.map((publication: AP_Publication) => {
-            return (
-              <div class="mb-16">
-                <p class="mb-4">{publication.text}</p>
-                <a
-                  href={publication.link}
-                  target="_blank"
-                  class="text-highlight hover:text-green-500 transition-colors"
-                >
-                  {publication.label}
-                </a>
-              </div>
-            );
-          })
-        }
-      </div> -->
     </div>
     <div id="podcasts">
       <h2 class="w-full text-center text-4xl font-bold text-highlight mb-8">

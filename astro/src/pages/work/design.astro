@@ -1,7 +1,89 @@
 ---
-import Layout from "../../layouts/Layout.astro";
+import PageHeader from "@components/PageHeader.astro"
+import Video from "@components/Video.astro"
+import Photograph from "@components/Photograph.svelte"
+import Layout from "@layouts/Layout.astro"
+import getAPIClient from "@lib/api/getClient"
+import { API_Page_Info_Fields } from "@lib/api/fields"
+
+const directus = await getAPIClient();
+
+const projects = await directus.singleton("design_projects").read({
+  fields: [
+    ...API_Page_Info_Fields,
+    "motion_graphics_header",
+    "motion_graphics_description",
+    "motion_graphics_videos.video_links_id.*.*",
+    "graphic_design_header",
+    "graphic_design_description",
+    "graphic_design_images.directus_files_id.*",
+  ],
+})
 ---
 
-<Layout title="Graphic Design & Motion Graphics">
-  <div></div>
+<Layout title={projects?.page_title ?? "Design"}>
+  <div class="mx-4 md:mx-8">
+    {
+      projects?.page_header && (
+        <PageHeader
+          header={projects?.page_header}
+          description={projects?.page_description}
+        />
+      )
+    }
+    <div id="design" class="mt-8">
+      {
+        projects?.motion_graphics_videos && (
+          <div id="motion_graphics" class="text-center">
+            {projects?.motion_graphics_header && (
+              <h3 class="text-2xl font-bold text-highlight">
+                {projects.motion_graphics_header}
+              </h3>
+            )}
+            {projects.motion_graphics_description && (
+              <p class="text-lg mt-4">{projects.motion_graphics_description}</p>
+            )}
+
+            <div class="flex flex-wrap gap-4 justify-center items-center mt-8">
+              {projects.motion_graphics_videos.map((motion_graphic) => {
+                return (
+                  <div class="rounded overflow-hidden">
+                    <Video videoData={motion_graphic.video_links_id} />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )
+      }
+      {
+        projects?.graphic_design_images && (
+          <div id="graphic_design" class="text-center mt-16">
+            {projects?.graphic_design_header && (
+              <h3 class="text-2xl font-bold text-highlight">
+                {projects.graphic_design_header}
+              </h3>
+            )}
+            {projects.graphic_design_description && (
+              <p class="text-lg mt-4">{projects.graphic_design_description}</p>
+            )}
+            <div class="flex flex-wrap justify-center items-center">
+              {projects.graphic_design_images.map((photograph) => {
+                return (
+                  <div class="basis-1/1 md:basis-1/3 mx-8 mt-8">
+                    <Photograph
+                      photograph={
+                        photograph.directus_files_id as unknown as API_Asset
+                      }
+                      client:load
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )
+      }
+    </div>
+  </div>
 </Layout>

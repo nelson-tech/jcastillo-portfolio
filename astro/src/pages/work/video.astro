@@ -1,17 +1,15 @@
 ---
-import PageHeader from "../../components/PageHeader.astro";
-import Video from "../../components/Video.astro";
-import Layout from "../../layouts/Layout.astro";
-import { getDirectusClient } from "../../utils/getDirectusClient";
+import PageHeader from "@components/PageHeader.astro"
+import Video from "@components/Video.astro"
+import Layout from "@layouts/Layout.astro"
+import { API_Page_Info_Fields } from "@lib/api/fields"
+import getAPIClient from "@lib/api/getClient"
 
-const directus = await getDirectusClient();
+const directus = await getAPIClient()
 
 const videos = await directus.singleton("videos").read({
   fields: [
-    "id",
-    "page_title",
-    "page_header",
-    "page_description",
+    ...API_Page_Info_Fields,
     "vr_header",
     "vr.video_links_id.*.*",
     "editing_header",
@@ -19,12 +17,8 @@ const videos = await directus.singleton("videos").read({
     "commercial_header",
     "commercial.video_links_id.*.*",
   ],
-});
+})
 
-console.log(
-  "Videos",
-  videos?.commercial[0].video_links_id.link.split("?")[0].split("/").at(-1)
-);
 ---
 
 <Layout title={videos?.page_title ?? "Video"}>
@@ -81,7 +75,7 @@ console.log(
           >
             {videos?.commercial_header && <h3>{videos.commercial_header}</h3>}
             <div class="flex flex-wrap gap-4 justify-center items-center mt-8">
-              {videos.commercial.map((commercial: API_Video) => {
+              {videos.commercial.map((commercial) => {
                 return (
                   <div class="rounded overflow-hidden">
                     <Video videoData={commercial.video_links_id} />

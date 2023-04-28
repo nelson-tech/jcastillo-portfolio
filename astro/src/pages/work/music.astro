@@ -1,23 +1,25 @@
 ---
-import PageHeader from "../../components/PageHeader.astro";
-import Layout from "../../layouts/Layout.astro";
-import { assetUrl } from "../../utils/constants";
-import { getDirectusClient } from "../../utils/getDirectusClient";
+import PageHeader from "@components/PageHeader.astro"
+import Layout from "@layouts/Layout.astro"
+import { API_Page_Info_Fields } from "@lib/api/fields"
+import { assetUrl } from "@lib/constants"
+import getAPIClient from "@lib/api/getClient"
 
-const directus = await getDirectusClient();
+const directus = await getAPIClient();
 
 const projects = await directus.singleton("music_projects").read({
   fields: [
-    "page_title",
-    "page_header",
-    "page_description",
+    ...API_Page_Info_Fields,
     "image.*",
     "link",
     "text",
     "links",
+    "links.*",
     "spotify",
+    "spotify.*",
   ],
-});
+})
+
 ---
 
 <Layout title={projects?.page_title ?? "Music"}>
@@ -49,7 +51,7 @@ const projects = await directus.singleton("music_projects").read({
     {
       projects?.spotify && (
         <div class="flex flex-wrap">
-          {projects.spotify.map((artist: Spotify) => {
+          {projects.spotify.map((artist) => {
             return (
               <iframe
                 style="border-radius:12px"
@@ -71,7 +73,7 @@ const projects = await directus.singleton("music_projects").read({
         <div id="press-releases" class="my-8 text-xl">
           {projects.text && <h4 class="text-center">{projects.text}</h4>}
           <div class="text-center">
-            {projects.links.map((link: PressReview) => {
+            {projects.links.map((link) => {
               return (
                 <p class="font-bold">
                   <a

@@ -1,14 +1,15 @@
 ---
-import PageHeader from "../../components/PageHeader.astro";
-import Photograph from "../../components/Photograph.svelte";
-import Layout from "../../layouts/Layout.astro";
-import { getDirectusClient } from "../../utils/getDirectusClient";
+import PageHeader from "@components/PageHeader.astro"
+import Photograph from "@components/Photograph.svelte"
+import Layout from "@layouts/Layout.astro"
+import { API_Page_Info_Fields } from "@lib/api/fields"
+import getAPIClient from "@lib/api/getClient"
 
-const directus = await getDirectusClient();
+const directus = await getAPIClient()
 
 const photographyData = await directus.singleton("photography_projects").read({
-  fields: ["page_title", "page_header", "page_description", "images.*.*"],
-});
+  fields: [...API_Page_Info_Fields, "images.*.*"],
+})
 ---
 
 <Layout title="Photography">

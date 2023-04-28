@@ -1,16 +1,16 @@
 ---
-import ProjectCard from "../components/ProjectCard.astro";
-import Layout from "../layouts/Layout.astro";
-import { getDirectusClient } from "../utils/getDirectusClient";
+import ProjectCard from "@components/ProjectCard.astro"
+import Layout from "@layouts/Layout.astro"
+import getAPIClient from "@lib/api/getClient"
 
-const directus = await getDirectusClient();
+const directus = await getAPIClient()
 
 const categories = (
   await directus.items("work_categories").readByQuery({
     fields: ["name", "slug", "image.*", "status"],
     filter: { status: "published" },
   })
-)?.data;
+)?.data
 ---
 
 <Layout title="Work">
@@ -19,8 +19,7 @@ const categories = (
   >
     {
       categories?.map((category) => {
-        if (category)
-          return <ProjectCard category={category as unknown as WorkCategory} />;
+        if (category) return <ProjectCard category={category} />;
       })
     }
   </div>

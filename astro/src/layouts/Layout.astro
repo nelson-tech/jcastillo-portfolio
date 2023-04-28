@@ -1,29 +1,31 @@
 ---
-import MenuButton from "../components/MenuButton.svelte";
-import MobileMenu from "../components/MobileMenu.svelte";
-import { getDirectusClient } from "../utils/getDirectusClient";
+import MenuButton from "@components/MenuButton.svelte"
+import MobileMenu from "@components/MobileMenu.svelte"
+import getAPIClient from "@lib/api/getClient"
 
-const directus = await getDirectusClient();
+const directus = await getAPIClient()
 
 const menuItems = (
   await directus.items("menu_items").readByQuery({
     fields: ["label", "path", "status"],
     filter: { status: "published" },
   })
-)?.data;
+)?.data
 
 const footerIcons = (
   await directus.items("footer_icons").readByQuery({
     fields: ["brand", "link", "status"],
     filter: { status: "published" },
   })
-)?.data;
+)?.data
 
 export interface Props {
-  title: string;
+  title: string
 }
 
-const { title } = Astro.props;
+const { title } = Astro.props
+
+const faScript = import.meta.env.PUBLIC_FA_SCRIPT
 ---
 
 <!DOCTYPE html>
@@ -33,7 +35,7 @@ const { title } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/x-icon" href="/favicon.icns" />
     <script
-      src="https://kit.fontawesome.com/b4e4107e2e.js"
+      src={faScript}
       crossorigin="anonymous"
     ></script>
     <meta name="generator" content={Astro.generator} />
@@ -45,7 +47,7 @@ const { title } = Astro.props;
     >
       <header>
         <nav class="py-8 px-8 flex items-center justify-between">
-          <a href="/"
+          <a href="/" title="Home"
             ><img src="/Jose Castillo logo.png" class="h-16 md:h-20" /></a
           >
           <ul class="hidden md:flex md:gap-4">
@@ -84,7 +86,7 @@ const { title } = Astro.props;
                   class="hover:text-highlight transition-colors"
                   title={icon.brand}
                 >
-                  <i class={`fab fa-${icon.brand.toLowerCase()} fa-2x`} />
+                  <i class={`fab fa-${icon.brand?.toLowerCase()} fa-2x`} />
                 </a>
               );
             })
@@ -221,5 +223,5 @@ const { title } = Astro.props;
   }
 </style>
 <script>
-  import "../utils/swup.js";
+  import "@lib/swup.js";
 </script>

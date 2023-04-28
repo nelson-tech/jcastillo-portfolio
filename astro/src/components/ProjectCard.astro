@@ -1,16 +1,16 @@
 ---
-import { assetUrl } from "../utils/constants";
+import { assetUrl } from "@lib/constants";
 
 export interface Props {
-  category: WorkCategory;
+  category: API_Work_Category
 }
-const { category } = Astro.props;
+const { category } = Astro.props
 ---
 
 <div class="aspect-video group relative">
   <img
-    src={`${assetUrl}/${category.image.filename_disk}`}
-    alt={category.image.title ?? ""}
+    src={`${assetUrl}/${category.image?.filename_disk}`}
+    alt={category.image?.title ?? ""}
     class="group-hover:grayscale transition-all duration-500 object-fill w-full h-full"
   />
   <div

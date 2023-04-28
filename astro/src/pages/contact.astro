@@ -1,12 +1,12 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import { getDirectusClient } from "../utils/getDirectusClient";
+import Layout from "@layouts/Layout.astro"
+import getAPIClient from "@lib/api/getClient"
 
-const directus = await getDirectusClient();
+const directus = await getAPIClient()
 
 const contactData = await directus.singleton("contact").read({
   fields: ["content", "email", "phone"],
-});
+})
 ---
 
 <Layout title="Contact">
