@@ -1,7 +1,70 @@
 ---
+import PageHeader from "@components/PageHeader.astro"
+import Video from "@components/Video.astro"
 import Layout from "@layouts/Layout.astro"
+import { API_Page_Info_Fields } from "@lib/api/fields"
+import getAPIClient from "@lib/api/getClient"
+
+const directus = await getAPIClient()
+
+const projects = await directus.singleton("audio_projects").read({
+	fields: [...API_Page_Info_Fields, "*.*.*.*"]
+})
+
+console.log(projects)
 ---
 
-<Layout title="Audio">
-  <div></div>
+<Layout title={projects?.page_title ?? "Audio"}>
+	<div class="mx-4 md:mx-8">
+		{
+			projects?.page_header && (
+				<PageHeader header={projects?.page_header} description={projects?.page_description} />
+			)
+		}
+		<div id="audio" class="mt-8">
+			{
+				projects?.sound_design_video_links && (
+					<div id="motion_graphics" class="text-center">
+						{projects?.sound_design_header && (
+							<h3 class="text-highlight text-2xl font-bold">{projects.sound_design_header}</h3>
+						)}
+						{projects.sound_design_description && (
+							<p class="mt-4 text-lg">{projects.sound_design_description}</p>
+						)}
+
+						<div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+							{projects.sound_design_video_links.map((sound_design) => {
+								return (
+									<div class="overflow-hidden rounded">
+										<Video videoData={sound_design.video_links_id} />
+									</div>
+								)
+							})}
+						</div>
+					</div>
+				)
+			}
+			{
+				projects?.audio_engineering_html && (
+					<div id="audio-engineering" class="mt-16 text-center">
+						{projects?.audio_engineering_header && (
+							<h3 class="text-highlight text-2xl font-bold">{projects.audio_engineering_header}</h3>
+						)}
+						{projects.audio_engineering_description && (
+							<p class="mt-4 text-lg">{projects.audio_engineering_description}</p>
+						)}
+						<div class="flex flex-wrap">
+							{projects?.audio_engineering_html.map((engineering) => {
+								return (
+									<div class="m-4 md:m-8 md:flex-1">
+										<div set:html={engineering.html} />
+									</div>
+								)
+							})}
+						</div>
+					</div>
+				)
+			}
+		</div>
+	</div>
 </Layout>

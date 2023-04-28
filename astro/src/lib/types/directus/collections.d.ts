@@ -28,7 +28,8 @@ type Collections = {
 	work_categories: API_Work_Category
 	music_projects: API_Music_Projects
 	academic_projects: AcademicPublications
-	design_projects: API_Design_Projects
-	photography_projects: API_Photography_Projects
+	audio_projects: API_Audio_Projects
 	videos: API_Videos
+	photography_projects: API_Photography_Projects
+	design_projects: API_Design_Projects
 }

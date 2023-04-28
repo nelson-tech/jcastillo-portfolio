@@ -5,45 +5,40 @@ import getAPIClient from "@lib/api/getClient"
 const directus = await getAPIClient()
 
 const contactData = await directus.singleton("contact").read({
-  fields: ["content", "email", "phone"],
+	fields: ["content", "email", "phone"]
 })
 ---
 
 <Layout title="Contact">
-  <div
-    class="flex flex-col md:flex-row items-center justify-around text-gray-700"
-  >
-    <div
-      class="flex flex-col justify-center basis-1/2 mt-8 md:mt-0 p-8 text-center tracking-wider leading-loose md:ml-8"
-    >
-      <div
-        set:html={contactData?.content}
-        class="[&>h2]:font-bold [&>h2]:text-4xl [&>p]:mt-8 [&>p]:text-xl"
-      />
-    </div>
-    <div
-      class="flex flex-col justify-center basis-1/2 mt-8 md:mt-0 text-center tracking-wider leading-loose"
-    >
-      <a
-        href={`mailto:${contactData?.email}`}
-        class="w-72 p-8 rounded border mb-8 border-highlight group mx-auto hover:bg-gradient-to-tr from-slate-50 to-white transition-all hover:text-highlight"
-      >
-        <i class="fas fa-envelope fa-lg group-hover:scale-125 transition-all"
-        ></i>
-        <br />
-        <span class="">{contactData?.email}</span>
-      </a>
-      <a
-        href={`tel:${contactData?.phone}`}
-        class="p-8 w-72 rounded border mb-8 border-highlight group mx-auto hover:bg-gradient-to-tr from-slate-50 to-slate-white transition-all hover:text-highlight"
-      >
-        <i class="fas fa-phone fa-lg group-hover:scale-125 transition-all"></i>
-        <i
-          class="fas fa-comment-sms fa-lg group-hover:scale-125 transition-all ml-4"
-        ></i>
-        <br />
-        {contactData?.phone}
-      </a>
-    </div>
-  </div>
+	<div class="flex flex-col items-center justify-around text-gray-700 md:flex-row">
+		<div
+			class="mt-8 flex basis-1/2 flex-col justify-center p-8 text-center leading-loose tracking-wider md:ml-8 md:mt-0"
+		>
+			<div
+				set:html={contactData?.content}
+				class="[&>h2]:text-4xl [&>h2]:font-bold [&>p]:mt-8 [&>p]:text-xl"
+			/>
+		</div>
+		<div
+			class="mt-8 flex basis-1/2 flex-col justify-center text-center leading-loose tracking-wider md:mt-0"
+		>
+			<a
+				href={`mailto:${contactData?.email}`}
+				class="border-highlight hover:text-highlight group mx-auto mb-8 w-72 rounded border from-slate-50 to-white p-8 transition-all hover:bg-gradient-to-tr"
+			>
+				<i class="fas fa-envelope fa-lg transition-all group-hover:scale-125"></i>
+				<br />
+				<span class="">{contactData?.email}</span>
+			</a>
+			<a
+				href={`tel:${contactData?.phone}`}
+				class="border-highlight to-slate-white hover:text-highlight group mx-auto mb-8 w-72 rounded border from-slate-50 p-8 transition-all hover:bg-gradient-to-tr"
+			>
+				<i class="fas fa-phone fa-lg transition-all group-hover:scale-125"></i>
+				<i class="fas fa-comment-sms fa-lg ml-4 transition-all group-hover:scale-125"></i>
+				<br />
+				{contactData?.phone}
+			</a>
+		</div>
+	</div>
 </Layout>

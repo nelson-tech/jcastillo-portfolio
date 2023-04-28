@@ -3,47 +3,47 @@ import Layout from "@layouts/Layout.astro"
 import { assetUrl } from "@lib/constants"
 import getAPIClient from "@lib/api/getClient"
 
-const directus = await getAPIClient();
+const directus = await getAPIClient()
 
 const aboutData = await directus.singleton("about").read({
-  fields: ["image.*", "content", "resume.*"],
-});
+	fields: ["image.*", "content", "resume.*"]
+})
 ---
 
 <Layout title="About">
-  <div class="flex flex-col md:flex-row items-center justify-around">
-    <div class="flex items-center basis-1/2 justify-center">
-      <img
-        src={`${assetUrl}/${aboutData?.image.filename_disk}`}
-        alt={aboutData?.image.title ?? ""}
-        class="max-h-[60vh] object-contain p-8"
-      />
-    </div>
-    <div
-      class="flex flex-col justify-center basis-1/2 p-16 text-center tracking-wider leading-loose text-gray-700"
-    >
-      <div
-        set:html={aboutData?.content}
-        class="[&>h2]:text-4xl [&>h2]:mb-4 [&>h2]:font-bold [&>p]:text-xl"
-      />
-      {
-        aboutData?.resume && (
-          <button class="flex cursor-default justify-center items-center mx-auto mt-8 text-highlight rounded px-6 py-4 overflow-hidden">
-            Resumé:
-            {false && (
-              <a
-                href={`${assetUrl}/${aboutData?.resume.filename_disk}?download`}
-                download={aboutData?.resume.filename_download}
-              >
-                <i class="fas fa-file-arrow-down fa-xl ml-2 p-4 hover:text-green-500 transition-colors" />
-              </a>
-            )}
-            <a href={`${assetUrl}/${aboutData?.resume.filename_disk}`}>
-              <i class="fas fa-eye fa-xl p-4 hover:text-green-500 transition-colors" />
-            </a>
-          </button>
-        )
-      }
-    </div>
-  </div>
+	<div class="flex flex-col items-center justify-around md:flex-row">
+		<div class="flex basis-1/2 items-center justify-center">
+			<img
+				src={`${assetUrl}/${aboutData?.image.filename_disk}`}
+				alt={aboutData?.image.title ?? ""}
+				class="max-h-[60vh] object-contain p-8"
+			/>
+		</div>
+		<div
+			class="flex basis-1/2 flex-col justify-center p-16 text-center leading-loose tracking-wider text-gray-700"
+		>
+			<div
+				set:html={aboutData?.content}
+				class="[&>h2]:mb-4 [&>h2]:text-4xl [&>h2]:font-bold [&>p]:text-xl"
+			/>
+			{
+				aboutData?.resume && (
+					<button class="text-highlight mx-auto mt-8 flex cursor-default items-center justify-center overflow-hidden rounded px-6 py-4">
+						Resumé:
+						{false && (
+							<a
+								href={`${assetUrl}/${aboutData?.resume.filename_disk}?download`}
+								download={aboutData?.resume.filename_download}
+							>
+								<i class="fas fa-file-arrow-down fa-xl ml-2 p-4 transition-colors hover:text-green-500" />
+							</a>
+						)}
+						<a href={`${assetUrl}/${aboutData?.resume.filename_disk}`}>
+							<i class="fas fa-eye fa-xl p-4 transition-colors hover:text-green-500" />
+						</a>
+					</button>
+				)
+			}
+		</div>
+	</div>
 </Layout>

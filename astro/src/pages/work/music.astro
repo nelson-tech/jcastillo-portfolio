@@ -5,101 +5,88 @@ import { API_Page_Info_Fields } from "@lib/api/fields"
 import { assetUrl } from "@lib/constants"
 import getAPIClient from "@lib/api/getClient"
 
-const directus = await getAPIClient();
+const directus = await getAPIClient()
 
 const projects = await directus.singleton("music_projects").read({
-  fields: [
-    ...API_Page_Info_Fields,
-    "image.*",
-    "link",
-    "text",
-    "links",
-    "links.*",
-    "spotify",
-    "spotify.*",
-  ],
+	fields: [
+		...API_Page_Info_Fields,
+		"image.*",
+		"link",
+		"text",
+		"links",
+		"links.*",
+		"spotify",
+		"spotify.*"
+	]
 })
-
 ---
 
 <Layout title={projects?.page_title ?? "Music"}>
-  <div class="mx-4 md:mx-8">
-    {
-      projects?.page_header && (
-        <PageHeader
-          header={projects.page_header}
-          description={projects.page_description}
-        />
-      )
-    }
-    {
-      projects?.image && (
-        <div class="flex justify-center">
-          <a
-            href={projects.link ?? "#"}
-            target="_blank"
-            title={projects.image.title ?? ""}
-          >
-            <img
-              src={`${assetUrl}/${projects.image.filename_disk}`}
-              alt={projects.image.title ?? ""}
-            />
-          </a>
-        </div>
-      )
-    }
-    {
-      projects?.spotify && (
-        <div class="flex flex-wrap">
-          {projects.spotify.map((artist) => {
-            return (
-              <iframe
-                style="border-radius:12px"
-                src={`https://open.spotify.com/embed/artist/${artist?.artist_id}?utm_source=generator`}
-                class="p-4 flex-1"
-                height="400"
-                frameborder="0"
-                allowfullscreen=""
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy"
-              />
-            );
-          })}
-        </div>
-      )
-    }
-    {
-      projects?.links && (
-        <div id="press-releases" class="my-8 text-xl">
-          {projects.text && <h4 class="text-center">{projects.text}</h4>}
-          <div class="text-center">
-            {projects.links.map((link) => {
-              return (
-                <p class="font-bold">
-                  <a
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener"
-                    data-cke-saved-href={link.url}
-                  >
-                    {link.label}
-                  </a>
-                </p>
-              );
-            })}
-          </div>
-        </div>
-      )
-    }
-  </div>
+	<div class="mx-4 md:mx-8">
+		{
+			projects?.page_header && (
+				<PageHeader header={projects.page_header} description={projects.page_description} />
+			)
+		}
+		{
+			projects?.image && (
+				<div class="flex justify-center">
+					<a href={projects.link ?? "#"} target="_blank" title={projects.image.title ?? ""}>
+						<img
+							src={`${assetUrl}/${projects.image.filename_disk}`}
+							alt={projects.image.title ?? ""}
+						/>
+					</a>
+				</div>
+			)
+		}
+		{
+			projects?.spotify && (
+				<div class="flex flex-wrap">
+					{projects.spotify.map((artist) => {
+						return (
+							<iframe
+								style="border-radius:12px"
+								src={`https://open.spotify.com/embed/artist/${artist?.artist_id}?utm_source=generator`}
+								class="flex-1 p-4"
+								height="400"
+								frameborder="0"
+								allowfullscreen=""
+								allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+								loading="lazy"
+							/>
+						)
+					})}
+				</div>
+			)
+		}
+		{
+			projects?.links && (
+				<div id="press-releases" class="my-8 text-xl">
+					{projects.text && <h4 class="text-center">{projects.text}</h4>}
+					<div class="text-center">
+						{projects.links.map((link) => {
+							return (
+								<p class="font-bold">
+									<a href={link.url} target="_blank" rel="noopener" data-cke-saved-href={link.url}>
+										{link.label}
+									</a>
+								</p>
+							)
+						})}
+					</div>
+				</div>
+			)
+		}
+	</div>
 </Layout>
 
 <style>
-  #press-releases p {
-    @apply mt-4;
-  }
+	#press-releases p {
+		@apply mt-4;
+	}
 
-  #press-releases a {
-    @apply text-highlight hover:text-green-500 transition-colors;
-  }
+	#press-releases a {
+		@apply text-highlight transition-colors hover:text-green-500;
+	}
 </style>

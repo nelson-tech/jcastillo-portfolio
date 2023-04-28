@@ -6,50 +6,44 @@ import getAPIClient from "@lib/api/getClient"
 const directus = await getAPIClient()
 
 const projects = await directus.singleton("academic_projects").read({
-  fields: ["*"],
+	fields: ["*.*"]
 })
 ---
 
 <Layout title="Public Diplomacy">
-  <div class="mx-4 md:mx-8 mt-16">
-    <div
-      id="publications"
-      class="pb-8 mb-8 border-b border-highlight border-opacity-50"
-    >
-      {
-        projects?.academic_publications_header && (
-          <h2 class="w-full text-center text-4xl font-bold text-highlight mb-8">
-            {projects.academic_publications_header}
-          </h2>
-        )
-      }
-      {
-        projects?.academic_publications && (
-          <div class="max-w-2xl mx-auto">
-            <PublicationCarousel
-              publications={projects.academic_publications}
-              client:load
-            />
-          </div>
-        )
-      }
-    </div>
-    <div id="podcasts">
-      <h2 class="w-full text-center text-4xl font-bold text-highlight mb-8">
-        Podcasts
-      </h2>
-      <div class="flex flex-wrap">
-        {
-          projects?.podcasts.map((podcast: AP_Podcasts) => {
-            return (
-              <div class="m-4 md:m-8 md:flex-1">
-                <p class="text-lg mb-4">{podcast.label}</p>
-                <div set:html={podcast.html} />
-              </div>
-            );
-          })
-        }
-      </div>
-    </div>
-  </div>
+	<div class="mx-4 mt-16 md:mx-8">
+		<div id="publications" class="border-highlight mb-8 border-b border-opacity-50 pb-8">
+			{
+				projects?.academic_publications_header && (
+					<h2 class="text-highlight mb-8 w-full text-center text-4xl font-bold">
+						{projects.academic_publications_header}
+					</h2>
+				)
+			}
+			{
+				projects?.academic_publications && (
+					<div class="mx-auto max-w-2xl">
+						<PublicationCarousel publications={projects.academic_publications} client:load />
+					</div>
+				)
+			}
+		</div>
+		{
+			projects.podcasts && (
+				<div id="podcasts">
+					<h2 class="text-highlight mb-8 w-full text-center text-4xl font-bold">Podcasts</h2>
+					<div class="flex flex-wrap">
+						{projects?.podcasts.map((podcast: AP_Podcasts) => {
+							return (
+								<div class="m-4 md:m-8 md:flex-1">
+									<p class="mb-4 text-lg">{podcast.label}</p>
+									<div set:html={podcast.html} />
+								</div>
+							)
+						})}
+					</div>
+				</div>
+			)
+		}
+	</div>
 </Layout>

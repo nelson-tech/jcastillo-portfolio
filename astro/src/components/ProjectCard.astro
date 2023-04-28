@@ -1,29 +1,26 @@
 ---
-import { assetUrl } from "@lib/constants";
+import { assetUrl } from "@lib/constants"
 
 export interface Props {
-  category: API_Work_Category
+	category: API_Work_Category
 }
 const { category } = Astro.props
 ---
 
-<div class="aspect-video group relative">
-  <img
-    src={`${assetUrl}/${category.image?.filename_disk}`}
-    alt={category.image?.title ?? ""}
-    class="group-hover:grayscale transition-all duration-500 object-fill w-full h-full"
-  />
-  <div
-    class="absolute inset-0 z-10 bg-black opacity-0 group-hover:opacity-100 transition-all bg-opacity-50 duration-500"
-  >
-    <a
-      href={`/work/${category.slug}`}
-      class="w-full h-full flex justify-center items-center"
-    >
-      <span
-        class="text-4xl text-white -translate-y-4 group-hover:translate-y-0 transition-all duration-500 text-center"
-        >{category.name}</span
-      >
-    </a>
-  </div>
+<div class="group relative aspect-video">
+	<img
+		src={`${assetUrl}/${category.image?.filename_disk}`}
+		alt={category.image?.title ?? ""}
+		class="h-full w-full object-fill transition-all duration-500 group-hover:grayscale"
+	/>
+	<div
+		class="absolute inset-0 z-10 bg-black bg-opacity-50 opacity-0 transition-all duration-500 group-hover:opacity-100"
+	>
+		<a href={`/work/${category.slug}`} class="flex h-full w-full items-center justify-center">
+			<span
+				class="-translate-y-4 text-center text-4xl text-white transition-all duration-500 group-hover:translate-y-0"
+				>{category.name}</span
+			>
+		</a>
+	</div>
 </div>

@@ -8,84 +8,74 @@ import getAPIClient from "@lib/api/getClient"
 const directus = await getAPIClient()
 
 const videos = await directus.singleton("videos").read({
-  fields: [
-    ...API_Page_Info_Fields,
-    "vr_header",
-    "vr.video_links_id.*.*",
-    "editing_header",
-    "editing.video_links_id.*.*",
-    "commercial_header",
-    "commercial.video_links_id.*.*",
-  ],
+	fields: [
+		...API_Page_Info_Fields,
+		"vr_header",
+		"vr.video_links_id.*.*",
+		"editing_header",
+		"editing.video_links_id.*.*",
+		"commercial_header",
+		"commercial.video_links_id.*.*"
+	]
 })
-
 ---
 
 <Layout title={videos?.page_title ?? "Video"}>
-  <div class="mx-4 md:mx-8">
-    {
-      videos?.page_header && (
-        <PageHeader
-          header={videos?.page_header}
-          description={videos?.page_description}
-        />
-      )
-    }
-    <div id="videos" class="mt-8">
-      {
-        videos?.vr && (
-          <div id="vr" class="text-2xl text-center font-bold text-highlight">
-            {videos?.vr_header && <h3>{videos.vr_header}</h3>}
-            <div class="flex flex-wrap gap-4 justify-center items-center mt-8">
-              {videos.vr.map((vr) => {
-                return (
-                  <div class="rounded overflow-hidden">
-                    <Video videoData={vr.video_links_id} />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )
-      }
-      {
-        videos?.editing && (
-          <div
-            id="editing"
-            class="text-2xl text-center font-bold text-highlight mt-8"
-          >
-            {videos?.editing_header && <h3>{videos.editing_header}</h3>}
-            <div class="flex flex-wrap gap-4 justify-center items-center mt-8">
-              {videos.editing.map((edit) => {
-                return (
-                  <div class="rounded overflow-hidden">
-                    <Video videoData={edit.video_links_id} />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )
-      }
-      {
-        videos?.commercial && (
-          <div
-            id="commercial"
-            class="text-2xl text-center font-bold text-highlight mt-8"
-          >
-            {videos?.commercial_header && <h3>{videos.commercial_header}</h3>}
-            <div class="flex flex-wrap gap-4 justify-center items-center mt-8">
-              {videos.commercial.map((commercial) => {
-                return (
-                  <div class="rounded overflow-hidden">
-                    <Video videoData={commercial.video_links_id} />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )
-      }
-    </div>
-  </div>
+	<div class="mx-4 md:mx-8">
+		{
+			videos?.page_header && (
+				<PageHeader header={videos?.page_header} description={videos?.page_description} />
+			)
+		}
+		<div id="videos" class="mt-8">
+			{
+				videos?.vr && (
+					<div id="vr" class="text-highlight text-center text-2xl font-bold">
+						{videos?.vr_header && <h3>{videos.vr_header}</h3>}
+						<div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+							{videos.vr.map((vr) => {
+								return (
+									<div class="overflow-hidden rounded">
+										<Video videoData={vr.video_links_id} />
+									</div>
+								)
+							})}
+						</div>
+					</div>
+				)
+			}
+			{
+				videos?.editing && (
+					<div id="editing" class="text-highlight mt-8 text-center text-2xl font-bold">
+						{videos?.editing_header && <h3>{videos.editing_header}</h3>}
+						<div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+							{videos.editing.map((edit) => {
+								return (
+									<div class="overflow-hidden rounded">
+										<Video videoData={edit.video_links_id} />
+									</div>
+								)
+							})}
+						</div>
+					</div>
+				)
+			}
+			{
+				videos?.commercial && (
+					<div id="commercial" class="text-highlight mt-8 text-center text-2xl font-bold">
+						{videos?.commercial_header && <h3>{videos.commercial_header}</h3>}
+						<div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+							{videos.commercial.map((commercial) => {
+								return (
+									<div class="overflow-hidden rounded">
+										<Video videoData={commercial.video_links_id} />
+									</div>
+								)
+							})}
+						</div>
+					</div>
+				)
+			}
+		</div>
+	</div>
 </Layout>

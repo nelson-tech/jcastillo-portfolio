@@ -8,38 +8,36 @@ import getAPIClient from "@lib/api/getClient"
 const directus = await getAPIClient()
 
 const photographyData = await directus.singleton("photography_projects").read({
-  fields: [...API_Page_Info_Fields, "images.*.*"],
+	fields: [...API_Page_Info_Fields, "images.*.*"]
 })
 ---
 
 <Layout title="Photography">
-  <div>
-    {
-      photographyData?.page_header && (
-        <PageHeader
-          header={photographyData.page_header}
-          description={photographyData.page_description}
-        />
-      )
-    }
+	<div>
+		{
+			photographyData?.page_header && (
+				<PageHeader
+					header={photographyData.page_header}
+					description={photographyData.page_description}
+				/>
+			)
+		}
 
-    {
-      photographyData?.images && (
-        <div class="flex flex-wrap justify-center items-center">
-          {photographyData.images.map((photograph) => {
-            return (
-              <div class="basis-1/1 md:basis-1/3 mx-8 mt-8">
-                <Photograph
-                  photograph={
-                    photograph.directus_files_id as unknown as API_Asset
-                  }
-                  client:load
-                />
-              </div>
-            );
-          })}
-        </div>
-      )
-    }
-  </div>
+		{
+			photographyData?.images && (
+				<div class="flex flex-wrap items-center justify-center">
+					{photographyData.images.map((photograph) => {
+						return (
+							<div class="basis-1/1 mx-8 mt-8 md:basis-1/3">
+								<Photograph
+									photograph={photograph.directus_files_id as unknown as API_Asset}
+									client:load
+								/>
+							</div>
+						)
+					})}
+				</div>
+			)
+		}
+	</div>
 </Layout>
