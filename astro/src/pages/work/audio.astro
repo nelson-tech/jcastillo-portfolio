@@ -8,10 +8,17 @@ import getAPIClient from "@lib/api/getClient"
 const directus = await getAPIClient()
 
 const projects = await directus.singleton("audio_projects").read({
-	fields: [...API_Page_Info_Fields, "*.*.*.*"]
+	fields: [
+		...API_Page_Info_Fields,
+		"sound_design_header",
+		"sound_design_description",
+		"sound_design_video_links.video_links_id.*.*",
+		"audio_engineering_header",
+		"audio_engineering_description",
+		"audio_engineering_html",
+		"audio_engineering_html.*"
+	]
 })
-
-console.log(projects)
 ---
 
 <Layout title={projects?.page_title ?? "Audio"}>
@@ -53,10 +60,10 @@ console.log(projects)
 						{projects.audio_engineering_description && (
 							<p class="mt-4 text-lg">{projects.audio_engineering_description}</p>
 						)}
-						<div class="flex flex-wrap">
+						<div class="flex flex-col items-center justify-center">
 							{projects?.audio_engineering_html.map((engineering) => {
 								return (
-									<div class="m-4 md:m-8 md:flex-1">
+									<div class="m-4 w-full md:m-8 md:w-1/2">
 										<div set:html={engineering.html} />
 									</div>
 								)

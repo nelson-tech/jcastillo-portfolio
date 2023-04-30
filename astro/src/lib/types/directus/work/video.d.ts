@@ -6,7 +6,7 @@ type API_Video_Provider = {
 type API_Video_Link = {
 	video_links_id: {
 		label: MaybeString
-		link: MaybeString
+		videoId: MaybeString
 		provider: API_Video_Provider
 	} & API_Status
 }

@@ -10,14 +10,11 @@ const { videoData } = Astro.props
 	videoData && (
 		<div class="video-js aspect-video w-full max-w-lg overflow-hidden rounded md:min-h-[280px]">
 			{(videoData.provider?.value ?? "youtube") === "youtube" ? (
-				<iframe
-					src={`https://www.youtube.com/embed/${videoData.link?.split("=")[1]}`}
-					class="h-full w-full"
-				/>
+				<iframe src={`https://www.youtube.com/embed/${videoData.videoId}`} class="h-full w-full" />
 			) : (
 				<iframe
 					allow="autoplay"
-					src={`https://player.vimeo.com/video/${videoData.link?.split("?")[0].split("/").at(-1)}`}
+					src={`https://player.vimeo.com/video/${videoData.videoId}`}
 					class="h-full w-full"
 				/>
 			)}
