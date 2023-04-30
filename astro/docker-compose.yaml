@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  astro:
+    container_name: ${PROJECT_NAME?err}_astro
+    image: ${PROJECT_NAME?err}_astro
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - .env
+    networks:
+      - nginx
+
+networks:
+  nginx:
+    external: true
