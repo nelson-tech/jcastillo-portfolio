@@ -13,4 +13,4 @@ services:
     volumes:
       - "./:/app"
     command: >
-      bash -c "npm run dev"
+      bash -c "npm ci && npm run dev"
