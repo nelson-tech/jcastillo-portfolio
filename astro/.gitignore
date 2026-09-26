@@ -4,8 +4,8 @@ dist/
 # generated types
 .astro/
 
-# dependencies
-node_modules/
+# dependencies (node_modules is a symlink to node_modules.nosync, so no trailing slash)
+node_modules
 
 # logs
 npm-debug.log*
