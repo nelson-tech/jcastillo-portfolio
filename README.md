@@ -4,44 +4,44 @@ Portfolio site for Jose Castillo — https://josecastillocorcuera.com
 
 ## Architecture
 
+An Astro site (Svelte + Tailwind) whose content lives in this repo:
+
 ```
-browser ──> nginx (reverse proxy, on the server)
-              ├── astro/   Astro SSR site (Svelte + Tailwind), node adapter, port 3333
-              │              └── fetches content from ──┐
-              └── api/     Directus CMS  <──────────────┘
-                             ├── MariaDB   (all content: projects, text, image metadata)
-                             ├── Redis     (API cache)
-                             └── S3        (uploaded files: photos, covers, audio)
+astro/
+  src/data/*.json        page content (text, links, video IDs, image references)
+  src/lib/content.ts     schemas that validate every data file at build time
+  public/media/          images, served as /media/<file>
+  src/pages/             one .astro file per page, reading from @lib/content
 ```
 
-- Content lives in the Directus database, not in this repo. Adding or editing work happens in the Directus admin UI.
-- Videos are YouTube/Vimeo embeds (`astro/src/components/Video.astro`), not stored files.
-- S3 is also the target for nightly DB backups (`api/docker-compose.backup.yaml`); restores use `api/docker-compose.restore.yaml`.
-- Production runs as Docker Compose stacks on a server with an external `nginx` Docker network. Both `api/docker-compose.yaml` and `astro/docker-compose.yaml` expect that network to exist.
+- Content was exported from the old Directus CMS with `astro/scripts/export-directus.mjs`. It is re-runnable while `api.josecastillocorcuera.com` is still up, but it overwrites `src/data/`.
+- Videos are YouTube/Vimeo embeds (`src/components/Video.astro`). Video entries with `"draft": true` were drafts in Directus but were still shown on the live site, so they're kept.
+- A bad reference fails the build: e.g. an image path that doesn't exist in `public/media`, a malformed URL, or a missing field.
 
-### Vercel (in progress)
+### Editing content
 
-The Astro site also deploys to the Vercel project `jcastillo-portfolio` (from the `astro/` folder). On Vercel (`VERCEL=1` at build time) every page is prerendered to static HTML, with content fetched from Directus during the build — so a content change in Directus needs a redeploy to show up there. Everywhere else the site still runs as a Node SSR server, so the Docker deploy is unchanged. See `astro/astro.config.mjs`.
+1. Edit the JSON in `astro/src/data/` (add images to `astro/public/media/` and reference them as `/media/<file>`).
+2. Check it locally (see below), then open a pull request. The Build check validates the data.
+
+### Deploys
+
+- **Vercel** (project `jcastillo-portfolio`, from `astro/`): builds with `VERCEL=1`, which prerenders every page to static HTML (`astro/astro.config.mjs`).
+- **Legacy server** (Michael's Hetzner host, until cutover): Docker Compose stacks behind an external `nginx` network — `astro/docker-compose.yaml` runs the site as a Node SSR server; `api/` holds the old Directus + MariaDB + Redis stack, with uploads and DB backups in S3.
 
 ## Environment variables
 
-`astro/.env` (see `astro/.env.example`). All `PUBLIC_*` values are exposed to the browser and baked in at build time — never put secrets here.
+`astro/.env` (see `astro/.env.example`):
 
 | Variable | Used in | Purpose |
 | --- | --- | --- |
 | `PROJECT_NAME` | compose files | Container/image name prefix |
-| `PUBLIC_DIRECTUS_URL` | `src/lib/api/getClient.ts` | Directus SDK base URL |
-| `PUBLIC_API_URL` | `src/components/PublicationCarousel.svelte` | Direct API requests |
-| `PUBLIC_ASSET_URL` | `src/lib/constants.ts` | Base URL for images/files |
 | `PUBLIC_FA_SCRIPT` | `src/layouts/Layout.astro` | Font Awesome kit script |
 
-`api/.env` (see `api/.env.example`) holds real secrets: Directus key/secret and admin login, DB passwords, S3 keys. It is gitignored and only exists on the server.
+`api/.env` (see `api/.env.example`) holds the old Directus stack's secrets. It is gitignored and only exists on the legacy server.
 
 ## Local development
 
 Requirements: Docker Desktop (or OrbStack).
-
-There is no local Directus — local dev points at the live API. To get the `PUBLIC_*` values, open the live site's devtools → Network tab.
 
 ```sh
 cd astro
