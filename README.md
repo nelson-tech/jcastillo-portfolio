@@ -46,8 +46,11 @@ Requirements: Docker Desktop (or OrbStack).
 ```sh
 cd astro
 cp .env.example .env   # fill in the values
+mkdir node_modules.nosync && ln -s node_modules.nosync node_modules
 docker compose -f docker-compose.dev.local.yaml up --build
 ```
+
+The repo lives in an iCloud-synced folder, so the busiest folders are named `*.nosync`, which iCloud skips: `astro/node_modules` is a symlink to `node_modules.nosync`, and `.git` is a file pointing to `.git.nosync` (`mv .git .git.nosync && echo "gitdir: ./.git.nosync" > .git`). The root `.gitignore` ignores iCloud's `"<name> 2"` conflict copies; stage files by path rather than with `git add -A`.
 
 Open http://localhost:3456. The source folder is mounted into the container, so edits hot-reload.
 
@@ -75,7 +78,7 @@ docker system prune                                              # clean up stop
 
 Glossary: an **image** is a built snapshot of the app (from a Dockerfile); a **container** is a running copy of an image; a **mount** links a folder on your Mac into the container; **compose** files describe which containers to run and how.
 
-Note: the container installs Linux `node_modules` into `astro/`. If you switch to running `npm run dev` directly on your Mac (Node 18, port 3333), delete `node_modules` first.
+Note: the container installs Linux packages into `astro/node_modules.nosync`. If you switch to running `npm run dev` directly on your Mac (Node 18, port 3333), empty that folder first and keep the symlink.
 
 ### Running the production image locally
 
