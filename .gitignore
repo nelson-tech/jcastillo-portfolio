@@ -1,0 +1,5 @@
+# iCloud conflict copies
+* [0-9]
+* [0-9].*
+# iCloud-excluded folders
+*.nosync
