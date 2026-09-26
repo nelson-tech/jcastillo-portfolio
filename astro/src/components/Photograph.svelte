@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { Lightbox } from "svelte-lightbox"
-	import { assetUrl } from "@lib/constants"
+	import type { Image } from "@lib/content"
 
-	export let photograph: API_Asset
+	export let image: Image
 </script>
 
 <Lightbox>
 	<img
-		src={`${assetUrl}/${photograph.filename_disk}`}
-		alt={photograph.title}
+		src={image.src}
+		alt={image.alt}
 		class="photo rounded-sm object-contain md:rounded"
 	/>
 </Lightbox>

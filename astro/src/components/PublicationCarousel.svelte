@@ -3,13 +3,13 @@
 
 	let carousel: any // for calling methods of the carousel instance
 
-	export let publications: AP_Publication[]
+	import type { publicDiplomacy } from "@lib/content"
+
+	export let publications: (typeof publicDiplomacy)["publications"]["items"]
 
 	const handleNextClick = () => {
 		carousel.goToNext()
 	}
-
-	const apiURL = import.meta.env.PUBLIC_API_URL
 </script>
 
 {#if typeof window !== undefined}
@@ -22,7 +22,7 @@
 			>
 				<div class="relative overflow-hidden rounded object-contain">
 					<img
-						src={`${apiURL}/assets/${publication.image}`}
+						src={publication.image.src}
 						alt={publication.label}
 						class="relative rounded object-contain transition-all duration-500 group-hover:grayscale"
 					/>

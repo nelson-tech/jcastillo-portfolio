@@ -1,23 +1,9 @@
 ---
 import MenuButton from "@components/MenuButton.svelte"
 import MobileMenu from "@components/MobileMenu.svelte"
-import getAPIClient from "@lib/api/getClient"
+import { site } from "@lib/content"
 
-const directus = await getAPIClient()
-
-const menuItems = (
-  await directus.items("menu_items").readByQuery({
-    fields: ["label", "path", "status"],
-    filter: { status: "published" },
-  })
-)?.data
-
-const footerIcons = (
-  await directus.items("footer_icons").readByQuery({
-    fields: ["brand", "link", "status"],
-    filter: { status: "published" },
-  })
-)?.data
+const { menu: menuItems, social: footerIcons } = site
 
 export interface Props {
   title: string

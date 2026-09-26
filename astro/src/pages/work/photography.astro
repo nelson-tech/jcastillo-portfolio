@@ -2,40 +2,25 @@
 import PageHeader from "@components/PageHeader.astro"
 import Photograph from "@components/Photograph.svelte"
 import Layout from "@layouts/Layout.astro"
-import { API_Page_Info_Fields } from "@lib/api/fields"
-import getAPIClient from "@lib/api/getClient"
-
-const directus = await getAPIClient()
-
-const photographyData = await directus.singleton("photography_projects").read({
-	fields: [...API_Page_Info_Fields, "images.*.*"]
-})
+import { photography } from "@lib/content"
 ---
 
 <Layout title="Photography">
 	<div>
 		{
-			photographyData?.page_header && (
-				<PageHeader
-					header={photographyData.page_header}
-					description={photographyData.page_description}
-				/>
+			photography.page.header && (
+				<PageHeader header={photography.page.header} description={photography.page.description} />
 			)
 		}
 
 		{
-			photographyData?.images && (
+			photography.images.length > 0 && (
 				<div class="flex flex-wrap items-center justify-center">
-					{photographyData.images.map((photograph) => {
-						return (
-							<div class="basis-1/1 mx-8 mt-8 md:basis-1/3">
-								<Photograph
-									photograph={photograph.directus_files_id as unknown as API_Asset}
-									client:load
-								/>
-							</div>
-						)
-					})}
+					{photography.images.map((image) => (
+						<div class="basis-1/1 mx-8 mt-8 md:basis-1/3">
+							<Photograph image={image} client:load />
+						</div>
+					))}
 				</div>
 			)
 		}
