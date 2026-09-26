@@ -1,0 +1,49 @@
+{
+	"page": {
+		"title": "Audio",
+		"header": "Audio",
+		"description": null
+	},
+	"soundDesign": {
+		"header": "Sound Design & Licensing",
+		"description": null,
+		"videos": [
+			{
+				"label": "The 5th Wave trailer",
+				"provider": "vimeo",
+				"id": "139624500",
+				"draft": false
+			},
+			{
+				"label": "The Rove Trailer",
+				"provider": "vimeo",
+				"id": "92289692",
+				"draft": false
+			},
+			{
+				"label": "What Maisie Knew",
+				"provider": "youtube",
+				"id": "xmUiX7qE1JA",
+				"draft": false
+			}
+		]
+	},
+	"audioEngineering": {
+		"header": "Audio Engineering",
+		"description": null,
+		"embeds": [
+			{
+				"label": "The Middle Initials",
+				"html": "<iframe style=\"border: 0; width: 100%; height: 42px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=2703957109/size=small/bgcol=ffffff/linkcol=0687f5/track=184765832/transparent=true/\" seamless><a href=\"https://themiddleinitials.bandcamp.com/album/made-up-memories\">Made Up Memories by The Middle Initials</a>style=\"border: 0; width: 100%; height: 42px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=2703957109/size=small/bgcol=ffffff/linkcol=0687f5/track=1688859491/transparent=true/\" seamless><a href=\"https://themiddleinitials.bandcamp.com/album/made-up-memories\">Made Up Memories by The Middle Initials</iframe>\n<iframe style=\"border: 0; width: 100%; height: 42px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=2703957109/size=small/bgcol=ffffff/linkcol=0687f5/track=1688859491/transparent=true/\" seamless><a href=\"https://themiddleinitials.bandcamp.com/album/made-up-memories\">Made Up Memories by The Middle Initials</a></iframe>    \n<iframe style=\"border: 0; width: 100%; height: 42px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=2703957109/size=small/bgcol=ffffff/linkcol=0687f5/track=867012577/transparent=true/\" seamless><a href=\"https://themiddleinitials.bandcamp.com/album/made-up-memories\">Made Up Memories by The Middle Initials</a></iframe>    \n<iframe style=\"border: 0; width: 100%; height: 42px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=2703957109/size=small/bgcol=ffffff/linkcol=0687f5/track=3373739229/transparent=true/\" seamless><a href=\"https://themiddleinitials.bandcamp.com/album/made-up-memories\">Made Up Memories by The Middle Initials</a></iframe>    "
+			},
+			{
+				"label": "Idio-Drone",
+				"html": "<iframe style=\"border: 0; width: 100%; height: 42px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=1675499038/size=small/bgcol=ffffff/linkcol=0687f5/transparent=true/\" seamless><a href=\"https://idiodrone.bandcamp.com/album/every-day-of-the-week\">Every Day of the Week by Idio-Drone</a></iframe>\n<iframe style=\"border: 0; width: 100%; height: 42px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=1675499038/size=small/bgcol=ffffff/linkcol=0687f5/track=4291756853/transparent=true/\" seamless><a href=\"https://idiodrone.bandcamp.com/album/every-day-of-the-week\">Every Day of the Week by Idio-Drone</a></iframe>"
+			},
+			{
+				"label": "Mixcloud",
+				"html": "<iframe width=\"100%\" height=\"120\" src=\"https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fcastthedice%2Fcast-the-dice-mixtape-35-by-the-face%2F\" frameborder=\"0\" ></iframe>"
+			}
+		]
+	}
+}

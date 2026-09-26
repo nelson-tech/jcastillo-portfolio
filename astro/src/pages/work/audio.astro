@@ -2,76 +2,40 @@
 import PageHeader from "@components/PageHeader.astro"
 import Video from "@components/Video.astro"
 import Layout from "@layouts/Layout.astro"
-import { API_Page_Info_Fields } from "@lib/api/fields"
-import getAPIClient from "@lib/api/getClient"
+import { audio } from "@lib/content"
 
-const directus = await getAPIClient()
-
-const projects = await directus.singleton("audio_projects").read({
-	fields: [
-		...API_Page_Info_Fields,
-		"sound_design_header",
-		"sound_design_description",
-		"sound_design_video_links.video_links_id.*.*",
-		"audio_engineering_header",
-		"audio_engineering_description",
-		"audio_engineering_html",
-		"audio_engineering_html.*"
-	]
-})
+const { page, soundDesign, audioEngineering } = audio
 ---
 
-<Layout title={projects?.page_title ?? "Audio"}>
+<Layout title={page.title ?? "Audio"}>
 	<div class="mx-4 md:mx-8">
-		{
-			projects?.page_header && (
-				<PageHeader header={projects?.page_header} description={projects?.page_description} />
-			)
-		}
+		{page.header && <PageHeader header={page.header} description={page.description} />}
 		<div id="audio" class="mt-8">
-			{
-				projects?.sound_design_video_links && (
-					<div id="motion_graphics" class="text-center">
-						{projects?.sound_design_header && (
-							<h3 class="text-highlight text-2xl font-bold">{projects.sound_design_header}</h3>
-						)}
-						{projects.sound_design_description && (
-							<p class="mt-4 text-lg">{projects.sound_design_description}</p>
-						)}
+			<div id="motion_graphics" class="text-center">
+				{soundDesign.header && <h3 class="text-highlight text-2xl font-bold">{soundDesign.header}</h3>}
+				{soundDesign.description && <p class="mt-4 text-lg">{soundDesign.description}</p>}
 
-						<div class="mt-8 flex flex-wrap items-center justify-center gap-4">
-							{projects.sound_design_video_links.map((sound_design) => {
-								return (
-									<div class="overflow-hidden rounded">
-										<Video videoData={sound_design.video_links_id} />
-									</div>
-								)
-							})}
+				<div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+					{soundDesign.videos.map((video) => (
+						<div class="overflow-hidden rounded">
+							<Video video={video} />
 						</div>
-					</div>
-				)
-			}
-			{
-				projects?.audio_engineering_html && (
-					<div id="audio-engineering" class="mt-16 text-center">
-						{projects?.audio_engineering_header && (
-							<h3 class="text-highlight text-2xl font-bold">{projects.audio_engineering_header}</h3>
-						)}
-						{projects.audio_engineering_description && (
-							<p class="mt-4 text-lg">{projects.audio_engineering_description}</p>
-						)}
-						<div class="flex flex-col items-center justify-center">
-							{projects?.audio_engineering_html.map((engineering) => {
-								return (
-									<div class="m-4 w-full md:m-8 md:w-1/2">
-										<div set:html={engineering.html} />
-									</div>
-								)
-							})}
+					))}
+				</div>
+			</div>
+			<div id="audio-engineering" class="mt-16 text-center">
+				{audioEngineering.header && (
+					<h3 class="text-highlight text-2xl font-bold">{audioEngineering.header}</h3>
+				)}
+				{audioEngineering.description && <p class="mt-4 text-lg">{audioEngineering.description}</p>}
+				<div class="flex flex-col items-center justify-center">
+					{audioEngineering.embeds.map((embed) => (
+						<div class="m-4 w-full md:m-8 md:w-1/2">
+							<div set:html={embed.html} />
 						</div>
-					</div>
-				)
-			}
+					))}
+				</div>
+			</div>
 		</div>
 	</div>
 </Layout>

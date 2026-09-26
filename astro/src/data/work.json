@@ -1,0 +1,64 @@
+{
+	"categories": [
+		{
+			"name": "Music",
+			"slug": "music",
+			"image": {
+				"src": "/media/014c621a-e4ab-4e4e-9033-c50bc0fb1a45.jpg",
+				"alt": "Guitarra Jo Edit",
+				"width": 960,
+				"height": 640
+			}
+		},
+		{
+			"name": "Public Diplomacy",
+			"slug": "public-diplomacy",
+			"image": {
+				"src": "/media/f2ea2dca-edd4-4190-bafe-bd8c08fb701d.jpg",
+				"alt": "Public Diplomacy",
+				"width": 1024,
+				"height": 576
+			}
+		},
+		{
+			"name": "Audio",
+			"slug": "audio",
+			"image": {
+				"src": "/media/8ecec474-1e41-4f12-b299-c86f85f46412.jpg",
+				"alt": "Header Resonance",
+				"width": 1024,
+				"height": 576
+			}
+		},
+		{
+			"name": "Video",
+			"slug": "video",
+			"image": {
+				"src": "/media/a0559d58-5fa2-408b-a1a4-9b6bb0af0625.gif",
+				"alt": "Video",
+				"width": 600,
+				"height": 338
+			}
+		},
+		{
+			"name": "Photography",
+			"slug": "photography",
+			"image": {
+				"src": "/media/81b61ef3-ef89-4c97-a74c-dd6e43d76a7b.jpg",
+				"alt": "Bali",
+				"width": 1024,
+				"height": 683
+			}
+		},
+		{
+			"name": "Motion Graphics & Graphic Design",
+			"slug": "design",
+			"image": {
+				"src": "/media/1ee5edcc-e2cc-4336-8d07-05e304091378.gif",
+				"alt": "Calavera Animation",
+				"width": 1334,
+				"height": 750
+			}
+		}
+	]
+}

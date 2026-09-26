@@ -1,0 +1,70 @@
+{
+	"page": {
+		"title": "Public Diplomacy",
+		"header": "Public Diplomacy",
+		"description": null
+	},
+	"publications": {
+		"header": "Public Diplomacy",
+		"items": [
+			{
+				"text": "Consulat Général de France à Los Angeles - Program management of LA residencies & website maintenance.",
+				"label": "Villa Albertine",
+				"link": "https://villa-albertine.org/residents",
+				"image": {
+					"src": "/media/49375e61-dff8-4de5-9847-a5f31b6ed1c8.png",
+					"alt": "Villa Albertine"
+				}
+			},
+			{
+				"text": "Analysis & Research: Central America Monitor - 2018 Graduate Research Fellow.",
+				"label": "Central America Monitor",
+				"link": "https://www.wola.org/cam/",
+				"image": {
+					"src": "/media/9bdec7ea-d81e-408c-8131-40425b092dff.png",
+					"alt": "Central America Monitor"
+				}
+			},
+			{
+				"text": "The Marginalized Sounds of Peru - Paper published in 2018 International Place Branding Association Journal.",
+				"label": "The Marginalized Sounds of Peru",
+				"link": "https://api.jc.nelson.tech/assets/cef5ba65-bd31-4d86-92b7-bb6ca19fa7f5",
+				"image": {
+					"src": "/media/09ec2a7b-69bc-4201-8300-5caf662f917d.jpg",
+					"alt": "The Marginalized Sounds of Peru"
+				}
+			},
+			{
+				"text": "Trashed - VR production on transborder water pollution. 1st & 2nd place - 62nd Los Angeles Press Club's Annual Southern California Journalism Awards.",
+				"label": "Trashed: The Tijuana River Valley Pollution Crisis",
+				"link": "http://trashed.jovrnalism.io/",
+				"image": {
+					"src": "/media/af2eb2df-ff80-4e7e-8339-fd456668d581.png",
+					"alt": "Trashed: The Tijuana River Valley Pollution Crisis"
+				}
+			},
+			{
+				"text": "Published opinion pieces & case studies on public diplomacy.",
+				"label": "USC Center on Public Diplomacy",
+				"link": "https://uscpublicdiplomacy.org/?q=user/cpdblog_main&uid=jose_castillo",
+				"image": {
+					"src": "/media/f924ffd3-746e-4391-9709-821ddb542e72.png",
+					"alt": "USC Center on Public Diplomacy"
+				}
+			}
+		]
+	},
+	"podcasts": {
+		"header": "Podcasts",
+		"items": [
+			{
+				"label": "Resonance - Music Diplomacy Podcast produced and hosted for USC’s M.A. in Public Diplomacy Practicum.",
+				"html": "<iframe width=\"100%\" height=\"350\" scrolling=\"no\" frameborder=\"no\" allow=\"autoplay\" src=\"https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/648720618&color=%23908464&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true\"></iframe>"
+			},
+			{
+				"label": "Public Diplocast - Public Diplomacy Podcast produced on behalf of the USC Center on Public Diplomacy.",
+				"html": "<iframe width=\"100%\" height=\"350\" scrolling=\"no\" frameborder=\"no\" allow=\"autoplay\" src=\"https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/406706979&color=%23908464&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true\"></iframe>"
+			}
+		]
+	}
+}

@@ -1,24 +1,15 @@
 ---
 import ProjectCard from "@components/ProjectCard.astro"
 import Layout from "@layouts/Layout.astro"
-import getAPIClient from "@lib/api/getClient"
+import { work } from "@lib/content"
 
-const directus = await getAPIClient()
-
-const categories = (
-	await directus.items("work_categories").readByQuery({
-		fields: ["name", "slug", "image.*", "status"],
-		filter: { status: "published" }
-	})
-)?.data
+const { categories } = work
 ---
 
 <Layout title="Work">
 	<div class="mx-4 grid grid-cols-1 overflow-hidden rounded md:mt-8 md:grid-cols-2">
 		{
-			categories?.map((category) => {
-				if (category) return <ProjectCard category={category} />
-			})
+			categories.map((category) => <ProjectCard category={category} />)
 		}
 	</div>
 </Layout>

@@ -1,0 +1,235 @@
+{
+	"page": {
+		"title": "Design",
+		"header": "Motion Graphics and Graphic Design",
+		"description": null
+	},
+	"motionGraphics": {
+		"header": "Motion Graphics",
+		"description": null,
+		"videos": [
+			{
+				"label": "Yo",
+				"provider": "youtube",
+				"id": "dFuCl9duA5E",
+				"draft": false
+			},
+			{
+				"label": "Middle Initials",
+				"provider": "vimeo",
+				"id": "102664150",
+				"draft": false
+			},
+			{
+				"label": "Tio Bernie",
+				"provider": "youtube",
+				"id": "Y3c14sSnbyE",
+				"draft": false
+			},
+			{
+				"label": "CPD Toolkit",
+				"provider": "youtube",
+				"id": "PkvpHipLsJ8",
+				"draft": false
+			},
+			{
+				"label": "CPD Animation",
+				"provider": "youtube",
+				"id": "BaA6gSSjqN4",
+				"draft": false
+			},
+			{
+				"label": "Japan House",
+				"provider": "youtube",
+				"id": "JUCbfMcj3Ik",
+				"draft": false
+			},
+			{
+				"label": "CPD Animation 2",
+				"provider": "youtube",
+				"id": "X5MNwlliCh4",
+				"draft": false
+			},
+			{
+				"label": "Multimedia Promo",
+				"provider": "youtube",
+				"id": "GEL5U1J4AZc",
+				"draft": false
+			},
+			{
+				"label": "What is PD?",
+				"provider": "youtube",
+				"id": "l8youaDKOsM",
+				"draft": false
+			},
+			{
+				"label": "Michael Scott",
+				"provider": "youtube",
+				"id": "0SZhycKaaWQ",
+				"draft": false
+			},
+			{
+				"label": "Jo",
+				"provider": "youtube",
+				"id": "Z_WMhDdae1I",
+				"draft": false
+			},
+			{
+				"label": "Skull Animation",
+				"provider": "youtube",
+				"id": "HGIvQSkIttw",
+				"draft": false
+			},
+			{
+				"label": "draw animation",
+				"provider": "youtube",
+				"id": "RMeJOFyAzWc",
+				"draft": false
+			},
+			{
+				"label": "Eye Animation",
+				"provider": "youtube",
+				"id": "CY7Zg5H7Xn8",
+				"draft": false
+			},
+			{
+				"label": "cerebro",
+				"provider": "youtube",
+				"id": "7oH9z1BtieI",
+				"draft": false
+			}
+		]
+	},
+	"graphicDesign": {
+		"header": "Graphic Design",
+		"description": null,
+		"images": [
+			{
+				"src": "/media/748156c3-d9cb-4119-9a6d-d13cfc15ab4a.jpg",
+				"alt": "Ica Cirque Du Soleil Media Outreach Flyer Orig",
+				"width": 618,
+				"height": 800
+			},
+			{
+				"src": "/media/6fada5e2-244f-4971-a308-36fd90a8726d.jpg",
+				"alt": "Img 0061 Orig",
+				"width": 800,
+				"height": 800
+			},
+			{
+				"src": "/media/7cd2863f-4619-44c8-8959-37fb73e68565.jpg",
+				"alt": "Jo 2 Orig",
+				"width": 797,
+				"height": 800
+			},
+			{
+				"src": "/media/349319dc-9f58-440b-b338-27542e18a7bb.jpg",
+				"alt": "Untitled Artwork 2 Orig",
+				"width": 1100,
+				"height": 768
+			},
+			{
+				"src": "/media/f7d01920-54da-4758-9884-dcad314b9fc7.jpg",
+				"alt": "Monk Orig",
+				"width": 800,
+				"height": 800
+			},
+			{
+				"src": "/media/a51ff4e4-44d0-4724-8d53-22371116c5d7.jpg",
+				"alt": "Jose Castillo Water Color Orig Orig",
+				"width": 601,
+				"height": 800
+			},
+			{
+				"src": "/media/9e086cd4-5fe4-419a-bc6c-350d4fbf56e4.jpg",
+				"alt": "Jose Alejandro Orig",
+				"width": 761,
+				"height": 800
+			},
+			{
+				"src": "/media/f0709fa1-fcbe-41d9-a293-7a534792f84b.jpg",
+				"alt": "Img 0035 Orig",
+				"width": 559,
+				"height": 800
+			},
+			{
+				"src": "/media/c9663a66-7120-43ba-b8ac-99c7063c8def.jpg",
+				"alt": "Girl Pain Splatters Orig Orig",
+				"width": 858,
+				"height": 720
+			},
+			{
+				"src": "/media/f989c7ff-c366-4983-9878-81c1d79c51af.jpg",
+				"alt": "8327291 Orig",
+				"width": 618,
+				"height": 800
+			},
+			{
+				"src": "/media/e015c412-3794-4587-9c36-f589f7ebb59a.jpg",
+				"alt": "7940194 Orig",
+				"width": 800,
+				"height": 800
+			},
+			{
+				"src": "/media/6f2ffbc3-9ca9-481c-9ef0-7cb51413337b.jpg",
+				"alt": "6978081 Orig",
+				"width": 557,
+				"height": 385
+			},
+			{
+				"src": "/media/ceccb19a-6eb3-482d-9457-d7fb468e33ca.jpg",
+				"alt": "6677471 Orig",
+				"width": 950,
+				"height": 550
+			},
+			{
+				"src": "/media/d1cee250-e220-4201-bd70-715c0286f4e2.jpg",
+				"alt": "6175210 Orig",
+				"width": 1100,
+				"height": 621
+			},
+			{
+				"src": "/media/9f89ddc9-4983-4f1a-8bd7-837652b793d3.jpg",
+				"alt": "4701563 Orig",
+				"width": 1100,
+				"height": 734
+			},
+			{
+				"src": "/media/7ff6b1d8-3b8d-4b29-885b-eabff4db00ba.jpg",
+				"alt": "4681913 Orig",
+				"width": 1100,
+				"height": 662
+			},
+			{
+				"src": "/media/eb65a972-3ee0-467c-a7f5-2143e12e1d25.png",
+				"alt": "4135959 Orig",
+				"width": 812,
+				"height": 800
+			},
+			{
+				"src": "/media/0f338d4c-b6d1-4a51-ba9d-a009085bc966.jpg",
+				"alt": "2263902 Orig",
+				"width": 800,
+				"height": 800
+			},
+			{
+				"src": "/media/b8082e3c-22fa-444f-8ea6-a33c310735ec.png",
+				"alt": "2204629 Orig",
+				"width": 1100,
+				"height": 598
+			},
+			{
+				"src": "/media/8fd687f2-0c69-4400-937f-12c19b7ba7d5.png",
+				"alt": "1855245 Orig",
+				"width": 1100,
+				"height": 594
+			},
+			{
+				"src": "/media/7fc0d5c5-7cb2-48f5-b962-a8ed6b9f607a.jpg",
+				"alt": "1778240 Orig",
+				"width": 581,
+				"height": 800
+			}
+		]
+	}
+}

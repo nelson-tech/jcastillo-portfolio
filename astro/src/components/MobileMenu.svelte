@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { isMenuOpen } from "@lib/stores/menu"
+	import type { site } from "@lib/content"
 
-	export let menuItems: API_Menu_Item[] | null | undefined
-	export let footerItems: API_Footer_Icon[] | null | undefined
+	export let menuItems: (typeof site)["menu"]
+	export let footerItems: (typeof site)["social"]
 
 	const clickOutside = (node: HTMLElement, ignore?: string) => {
 		const handleClick = (event: Event) => {

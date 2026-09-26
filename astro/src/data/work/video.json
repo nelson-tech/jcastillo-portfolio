@@ -1,0 +1,76 @@
+{
+	"page": {
+		"title": "Video",
+		"header": "Video",
+		"description": null
+	},
+	"vr": {
+		"header": "VR 360 Production",
+		"videos": [
+			{
+				"label": "Trashed",
+				"provider": "youtube",
+				"id": "f2DLLWRHJ1o",
+				"draft": true
+			}
+		]
+	},
+	"editing": {
+		"header": "Video Editing",
+		"videos": [
+			{
+				"label": "CPD",
+				"provider": "youtube",
+				"id": "jxD_viR3LCU",
+				"draft": false
+			},
+			{
+				"label": "Rojava Means West",
+				"provider": "youtube",
+				"id": "9MI8IJwZEd0",
+				"draft": false
+			}
+		]
+	},
+	"commercial": {
+		"header": "Original Commercial Productions",
+		"videos": [
+			{
+				"label": "Palabras de Amor",
+				"provider": "vimeo",
+				"id": "435878002",
+				"draft": false
+			},
+			{
+				"label": "Adefecio - #73",
+				"provider": "vimeo",
+				"id": "383454682",
+				"draft": false
+			},
+			{
+				"label": "Nuve",
+				"provider": "vimeo",
+				"id": "160432959",
+				"draft": true
+			},
+			{
+				"label": "The Face - Coma Tree (Promo)",
+				"provider": "vimeo",
+				"id": "80652432",
+				"draft": false
+			},
+			{
+				"label": "The Face EP Promo",
+				"provider": "vimeo",
+				"id": "50070127",
+				"draft": false
+			},
+			{
+				"label": "A week in Thailand (2014)",
+				"provider": "vimeo",
+				"id": "97485364",
+				"draft": false
+			}
+		]
+	}
+}

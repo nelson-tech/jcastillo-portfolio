@@ -1,0 +1,51 @@
+{
+	"page": {
+		"title": "Music",
+		"header": "Music",
+		"description": null
+	},
+	"hero": {
+		"image": {
+			"src": "/media/9ad97401-3be8-40b8-9700-23e8ed45b045.png",
+			"alt": "Sweettigerrecords",
+			"width": 400,
+			"height": 394
+		},
+		"link": "https://sweettigerrecords.bandcamp.com"
+	},
+	"spotifyArtists": [
+		{
+			"name": "The Face",
+			"id": "3E3VwuFELK4r0f1dqX8IMt"
+		},
+		{
+			"name": "Nuve",
+			"id": "6JlXlRHurEVniQjTS0Dipf"
+		},
+		{
+			"name": "Leila Mendes",
+			"id": "3Inn8EW751beICCDP51NH6"
+		}
+	],
+	"press": {
+		"text": null,
+		"links": [
+			{
+				"label": "Remezcla",
+				"url": "https://remezcla.com/music/nuve-music-umbra-et-penumbra/"
+			},
+			{
+				"label": "Sonic Masala",
+				"url": "http://sonicmasala.blogspot.com.au/2014/02/hits-from-box-80-awake-from-thy.html"
+			},
+			{
+				"label": "Cazar Truenos - Radio Feature (Spanish)",
+				"url": "http://cazartruenos.blogspot.com/2012/08/cazar-truenos-programa-no-32-29-08-2012.html"
+			},
+			{
+				"label": "Cast the Dice - Blog Feature (DJ Set)",
+				"url": "http://www.mixcloud.com/castthedice/cast-the-dice-mixtape-35-by-the-face/"
+			}
+		]
+	}
+}

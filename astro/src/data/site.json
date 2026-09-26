@@ -1,0 +1,46 @@
+{
+	"menu": [
+		{
+			"label": "Work",
+			"path": "/work"
+		},
+		{
+			"label": "About",
+			"path": "/about"
+		},
+		{
+			"label": "Contact",
+			"path": "/contact"
+		}
+	],
+	"social": [
+		{
+			"brand": "Github",
+			"link": "https://github.com/jcastilloc23"
+		},
+		{
+			"brand": "Twitter",
+			"link": "https://twitter.com/esoj_ollitsac"
+		},
+		{
+			"brand": "Instagram",
+			"link": "https://www.instagram.com/ollitsac_esoj/"
+		},
+		{
+			"brand": "Spotify",
+			"link": "https://open.spotify.com/artist/3E3VwuFELK4r0f1dqX8IMt?si=nIFp72ywQIqWhfyjS78jdg"
+		},
+		{
+			"brand": "SoundCloud",
+			"link": "https://soundcloud.com/sweettigerrecords"
+		},
+		{
+			"brand": "Vimeo",
+			"link": "https://vimeo.com/sweettigerrecords"
+		},
+		{
+			"brand": "LinkedIn",
+			"link": "https://www.linkedin.com/in/jcastilloc23/"
+		}
+	]
+}

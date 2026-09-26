@@ -1,83 +1,49 @@
 ---
 import PageHeader from "@components/PageHeader.astro"
 import Layout from "@layouts/Layout.astro"
-import { API_Page_Info_Fields } from "@lib/api/fields"
-import { assetUrl } from "@lib/constants"
-import getAPIClient from "@lib/api/getClient"
+import { music } from "@lib/content"
 
-const directus = await getAPIClient()
-
-const projects = await directus.singleton("music_projects").read({
-	fields: [
-		...API_Page_Info_Fields,
-		"image.*",
-		"link",
-		"text",
-		"links",
-		"links.*",
-		"spotify",
-		"spotify.*"
-	]
-})
+const { page, hero, spotifyArtists, press } = music
 ---
 
-<Layout title={projects?.page_title ?? "Music"}>
+<Layout title={page.title ?? "Music"}>
 	<div class="mx-4 md:mx-8">
+		{page.header && <PageHeader header={page.header} description={page.description} />}
 		{
-			projects?.page_header && (
-				<PageHeader header={projects.page_header} description={projects.page_description} />
-			)
-		}
-		{
-			projects?.image && (
+			hero && (
 				<div class="flex justify-center">
-					<a href={projects.link ?? "#"} target="_blank" title={projects.image.title ?? ""}>
-						<img
-							src={`${assetUrl}/${projects.image.filename_disk}`}
-							alt={projects.image.title ?? ""}
-						/>
+					<a href={hero.link} target="_blank" title={hero.image.alt}>
+						<img src={hero.image.src} alt={hero.image.alt} />
 					</a>
 				</div>
 			)
 		}
-		{
-			projects?.spotify && (
-				<div class="flex flex-wrap">
-					{projects.spotify.map((artist) => {
-						return (
-							<iframe
-								style="border-radius:12px"
-								src={`https://open.spotify.com/embed/artist/${artist?.artist_id}?utm_source=generator`}
-								class="flex-1 p-4"
-								height="400"
-								frameborder="0"
-								allowfullscreen=""
-								allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-								loading="lazy"
-							/>
-						)
-					})}
-				</div>
-			)
-		}
-		{
-			projects?.links && (
-				<div id="press-releases" class="my-8 text-xl">
-					{projects.text && <h4 class="text-center">{projects.text}</h4>}
-					<div class="text-center">
-						{projects.links.map((link) => {
-							return (
-								<p class="font-bold">
-									<a href={link.url} target="_blank" rel="noopener" data-cke-saved-href={link.url}>
-										{link.label}
-									</a>
-								</p>
-							)
-						})}
-					</div>
-				</div>
-			)
-		}
+		<div class="flex flex-wrap">
+			{spotifyArtists.map((artist) => (
+				<iframe
+					style="border-radius:12px"
+					src={`https://open.spotify.com/embed/artist/${artist.id}?utm_source=generator`}
+					class="flex-1 p-4"
+					height="400"
+					frameborder="0"
+					allowfullscreen=""
+					allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+					loading="lazy"
+				/>
+			))}
+		</div>
+		<div id="press-releases" class="my-8 text-xl">
+			{press.text && <h4 class="text-center">{press.text}</h4>}
+			<div class="text-center">
+				{press.links.map((link) => (
+					<p class="font-bold">
+						<a href={link.url} target="_blank" rel="noopener">
+							{link.label}
+						</a>
+					</p>
+				))}
+			</div>
+		</div>
 	</div>
 </Layout>
 
