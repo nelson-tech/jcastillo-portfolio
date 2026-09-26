@@ -19,6 +19,10 @@ browser ──> nginx (reverse proxy, on the server)
 - S3 is also the target for nightly DB backups (`api/docker-compose.backup.yaml`); restores use `api/docker-compose.restore.yaml`.
 - Production runs as Docker Compose stacks on a server with an external `nginx` Docker network. Both `api/docker-compose.yaml` and `astro/docker-compose.yaml` expect that network to exist.
 
+### Vercel (in progress)
+
+The Astro site also deploys to the Vercel project `jcastillo-portfolio` (from the `astro/` folder). On Vercel (`VERCEL=1` at build time) every page is prerendered to static HTML, with content fetched from Directus during the build — so a content change in Directus needs a redeploy to show up there. Everywhere else the site still runs as a Node SSR server, so the Docker deploy is unchanged. See `astro/astro.config.mjs`.
+
 ## Environment variables
 
 `astro/.env` (see `astro/.env.example`). All `PUBLIC_*` values are exposed to the browser and baked in at build time — never put secrets here.
