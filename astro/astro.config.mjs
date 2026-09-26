@@ -16,4 +16,10 @@ export default defineConfig({
   integrations: [tailwind(), svelte()],
   output: onVercel ? "static" : "server",
   adapter: onVercel ? undefined : node({ mode: "standalone" }),
+  vite: {
+    server: {
+      // Vite only skips folders named node_modules; the real deps live in node_modules.nosync.
+      watch: { ignored: ["**/node_modules.nosync/**"] },
+    },
+  },
 });
