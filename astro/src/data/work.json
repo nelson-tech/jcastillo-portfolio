@@ -67,8 +67,10 @@
 				"src": "/media/systems-data-tile.jpg",
 				"alt": "Roy and Sensational Concrete website screenshots",
 				"width": 1024,
-				"height": 576
-			}
+				"height": 576,
+				"wideSrc": "/media/systems-data-tile-wide.jpg"
+			},
+			"wide": true
 		}
 	]
 }

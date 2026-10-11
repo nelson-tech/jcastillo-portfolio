@@ -7,12 +7,15 @@ export interface Props {
 const { category } = Astro.props
 ---
 
-<div class="group relative aspect-video">
+<div class={`group relative aspect-video ${category.wide ? "md:col-span-2 md:aspect-[32/9]" : ""}`}>
+	<picture>
+	{category.wide && category.image.wideSrc && <source media="(min-width: 768px)" srcset={category.image.wideSrc} />}
 	<img
 		src={category.image.src}
 		alt={category.image.alt}
 		class="h-full w-full object-fill transition-all duration-500 group-hover:grayscale"
 	/>
+	</picture>
 	<div
 		class="absolute inset-0 z-10 bg-black bg-opacity-50 opacity-0 transition-all duration-500 group-hover:opacity-100"
 	>

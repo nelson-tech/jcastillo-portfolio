@@ -66,7 +66,7 @@ export const contact = z
 
 export const work = z
 	.object({
-		categories: z.array(z.object({ name: z.string(), slug: z.string(), image }))
+		categories: z.array(z.object({ name: z.string(), slug: z.string(), image: image.extend({ wideSrc: z.string().optional() }), wide: z.boolean().optional() }))
 	})
 	.parse(workJson)
 
