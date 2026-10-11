@@ -12,6 +12,7 @@ import videoJson from "@data/work/video.json"
 import audioJson from "@data/work/audio.json"
 import musicJson from "@data/work/music.json"
 import publicDiplomacyJson from "@data/work/public-diplomacy.json"
+import systemsDataJson from "@data/work/systems-data.json"
 
 const publicDir = path.join(process.cwd(), "public")
 // The production Docker image deletes public/ after building, so only check when it exists.
@@ -119,3 +120,30 @@ export const publicDiplomacy = z
 		podcasts: z.object({ header: text, items: z.array(z.object({ label: z.string(), html })) })
 	})
 	.parse(publicDiplomacyJson)
+
+export const systemsData = z
+	.object({
+		page: pageInfo,
+		caseStudies: z.object({
+			header: text,
+			items: z.array(
+				z.object({
+					name: z.string(),
+					link: z.string().url(),
+					summary: z.string(),
+					problem: text,
+					built: z.array(z.string()),
+					stack: z.array(z.string()),
+					results: z.array(z.string())
+				})
+			)
+		}),
+		stack: z.object({ header: text, items: z.array(z.string()) }),
+		agents: z.object({ header: text, text: z.string() }),
+		career: z.object({
+			header: text,
+			items: z.array(z.object({ company: z.string(), text: z.string(), confirmed: z.boolean() }))
+		}),
+		links: z.array(z.object({ label: z.string(), url: z.string().url() }))
+	})
+	.parse(systemsDataJson)

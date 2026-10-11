@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="576" viewBox="0 0 1024 576">
+	<defs>
+		<linearGradient id="bg" x1="0" y1="1" x2="1" y2="0">
+			<stop offset="0" stop-color="#cbd5e1"/>
+			<stop offset="1" stop-color="#f8fafc"/>
+		</linearGradient>
+		<radialGradient id="glow" cx="0.62" cy="0.48" r="0.45">
+			<stop offset="0" stop-color="#5592b5" stop-opacity="0.2"/>
+			<stop offset="1" stop-color="#5592b5" stop-opacity="0"/>
+		</radialGradient>
+	</defs>
+	<rect width="1024" height="576" fill="url(#bg)"/>
+	<rect width="1024" height="576" fill="url(#glow)"/>
+
+	<!-- flowing streams converging toward the centre-right -->
+	<g fill="none" stroke="#64748b" stroke-width="1" stroke-linecap="round">
+		<path stroke-opacity="0.12" d="M-20,40 C200,10 360,120 560,170 S860,230 1044,200"/>
+		<path stroke-opacity="0.18" d="M-20,75 C190,50 380,150 570,185 S870,240 1044,215"/>
+		<path stroke-opacity="0.14" d="M-20,110 C180,95 390,175 580,200 S880,250 1044,232"/>
+		<path stroke-opacity="0.2" d="M-20,145 C170,140 400,200 590,215 S880,258 1044,248"/>
+		<path stroke-opacity="0.12" d="M-20,180 C160,185 410,225 600,232 S890,266 1044,262"/>
+		<path stroke-opacity="0.18" d="M-20,215 C150,230 420,250 610,250 S890,274 1044,276"/>
+		<path stroke-opacity="0.14" d="M-20,250 C150,270 420,272 620,266 S900,282 1044,290"/>
+		<path stroke-opacity="0.2" d="M-20,285 C150,305 420,292 630,282 S900,292 1044,304"/>
+		<path stroke-opacity="0.12" d="M-20,320 C160,345 420,315 640,298 S900,302 1044,318"/>
+		<path stroke-opacity="0.18" d="M-20,355 C170,385 420,338 650,314 S900,312 1044,332"/>
+		<path stroke-opacity="0.14" d="M-20,390 C180,425 420,362 660,330 S900,322 1044,346"/>
+		<path stroke-opacity="0.2" d="M-20,425 C190,465 420,386 670,346 S900,332 1044,360"/>
+		<path stroke-opacity="0.12" d="M-20,460 C200,505 420,410 680,362 S900,342 1044,374"/>
+		<path stroke-opacity="0.16" d="M-20,495 C210,545 420,434 690,378 S900,352 1044,388"/>
+		<path stroke-opacity="0.12" d="M-20,530 C220,585 420,458 700,394 S900,362 1044,402"/>
+	</g>
+	<g fill="none" stroke="#5592b5" stroke-linecap="round">
+		<path stroke-opacity="0.6" stroke-width="1.8" d="M-20,160 C170,160 400,212 594,224 S880,262 1044,256"/>
+		<path stroke-opacity="0.45" stroke-width="1.4" d="M-20,372 C175,405 420,350 655,322 S900,317 1044,339"/>
+	</g>
+
+	<!-- node graph -->
+	<g stroke="#475569" stroke-opacity="0.25" stroke-width="0.8">
+		<line x1="180" y1="130" x2="300" y2="210"/>
+		<line x1="300" y1="210" x2="420" y2="150"/>
+		<line x1="300" y1="210" x2="360" y2="330"/>
+		<line x1="420" y1="150" x2="540" y2="230"/>
+		<line x1="360" y1="330" x2="540" y2="230"/>
+		<line x1="360" y1="330" x2="250" y2="430"/>
+		<line x1="360" y1="330" x2="470" y2="420"/>
+		<line x1="540" y1="230" x2="640" y2="280"/>
+		<line x1="470" y1="420" x2="640" y2="280"/>
+		<line x1="640" y1="280" x2="760" y2="200"/>
+		<line x1="640" y1="280" x2="770" y2="370"/>
+		<line x1="760" y1="200" x2="880" y2="150"/>
+		<line x1="760" y1="200" x2="890" y2="290"/>
+		<line x1="770" y1="370" x2="890" y2="290"/>
+		<line x1="770" y1="370" x2="860" y2="460"/>
+		<line x1="470" y1="420" x2="600" y2="480"/>
+		<line x1="600" y1="480" x2="770" y2="370"/>
+		<line x1="540" y1="230" x2="560" y2="110"/>
+		<line x1="560" y1="110" x2="760" y2="200"/>
+	</g>
+	<g fill="none" stroke="#64748b" stroke-opacity="0.22">
+		<circle cx="180" cy="130" r="7"/>
+		<circle cx="420" cy="150" r="7"/>
+		<circle cx="360" cy="330" r="8"/>
+		<circle cx="250" cy="430" r="6"/>
+		<circle cx="470" cy="420" r="7"/>
+		<circle cx="560" cy="110" r="6"/>
+		<circle cx="760" cy="200" r="8"/>
+		<circle cx="880" cy="150" r="6"/>
+		<circle cx="890" cy="290" r="7"/>
+		<circle cx="860" cy="460" r="6"/>
+		<circle cx="600" cy="480" r="7"/>
+	</g>
+	<g fill="#475569" fill-opacity="0.5">
+		<circle cx="180" cy="130" r="3.5"/>
+		<circle cx="420" cy="150" r="4"/>
+		<circle cx="360" cy="330" r="4.5"/>
+		<circle cx="250" cy="430" r="3"/>
+		<circle cx="470" cy="420" r="4"/>
+		<circle cx="560" cy="110" r="3"/>
+		<circle cx="760" cy="200" r="4.5"/>
+		<circle cx="880" cy="150" r="3"/>
+		<circle cx="890" cy="290" r="4"/>
+		<circle cx="860" cy="460" r="3"/>
+		<circle cx="600" cy="480" r="4"/>
+	</g>
+	<g fill="none" stroke="#5592b5" stroke-opacity="0.5">
+		<circle cx="300" cy="210" r="13"/>
+		<circle cx="540" cy="230" r="15"/>
+		<circle cx="640" cy="280" r="18"/>
+		<circle cx="770" cy="370" r="13"/>
+	</g>
+	<g fill="#5592b5" fill-opacity="0.9">
+		<circle cx="300" cy="210" r="6"/>
+		<circle cx="540" cy="230" r="7"/>
+		<circle cx="640" cy="280" r="8"/>
+		<circle cx="770" cy="370" r="6"/>
+	</g>
+</svg>

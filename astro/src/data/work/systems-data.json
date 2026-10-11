@@ -1,0 +1,87 @@
+{
+	"page": {
+		"title": "Systems & Data",
+		"header": "Systems & Data",
+		"description": null
+	},
+	"caseStudies": {
+		"header": "Case Studies",
+		"items": [
+			{
+				"name": "Roy",
+				"link": "https://royanalyst.com",
+				"summary": "AI royalty-statement analyst for musicians and publishers.",
+				"problem": "Royalty statements come in dozens of inconsistent formats.",
+				"built": ["Upload, parse, normalize and analyze royalty statements with AI."],
+				"stack": ["Next.js", "Clerk", "Supabase", "Gemini", "Vercel"],
+				"results": [
+					"100% parsing accuracy across 37 statement formats, verified in CI on every change.",
+					"Automated auth and regression tests.",
+					"Built with AI-agent-driven development behind PR checks."
+				]
+			},
+			{
+				"name": "Sensational Concrete",
+				"link": "https://sensationalconcrete.com",
+				"summary": "Website for a local concrete contractor.",
+				"problem": null,
+				"built": [
+					"Structured data and generative-engine optimization so AI assistants like ChatGPT can understand and cite the business. The owner reports leads from ChatGPT users.",
+					"Lead-source tracking on the quote form (\"How did you hear about us?\" plus UTM capture).",
+					"CI with lint, build and quote-form tests."
+				],
+				"stack": ["Next.js", "Vercel"],
+				"results": []
+			}
+		]
+	},
+	"stack": {
+		"header": "Stack",
+		"items": [
+			"Google Cloud / BigQuery",
+			"SQL",
+			"Python",
+			"Airflow / Prefect",
+			"Next.js",
+			"Supabase",
+			"Tableau",
+			"Vercel",
+			"AI agents"
+		]
+	},
+	"agents": {
+		"header": "Operating with AI Agents",
+		"text": "I run a small team of AI agents across engineering, finance and marketing. Every change goes through pull requests, automated tests and CI guardrails, and I verify the results myself before anything ships."
+	},
+	"career": {
+		"header": "Career Highlights",
+		"items": [
+			{
+				"company": "Warner Chappell Music",
+				"text": "Music publishing royalty operations and data.",
+				"confirmed": false
+			},
+			{
+				"company": "SoundCloud",
+				"text": "Royalty operations and data for creator services.",
+				"confirmed": false
+			},
+			{
+				"company": "Meta",
+				"text": "Data engineering and analytics for music partnerships.",
+				"confirmed": false
+			},
+			{
+				"company": "Spark Networks",
+				"text": "Data analytics and engineering.",
+				"confirmed": false
+			}
+		]
+	},
+	"links": [
+		{
+			"label": "GitHub",
+			"url": "https://github.com/jcastilloc23"
+		}
+	]
+}

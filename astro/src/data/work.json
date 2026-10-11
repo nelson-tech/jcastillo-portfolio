@@ -59,6 +59,16 @@
 				"width": 1334,
 				"height": 750
 			}
+		},
+		{
+			"name": "Systems & Data",
+			"slug": "systems-data",
+			"image": {
+				"src": "/media/systems-data.svg",
+				"alt": "Abstract flowing lines and connected nodes",
+				"width": 1024,
+				"height": 576
+			}
 		}
 	]
 }

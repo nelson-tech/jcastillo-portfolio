@@ -44,9 +44,18 @@
 				}
 			},
 			{
-				"text": "Published opinion pieces & case studies on public diplomacy.",
+				"text": "Multimedia producer & contributor: CPD Blog, PD features, and the Resonance music-diplomacy podcast.",
 				"label": "USC Center on Public Diplomacy",
-				"link": "https://uscpublicdiplomacy.org/?q=user/cpdblog_main&uid=jose_castillo",
+				"link": "https://uscpublicdiplomacy.org/users/jose_castillo",
+				"image": {
+					"src": "/media/f924ffd3-746e-4391-9709-821ddb542e72.png",
+					"alt": "USC Center on Public Diplomacy"
+				}
+			},
+			{
+				"text": "Resonance episode with Nicholas J. Cull on jazz diplomacy and musical propaganda (USC CPD, 2019).",
+				"label": "Resonance: Music Diplomacy in Times of Conflict",
+				"link": "https://uscpublicdiplomacy.org/story/music-diplomacy-times-conflict",
 				"image": {
 					"src": "/media/f924ffd3-746e-4391-9709-821ddb542e72.png",
 					"alt": "USC Center on Public Diplomacy"
