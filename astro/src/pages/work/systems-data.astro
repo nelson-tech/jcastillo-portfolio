@@ -19,6 +19,25 @@ const { page, caseStudies, stack, agents, career, links } = systemsData
 			<div class="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2">
 				{caseStudies.items.map((study) => (
 					<div class="flex flex-col gap-4">
+						<a
+							href={study.link}
+							target="_blank"
+							rel="noopener"
+							title={study.name}
+							class="group relative block aspect-video overflow-hidden rounded"
+						>
+							<picture>
+								<source media="(max-width: 639px)" srcset={study.image.mobileSrc} />
+								<img
+									src={study.image.src}
+									alt={study.image.alt}
+									width={study.image.width}
+									height={study.image.height}
+									loading="lazy"
+									class="h-full w-full object-cover object-top transition-all duration-500 group-hover:grayscale"
+								/>
+							</picture>
+						</a>
 						<ul>
 							<Card title={study.name} body={study.summary} href={study.link} />
 						</ul>

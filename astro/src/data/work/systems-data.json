@@ -9,6 +9,13 @@
 		"items": [
 			{
 				"name": "Roy",
+				"image": {
+					"src": "/media/systems-data-roy.jpg",
+					"mobileSrc": "/media/systems-data-roy-mobile.jpg",
+					"alt": "Roy homepage",
+					"width": 1024,
+					"height": 576
+				},
 				"link": "https://royanalyst.com",
 				"summary": "AI royalty-statement analyst for musicians and publishers.",
 				"problem": "Royalty statements come in dozens of inconsistent formats.",
@@ -22,6 +29,13 @@
 			},
 			{
 				"name": "Sensational Concrete",
+				"image": {
+					"src": "/media/systems-data-sensational-concrete.jpg",
+					"mobileSrc": "/media/systems-data-sensational-concrete-mobile.jpg",
+					"alt": "Sensational Concrete homepage",
+					"width": 1024,
+					"height": 576
+				},
 				"link": "https://sensationalconcrete.com",
 				"summary": "Website for a local concrete contractor.",
 				"problem": null,

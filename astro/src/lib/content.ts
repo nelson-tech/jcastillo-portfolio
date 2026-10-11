@@ -129,6 +129,7 @@ export const systemsData = z
 			items: z.array(
 				z.object({
 					name: z.string(),
+					image: image.extend({ mobileSrc: mediaPath }),
 					link: z.string().url(),
 					summary: z.string(),
 					problem: text,
