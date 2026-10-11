@@ -1,0 +1,117 @@
+{
+	"page": {
+		"title": "Systems & Data",
+		"header": "Systems & Data",
+		"description": null
+	},
+	"caseStudies": {
+		"header": "Case Studies",
+		"items": [
+			{
+				"name": "Roy",
+				"image": {
+					"src": "/media/systems-data-roy.jpg",
+					"mobileSrc": "/media/systems-data-roy-mobile.jpg",
+					"alt": "Roy homepage",
+					"width": 1024,
+					"height": 576
+				},
+				"link": "https://royanalyst.com",
+				"summary": "An AI royalty-statement analyst for musicians and publishers that I designed, built and run end to end.",
+				"problem": "Royalty statements come in dozens of inconsistent formats.",
+				"built": [
+					"The whole product, solo: product and design, Next.js frontend and API routes, Supabase Postgres database and migrations, Clerk auth, Gemini-powered analysis and chat, Vercel deployment, and day-to-day live operations.",
+					"A statement parser that uploads, normalizes and analyzes royalty statements across 37 formats.",
+					"CI with Vitest unit tests and Playwright end-to-end tests gating every pull request."
+				],
+				"stack": [
+					"Next.js",
+					"Clerk",
+					"Supabase",
+					"Gemini",
+					"Vercel",
+					"Vitest",
+					"Playwright"
+				],
+				"results": [
+					"100% parsing accuracy across 37 statement formats, verified in CI on every change.",
+					"Built with AI-agent-driven development behind PR checks."
+				]
+			},
+			{
+				"name": "Sensational Concrete",
+				"image": {
+					"src": "/media/systems-data-sensational-concrete.jpg",
+					"mobileSrc": "/media/systems-data-sensational-concrete-mobile.jpg",
+					"alt": "Sensational Concrete homepage",
+					"width": 1024,
+					"height": 576
+				},
+				"link": "https://sensationalconcrete.com",
+				"summary": "The website for a local concrete contractor, which I designed, built and run end to end.",
+				"problem": null,
+				"built": [
+					"The whole site: design, Next.js frontend, a quote-request API that emails leads to the owner via Resend, Vercel deployment and analytics, and ongoing operations.",
+					"Structured data and generative-engine optimization so AI assistants like ChatGPT can understand and cite the business. The owner reports leads from ChatGPT users.",
+					"Lead-source tracking on the quote form (\"How did you hear about us?\" plus UTM capture).",
+					"CI with lint, type checks, build, quote-form tests and an SEO check."
+				],
+				"stack": [
+					"Next.js",
+					"Resend",
+					"Vercel"
+				],
+				"results": []
+			}
+		]
+	},
+	"stack": {
+		"header": "Stack",
+		"items": [
+			"Google Cloud / BigQuery",
+			"SQL",
+			"Python",
+			"Airflow / Prefect",
+			"Next.js",
+			"Supabase",
+			"Tableau",
+			"Vercel",
+			"AI agents"
+		]
+	},
+	"agents": {
+		"header": "Operating with AI Agents",
+		"text": "I run a small team of AI agents across engineering, finance and marketing. Every change goes through pull requests, automated tests and CI guardrails, and I verify the results myself before anything ships."
+	},
+	"career": {
+		"header": "Career Highlights",
+		"items": [
+			{
+				"company": "Warner Chappell Music",
+				"text": "Music publishing royalty operations and data.",
+				"confirmed": false
+			},
+			{
+				"company": "SoundCloud",
+				"text": "Royalty operations and data for creator services.",
+				"confirmed": false
+			},
+			{
+				"company": "Meta",
+				"text": "Data engineering and analytics for music partnerships.",
+				"confirmed": false
+			},
+			{
+				"company": "Spark Networks",
+				"text": "Data analytics and engineering.",
+				"confirmed": false
+			}
+		]
+	},
+	"links": [
+		{
+			"label": "GitHub",
+			"url": "https://github.com/jcastilloc23"
+		}
+	]
+}
