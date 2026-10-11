@@ -17,13 +17,24 @@
 					"height": 576
 				},
 				"link": "https://royanalyst.com",
-				"summary": "AI royalty-statement analyst for musicians and publishers.",
+				"summary": "An AI royalty-statement analyst for musicians and publishers that I designed, built and run end to end.",
 				"problem": "Royalty statements come in dozens of inconsistent formats.",
-				"built": ["Upload, parse, normalize and analyze royalty statements with AI."],
-				"stack": ["Next.js", "Clerk", "Supabase", "Gemini", "Vercel"],
+				"built": [
+					"The whole product, solo: product and design, Next.js frontend and API routes, Supabase Postgres database and migrations, Clerk auth, Gemini-powered analysis and chat, Vercel deployment, and day-to-day live operations.",
+					"A statement parser that uploads, normalizes and analyzes royalty statements across 37 formats.",
+					"CI with Vitest unit tests and Playwright end-to-end tests gating every pull request."
+				],
+				"stack": [
+					"Next.js",
+					"Clerk",
+					"Supabase",
+					"Gemini",
+					"Vercel",
+					"Vitest",
+					"Playwright"
+				],
 				"results": [
 					"100% parsing accuracy across 37 statement formats, verified in CI on every change.",
-					"Automated auth and regression tests.",
 					"Built with AI-agent-driven development behind PR checks."
 				]
 			},
@@ -37,14 +48,19 @@
 					"height": 576
 				},
 				"link": "https://sensationalconcrete.com",
-				"summary": "Website for a local concrete contractor.",
+				"summary": "The website for a local concrete contractor, which I designed, built and run end to end.",
 				"problem": null,
 				"built": [
+					"The whole site: design, Next.js frontend, a quote-request API that emails leads to the owner via Resend, Vercel deployment and analytics, and ongoing operations.",
 					"Structured data and generative-engine optimization so AI assistants like ChatGPT can understand and cite the business. The owner reports leads from ChatGPT users.",
 					"Lead-source tracking on the quote form (\"How did you hear about us?\" plus UTM capture).",
-					"CI with lint, build and quote-form tests."
+					"CI with lint, type checks, build, quote-form tests and an SEO check."
 				],
-				"stack": ["Next.js", "Vercel"],
+				"stack": [
+					"Next.js",
+					"Resend",
+					"Vercel"
+				],
 				"results": []
 			}
 		]
