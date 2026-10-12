@@ -38,10 +38,10 @@
 					"Built with AI-agent-driven development behind PR checks."
 				],
 				"logo": {
-					"src": "/media/logos/roy-ink.svg",
+					"src": "/media/logos/roy-green.svg",
 					"alt": "Roy logo",
 					"slug": "roy",
-					"size": "h-20 md:h-28"
+					"size": "h-20 md:h-40"
 				}
 			},
 			{
@@ -72,7 +72,7 @@
 					"src": "/media/logos/sensational-concrete-wordmark.png",
 					"alt": "Sensational Concrete logo",
 					"slug": "sensational-concrete",
-					"size": "h-12 md:h-16"
+					"size": "h-8 md:h-20"
 				}
 			},
 			{
@@ -80,7 +80,7 @@
 				"logo": {
 					"src": "/media/logos/viru-andean-house.png",
 					"alt": "Viru Andean House logo",
-					"size": "h-24 md:h-32",
+					"size": "h-24 md:h-44",
 					"slug": "viru-andean-house"
 				},
 				"link": "https://www.andeanhouse.com",

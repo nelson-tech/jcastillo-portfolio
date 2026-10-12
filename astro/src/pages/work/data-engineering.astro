@@ -10,12 +10,22 @@ const { page, caseStudies, stack, agents, career, links } = dataEngineering
 	<div class="mx-4 mt-16 md:mx-8">
 		{page.header && <PageHeader header={page.header} description={page.description} />}
 		<div id="case-studies" class="mb-8 mt-8 pb-8">
-			<div class="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-x-12 gap-y-10 py-6 md:gap-x-16">
-				{caseStudies.items.map((study) => (
-					<a href={`#${study.logo.slug}`} title={`${study.name} case study`} class="group inline-flex items-center rounded-sm p-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-highlight">
-						<img src={study.logo.src} alt={study.logo.alt} class={`${study.logo.size} w-auto max-w-[80vw] object-contain opacity-90 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-100`} />
-					</a>
-				))}
+			<!-- Inverted triangle: first two logos side by side, third centred underneath -->
+			<div class="mx-auto flex max-w-5xl flex-col items-center gap-y-6 py-6 md:gap-y-10">
+				<div class="flex flex-nowrap items-center justify-center gap-x-5 md:gap-x-20">
+					{caseStudies.items.slice(0, 2).map((study) => (
+						<a href={`#${study.logo.slug}`} title={`${study.name} case study`} class="group inline-flex items-center rounded-sm p-1 md:p-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-highlight">
+							<img src={study.logo.src} alt={study.logo.alt} class={`${study.logo.size} w-auto max-w-full object-contain opacity-90 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-100`} />
+						</a>
+					))}
+				</div>
+				<div class="flex justify-center">
+					{caseStudies.items.slice(2).map((study) => (
+						<a href={`#${study.logo.slug}`} title={`${study.name} case study`} class="group inline-flex items-center rounded-sm p-1 md:p-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-highlight">
+							<img src={study.logo.src} alt={study.logo.alt} class={`${study.logo.size} w-auto max-w-full object-contain opacity-90 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-100`} />
+						</a>
+					))}
+				</div>
 			</div>
 			<div class="mx-auto mt-16 max-w-3xl">
 				{caseStudies.items.map((study) => (
