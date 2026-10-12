@@ -151,10 +151,5 @@
 			}
 		]
 	},
-	"links": [
-		{
-			"label": "GitHub",
-			"url": "https://github.com/jcastilloc23"
-		}
-	]
+	"links": []
 }
