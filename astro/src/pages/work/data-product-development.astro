@@ -5,7 +5,7 @@ import Layout from "@layouts/Layout.astro"
 import { dataEngineering } from "@lib/content"
 
 import { stackMeta } from "@lib/stack"
-const stackVariant = "mono" // "mono" (monochrome until hover) | "color"
+import StackPill from "@components/StackPill.astro"
 const { page, caseStudies, stack, agents, career, links } = dataEngineering
 ---
 
@@ -53,7 +53,7 @@ const { page, caseStudies, stack, agents, career, links } = dataEngineering
 								{study.problem && (<><h4>Problem</h4><p>{study.problem}</p></>)}
 								{study.built.length > 0 && (<><h4>Built</h4><ul>{study.built.map((item) => <li>{item}</li>)}</ul></>)}
 								{study.results.length > 0 && (<><h4>Results</h4><ul>{study.results.map((item) => <li>{item}</li>)}</ul></>)}
-								<div class="mt-6 flex flex-wrap gap-2">{study.stack.map((item) => <span class="pill">{item}</span>)}</div>
+								<div class="mt-6 flex flex-wrap gap-2">{study.stack.map((item) => <StackPill name={item} />)}</div>
 							</section>
 						</div>
 					</div>
@@ -63,20 +63,7 @@ const { page, caseStudies, stack, agents, career, links } = dataEngineering
 		<div id="stack" class="border-rule mb-8 border-t pt-12 pb-8">
 			{stack.header && <h2 class="text-highlight mb-8 w-full text-center text-4xl font-bold">{stack.header}</h2>}
 			<div class="mx-auto flex max-w-3xl flex-wrap justify-center gap-3 text-lg">
-				{stack.items.map((item) => {
-					const meta = stackMeta[item]
-					if (!meta) return <span class="pill">{item}</span>
-					return (
-						<a class={`pill stack-pill stack-${stackVariant}`} href={meta.href} target="_blank" rel="noopener noreferrer">
-							{meta.icons.map((ic) => ic.kind === "brand" ? (
-								<svg class="stack-icon" viewBox="0 0 24 24" aria-hidden="true" style={`--brand:${ic.color}`}><path d={ic.d} fill-rule={ic.evenodd ? "evenodd" : undefined} /></svg>
-							) : (
-								<svg class="stack-icon stack-line" viewBox="0 0 24 24" aria-hidden="true" style={`--brand:${ic.color}`} set:html={ic.svg} />
-							))}
-							<span>{item}</span>
-						</a>
-					)
-				})}
+				{stack.items.map((item) => <StackPill name={item} />)}
 			</div>
 		</div>
 		<div id="agents" class="border-rule mb-8 border-t pt-12 pb-8">
@@ -211,42 +198,6 @@ const { page, caseStudies, stack, agents, career, links } = dataEngineering
 
 	.case-study li {
 		@apply mt-1;
-	}
-
-	.pill {
-		@apply border-rule text-stone rounded-full border bg-white px-3 py-1 text-sm;
-	}
-
-	.stack-pill {
-		@apply inline-flex items-center gap-1.5 transition-colors;
-	}
-	.stack-icon {
-		width: 0.95em;
-		height: 0.95em;
-		flex: none;
-		fill: currentColor;
-		transition: fill 0.2s, stroke 0.2s, color 0.2s;
-	}
-	.stack-icon + span { margin-left: 0.1em; }
-	.stack-line {
-		fill: none;
-		stroke: currentColor;
-		stroke-width: 2;
-		stroke-linecap: round;
-		stroke-linejoin: round;
-	}
-	.stack-color .stack-icon,
-	.stack-mono:hover .stack-icon,
-	.stack-mono:focus-visible .stack-icon {
-		color: var(--brand);
-	}
-	.stack-mono:hover,
-	.stack-mono:focus-visible,
-	.stack-color:hover {
-		@apply border-stone text-ink;
-	}
-	@media (prefers-reduced-motion: reduce) {
-		.stack-pill, .stack-icon { transition: none; }
 	}
 
 	.agent-tools a {
