@@ -61,7 +61,7 @@ Repo `nelson-tech/jcastillo-portfolio`, app in `astro/`. Reference implementatio
 ## Acceptance (current)
 - [ ] No `#da62c4`, `124, 58, 237`, `accent-gradient`, `green-500` (systems-data), pexels or `systems-data-tile` references under `astro/src`.
 - [ ] `/work/systems-data`: two bare logos, roughly equal visual weight; each scrolls to its case study; "Visit site" opens the external site.
-- [ ] `/work`: 6 numbered 3:2 tiles in 2 columns, then `07 Systems & Data` full width at 2.4:1 on desktop (no empty cell). It is a normal 3:2 tile on mobile and shows the team-logo art centred, not stretched.
+- [ ] `/work` is identical to main's layout and hover (flush 16:9 mosaic, grayscale + overlay + centered title on hover). The Systems & Data tile is full width at 32:9 on desktop with no empty cell, shows the team-logo art undistorted, and is 16:9 on mobile.
 - [ ] About is byte-identical to `main`.
 
 ## Revision 4: Systems & Data as a full-width feature tile
@@ -72,3 +72,11 @@ Repo `nelson-tech/jcastillo-portfolio`, app in `astro/`. Reference implementatio
   - The img is `object-cover object-center`.
   - Below 768 px the tile falls back to the normal 3:2 `systems-data-thumb.webp`.
 - The label row is unchanged (`07 Systems & Data` + arrow).
+
+## Revision 5 (current, supersedes Revisions 3–4 for the Work grid): Work grid restored to main
+- `src/components/ProjectCard.astro` and `src/pages/work.astro` are **restored byte-for-byte from `origin/main`**: the flush mosaic with no gutters, 16:9 tiles, main's hover (grayscale + 50% black overlay + centered title) and main's `md:col-span-2 md:aspect-[32/9]` wide support.
+- **Dropped:** the 01–07 numbering, the label rows, the gaps and the 3:2 / 2.4:1 aspects.
+- Main renders images with `object-fill`, so the artwork is pre-padded with black to the exact tile ratio to avoid distortion:
+  - `public/media/work/systems-data-thumb.webp`: 1280×720 (16:9), used on mobile.
+  - `public/media/work/systems-data-thumb-wide.webp`: 2560×720 (32:9), used on desktop. The wide tile is the same height as a normal row, so the mosaic has no gap.
+- **Still kept:** the bare logos on Systems & Data, the removed pink gradient, the palette and fonts, About untouched.

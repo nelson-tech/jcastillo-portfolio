@@ -36,12 +36,11 @@ Measure: body copy max ~70ch (`max-w-3xl`).
 
 ## 4. Grid
 - Content max width 1152 px (`max-w-6xl`); reading width 768 px (`max-w-3xl`).
-- Work: 2 columns ≥768 px, 1 column on mobile. Tiles 3:2, "wide" tiles 3:1 spanning both columns. Gaps 32×48. Label sits *under* the image, not over it.
+- **Work (Jose's rule): exactly main's layout.** A flush mosaic with no gutters: 2 columns ≥768 px, 1 column on mobile, 16:9 tiles. The last tile (Systems & Data) spans both columns at 32:9 on desktop, so the grid has no empty cell. Titles show only on hover (main's original overlay).
 - Center-aligned page titles; left-aligned reading text.
 
 ## 5. Cards, tiles and states
-- **Work tile:** image (3:2, `object-cover`, 2 px radius) + label row (Fraunces 20 px + `→` in stone + 1 px `rule` underline).
-  - Hover/focus: image scales to 1.03 over 500 ms ease-out; arrow moves 4 px right and turns ink. **No grayscale, no dark overlay, no colored fill.**
+- **Work tile (unchanged from main, at Jose's request):** the image fills the tile. On hover it goes grayscale, a 50% black overlay fades in and the category name slides in, centered and white (500 ms). Images must be pre-cropped to the tile ratio (16:9, or 32:9 for the wide tile; pad with the artwork's own background) because main uses `object-fill`.
 - **Venture logos** (Systems & Data): bare, with transparent backgrounds and no tile or border, in one row centered on paper, optically balanced (see §9). Each is a link to its case study, with a visible focus ring.
 - **Link card** (`Card.astro`): white, 1 px `rule` border, 4 px radius, no shadow.
   - Hover/focus: border becomes `ink` and the arrow nudges. **The purple→pink `--accent-gradient` is removed.**
@@ -65,7 +64,6 @@ Measure: body copy max ~70ch (`max-w-3xl`).
 - The GIF/character animations carry personality; UI motion stays quiet.
 
 ## 9. Remixed from the inspiration pass (see inspiration/README.md)
-- **Numbered index** (after rsms.me, paco.me): Work tiles carry a small `01–07` tabular numeral in `stone` before the Fraunces label. This gives quiet order across very mixed disciplines.
 - **Character over chrome** (after wattenberger.com, joshwcomeau.com): Jose's own illustrated faces and punk/chicha art are the only "decoration". Category thumbnails should be his illustrations (e.g. the skeleton-hand Systems & Data art), never stock.
 - **One signature color with conviction** (after robinsloan.com): steel blue stays the only accent. The illustrations' acid lime and chicha brights live *inside images*, never in UI chrome.
 - **Bare logos** (Jose's feedback): venture logos sit on paper with no box, transparent, and optically balanced (compact marks larger, wide wordmarks shorter; Roy `h-12/14`, SC `h-8/10`). Hover lifts them 2 px and brings opacity to 100%.
