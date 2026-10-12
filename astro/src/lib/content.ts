@@ -144,7 +144,7 @@ export const dataEngineering = z
 		agents: z.object({ header: text, text: z.string() }),
 		career: z.object({
 			header: text,
-			items: z.array(z.object({ company: z.string(), logo: z.object({ src: z.string(), alt: z.string(), size: z.string() }).optional(), text: z.string(), confirmed: z.boolean() }))
+			items: z.array(z.object({ company: z.string(), logo: z.object({ src: z.string(), alt: z.string(), url: z.string().url().optional(), size: z.string() }).optional(), text: z.string(), confirmed: z.boolean() }))
 		}),
 		links: z.array(z.object({ label: z.string(), url: z.string().url() }))
 	})

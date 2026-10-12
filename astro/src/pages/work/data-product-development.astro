@@ -9,37 +9,51 @@ const { page, caseStudies, stack, agents, career, links } = dataEngineering
 <Layout title={page.title ?? "Data, Product & Development"}>
 	<div class="mx-4 mt-16 md:mx-8">
 		{page.header && <PageHeader header={page.header} description={page.description} />}
+		<script is:inline>document.documentElement.classList.add("js")</script>
 		<div id="case-studies" class="mb-8 mt-8 pb-8">
-			<!-- Inverted triangle: first two logos side by side, third centred underneath -->
+			<!-- Inverted triangle: logo links to the live site; the toggle under it opens that case study below (one open at a time) -->
 			<div class="mx-auto flex max-w-5xl flex-col items-center gap-y-6 py-6 md:gap-y-10">
-				<div class="flex flex-nowrap items-center justify-center gap-x-5 md:gap-x-20">
+				<div class="flex flex-nowrap items-start justify-center gap-x-5 md:gap-x-20">
 					{caseStudies.items.slice(0, 2).map((study) => (
-						<a href={`#${study.logo.slug}`} title={`${study.name} case study`} class="group inline-flex items-center rounded-sm p-1 md:p-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-highlight">
-							<img src={study.logo.src} alt={study.logo.alt} class={`${study.logo.size} w-auto max-w-full object-contain opacity-90 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-100`} />
-						</a>
+						<div class="flex flex-col items-center gap-2">
+							<div class="flex h-[88px] items-center md:h-[176px]">
+							<a href={study.link} target="_blank" rel="noopener" title={`${study.name} (opens in a new tab)`} class="logo-link group inline-flex items-center rounded-sm p-1 md:p-2">
+								<img src={study.logo.src} alt={study.logo.alt} class={`${study.logo.size} w-auto max-w-full object-contain opacity-90 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-100`} />
+							</a>
+							</div>
+							<button type="button" class="case-toggle" aria-expanded="false" aria-controls={`case-${study.logo.slug}`} data-case={study.logo.slug}>
+								Case study <span class="sign" aria-hidden="true">+</span>
+							</button>
+						</div>
 					))}
 				</div>
 				<div class="flex justify-center">
 					{caseStudies.items.slice(2).map((study) => (
-						<a href={`#${study.logo.slug}`} title={`${study.name} case study`} class="group inline-flex items-center rounded-sm p-1 md:p-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-highlight">
-							<img src={study.logo.src} alt={study.logo.alt} class={`${study.logo.size} w-auto max-w-full object-contain opacity-90 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-100`} />
-						</a>
+						<div class="flex flex-col items-center gap-2">
+							<a href={study.link} target="_blank" rel="noopener" title={`${study.name} (opens in a new tab)`} class="logo-link group inline-flex items-center rounded-sm p-1 md:p-2">
+								<img src={study.logo.src} alt={study.logo.alt} class={`${study.logo.size} w-auto max-w-full object-contain opacity-90 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-100`} />
+							</a>
+							<button type="button" class="case-toggle" aria-expanded="false" aria-controls={`case-${study.logo.slug}`} data-case={study.logo.slug}>
+								Case study <span class="sign" aria-hidden="true">+</span>
+							</button>
+						</div>
 					))}
 				</div>
 			</div>
-			<div class="mx-auto mt-16 max-w-3xl">
+			<div class="mx-auto max-w-3xl">
 				{caseStudies.items.map((study) => (
-					<section id={study.logo.slug} class="case-study border-rule scroll-mt-24 border-t py-10 text-lg">
-						<div class="flex items-baseline justify-between gap-4">
-							<h3 class="text-highlight !mt-0 text-2xl font-bold">{study.name}</h3>
-							<a href={study.link} target="_blank" rel="noopener" class="visit">Visit site &rarr;</a>
+					<div id={`case-${study.logo.slug}`} class="case-panel" data-open="false" role="region" aria-label={`${study.name} case study`}>
+						<div class="case-inner">
+							<section class="case-study border-rule border-t py-8 text-lg">
+								<h3 class="text-highlight !mt-0 text-2xl font-bold">{study.name}</h3>
+								<p class="text-stone mt-2">{study.summary}</p>
+								{study.problem && (<><h4>Problem</h4><p>{study.problem}</p></>)}
+								{study.built.length > 0 && (<><h4>Built</h4><ul>{study.built.map((item) => <li>{item}</li>)}</ul></>)}
+								{study.results.length > 0 && (<><h4>Results</h4><ul>{study.results.map((item) => <li>{item}</li>)}</ul></>)}
+								<div class="mt-6 flex flex-wrap gap-2">{study.stack.map((item) => <span class="pill">{item}</span>)}</div>
+							</section>
 						</div>
-						<p class="text-stone mt-2">{study.summary}</p>
-						{study.problem && (<><h4>Problem</h4><p>{study.problem}</p></>)}
-						{study.built.length > 0 && (<><h4>Built</h4><ul>{study.built.map((item) => <li>{item}</li>)}</ul></>)}
-						{study.results.length > 0 && (<><h4>Results</h4><ul>{study.results.map((item) => <li>{item}</li>)}</ul></>)}
-						<div class="mt-6 flex flex-wrap gap-2">{study.stack.map((item) => <span class="pill">{item}</span>)}</div>
-					</section>
+					</div>
 				))}
 			</div>
 		</div>
@@ -61,7 +75,9 @@ const { page, caseStudies, stack, agents, career, links } = dataEngineering
 				{career.items.map((item) => (
 					<div>
 						<div class="mb-4 flex h-10 items-center justify-center">
-							{item.logo ? <img src={item.logo.src} alt={item.logo.alt} class={`${item.logo.size} w-auto object-contain`} loading="lazy" /> : <p class="text-xl font-bold">{item.company}</p>}
+							{item.logo ? (item.logo.url
+								? <a href={item.logo.url} target="_blank" rel="noopener" title={`${item.company} (opens in a new tab)`} class="logo-link inline-flex rounded-sm p-1"><img src={item.logo.src} alt={item.logo.alt} class={`${item.logo.size} w-auto object-contain`} loading="lazy" /></a>
+								: <img src={item.logo.src} alt={item.logo.alt} class={`${item.logo.size} w-auto object-contain`} loading="lazy" />) : <p class="text-xl font-bold">{item.company}</p>}
 						</div>
 						<p class="text-lg">{item.text}</p>
 					</div>
@@ -78,7 +94,65 @@ const { page, caseStudies, stack, agents, career, links } = dataEngineering
 	</div>
 </Layout>
 
+<script>
+	// One case study open at a time: opening one closes the others.
+	const toggles = document.querySelectorAll<HTMLButtonElement>(".case-toggle")
+	const setOpen = (btn: HTMLButtonElement, open: boolean) => {
+		const panel = document.getElementById(btn.getAttribute("aria-controls")!)
+		btn.setAttribute("aria-expanded", String(open))
+		btn.querySelector(".sign")!.textContent = open ? "\u2212" : "+"
+		if (panel) {
+			panel.dataset.open = String(open)
+			panel.toggleAttribute("inert", !open)
+		}
+	}
+	toggles.forEach((btn) => setOpen(btn, false))
+	toggles.forEach((btn) =>
+		btn.addEventListener("click", () => {
+			const open = btn.getAttribute("aria-expanded") !== "true"
+			toggles.forEach((other) => other !== btn && setOpen(other, false))
+			setOpen(btn, open)
+		})
+	)
+</script>
+
 <style>
+	.case-toggle {
+		@apply text-highlight rounded-sm text-base underline-offset-4 hover:underline;
+	}
+	.case-toggle .sign {
+		@apply inline-block w-3 text-center;
+	}
+	.logo-link,
+	.case-toggle {
+		@apply focus-visible:outline-highlight focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4;
+	}
+	/* Without JS every card is shown open and the toggles are hidden; JS adds html.js. */
+	.case-toggle {
+		display: none;
+	}
+	:global(html.js) .case-toggle {
+		display: inline-block;
+	}
+	:global(html.js) .case-panel {
+		display: grid;
+		grid-template-rows: 0fr;
+		opacity: 0;
+		transition: grid-template-rows 200ms ease-out, opacity 200ms ease-out;
+	}
+	:global(html.js) .case-panel[data-open="true"] {
+		grid-template-rows: 1fr;
+		opacity: 1;
+	}
+	:global(html.js) .case-inner {
+		overflow: hidden;
+		min-height: 0;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.case-panel {
+			transition: none;
+		}
+	}
 	.case-study h4 {
 		@apply text-highlight mt-4 text-xl font-bold;
 	}
