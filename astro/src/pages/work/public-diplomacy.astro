@@ -3,7 +3,8 @@ import PublicationCarousel from "@components/PublicationCarousel.svelte"
 import Layout from "@layouts/Layout.astro"
 import { publicDiplomacy } from "@lib/content"
 
-const { publications, podcasts } = publicDiplomacy
+const { publications, writing, podcasts } = publicDiplomacy
+// Logo height overrides from JSON (kept here so Tailwind generates them): max-h-7 max-h-10 max-h-12
 ---
 
 <Layout title="Public Diplomacy">
@@ -18,6 +19,39 @@ const { publications, podcasts } = publicDiplomacy
 				<PublicationCarousel publications={publications.items} client:load />
 			</div>
 		</div>
+		<section id="writing" class="border-highlight mb-8 border-b border-opacity-50 pb-8">
+			<h2 class="text-highlight mb-8 w-full text-center text-4xl font-bold">{writing.header}</h2>
+			<ul class="mx-auto max-w-2xl">
+				{writing.items.map((item) => (
+					<li class="border-rule flex items-center gap-6 border-t py-5 first:border-t-0">
+						<a
+							href={item.publisher.url}
+							target="_blank"
+							rel="noopener"
+							aria-label={item.publisher.name}
+							class="flex h-12 w-20 shrink-0 md:w-28 items-center justify-center"
+						>
+							<img
+								src={item.publisher.logo}
+								alt={item.publisher.name}
+								width={item.publisher.w}
+								height={item.publisher.h}
+								class={`${item.publisher.max ?? "max-h-12"} w-auto max-w-full object-contain`}
+								loading="lazy"
+							/>
+						</a>
+						<div>
+							<a href={item.link} target="_blank" rel="noopener" class="text-lg font-bold underline-offset-4 hover:underline">
+								{item.title}
+							</a>
+							<p class="text-stone mt-1 text-base">
+								{[item.publisher.name, item.label, item.year].filter(Boolean).join(" · ")}
+							</p>
+						</div>
+					</li>
+				))}
+			</ul>
+		</section>
 		<div id="podcasts">
 			<h2 class="text-highlight mb-8 w-full text-center text-4xl font-bold">Podcasts</h2>
 			<div class="flex flex-wrap">
