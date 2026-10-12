@@ -3,12 +3,13 @@ import type { Video } from "@lib/content"
 
 interface Props {
 	video: Video
+	featured?: boolean
 }
 
-const { video } = Astro.props
+const { video, featured = false } = Astro.props
 ---
 
-<div class="video-js aspect-video w-full max-w-lg overflow-hidden rounded md:min-h-[280px]">
+<div class:list={["video-js aspect-video w-full overflow-hidden rounded md:min-h-[280px]", featured ? "max-w-none" : "max-w-lg"]}>
 	{
 		video.provider === "youtube" ? (
 			<iframe src={`https://www.youtube.com/embed/${video.id}`} class="h-full w-full" />
