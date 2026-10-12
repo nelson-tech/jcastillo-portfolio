@@ -9,14 +9,14 @@ const { category, index } = Astro.props
 ---
 
 <a href={`/work/${category.slug}`} class={`group block ${category.wide ? "md:col-span-2" : ""}`}>
-	<div class={`overflow-hidden rounded-sm bg-ink aspect-[3/2] ${category.wide ? "md:aspect-[3/1]" : ""}`}>
+	<div class={`overflow-hidden rounded-sm bg-ink aspect-[3/2] ${category.wide ? "md:aspect-[12/5]" : ""}`}>
 		<picture>
 			{category.wide && category.image.wideSrc && <source media="(min-width: 768px)" srcset={category.image.wideSrc} />}
 			<img
 				src={category.image.src}
 				alt={category.image.alt}
 				loading="lazy"
-				class="h-full w-full object-cover transition duration-500 ease-out group-hover:scale-[1.03]"
+				class="h-full w-full object-cover object-center transition duration-500 ease-out group-hover:scale-[1.03]"
 			/>
 		</picture>
 	</div>

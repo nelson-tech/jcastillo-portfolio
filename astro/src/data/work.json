@@ -67,8 +67,10 @@
 				"src": "/media/work/systems-data-thumb.webp",
 				"alt": "Systems & Data illustration",
 				"width": 1080,
-				"height": 720
-			}
+				"height": 720,
+				"wideSrc": "/media/work/systems-data-thumb-wide.webp"
+			},
+			"wide": true
 		}
 	]
 }

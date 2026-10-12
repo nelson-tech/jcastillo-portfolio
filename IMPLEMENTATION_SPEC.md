@@ -29,7 +29,7 @@ Repo `nelson-tech/jcastillo-portfolio`, app in `astro/`. Reference implementatio
 - The Systems & Data tile used to be a collage of UI screenshots, unlike every other tile.
 - *(Superseded: the Unsplash fibre photo and then the Pexels fibre photo were both dropped.)*
 - Current: **Jose's SoundCloud team logo (cropped to 3:2, RDAR text removed)** at `public/media/work/systems-data-thumb.webp` (1080×720, 83 KB). Credit in `/CREDITS.md`: "Artwork: Jose's SoundCloud team logo (cropped), used with his permission."
-- The tile is a normal 3:2 tile (no `wide`), so the 2-column rhythm holds. `systems-data-tile*.jpg` are deleted.
+- `systems-data-tile*.jpg` are deleted. Layout: see Revision 4 (full-width feature tile on desktop).
 
 ## Work grid (minimal)
 - `src/pages/work.astro`: the container becomes `mx-auto max-w-6xl grid md:grid-cols-2 gap-x-8 gap-y-12 px-4 md:px-8` (it was flush and gapless).
@@ -61,5 +61,14 @@ Repo `nelson-tech/jcastillo-portfolio`, app in `astro/`. Reference implementatio
 ## Acceptance (current)
 - [ ] No `#da62c4`, `124, 58, 237`, `accent-gradient`, `green-500` (systems-data), pexels or `systems-data-tile` references under `astro/src`.
 - [ ] `/work/systems-data`: two bare logos, roughly equal visual weight; each scrolls to its case study; "Visit site" opens the external site.
-- [ ] `/work`: 7 numbered, labelled 3:2 tiles in 2 columns; Systems & Data shows the team-logo art.
+- [ ] `/work`: 6 numbered 3:2 tiles in 2 columns, then `07 Systems & Data` full width at 2.4:1 on desktop (no empty cell). It is a normal 3:2 tile on mobile and shows the team-logo art centred, not stretched.
 - [ ] About is byte-identical to `main`.
+
+## Revision 4: Systems & Data as a full-width feature tile
+- `src/data/work.json`: Systems & Data has `"wide": true` and `image.wideSrc: "/media/work/systems-data-thumb-wide.webp"`.
+- `public/media/work/systems-data-thumb-wide.webp` (1728×720, 2.4:1, 83 KB): the v4 artwork centred, with its black background extended left and right. There is no stretching or cropping of the art.
+- `src/components/ProjectCard.astro`:
+  - Wide tiles use `md:col-span-2 md:aspect-[12/5]` (was `3/1`), and the `<picture>` serves `wideSrc` at ≥768 px.
+  - The img is `object-cover object-center`.
+  - Below 768 px the tile falls back to the normal 3:2 `systems-data-thumb.webp`.
+- The label row is unchanged (`07 Systems & Data` + arrow).
