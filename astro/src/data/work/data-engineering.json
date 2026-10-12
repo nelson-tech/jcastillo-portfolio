@@ -39,7 +39,7 @@
 				],
 				"logo": {
 					"src": "/media/logos/roy-green.svg",
-					"alt": "Roy logo",
+					"alt": "Roy",
 					"slug": "roy",
 					"size": "h-20 md:h-40"
 				}
@@ -70,7 +70,7 @@
 				"results": [],
 				"logo": {
 					"src": "/media/logos/sensational-concrete-stacked.png",
-					"alt": "Sensational Concrete logo",
+					"alt": "Sensational Concrete",
 					"slug": "sensational-concrete",
 					"size": "h-11 md:h-24"
 				}
@@ -79,7 +79,7 @@
 				"name": "Viru Andean House",
 				"logo": {
 					"src": "/media/logos/viru-andean-house.png",
-					"alt": "Viru Andean House logo",
+					"alt": "Viru Andean House",
 					"size": "h-24 md:h-44",
 					"slug": "viru-andean-house"
 				},
@@ -127,21 +127,25 @@
 		"items": [
 			{
 				"company": "Warner Chappell Music",
+				"logo": { "src": "/media/logos/career/warner-chappell-music.svg", "alt": "Warner Chappell Music", "size": "h-10" },
 				"text": "Music publishing royalty operations and data.",
 				"confirmed": false
 			},
 			{
 				"company": "SoundCloud",
+				"logo": { "src": "/media/logos/career/soundcloud.png", "alt": "SoundCloud", "size": "h-5" },
 				"text": "Royalty operations and data for creator services.",
 				"confirmed": false
 			},
 			{
 				"company": "Meta",
+				"logo": { "src": "/media/logos/career/meta.svg", "alt": "Meta", "size": "h-6" },
 				"text": "Data engineering and analytics for music partnerships.",
 				"confirmed": false
 			},
 			{
 				"company": "Spark Networks",
+				"logo": { "src": "/media/logos/career/spark-networks.png", "alt": "Spark Networks", "size": "h-10" },
 				"text": "Data analytics and engineering.",
 				"confirmed": false
 			}
