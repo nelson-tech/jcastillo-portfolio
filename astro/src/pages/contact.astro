@@ -1,38 +1,166 @@
 ---
 import Layout from "@layouts/Layout.astro"
-import { contact as contactData } from "@lib/content"
 ---
 
 <Layout title="Contact">
-	<div class="flex flex-col items-center justify-around text-gray-700 md:flex-row">
-		<div
-			class="mt-8 flex basis-1/2 flex-col justify-center p-8 text-center leading-loose tracking-wider md:ml-8 md:mt-0"
-		>
-			<div
-				set:html={contactData.content}
-				class="[&>h2]:text-4xl [&>h2]:font-bold [&>p]:mt-8 [&>p]:text-xl"
-			/>
+	<section class="text-ink mx-auto w-full max-w-xl px-8 pb-16 pt-4 tracking-wider" aria-labelledby="contact-title">
+		<h1 id="contact-title" class="text-highlight text-center text-4xl font-bold">Contact</h1>
+		<p class="text-stone mt-6 text-center text-xl leading-loose">Interested in working together? Send me a note and I'll get back to you.</p>
+
+		<form id="contact-form" class="mt-10 space-y-6" method="post" action="/api/contact" novalidate>
+			<div class="field">
+				<label for="cf-name">Name</label>
+				<input id="cf-name" name="name" type="text" autocomplete="name" required maxlength="120" aria-describedby="cf-name-err" />
+				<p id="cf-name-err" class="err" hidden>Please enter your name.</p>
+			</div>
+			<div class="field">
+				<label for="cf-email">Email</label>
+				<input id="cf-email" name="email" type="email" autocomplete="email" required maxlength="200" aria-describedby="cf-email-err" />
+				<p id="cf-email-err" class="err" hidden>Please enter a valid email address.</p>
+			</div>
+			<div class="field">
+				<label for="cf-reason">Reason</label>
+				<select id="cf-reason" name="reason" required aria-describedby="cf-reason-err">
+					<option value="" selected disabled>Choose one</option>
+					<option>Work together</option>
+					<option>Speaking</option>
+					<option>Other</option>
+				</select>
+				<p id="cf-reason-err" class="err" hidden>Please choose a reason.</p>
+			</div>
+			<div class="field">
+				<label for="cf-message">Message</label>
+				<textarea id="cf-message" name="message" rows="6" required maxlength="5000" aria-describedby="cf-message-err"></textarea>
+				<p id="cf-message-err" class="err" hidden>Please write a short message.</p>
+			</div>
+
+			<!-- Spam protection: honeypot (hidden from people and screen readers) + time trap -->
+			<div class="hp" aria-hidden="true">
+				<label for="cf-website">Website</label>
+				<input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+			</div>
+			<input type="hidden" name="t" id="cf-t" />
+
+			<div class="flex flex-col items-center gap-4 pt-2">
+				<button type="submit" class="submit">Send message</button>
+				<p id="cf-status" class="status" role="status" aria-live="polite"></p>
+			</div>
+		</form>
+
+		<div id="cf-success" class="mt-10 text-center" hidden tabindex="-1">
+			<p class="text-highlight text-2xl font-bold">Thank you!</p>
+			<p class="text-stone mt-4 text-lg leading-loose">Your message is on its way. I'll reply to the email you gave me.</p>
 		</div>
-		<div
-			class="mt-8 flex basis-1/2 flex-col justify-center text-center leading-loose tracking-wider md:mt-0"
-		>
-			<a
-				href={`mailto:${contactData.email}`}
-				class="border-highlight hover:text-highlight group mx-auto mb-8 w-72 rounded border from-slate-50 to-white p-8 transition-all hover:bg-gradient-to-tr"
-			>
-				<i class="fas fa-envelope fa-lg transition-all group-hover:scale-125"></i>
-				<br />
-				<span class="">{contactData.email}</span>
-			</a>
-			<a
-				href={`tel:${contactData.phone}`}
-				class="border-highlight to-slate-white hover:text-highlight group mx-auto mb-8 w-72 rounded border from-slate-50 p-8 transition-all hover:bg-gradient-to-tr"
-			>
-				<i class="fas fa-phone fa-lg transition-all group-hover:scale-125"></i>
-				<i class="fas fa-comment-sms fa-lg ml-4 transition-all group-hover:scale-125"></i>
-				<br />
-				{contactData.phone}
-			</a>
-		</div>
-	</div>
+	</section>
 </Layout>
+
+<style>
+	.field label {
+		@apply text-stone mb-2 block text-sm uppercase tracking-widest;
+	}
+	.field input,
+	.field select,
+	.field textarea {
+		@apply border-rule text-ink block w-full rounded border bg-white px-4 py-3 text-lg tracking-wide transition-colors;
+		font-family: inherit;
+	}
+	.field select {
+		appearance: none;
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%236B7176' stroke-width='1.5'/%3E%3C/svg%3E");
+		background-repeat: no-repeat;
+		background-position: right 1rem center;
+		background-size: 0.75rem;
+	}
+	.field input:focus,
+	.field select:focus,
+	.field textarea:focus {
+		@apply border-highlight outline-none;
+		box-shadow: 0 0 0 3px rgba(85, 146, 181, 0.25);
+	}
+	.field [aria-invalid="true"] {
+		border-color: #b4423a;
+	}
+	.err {
+		@apply mt-2 text-sm;
+		color: #b4423a;
+	}
+	.hp {
+		position: absolute;
+		left: -10000px;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+	}
+	.submit {
+		@apply border-highlight text-highlight hover:bg-highlight rounded-full border px-8 py-3 text-lg tracking-widest transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-wait disabled:opacity-60;
+	}
+	.status {
+		@apply min-h-[1.5rem] text-center text-sm;
+	}
+	.status.error {
+		color: #b4423a;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.field input, .field select, .field textarea, .submit { transition: none; }
+	}
+</style>
+
+<script>
+	const form = document.getElementById("contact-form") as HTMLFormElement | null
+	if (form) {
+		const t = document.getElementById("cf-t") as HTMLInputElement
+		t.value = String(Date.now())
+		const status = document.getElementById("cf-status")!
+		const success = document.getElementById("cf-success")!
+		const button = form.querySelector("button[type=submit]") as HTMLButtonElement
+		const fields: [string, (v: string) => boolean][] = [
+			["cf-name", (v) => v.trim().length > 0],
+			["cf-email", (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())],
+			["cf-reason", (v) => v !== ""],
+			["cf-message", (v) => v.trim().length > 0],
+		]
+		const validate = () => {
+			let first: HTMLElement | null = null
+			for (const [id, ok] of fields) {
+				const el = document.getElementById(id) as HTMLInputElement
+				const bad = !ok(el.value)
+				el.setAttribute("aria-invalid", String(bad))
+				document.getElementById(`${id}-err`)!.hidden = !bad
+				if (bad && !first) first = el
+			}
+			first?.focus()
+			return !first
+		}
+		for (const [id, ok] of fields) {
+			const el = document.getElementById(id) as HTMLInputElement
+			el.addEventListener(id === "cf-reason" ? "change" : "input", () => {
+				if (el.getAttribute("aria-invalid") === "true" && ok(el.value)) {
+					el.setAttribute("aria-invalid", "false")
+					document.getElementById(`${id}-err`)!.hidden = true
+				}
+			})
+		}
+		form.addEventListener("submit", async (e) => {
+			e.preventDefault()
+			status.textContent = ""
+			status.classList.remove("error")
+			if (!validate()) return
+			button.disabled = true
+			button.textContent = "Sending…"
+			try {
+				const res = await fetch(form.action, { method: "POST", body: new FormData(form) })
+				const data = await res.json().catch(() => ({}))
+				if (!res.ok || !data.ok) throw new Error(data.error || "Something went wrong sending your message.")
+				form.hidden = true
+				success.hidden = false
+				success.focus()
+			} catch (err) {
+				status.textContent = `${(err as Error).message} Please try again in a moment.`
+				status.classList.add("error")
+			} finally {
+				button.disabled = false
+				button.textContent = "Send message"
+			}
+		})
+	}
+</script>
