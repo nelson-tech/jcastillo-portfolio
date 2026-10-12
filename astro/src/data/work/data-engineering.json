@@ -139,7 +139,7 @@
 			},
 			{
 				"company": "Meta",
-				"logo": { "src": "/media/logos/career/meta.svg", "alt": "Meta", "url": "https://www.meta.com", "size": "h-6" },
+				"logo": { "src": "/media/logos/career/meta.webp", "alt": "Meta", "url": "https://www.meta.com", "size": "h-6" },
 				"text": "Data engineering and analytics for music partnerships.",
 				"confirmed": false
 			},
