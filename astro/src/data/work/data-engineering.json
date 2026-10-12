@@ -69,10 +69,10 @@
 				],
 				"results": [],
 				"logo": {
-					"src": "/media/logos/sensational-concrete-wordmark.png",
+					"src": "/media/logos/sensational-concrete-stacked.png",
 					"alt": "Sensational Concrete logo",
 					"slug": "sensational-concrete",
-					"size": "h-8 md:h-20"
+					"size": "h-11 md:h-24"
 				}
 			},
 			{
