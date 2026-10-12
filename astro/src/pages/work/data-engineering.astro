@@ -31,7 +31,7 @@ const { page, caseStudies, stack, agents, career, links } = dataEngineering
 				{caseStudies.items.map((study) => (
 					<section id={study.logo.slug} class="case-study border-rule scroll-mt-24 border-t py-10 text-lg">
 						<div class="flex items-baseline justify-between gap-4">
-							<h3 class="font-display !mt-0 text-3xl">{study.name}</h3>
+							<h3 class="text-highlight !mt-0 text-2xl font-bold">{study.name}</h3>
 							<a href={study.link} target="_blank" rel="noopener" class="visit">Visit site &rarr;</a>
 						</div>
 						<p class="text-stone mt-2">{study.summary}</p>
@@ -44,7 +44,7 @@ const { page, caseStudies, stack, agents, career, links } = dataEngineering
 			</div>
 		</div>
 		<div id="stack" class="border-rule mb-8 border-t pt-12 pb-8">
-			{stack.header && <h2 class="font-display text-ink mb-8 w-full text-center text-3xl font-semibold tracking-normal">{stack.header}</h2>}
+			{stack.header && <h2 class="text-highlight mb-8 w-full text-center text-4xl font-bold">{stack.header}</h2>}
 			<div class="mx-auto flex max-w-3xl flex-wrap justify-center gap-3 text-lg">
 				{stack.items.map((item) => (
 					<span class="pill">{item}</span>
@@ -52,11 +52,11 @@ const { page, caseStudies, stack, agents, career, links } = dataEngineering
 			</div>
 		</div>
 		<div id="agents" class="border-rule mb-8 border-t pt-12 pb-8">
-			{agents.header && <h2 class="font-display text-ink mb-8 w-full text-center text-3xl font-semibold tracking-normal">{agents.header}</h2>}
+			{agents.header && <h2 class="text-highlight mb-8 w-full text-center text-4xl font-bold">{agents.header}</h2>}
 			<p class="mx-auto max-w-2xl text-center text-xl leading-loose tracking-wider text-gray-700">{agents.text}</p>
 		</div>
 		<div id="career" class="border-rule mb-8 border-t pt-12 pb-8">
-			{career.header && <h2 class="font-display text-ink mb-8 w-full text-center text-3xl font-semibold tracking-normal">{career.header}</h2>}
+			{career.header && <h2 class="text-highlight mb-8 w-full text-center text-4xl font-bold">{career.header}</h2>}
 			<div class="mx-auto grid max-w-4xl grid-cols-1 gap-8 text-center md:grid-cols-2">
 				{career.items.map((item) => (
 					<div>
@@ -78,7 +78,7 @@ const { page, caseStudies, stack, agents, career, links } = dataEngineering
 
 <style>
 	.case-study h4 {
-		@apply text-stone mt-6 text-sm font-semibold uppercase tracking-widest;
+		@apply text-highlight mt-4 text-xl font-bold;
 	}
 	.visit {
 		@apply text-accent-deep whitespace-nowrap text-base underline-offset-4 hover:underline;

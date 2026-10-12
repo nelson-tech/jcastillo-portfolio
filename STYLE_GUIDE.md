@@ -14,22 +14,24 @@
 
 Rules: one accent only. No gradients, no pink/purple, no green hover. Color comes from the work itself (the images), not from the UI.
 
-## 2. Typography
-- **Display: Fraunces** (Google Fonts, SIL OFL, free). Weights 400/600, optical size axis on. A warm, slightly quirky old-style serif with character that echoes the hand-made feel of Jose's work without competing with the script wordmark. Use it for page titles, section heads, card titles and case-study names. Letter-spacing: normal (never tracked).
-- **Text: basic-sans** (already licensed through his Adobe Fonts kit). Use it for body, nav, captions and pills. Tracking `0.025em` (`tracking-wide`) for body; `0.1em` uppercase only for eyebrow labels.
-- **Wordmark:** the existing blue script "Jose Castillo" PNG. It is the only script on the site; never set other text in script.
+## 2. Typography: one type system on every page
+**The rule:** one type system applies across every page: home, Work, each /work/* page, About, Contact. No page gets its own display face. Headings are set in **basic-sans**, the same as everything else.
 
-| Step | Size / line height | Use |
-|---|---|---|
-| Display XL | 60/64 (md), 48/52 (mobile) | Page title (h1) |
-| Display L | 30/36 | Section head (h2), case-study name |
-| Display M | 20–22/28 | Card titles, Work tile labels |
-| Body L | 18/28 | Case-study body |
-| Body | 16/24 | Default |
-| Small | 14/20 | Pills, meta |
-| Eyebrow | 12–14/16, uppercase, 0.1em, `stone` | "Problem / Built / Results" |
+- **Family: basic-sans** (Adobe Fonts kit, already licensed), used for headings, body, nav, labels and pills. This is the site's original, dominant font. The live audit on 2026-10-11 found it on every route.
+- **Wordmark:** the blue script "Jose Castillo" image is the only script. Logo artwork (Roy, Sensational Concrete, Viru) keeps its own lettering because it's an image, not site type.
+- **Correction:** Revisions 1–6 recommended Fraunces as a display serif. That is withdrawn. Fraunces shipped to production in PR #8 on the shared page title (h1 of every /work/* page) and on the Systems & Data headings. Branch `design/restore-social-icons` removes it everywhere: no Google Fonts link, no `font-display` family, no Fraunces in `Card.astro`.
 
-Measure: body copy max ~70ch (`max-w-3xl`).
+| Role | Element | Style (Tailwind) | Computed |
+|---|---|---|---|
+| Page title | `PageHeader` h2 | `text-highlight text-4xl font-bold text-center` | basic-sans 700 / 36px |
+| Section head | h2 | `text-highlight text-4xl font-bold` | basic-sans 700 / 36px |
+| Item title (case study, video, design) | h3 | `text-highlight text-2xl font-bold` | basic-sans 700 / 24px |
+| Sub-label (Problem / Built / Results) | h4 | `text-highlight text-xl font-bold` | basic-sans 700 / 20px |
+| Body (work pages) | p | `text-lg` | basic-sans 400 / 18px |
+| Body (About / Contact) | p | `text-xl tracking-wider` | basic-sans 400 / 20px |
+| Nav, footer, default | body | base | basic-sans 400 / 16px |
+
+Letter-spacing comes from the body's `tracking-wide` (0.4px at 16px); About and Contact use `tracking-wider`. Don't add per-page tracking or uppercase eyebrow labels.
 
 ## 3. Spacing (4 px base, Tailwind steps)
 4 · 8 · 12 · 16 · 24 · 32 · 48 · 64 · 96. Between sections: 64–96. Grid gutters: 32 horizontal, 48 vertical. Card padding: 24/20. Never mix in odd values.

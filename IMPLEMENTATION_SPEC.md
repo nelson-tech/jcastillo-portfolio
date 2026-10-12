@@ -91,3 +91,9 @@ Repo `nelson-tech/jcastillo-portfolio`, app in `astro/`. Reference implementatio
   - `src/pages/work/systems-data.astro` → `src/pages/work/data-engineering.astro`; `src/lib/content.ts` export `systemsData` → `dataEngineering`.
   - The site has no OG/meta title tags beyond `<title>`, which comes from the page title.
   - **Redirect:** `vercel.json` → `{"source":"/work/systems-data","destination":"/work/data-engineering","statusCode":301}`. Production is a static Vercel build (`VERCEL=1`), so the redirect lives in Vercel, not Astro. It does nothing under `astro dev` or the Docker/node build, so check it on the Vercel preview or production.
+
+## Revision 7: fonts back to the site's own type system
+- Live audit: basic-sans is used on every route. Fraunces was only on the /work/* page titles (shipped in PR #8 via `PageHeader.astro`) and the Systems & Data headings.
+- `PageHeader.astro` is restored to its pre-#8 markup (`h2.text-highlight.text-4xl.font-bold`).
+- `data-engineering.astro`: section h2s use the original `text-highlight text-4xl font-bold`. Case-study titles use `text-highlight text-2xl font-bold`. Problem / Built / Results labels go back to the original `text-highlight mt-4 text-xl font-bold`.
+- Fraunces removed: the Google Fonts `<link>`s in `Layout.astro`, `fontFamily.display` in `tailwind.config.cjs`, and the font-family in `Card.astro`.
