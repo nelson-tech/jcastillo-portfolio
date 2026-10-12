@@ -3,13 +3,19 @@ import PageHeader from "@components/PageHeader.astro"
 import Video from "@components/Video.astro"
 import Photograph from "@components/Photograph.svelte"
 import Layout from "@layouts/Layout.astro"
+import { imageInfo } from "@lib/images"
 import { withInfo } from "@lib/images"
 import { design } from "@lib/content"
 
 const { page, motionGraphics, graphicDesign } = design
+const first = motionGraphics.videos[0]
+const thumbInfo = first?.provider === "youtube" ? imageInfo(`/media/thumbs/${first.id}.jpg`) : undefined
+const preload = thumbInfo
+	? { src: thumbInfo.avif.at(-1)!.src, srcset: thumbInfo.avif.map((v) => `${v.src} ${v.w}w`).join(", "), sizes: "(min-width: 1072px) 1040px, calc(100vw - 32px)", type: "image/avif" }
+	: undefined
 ---
 
-<Layout title={page.title ?? "Design"} preloadImage={motionGraphics.videos[0]?.provider === "youtube" ? `https://i.ytimg.com/vi/${motionGraphics.videos[0].id}/hqdefault.jpg` : undefined}>
+<Layout title={page.title ?? "Design"} preloadImage={preload}>
 	<div class="mx-4 md:mx-8">
 		{page.header && <PageHeader header={page.header} description={page.description} />}
 		<div id="design" class="mt-8">
