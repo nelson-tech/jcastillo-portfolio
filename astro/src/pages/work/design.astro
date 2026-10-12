@@ -9,7 +9,7 @@ import { design } from "@lib/content"
 const { page, motionGraphics, graphicDesign } = design
 ---
 
-<Layout title={page.title ?? "Design"}>
+<Layout title={page.title ?? "Design"} preloadImage={motionGraphics.videos[0]?.provider === "youtube" ? `https://i.ytimg.com/vi/${motionGraphics.videos[0].id}/hqdefault.jpg` : undefined}>
 	<div class="mx-4 md:mx-8">
 		{page.header && <PageHeader header={page.header} description={page.description} />}
 		<div id="design" class="mt-8">

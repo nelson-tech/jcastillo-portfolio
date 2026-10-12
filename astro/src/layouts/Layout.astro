@@ -9,9 +9,10 @@ const { menu: menuItems, social: footerIcons } = site
 
 export interface Props {
   title: string
+  preloadImage?: string
 }
 
-const { title } = Astro.props
+const { title, preloadImage } = Astro.props
 
 const faScript = import.meta.env.PUBLIC_FA_SCRIPT
 ---
@@ -19,6 +20,7 @@ const faScript = import.meta.env.PUBLIC_FA_SCRIPT
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    {preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32-v2.png" />
