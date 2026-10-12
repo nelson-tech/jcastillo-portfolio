@@ -116,7 +116,11 @@
 			"SQL",
 			"Python",
 			"Looker",
-			"Tableau"
+			"Tableau",
+			"Next.js",
+			"TypeScript",
+			"Vercel",
+			"Supabase"
 		]
 	},
 	"agents": {
