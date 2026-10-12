@@ -3,6 +3,7 @@ import PageHeader from "@components/PageHeader.astro"
 import Video from "@components/Video.astro"
 import Photograph from "@components/Photograph.svelte"
 import Layout from "@layouts/Layout.astro"
+import { withInfo } from "@lib/images"
 import { design } from "@lib/content"
 
 const { page, motionGraphics, graphicDesign } = design
@@ -32,7 +33,7 @@ const { page, motionGraphics, graphicDesign } = design
 				<div class="flex flex-wrap items-center justify-center">
 					{graphicDesign.images.map((image) => (
 						<div class="basis-1/1 mx-8 mt-8 md:basis-1/3">
-							<Photograph image={image} client:load />
+							<Photograph image={withInfo(image)} sizes="(min-width: 768px) 31vw, calc(100vw - 6rem)" client:visible />
 						</div>
 					))}
 				</div>

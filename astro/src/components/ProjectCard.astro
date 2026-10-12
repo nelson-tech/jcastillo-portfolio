@@ -1,4 +1,5 @@
 ---
+import Picture from "@components/Picture.astro"
 import type { work } from "@lib/content"
 
 export interface Props {
@@ -8,14 +9,15 @@ const { category } = Astro.props
 ---
 
 <div class={`group relative aspect-video ${category.wide ? "md:col-span-2 md:aspect-[32/9]" : ""}`}>
-	<picture>
-	{category.wide && category.image.wideSrc && <source media="(min-width: 768px)" srcset={category.image.wideSrc} />}
-	<img
+	<Picture
 		src={category.image.src}
 		alt={category.image.alt}
 		class="h-full w-full object-fill transition-all duration-500 group-hover:grayscale"
+		sizes="(min-width: 1312px) 624px, (min-width: 768px) 50vw, 100vw"
+		media={category.wide && category.image.wideSrc ? "(min-width: 768px)" : undefined}
+		mediaSrc={category.wide ? category.image.wideSrc : undefined}
+		mediaSizes="(min-width: 1312px) 1248px, 100vw"
 	/>
-	</picture>
 	<div
 		class="scrim absolute inset-0 z-10 opacity-0 transition-all duration-500 group-hover:opacity-100"
 	>

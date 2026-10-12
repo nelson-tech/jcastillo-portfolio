@@ -1,5 +1,6 @@
 ---
 import PageHeader from "@components/PageHeader.astro"
+import Picture from "@components/Picture.astro"
 import Layout from "@layouts/Layout.astro"
 import { music } from "@lib/content"
 
@@ -13,7 +14,7 @@ const { page, hero, spotifyArtists, press } = music
 			hero && (
 				<div class="flex justify-center">
 					<a href={hero.link} target="_blank" title={hero.image.alt}>
-						<img src={hero.image.src} alt={hero.image.alt} />
+						<Picture src={hero.image.src} alt={hero.image.alt} priority />
 					</a>
 				</div>
 			)
