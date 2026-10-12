@@ -117,6 +117,25 @@ export const publicDiplomacy = z
 			header: text,
 			items: z.array(z.object({ text: z.string(), label: z.string(), link: z.string().url(), image }))
 		}),
+		writing: z.object({
+			header: z.string(),
+			items: z.array(
+				z.object({
+					title: z.string(),
+					link: z.string().url(),
+					label: z.string(),
+					year: z.string().optional(),
+					publisher: z.object({
+						name: z.string(),
+						url: z.string().url(),
+						logo: mediaPath,
+						w: z.number(),
+						h: z.number(),
+						max: z.string().optional()
+					})
+				})
+			)
+		}),
 		podcasts: z.object({ header: text, items: z.array(z.object({ label: z.string(), html })) })
 	})
 	.parse(publicDiplomacyJson)

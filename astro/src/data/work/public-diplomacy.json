@@ -1,79 +1,163 @@
 {
-	"page": {
-		"title": "Public Diplomacy",
-		"header": "Public Diplomacy",
-		"description": null
-	},
-	"publications": {
-		"header": "Public Diplomacy",
-		"items": [
-			{
-				"text": "Consulat Général de France à Los Angeles - Program management of LA residencies & website maintenance.",
-				"label": "Villa Albertine",
-				"link": "https://villa-albertine.org/residents",
-				"image": {
-					"src": "/media/49375e61-dff8-4de5-9847-a5f31b6ed1c8.png",
-					"alt": "Villa Albertine"
-				}
-			},
-			{
-				"text": "Analysis & Research: Central America Monitor - 2018 Graduate Research Fellow.",
-				"label": "Central America Monitor",
-				"link": "https://www.wola.org/cam/",
-				"image": {
-					"src": "/media/9bdec7ea-d81e-408c-8131-40425b092dff.png",
-					"alt": "Central America Monitor"
-				}
-			},
-			{
-				"text": "The Marginalized Sounds of Peru - Paper published in 2018 International Place Branding Association Journal.",
-				"label": "The Marginalized Sounds of Peru",
-				"link": "https://api.jc.nelson.tech/assets/cef5ba65-bd31-4d86-92b7-bb6ca19fa7f5",
-				"image": {
-					"src": "/media/09ec2a7b-69bc-4201-8300-5caf662f917d.jpg",
-					"alt": "The Marginalized Sounds of Peru"
-				}
-			},
-			{
-				"text": "Trashed - VR production on transborder water pollution. 1st & 2nd place - 62nd Los Angeles Press Club's Annual Southern California Journalism Awards.",
-				"label": "Trashed: The Tijuana River Valley Pollution Crisis",
-				"link": "http://trashed.jovrnalism.io/",
-				"image": {
-					"src": "/media/af2eb2df-ff80-4e7e-8339-fd456668d581.png",
-					"alt": "Trashed: The Tijuana River Valley Pollution Crisis"
-				}
-			},
-			{
-				"text": "Multimedia producer & contributor: CPD Blog, PD features, and the Resonance music-diplomacy podcast.",
-				"label": "USC Center on Public Diplomacy",
-				"link": "https://uscpublicdiplomacy.org/users/jose_castillo",
-				"image": {
-					"src": "/media/f924ffd3-746e-4391-9709-821ddb542e72.png",
-					"alt": "USC Center on Public Diplomacy"
-				}
-			},
-			{
-				"text": "Resonance episode with Nicholas J. Cull on jazz diplomacy and musical propaganda (USC CPD, 2019).",
-				"label": "Resonance: Music Diplomacy in Times of Conflict",
-				"link": "https://uscpublicdiplomacy.org/story/music-diplomacy-times-conflict",
-				"image": {
-					"src": "/media/f924ffd3-746e-4391-9709-821ddb542e72.png",
-					"alt": "USC Center on Public Diplomacy"
-				}
-			}
-		]
-	},
-	"podcasts": {
-		"header": "Podcasts",
-		"items": [
-			{
-				"label": "Resonance - Music Diplomacy Podcast produced and hosted for USC’s M.A. in Public Diplomacy Practicum.",
-				"html": "<iframe width=\"100%\" height=\"350\" scrolling=\"no\" frameborder=\"no\" allow=\"autoplay\" src=\"https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/648720618&color=%23908464&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true\"></iframe>"
-			},
-			{
-				"label": "Public Diplocast - Public Diplomacy Podcast produced on behalf of the USC Center on Public Diplomacy.",
-				"html": "<iframe width=\"100%\" height=\"350\" scrolling=\"no\" frameborder=\"no\" allow=\"autoplay\" src=\"https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/406706979&color=%23908464&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true\"></iframe>"
-			}
-		]
-	}
+  "page": {
+    "title": "Public Diplomacy",
+    "header": "Public Diplomacy",
+    "description": null
+  },
+  "publications": {
+    "header": "Public Diplomacy",
+    "items": [
+      {
+        "text": "Consulat Général de France à Los Angeles - Program management of LA residencies & website maintenance.",
+        "label": "Villa Albertine",
+        "link": "https://villa-albertine.org/residents",
+        "image": {
+          "src": "/media/49375e61-dff8-4de5-9847-a5f31b6ed1c8.png",
+          "alt": "Villa Albertine"
+        }
+      },
+      {
+        "text": "Analysis & Research: Central America Monitor - 2018 Graduate Research Fellow.",
+        "label": "Central America Monitor",
+        "link": "https://www.wola.org/cam/",
+        "image": {
+          "src": "/media/9bdec7ea-d81e-408c-8131-40425b092dff.png",
+          "alt": "Central America Monitor"
+        }
+      },
+      {
+        "text": "The Marginalized Sounds of Peru - Paper in the Conference Proceedings of the International Place Branding Association, Macao 2018.",
+        "label": "The Marginalized Sounds of Peru",
+        "link": "https://api.jc.nelson.tech/assets/cef5ba65-bd31-4d86-92b7-bb6ca19fa7f5",
+        "image": {
+          "src": "/media/09ec2a7b-69bc-4201-8300-5caf662f917d.jpg",
+          "alt": "The Marginalized Sounds of Peru"
+        }
+      },
+      {
+        "text": "Trashed - VR production on transborder water pollution. 1st & 2nd place - 62nd Los Angeles Press Club's Annual Southern California Journalism Awards.",
+        "label": "Trashed: The Tijuana River Valley Pollution Crisis",
+        "link": "http://trashed.jovrnalism.io/",
+        "image": {
+          "src": "/media/af2eb2df-ff80-4e7e-8339-fd456668d581.png",
+          "alt": "Trashed: The Tijuana River Valley Pollution Crisis"
+        }
+      },
+      {
+        "text": "Multimedia producer & contributor: CPD Blog, PD features, and the Resonance music-diplomacy podcast.",
+        "label": "USC Center on Public Diplomacy",
+        "link": "https://uscpublicdiplomacy.org/users/jose_castillo",
+        "image": {
+          "src": "/media/f924ffd3-746e-4391-9709-821ddb542e72.png",
+          "alt": "USC Center on Public Diplomacy"
+        }
+      },
+      {
+        "text": "Resonance episode with Nicholas J. Cull on jazz diplomacy and musical propaganda (USC CPD, 2019).",
+        "label": "Resonance: Music Diplomacy in Times of Conflict",
+        "link": "https://uscpublicdiplomacy.org/story/music-diplomacy-times-conflict",
+        "image": {
+          "src": "/media/f924ffd3-746e-4391-9709-821ddb542e72.png",
+          "alt": "USC Center on Public Diplomacy"
+        }
+      }
+    ]
+  },
+  "podcasts": {
+    "header": "Podcasts",
+    "items": [
+      {
+        "label": "Resonance - Music Diplomacy Podcast produced and hosted for USC’s M.A. in Public Diplomacy Practicum.",
+        "html": "<iframe width=\"100%\" height=\"350\" scrolling=\"no\" frameborder=\"no\" allow=\"autoplay\" src=\"https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/648720618&color=%23908464&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true\"></iframe>"
+      },
+      {
+        "label": "Public Diplocast - Public Diplomacy Podcast produced on behalf of the USC Center on Public Diplomacy.",
+        "html": "<iframe width=\"100%\" height=\"350\" scrolling=\"no\" frameborder=\"no\" allow=\"autoplay\" src=\"https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/406706979&color=%23908464&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true\"></iframe>"
+      }
+    ]
+  },
+  "writing": {
+    "header": "Publications",
+    "items": [
+      {
+        "title": "The Marginalized Sounds of Peru: Peruvian Music Diplomacy",
+        "link": "https://placebranding.org/wp-content/uploads/2020/10/3rd-IPBA-and-DBM-VI-Conference-Proceedings-5-7-December-2018.pdf",
+        "publisher": {
+          "url": "https://placebranding.org",
+          "name": "International Place Branding Association",
+          "logo": "/media/logos/publications/ipba.png",
+          "w": 386,
+          "h": 114,
+          "max": "max-h-7"
+        },
+        "label": "Conference Proceedings, Macao 2018"
+      },
+      {
+        "title": "Cuban Public Diplomacy",
+        "link": "https://uscpublicdiplomacy.org/blog/cuban-public-diplomacy",
+        "publisher": {
+          "url": "https://uscpublicdiplomacy.org",
+          "name": "USC Center on Public Diplomacy",
+          "logo": "/media/logos/publications/usc-cpd.png",
+          "w": 640,
+          "h": 186
+        },
+        "label": "CPD Blog",
+        "year": "2018"
+      },
+      {
+        "title": "Internationalists Unite! PD and the Transnational Progressive Movement",
+        "link": "https://uscpublicdiplomacy.org/blog/internationalists-unite-pd-and-transnational-progressive-movement",
+        "publisher": {
+          "url": "https://uscpublicdiplomacy.org",
+          "name": "USC Center on Public Diplomacy",
+          "logo": "/media/logos/publications/usc-cpd.png",
+          "w": 640,
+          "h": 186
+        },
+        "label": "CPD Blog",
+        "year": "2019"
+      },
+      {
+        "title": "Connecting Through Sound",
+        "link": "https://uscpublicdiplomacy.org/story/connecting-through-sound",
+        "publisher": {
+          "url": "https://uscpublicdiplomacy.org",
+          "name": "USC Center on Public Diplomacy",
+          "logo": "/media/logos/publications/usc-cpd.png",
+          "w": 640,
+          "h": 186
+        },
+        "label": "Resonance podcast",
+        "year": "2019"
+      },
+      {
+        "title": "Music Diplomacy in Times of Conflict",
+        "link": "https://uscpublicdiplomacy.org/story/music-diplomacy-times-conflict",
+        "publisher": {
+          "url": "https://uscpublicdiplomacy.org",
+          "name": "USC Center on Public Diplomacy",
+          "logo": "/media/logos/publications/usc-cpd.png",
+          "w": 640,
+          "h": 186
+        },
+        "label": "Resonance podcast",
+        "year": "2019"
+      },
+      {
+        "title": "Trashed: The Tijuana River Valley Pollution Crisis",
+        "link": "https://morethanasurvivor.jovrnalism.io/project/trashed/",
+        "publisher": {
+          "url": "https://www.jovrnalism.io",
+          "name": "JOVRNALISM",
+          "logo": "/media/logos/publications/jovrnalism.png",
+          "w": 240,
+          "h": 232,
+          "max": "max-h-10"
+        },
+        "label": "360° VR",
+        "year": "2021"
+      }
+    ]
+  }
 }
