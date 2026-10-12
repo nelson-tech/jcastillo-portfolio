@@ -60,11 +60,10 @@ const { page, caseStudies, stack, agents, career, links } = dataEngineering
 			<div class="mx-auto grid max-w-4xl grid-cols-1 gap-8 text-center md:grid-cols-2">
 				{career.items.map((item) => (
 					<div>
-						<div class={`mb-3 h-10 items-end justify-center ${item.logo ? "flex" : "hidden md:flex"}`} aria-hidden={item.logo ? undefined : "true"}>
-							{item.logo && <img src={item.logo.src} alt={item.logo.alt} class={`${item.logo.size} w-auto object-contain`} loading="lazy" />}
+						<div class="mb-4 flex h-10 items-center justify-center">
+							{item.logo ? <img src={item.logo.src} alt={item.logo.alt} class={`${item.logo.size} w-auto object-contain`} loading="lazy" /> : <p class="text-xl font-bold">{item.company}</p>}
 						</div>
-						<p class="text-xl font-bold">{item.company}</p>
-						<p class="mt-2 text-lg">{item.text}</p>
+						<p class="text-lg">{item.text}</p>
 					</div>
 				))}
 			</div>
