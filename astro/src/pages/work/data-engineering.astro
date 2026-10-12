@@ -9,6 +9,7 @@ const { page, caseStudies, stack, agents, career, links } = dataEngineering
 <Layout title={page.title ?? "Data & Engineering"}>
 	<div class="mx-4 mt-16 md:mx-8">
 		{page.header && <PageHeader header={page.header} description={page.description} />}
+		<script is:inline>document.documentElement.classList.add("js")</script>
 		<div id="case-studies" class="mb-8 mt-8 pb-8">
 			<!-- Inverted triangle: logo links to the live site; the toggle under it opens that case study below (one open at a time) -->
 			<div class="mx-auto flex max-w-5xl flex-col items-center gap-y-6 py-6 md:gap-y-10">
@@ -41,7 +42,7 @@ const { page, caseStudies, stack, agents, career, links } = dataEngineering
 			</div>
 			<div class="mx-auto max-w-3xl">
 				{caseStudies.items.map((study) => (
-					<div id={`case-${study.logo.slug}`} class="case-panel" data-open="false" role="region" aria-label={`${study.name} case study`} inert>
+					<div id={`case-${study.logo.slug}`} class="case-panel" data-open="false" role="region" aria-label={`${study.name} case study`}>
 						<div class="case-inner">
 							<section class="case-study border-rule border-t py-8 text-lg">
 								<h3 class="text-highlight !mt-0 text-2xl font-bold">{study.name}</h3>
@@ -105,6 +106,7 @@ const { page, caseStudies, stack, agents, career, links } = dataEngineering
 			panel.toggleAttribute("inert", !open)
 		}
 	}
+	toggles.forEach((btn) => setOpen(btn, false))
 	toggles.forEach((btn) =>
 		btn.addEventListener("click", () => {
 			const open = btn.getAttribute("aria-expanded") !== "true"
@@ -125,17 +127,24 @@ const { page, caseStudies, stack, agents, career, links } = dataEngineering
 	.case-toggle {
 		@apply focus-visible:outline-highlight focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4;
 	}
-	.case-panel {
+	/* Without JS every card is shown open and the toggles are hidden; JS adds html.js. */
+	.case-toggle {
+		display: none;
+	}
+	:global(html.js) .case-toggle {
+		display: inline-block;
+	}
+	:global(html.js) .case-panel {
 		display: grid;
 		grid-template-rows: 0fr;
 		opacity: 0;
 		transition: grid-template-rows 200ms ease-out, opacity 200ms ease-out;
 	}
-	.case-panel[data-open="true"] {
+	:global(html.js) .case-panel[data-open="true"] {
 		grid-template-rows: 1fr;
 		opacity: 1;
 	}
-	.case-inner {
+	:global(html.js) .case-inner {
 		overflow: hidden;
 		min-height: 0;
 	}
