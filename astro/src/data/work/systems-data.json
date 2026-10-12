@@ -36,7 +36,13 @@
 				"results": [
 					"100% parsing accuracy across 37 statement formats, verified in CI on every change.",
 					"Built with AI-agent-driven development behind PR checks."
-				]
+				],
+				"logo": {
+					"src": "/media/logos/roy.svg",
+					"alt": "Roy logo",
+					"bg": "ink",
+					"slug": "roy"
+				}
 			},
 			{
 				"name": "Sensational Concrete",
@@ -61,7 +67,13 @@
 					"Resend",
 					"Vercel"
 				],
-				"results": []
+				"results": [],
+				"logo": {
+					"src": "/media/logos/sensational-concrete.png",
+					"alt": "Sensational Concrete logo",
+					"bg": "white",
+					"slug": "sensational-concrete"
+				}
 			}
 		]
 	},

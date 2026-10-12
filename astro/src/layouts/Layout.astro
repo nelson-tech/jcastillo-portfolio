@@ -26,10 +26,13 @@ const faScript = import.meta.env.PUBLIC_FA_SCRIPT
     ></script>
     <meta name="generator" content={Astro.generator} />
     <title>Jose Castillo | {title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&display=swap" rel="stylesheet" />
   </head>
-  <body class="font-[basic-sans] tracking-wider">
+  <body class="font-sans tracking-wide text-ink bg-paper">
     <div
-      class="min-h-screen flex flex-col justify-between bg-gradient-to-tr from-slate-300 to-slate-50"
+      class="min-h-screen flex flex-col justify-between bg-paper"
     >
       <header>
         <nav class="py-8 px-8 flex items-center justify-between">
@@ -89,13 +92,7 @@ const faScript = import.meta.env.PUBLIC_FA_SCRIPT
 </html>
 <style is:global>
   :root {
-    --accent: 124, 58, 237;
-    --accent-gradient: linear-gradient(
-      45deg,
-      rgb(var(--accent)),
-      #da62c4 30%,
-      white 60%
-    );
+    --accent: 85, 146, 181;
   }
 
   .swup-progress-bar {

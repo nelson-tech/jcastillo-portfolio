@@ -12,6 +12,15 @@ module.exports = {
     extend: {
       colors: {
         highlight: "#5592b5",
+        ink: "#16191C",
+        paper: "#F5F3EE",
+        stone: "#6B7176",
+        rule: "#DEDAD2",
+        "accent-deep": "#2E6584",
+      },
+      fontFamily: {
+        display: ["Fraunces", "Georgia", "serif"],
+        sans: ["basic-sans", "system-ui", "sans-serif"],
       },
     },
   },

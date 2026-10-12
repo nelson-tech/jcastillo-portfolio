@@ -1,5 +1,4 @@
 ---
-import Card from "@components/Card.astro"
 import PageHeader from "@components/PageHeader.astro"
 import Layout from "@layouts/Layout.astro"
 import { systemsData } from "@lib/content"
@@ -10,88 +9,53 @@ const { page, caseStudies, stack, agents, career, links } = systemsData
 <Layout title={page.title ?? "Systems & Data"}>
 	<div class="mx-4 mt-16 md:mx-8">
 		{page.header && <PageHeader header={page.header} description={page.description} />}
-		<div id="case-studies" class="border-highlight mb-8 mt-8 border-b border-opacity-50 pb-8">
+		<div id="case-studies" class="mb-8 mt-8 pb-8">
 			{
 				caseStudies.header && (
-					<h2 class="text-highlight mb-8 w-full text-center text-4xl font-bold">{caseStudies.header}</h2>
+					<h2 class="font-display text-ink mb-8 w-full text-center text-3xl font-semibold tracking-normal">{caseStudies.header}</h2>
 				)
 			}
-			<div class="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2">
+			<div class="mx-auto grid max-w-3xl grid-cols-2 gap-6">
 				{caseStudies.items.map((study) => (
-					<div class="flex flex-col gap-4">
-						<a
-							href={study.link}
-							target="_blank"
-							rel="noopener"
-							title={study.name}
-							class="group relative block aspect-video overflow-hidden rounded"
-						>
-							<picture>
-								<source media="(max-width: 639px)" srcset={study.image.mobileSrc} />
-								<img
-									src={study.image.src}
-									alt={study.image.alt}
-									width={study.image.width}
-									height={study.image.height}
-									loading="lazy"
-									class="h-full w-full object-cover object-top transition-all duration-500 group-hover:grayscale"
-								/>
-							</picture>
-						</a>
-						<ul>
-							<Card title={study.name} body={study.summary} href={study.link} />
-						</ul>
-						<div class="case-study px-2 text-lg">
-							{study.problem && (
-								<>
-									<h3>Problem</h3>
-									<p>{study.problem}</p>
-								</>
-							)}
-							{study.built.length > 0 && (
-								<>
-									<h3>Built</h3>
-									<ul>
-										{study.built.map((item) => (
-											<li>{item}</li>
-										))}
-									</ul>
-								</>
-							)}
-							{study.results.length > 0 && (
-								<>
-									<h3>Results</h3>
-									<ul>
-										{study.results.map((item) => (
-											<li>{item}</li>
-										))}
-									</ul>
-								</>
-							)}
-							<div class="mt-4 flex flex-wrap gap-2">
-								{study.stack.map((item) => (
-									<span class="pill">{item}</span>
-								))}
-							</div>
+					<a
+						href={`#${study.logo.slug}`}
+						title={`${study.name} case study`}
+						class={`group flex aspect-[3/2] items-center justify-center rounded-sm border border-rule p-8 transition-colors duration-200 ease-out hover:border-ink ${study.logo.bg === "ink" ? "bg-ink" : "bg-white"}`}
+					>
+						<img src={study.logo.src} alt={study.logo.alt} class="max-h-24 w-auto max-w-[70%] object-contain transition-transform duration-300 ease-out group-hover:scale-105" />
+					</a>
+				))}
+			</div>
+			<div class="mx-auto mt-16 max-w-3xl">
+				{caseStudies.items.map((study) => (
+					<section id={study.logo.slug} class="case-study border-rule scroll-mt-24 border-t py-10 text-lg">
+						<div class="flex items-baseline justify-between gap-4">
+							<h3 class="font-display !mt-0 text-3xl">{study.name}</h3>
+							<a href={study.link} target="_blank" rel="noopener" class="visit">Visit site &rarr;</a>
 						</div>
-					</div>
+						<p class="text-stone mt-2">{study.summary}</p>
+						{study.problem && (<><h4>Problem</h4><p>{study.problem}</p></>)}
+						{study.built.length > 0 && (<><h4>Built</h4><ul>{study.built.map((item) => <li>{item}</li>)}</ul></>)}
+						{study.results.length > 0 && (<><h4>Results</h4><ul>{study.results.map((item) => <li>{item}</li>)}</ul></>)}
+						<div class="mt-6 flex flex-wrap gap-2">{study.stack.map((item) => <span class="pill">{item}</span>)}</div>
+					</section>
 				))}
 			</div>
 		</div>
-		<div id="stack" class="border-highlight mb-8 border-b border-opacity-50 pb-8">
-			{stack.header && <h2 class="text-highlight mb-8 w-full text-center text-4xl font-bold">{stack.header}</h2>}
+		<div id="stack" class="border-rule mb-8 border-t pt-12 pb-8">
+			{stack.header && <h2 class="font-display text-ink mb-8 w-full text-center text-3xl font-semibold tracking-normal">{stack.header}</h2>}
 			<div class="mx-auto flex max-w-3xl flex-wrap justify-center gap-3 text-lg">
 				{stack.items.map((item) => (
 					<span class="pill">{item}</span>
 				))}
 			</div>
 		</div>
-		<div id="agents" class="border-highlight mb-8 border-b border-opacity-50 pb-8">
-			{agents.header && <h2 class="text-highlight mb-8 w-full text-center text-4xl font-bold">{agents.header}</h2>}
+		<div id="agents" class="border-rule mb-8 border-t pt-12 pb-8">
+			{agents.header && <h2 class="font-display text-ink mb-8 w-full text-center text-3xl font-semibold tracking-normal">{agents.header}</h2>}
 			<p class="mx-auto max-w-2xl text-center text-xl leading-loose tracking-wider text-gray-700">{agents.text}</p>
 		</div>
-		<div id="career" class="border-highlight mb-8 border-b border-opacity-50 pb-8">
-			{career.header && <h2 class="text-highlight mb-8 w-full text-center text-4xl font-bold">{career.header}</h2>}
+		<div id="career" class="border-rule mb-8 border-t pt-12 pb-8">
+			{career.header && <h2 class="font-display text-ink mb-8 w-full text-center text-3xl font-semibold tracking-normal">{career.header}</h2>}
 			<div class="mx-auto grid max-w-4xl grid-cols-1 gap-8 text-center md:grid-cols-2">
 				{career.items.map((item) => (
 					<div>
@@ -112,8 +76,11 @@ const { page, caseStudies, stack, agents, career, links } = systemsData
 </Layout>
 
 <style>
-	.case-study h3 {
-		@apply text-highlight mt-4 text-xl font-bold;
+	.case-study h4 {
+		@apply text-stone mt-6 text-sm font-semibold uppercase tracking-widest;
+	}
+	.visit {
+		@apply text-accent-deep whitespace-nowrap text-base underline-offset-4 hover:underline;
 	}
 
 	.case-study ul {
@@ -125,10 +92,10 @@ const { page, caseStudies, stack, agents, career, links } = systemsData
 	}
 
 	.pill {
-		@apply border-highlight text-highlight rounded-full border border-opacity-50 bg-white bg-opacity-50 px-4 py-1;
+		@apply border-rule text-stone rounded-full border bg-white px-3 py-1 text-sm;
 	}
 
 	#links a {
-		@apply text-highlight transition-colors hover:text-green-500;
+		@apply text-accent-deep underline-offset-4 transition-colors hover:text-ink hover:underline;
 	}
 </style>
