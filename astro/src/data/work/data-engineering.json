@@ -108,17 +108,15 @@
 		"header": "Stack",
 		"items": [
 			"Google Cloud / BigQuery",
+			"AWS",
+			"Snowflake",
+			"dbt",
+			"Airflow",
+			"Kafka",
 			"SQL",
 			"Python",
-			"Airflow / Prefect",
-			"Next.js",
-			"Supabase",
-			"Tableau",
-			"Vercel",
-			"Claude",
-			"ChatGPT",
-			"Grok Bot",
-			"Muse"
+			"Looker",
+			"Tableau"
 		]
 	},
 	"agents": {
