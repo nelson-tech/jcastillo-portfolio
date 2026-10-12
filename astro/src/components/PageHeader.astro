@@ -7,7 +7,7 @@ interface Props {
 const { header, description } = Astro.props
 ---
 
-<h2 class="text-highlight my-4 text-center text-4xl font-bold">
+<h1 class="font-display text-ink mt-8 mb-4 text-center text-5xl font-semibold tracking-normal md:text-6xl">
 	{header}
-</h2>
-{description && <p class="text-center text-lg">{description}</p>}
+</h1>
+{description && <p class="text-stone text-center text-lg">{description}</p>}

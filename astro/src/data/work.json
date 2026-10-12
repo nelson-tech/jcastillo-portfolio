@@ -64,11 +64,11 @@
 			"name": "Systems & Data",
 			"slug": "systems-data",
 			"image": {
-				"src": "/media/systems-data-tile.jpg",
-				"alt": "Roy and Sensational Concrete website screenshots",
-				"width": 1024,
-				"height": 576,
-				"wideSrc": "/media/systems-data-tile-wide.jpg"
+				"src": "/media/work/systems-data-thumb.webp",
+				"alt": "Systems & Data illustration",
+				"width": 1280,
+				"height": 720,
+				"wideSrc": "/media/work/systems-data-thumb-wide.webp"
 			},
 			"wide": true
 		}
