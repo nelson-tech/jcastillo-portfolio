@@ -1,3 +1,10 @@
 # Image credits
 - Logos: Roy (royanalyst.com/icon.svg, recolored to ink #16191C); Sensational Concrete (mark from sensationalconcrete.com/logo.png + the name set in Fraunces 600, matching the live site header).
 - Work › Data & Engineering thumbnail (`astro/public/media/work/data-engineering-thumb.webp`): Artwork: Jose's SoundCloud team logo (cropped), used with his permission.
+
+## Career Highlights logos (Data & Engineering page)
+All four are shown in one dark monochrome (ink #16191C, SoundCloud in its own black), on a transparent background, scaled to the same visual weight and never distorted.
+- **Warner Chappell Music:** the official vector logo from the header SVG on https://warnerchappell.com/. WCM publishes a single-colour (white) variant through WMG's rebrand press assets (https://www.wmg.com/news/warner-chappell-music-unveils-new-logo-and-brand-identity-34301), so this version uses that single-colour treatment in ink. File: `astro/public/media/logos/career/warner-chappell-music.svg`.
+- **SoundCloud:** the official "Logo black on white" from the SoundCloud Media Kit (https://soundcloud.com/company/media-kit), with the white background removed. The black 7-bar Cloudmark wordmark is unchanged; the kit allows only black or white. File: `astro/public/media/logos/career/soundcloud.png`. The kit offers only PNG; SVGs are available on request from SoundCloud Press.
+- **Spark Networks:** the company-supplied logo distributed via PR Newswire (https://mma.prnewswire.com/media/680237/Spark_Networks_Logo.html), with the background removed and set in single-colour ink. spark.net currently shows "Website Expired", and no public brand guidelines were found. File: `astro/public/media/logos/career/spark-networks.png`.
+- **Meta: no logo, on purpose.** Meta's Brand Resource Center (https://www.meta.com/brand/resources/meta/company-brand/) says all use of the Meta logo requires approval through Meta's Brand Review. It also lists permitted uses (partnerships, news, editorial, etc.), and a personal portfolio isn't among them. The entry stays text-only until Meta approves.

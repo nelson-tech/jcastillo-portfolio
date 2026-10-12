@@ -127,11 +127,13 @@
 		"items": [
 			{
 				"company": "Warner Chappell Music",
+				"logo": { "src": "/media/logos/career/warner-chappell-music.svg", "alt": "Warner Chappell Music logo", "size": "h-10" },
 				"text": "Music publishing royalty operations and data.",
 				"confirmed": false
 			},
 			{
 				"company": "SoundCloud",
+				"logo": { "src": "/media/logos/career/soundcloud.png", "alt": "SoundCloud logo", "size": "h-5" },
 				"text": "Royalty operations and data for creator services.",
 				"confirmed": false
 			},
@@ -142,6 +144,7 @@
 			},
 			{
 				"company": "Spark Networks",
+				"logo": { "src": "/media/logos/career/spark-networks.png", "alt": "Spark Networks logo", "size": "h-10" },
 				"text": "Data analytics and engineering.",
 				"confirmed": false
 			}
