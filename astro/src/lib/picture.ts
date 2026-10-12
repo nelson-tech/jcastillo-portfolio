@@ -12,6 +12,8 @@ export interface ImageInfo {
 	color: string | null
 	avif?: Variant[]
 	webp?: Variant[]
+	/** Photography lightbox AVIF (long edge <= 2000, q72). */
+	lightbox?: { src: string; width: number; height: number }
 }
 
 export const srcset = (variants: Variant[]) => variants.map((v) => `${v.src} ${v.w}w`).join(", ")

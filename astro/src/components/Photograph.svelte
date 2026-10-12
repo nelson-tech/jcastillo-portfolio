@@ -25,15 +25,22 @@
 			class="photo rounded-sm object-contain md:rounded"
 		/>
 	</svelte:fragment>
-	<!-- Opened view: the largest generated variant (1600w) instead of the full-size original. -->
-	<Picture
-		src={image.src}
-		alt={image.alt}
-		info={image.info}
-		sizes={image.info ? largestSizes(image.info) : undefined}
-		loading="eager"
-		class="photo rounded-sm object-contain md:rounded"
-	/>
+	<!-- Opened view: Photography gets a dedicated 2000px q72 AVIF; elsewhere the largest generated variant. -->
+	{#if image.info?.lightbox}
+		<picture>
+			<source type="image/avif" srcset={image.info.lightbox.src} />
+			<img src={image.info.webp?.at(-1)?.src ?? image.src} alt={image.alt} width={image.info.lightbox.width} height={image.info.lightbox.height} class="photo rounded-sm object-contain md:rounded" />
+		</picture>
+	{:else}
+		<Picture
+			src={image.src}
+			alt={image.alt}
+			info={image.info}
+			sizes={image.info ? largestSizes(image.info) : undefined}
+			loading="eager"
+			class="photo rounded-sm object-contain md:rounded"
+		/>
+	{/if}
 </Lightbox>
 
 <style>
