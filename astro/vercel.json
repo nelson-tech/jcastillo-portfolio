@@ -4,7 +4,12 @@
   "redirects": [
     {
       "source": "/work/systems-data",
-      "destination": "/work/data-engineering",
+      "destination": "/work/data-product-development",
+      "statusCode": 301
+    },
+    {
+      "source": "/work/data-engineering",
+      "destination": "/work/data-product-development",
       "statusCode": 301
     }
   ]
