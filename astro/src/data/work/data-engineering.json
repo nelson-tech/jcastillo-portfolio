@@ -132,27 +132,62 @@
 		"items": [
 			{
 				"company": "Warner Chappell Music",
-				"logo": { "src": "/media/logos/career/warner-chappell-music.svg", "alt": "Warner Chappell Music", "url": "https://warnerchappell.com", "size": "h-10" },
-				"text": "Music publishing royalty operations and data.",
-				"confirmed": false
+				"logo": {
+					"src": "/media/logos/career/warner-chappell-music.svg",
+					"alt": "Warner Chappell Music",
+					"url": "https://warnerchappell.com",
+					"size": "h-10"
+				},
+				"role": "Sr. Royalty Data Analyst · June 2015 – August 2019",
+				"text": "Managed royalty operations & analytics of Warner/Chappell Music's sub-publisher and composer accounts across North America.",
+				"confirmed": true
+			},
+			{
+				"company": "WarnerMedia",
+				"logo": {
+					"src": "/media/logos/career/warner-bros.svg",
+					"alt": "Warner Bros.",
+					"url": "https://www.warnerbros.com",
+					"size": "h-10"
+				},
+				"role": "Sr. Royalty Reporting Analyst · August 2019 – November 2021",
+				"text": "Oversaw the annual processing of 7.5k royalty statements with $50M scope on behalf of DC Entertainment, Water Tower Records and Warner Bros. Entertainment.",
+				"confirmed": true
 			},
 			{
 				"company": "SoundCloud",
-				"logo": { "src": "/media/logos/career/soundcloud.png", "alt": "SoundCloud", "url": "https://soundcloud.com", "size": "h-5" },
-				"text": "Royalty operations and data for creator services.",
-				"confirmed": false
+				"logo": {
+					"src": "/media/logos/career/soundcloud.png",
+					"alt": "SoundCloud",
+					"url": "https://soundcloud.com",
+					"size": "h-5"
+				},
+				"role": "Associate Director, Royalty & Data Operations · November 2021 – March 2023",
+				"text": "Owned end-to-end payout operations and data infrastructure for on-platform and off-platform royalties through SoundCloud for Artists.",
+				"confirmed": true
 			},
 			{
 				"company": "Meta",
-				"logo": { "src": "/media/logos/career/meta.webp", "alt": "Meta", "url": "https://www.meta.com", "size": "h-6" },
-				"text": "Data engineering and analytics for music partnerships.",
-				"confirmed": false
+				"logo": {
+					"src": "/media/logos/career/meta.webp",
+					"alt": "Meta",
+					"url": "https://www.meta.com",
+					"size": "h-6"
+				},
+				"role": "Data Analyst II, Global Partnerships & Content · March 2023 – September 2024; Data Analyst II, Business & Monetization - Generative AI · November 2024 – May 2025",
+				"text": "Designed, built, and maintained scalable, privacy-conscious data infrastructure powering Meta's Generative AI Agent platform.",
+				"confirmed": true
 			},
 			{
 				"company": "Spark Networks",
-				"logo": { "src": "/media/logos/career/spark-networks.png", "alt": "Spark Networks", "size": "h-10" },
-				"text": "Data analytics and engineering.",
-				"confirmed": false
+				"logo": {
+					"src": "/media/logos/career/spark-networks.png",
+					"alt": "Spark Networks",
+					"size": "h-10"
+				},
+				"role": "Data Engineer · May 2025 – Present",
+				"text": "Lead the modernization of event-driven data pipelines and streaming analytics for Spark's portfolio of dating apps (Christian Mingle, JDate, etc.), increasing scalability, reliability and speed of data delivery.",
+				"confirmed": true
 			}
 		]
 	},

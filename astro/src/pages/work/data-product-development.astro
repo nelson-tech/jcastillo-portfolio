@@ -106,7 +106,8 @@ const { page, caseStudies, stack, agents, career, links } = dataEngineering
 								? <a href={item.logo.url} target="_blank" rel="noopener" title={`${item.company} (opens in a new tab)`} class="logo-link inline-flex rounded-sm p-1"><img src={item.logo.src} alt={item.logo.alt} class={`${item.logo.size} w-auto object-contain`} loading="lazy" /></a>
 								: <img src={item.logo.src} alt={item.logo.alt} class={`${item.logo.size} w-auto object-contain`} loading="lazy" />) : <p class="text-xl font-bold">{item.company}</p>}
 						</div>
-						<p class="text-lg">{item.text}</p>
+						{item.role && item.role.split("; ").map((r) => <p class="text-stone mb-1 text-sm tracking-wider">{r}</p>)}
+						<p class="mt-3 text-lg">{item.text}</p>
 					</div>
 				))}
 			</div>
