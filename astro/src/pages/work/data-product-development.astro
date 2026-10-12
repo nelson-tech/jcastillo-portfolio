@@ -107,11 +107,25 @@ const { page, caseStudies, stack, agents, career, links } = dataEngineering
 		}
 	}
 	toggles.forEach((btn) => setOpen(btn, false))
+	// Switching cards: collapse the open one first, then expand the new one, so two
+	// panels are never mid-animation at once (no stacked/overlapping text).
+	const reduce = window.matchMedia("(prefers-reduced-motion: reduce)")
+	const CLOSE_MS = 240
+	let pending: number | undefined
 	toggles.forEach((btn) =>
 		btn.addEventListener("click", () => {
 			const open = btn.getAttribute("aria-expanded") !== "true"
-			toggles.forEach((other) => other !== btn && setOpen(other, false))
-			setOpen(btn, open)
+			window.clearTimeout(pending)
+			const others = [...toggles].filter((o) => o !== btn)
+			const wasOpen = others.some((o) => o.getAttribute("aria-expanded") === "true")
+			others.forEach((other) => setOpen(other, false))
+			if (open && wasOpen && !reduce.matches) {
+				btn.setAttribute("aria-expanded", "true")
+				btn.querySelector(".sign")!.textContent = "\u2212"
+				pending = window.setTimeout(() => setOpen(btn, true), CLOSE_MS)
+			} else {
+				setOpen(btn, open)
+			}
 		})
 	)
 </script>
@@ -138,18 +152,22 @@ const { page, caseStudies, stack, agents, career, links } = dataEngineering
 		display: grid;
 		grid-template-rows: 0fr;
 		opacity: 0;
-		transition: grid-template-rows 200ms ease-out, opacity 200ms ease-out;
+		/* Closing: fade text out quickly, then finish collapsing the height. */
+		transition: opacity 120ms ease-out, grid-template-rows 220ms ease-in-out;
 	}
 	:global(html.js) .case-panel[data-open="true"] {
 		grid-template-rows: 1fr;
 		opacity: 1;
+		/* Opening: grow the height, fade text in once there is room for it. */
+		transition: grid-template-rows 260ms ease-out, opacity 180ms ease-out 100ms;
 	}
 	:global(html.js) .case-inner {
 		overflow: hidden;
 		min-height: 0;
 	}
 	@media (prefers-reduced-motion: reduce) {
-		.case-panel {
+		:global(html.js) .case-panel,
+		:global(html.js) .case-panel[data-open="true"] {
 			transition: none;
 		}
 	}

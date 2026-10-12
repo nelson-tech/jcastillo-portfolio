@@ -17,13 +17,22 @@ const { category } = Astro.props
 	/>
 	</picture>
 	<div
-		class="absolute inset-0 z-10 bg-black bg-opacity-50 opacity-0 transition-all duration-500 group-hover:opacity-100"
+		class="scrim absolute inset-0 z-10 opacity-0 transition-all duration-500 group-hover:opacity-100"
 	>
 		<a href={`/work/${category.slug}`} class="flex h-full w-full items-center justify-center">
 			<span
-				class="-translate-y-4 text-center text-4xl text-white transition-all duration-500 group-hover:translate-y-0"
+				class="-translate-y-4 text-center text-4xl font-medium text-white transition-all duration-500 group-hover:translate-y-0"
 				>{category.name}</span
 			>
 		</a>
 	</div>
 </div>
+
+<style>
+	/* Dark, lightly blurred scrim keeps the white hover title at WCAG AA over busy art. */
+	.scrim {
+		background-color: rgba(10, 10, 10, 0.55);
+		-webkit-backdrop-filter: blur(6px);
+		backdrop-filter: blur(6px);
+	}
+</style>
