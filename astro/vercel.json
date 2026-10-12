@@ -1,4 +1,11 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": "astro"
+  "framework": "astro",
+  "redirects": [
+    {
+      "source": "/work/systems-data",
+      "destination": "/work/data-engineering",
+      "statusCode": 301
+    }
+  ]
 }

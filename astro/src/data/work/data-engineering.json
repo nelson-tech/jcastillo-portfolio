@@ -1,7 +1,7 @@
 {
 	"page": {
-		"title": "Systems & Data",
-		"header": "Systems & Data",
+		"title": "Data & Engineering",
+		"header": "Data & Engineering",
 		"description": null
 	},
 	"caseStudies": {
@@ -38,10 +38,10 @@
 					"Built with AI-agent-driven development behind PR checks."
 				],
 				"logo": {
-					"src": "/media/logos/roy-ink.svg",
+					"src": "/media/logos/roy-green.svg",
 					"alt": "Roy logo",
 					"slug": "roy",
-					"size": "h-12 md:h-14"
+					"size": "h-20 md:h-40"
 				}
 			},
 			{
@@ -69,11 +69,38 @@
 				],
 				"results": [],
 				"logo": {
-					"src": "/media/logos/sensational-concrete-wordmark.png",
+					"src": "/media/logos/sensational-concrete-stacked.png",
 					"alt": "Sensational Concrete logo",
 					"slug": "sensational-concrete",
-					"size": "h-8 md:h-10"
+					"size": "h-11 md:h-24"
 				}
+			},
+			{
+				"name": "Viru Andean House",
+				"logo": {
+					"src": "/media/logos/viru-andean-house.png",
+					"alt": "Viru Andean House logo",
+					"size": "h-24 md:h-44",
+					"slug": "viru-andean-house"
+				},
+				"link": "https://www.andeanhouse.com",
+				"summary": "A pre-launch brand site and storefront for curated Andean textiles, jewelry and pantry goods, a partnership between Jose Castillo and Crystal Wallstrom.",
+				"problem": null,
+				"built": [
+					"A Next.js (App Router) site on Vercel that renders a pre-launch experience with a sign-up list while commerce stays off.",
+					"Headless Shopify commerce, Resend email and a Sanity CMS, each switched on by its own environment variables.",
+					"CI with lint, type checks, build and Playwright smoke tests on every pull request."
+				],
+				"stack": [
+					"Next.js",
+					"Tailwind CSS",
+					"Shopify",
+					"Resend",
+					"Sanity",
+					"Vercel",
+					"Playwright"
+				],
+				"results": []
 			}
 		]
 	},

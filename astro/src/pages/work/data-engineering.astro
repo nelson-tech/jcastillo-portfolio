@@ -1,32 +1,37 @@
 ---
 import PageHeader from "@components/PageHeader.astro"
 import Layout from "@layouts/Layout.astro"
-import { systemsData } from "@lib/content"
+import { dataEngineering } from "@lib/content"
 
-const { page, caseStudies, stack, agents, career, links } = systemsData
+const { page, caseStudies, stack, agents, career, links } = dataEngineering
 ---
 
-<Layout title={page.title ?? "Systems & Data"}>
+<Layout title={page.title ?? "Data & Engineering"}>
 	<div class="mx-4 mt-16 md:mx-8">
 		{page.header && <PageHeader header={page.header} description={page.description} />}
 		<div id="case-studies" class="mb-8 mt-8 pb-8">
-			{
-				caseStudies.header && (
-					<h2 class="font-display text-ink mb-8 w-full text-center text-3xl font-semibold tracking-normal">{caseStudies.header}</h2>
-				)
-			}
-			<div class="mx-auto flex max-w-3xl flex-wrap items-center justify-center gap-x-20 gap-y-10 py-6">
-				{caseStudies.items.map((study) => (
-					<a href={`#${study.logo.slug}`} title={`${study.name} case study`} class="group inline-flex items-center rounded-sm p-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-highlight">
-						<img src={study.logo.src} alt={study.logo.alt} class={`${study.logo.size} w-auto opacity-90 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-100`} />
-					</a>
-				))}
+			<!-- Inverted triangle: first two logos side by side, third centred underneath -->
+			<div class="mx-auto flex max-w-5xl flex-col items-center gap-y-6 py-6 md:gap-y-10">
+				<div class="flex flex-nowrap items-center justify-center gap-x-5 md:gap-x-20">
+					{caseStudies.items.slice(0, 2).map((study) => (
+						<a href={`#${study.logo.slug}`} title={`${study.name} case study`} class="group inline-flex items-center rounded-sm p-1 md:p-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-highlight">
+							<img src={study.logo.src} alt={study.logo.alt} class={`${study.logo.size} w-auto max-w-full object-contain opacity-90 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-100`} />
+						</a>
+					))}
+				</div>
+				<div class="flex justify-center">
+					{caseStudies.items.slice(2).map((study) => (
+						<a href={`#${study.logo.slug}`} title={`${study.name} case study`} class="group inline-flex items-center rounded-sm p-1 md:p-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-highlight">
+							<img src={study.logo.src} alt={study.logo.alt} class={`${study.logo.size} w-auto max-w-full object-contain opacity-90 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-100`} />
+						</a>
+					))}
+				</div>
 			</div>
 			<div class="mx-auto mt-16 max-w-3xl">
 				{caseStudies.items.map((study) => (
 					<section id={study.logo.slug} class="case-study border-rule scroll-mt-24 border-t py-10 text-lg">
 						<div class="flex items-baseline justify-between gap-4">
-							<h3 class="font-display !mt-0 text-3xl">{study.name}</h3>
+							<h3 class="text-highlight !mt-0 text-2xl font-bold">{study.name}</h3>
 							<a href={study.link} target="_blank" rel="noopener" class="visit">Visit site &rarr;</a>
 						</div>
 						<p class="text-stone mt-2">{study.summary}</p>
@@ -39,7 +44,7 @@ const { page, caseStudies, stack, agents, career, links } = systemsData
 			</div>
 		</div>
 		<div id="stack" class="border-rule mb-8 border-t pt-12 pb-8">
-			{stack.header && <h2 class="font-display text-ink mb-8 w-full text-center text-3xl font-semibold tracking-normal">{stack.header}</h2>}
+			{stack.header && <h2 class="text-highlight mb-8 w-full text-center text-4xl font-bold">{stack.header}</h2>}
 			<div class="mx-auto flex max-w-3xl flex-wrap justify-center gap-3 text-lg">
 				{stack.items.map((item) => (
 					<span class="pill">{item}</span>
@@ -47,11 +52,11 @@ const { page, caseStudies, stack, agents, career, links } = systemsData
 			</div>
 		</div>
 		<div id="agents" class="border-rule mb-8 border-t pt-12 pb-8">
-			{agents.header && <h2 class="font-display text-ink mb-8 w-full text-center text-3xl font-semibold tracking-normal">{agents.header}</h2>}
+			{agents.header && <h2 class="text-highlight mb-8 w-full text-center text-4xl font-bold">{agents.header}</h2>}
 			<p class="mx-auto max-w-2xl text-center text-xl leading-loose tracking-wider text-gray-700">{agents.text}</p>
 		</div>
 		<div id="career" class="border-rule mb-8 border-t pt-12 pb-8">
-			{career.header && <h2 class="font-display text-ink mb-8 w-full text-center text-3xl font-semibold tracking-normal">{career.header}</h2>}
+			{career.header && <h2 class="text-highlight mb-8 w-full text-center text-4xl font-bold">{career.header}</h2>}
 			<div class="mx-auto grid max-w-4xl grid-cols-1 gap-8 text-center md:grid-cols-2">
 				{career.items.map((item) => (
 					<div>
@@ -73,7 +78,7 @@ const { page, caseStudies, stack, agents, career, links } = systemsData
 
 <style>
 	.case-study h4 {
-		@apply text-stone mt-6 text-sm font-semibold uppercase tracking-widest;
+		@apply text-highlight mt-4 text-xl font-bold;
 	}
 	.visit {
 		@apply text-accent-deep whitespace-nowrap text-base underline-offset-4 hover:underline;

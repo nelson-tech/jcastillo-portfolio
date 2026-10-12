@@ -19,7 +19,6 @@ module.exports = {
         "accent-deep": "#2E6584",
       },
       fontFamily: {
-        display: ["Fraunces", "Georgia", "serif"],
         sans: ["basic-sans", "system-ui", "sans-serif"],
       },
     },
