@@ -128,7 +128,7 @@
 		"text": "I run a small team of AI agents across engineering, finance and marketing. Every change goes through pull requests, automated tests and CI guardrails, and I verify the results myself before anything ships."
 	},
 	"career": {
-		"header": "Alumni of",
+		"header": "Alumni",
 		"items": [
 			{
 				"company": "Warner Bros.",
@@ -136,7 +136,7 @@
 					"src": "/media/logos/career/warner-bros.svg",
 					"alt": "Warner Bros. (WarnerMedia)",
 					"url": "https://www.warnerbros.com",
-					"size": "h-8 md:h-10"
+					"size": "1.4"
 				}
 			},
 			{
@@ -145,7 +145,7 @@
 					"src": "/media/logos/career/music-reports.webp",
 					"alt": "Music Reports",
 					"url": "https://www.musicreports.com",
-					"size": "h-7 md:h-9"
+					"size": "0.9"
 				}
 			},
 			{
@@ -154,7 +154,7 @@
 					"src": "/media/logos/career/soundcloud.png",
 					"alt": "SoundCloud",
 					"url": "https://soundcloud.com",
-					"size": "h-3 md:h-4"
+					"size": "1.3"
 				}
 			},
 			{
@@ -163,7 +163,7 @@
 					"src": "/media/logos/career/meta.webp",
 					"alt": "Meta",
 					"url": "https://www.meta.com",
-					"size": "h-4 md:h-6"
+					"size": "0.82"
 				}
 			},
 			{
@@ -172,7 +172,7 @@
 					"src": "/media/logos/career/warner-chappell-music.svg",
 					"alt": "Warner Chappell Music",
 					"url": "https://warnerchappell.com",
-					"size": "h-6 md:h-8"
+					"size": "1"
 				}
 			},
 			{
@@ -181,7 +181,7 @@
 					"src": "/media/logos/career/spark-networks.png",
 					"alt": "Spark Networks",
 					"url": "https://www.spark.net",
-					"size": "h-6 md:h-8"
+					"size": "0.95"
 				}
 			},
 			{
@@ -190,7 +190,7 @@
 					"src": "/media/logos/career/mogul.svg",
 					"alt": "Mogul",
 					"url": "https://usemogul.com",
-					"size": "h-5 md:h-6"
+					"size": "0.8"
 				}
 			}
 		]
