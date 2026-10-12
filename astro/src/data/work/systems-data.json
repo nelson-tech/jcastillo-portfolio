@@ -38,9 +38,9 @@
 					"Built with AI-agent-driven development behind PR checks."
 				],
 				"logo": {
-					"src": "/media/logos/roy.svg",
+					"src": "/media/logos/roy-ink.svg",
 					"alt": "Roy logo",
-					"bg": "ink",
+					"bg": "white",
 					"slug": "roy"
 				}
 			},
@@ -69,7 +69,7 @@
 				],
 				"results": [],
 				"logo": {
-					"src": "/media/logos/sensational-concrete.png",
+					"src": "/media/logos/sensational-concrete-wordmark.png",
 					"alt": "Sensational Concrete logo",
 					"bg": "white",
 					"slug": "sensational-concrete"

@@ -65,12 +65,10 @@
 			"slug": "systems-data",
 			"image": {
 				"src": "/media/systems-data-tile.jpg",
-				"alt": "Blue light passing over fibre-optic cable (photo: Compare Fibre / Unsplash)",
-				"width": 1024,
-				"height": 576,
-				"wideSrc": "/media/systems-data-tile-wide.jpg"
-			},
-			"wide": true
+				"alt": "Close-up of illuminated blue and green fibre optics (photo: Atlantic Ambience / Pexels)",
+				"width": 1200,
+				"height": 800
+			}
 		}
 	]
 }
