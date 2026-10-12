@@ -1,5 +1,6 @@
 ---
 import PageHeader from "@components/PageHeader.astro"
+import Picture from "@components/Picture.astro"
 import Layout from "@layouts/Layout.astro"
 import { dataEngineering } from "@lib/content"
 
@@ -20,7 +21,7 @@ const { page, caseStudies, stack, agents, career, links } = dataEngineering
 						<div class="flex flex-col items-center gap-2">
 							<div class="flex h-[88px] items-center md:h-[176px]">
 							<a href={study.link} target="_blank" rel="noopener" title={`${study.name} (opens in a new tab)`} class="logo-link group inline-flex items-center rounded-sm p-1 md:p-2">
-								<img src={study.logo.src} alt={study.logo.alt} class={`${study.logo.size} w-auto max-w-full object-contain opacity-90 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-100`} />
+								<Picture src={study.logo.src} alt={study.logo.alt} class={`${study.logo.size} w-auto max-w-full object-contain opacity-90 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-100`} />
 							</a>
 							</div>
 							<button type="button" class="case-toggle" aria-expanded="false" aria-controls={`case-${study.logo.slug}`} data-case={study.logo.slug}>
@@ -33,7 +34,7 @@ const { page, caseStudies, stack, agents, career, links } = dataEngineering
 					{caseStudies.items.slice(2).map((study) => (
 						<div class="flex flex-col items-center gap-2">
 							<a href={study.link} target="_blank" rel="noopener" title={`${study.name} (opens in a new tab)`} class="logo-link group inline-flex items-center rounded-sm p-1 md:p-2">
-								<img src={study.logo.src} alt={study.logo.alt} class={`${study.logo.size} w-auto max-w-full object-contain opacity-90 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-100`} />
+								<Picture src={study.logo.src} alt={study.logo.alt} class={`${study.logo.size} w-auto max-w-full object-contain opacity-90 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-100`} />
 							</a>
 							<button type="button" class="case-toggle" aria-expanded="false" aria-controls={`case-${study.logo.slug}`} data-case={study.logo.slug}>
 								Case study <span class="sign" aria-hidden="true">+</span>
@@ -103,11 +104,11 @@ const { page, caseStudies, stack, agents, career, links } = dataEngineering
 					<li class="flex justify-center">
 						{item.logo.url ? (
 							<a href={item.logo.url} target="_blank" rel="noopener" title={`${item.company} (opens in a new tab)`} class="logo-link inline-flex rounded-sm p-1">
-								<img src={item.logo.src} alt={item.logo.alt} class="alumni-logo" style={`--s:${item.logo.size}`} loading="lazy" draggable="false" />
+								<Picture src={item.logo.src} alt={item.logo.alt} class="alumni-logo" style={`--s:${item.logo.size}`} draggable="false" sizes="136px" />
 							</a>
 						) : (
 							<span title={item.company} class="logo-link inline-flex rounded-sm p-1">
-								<img src={item.logo.src} alt={item.logo.alt} class="alumni-logo" style={`--s:${item.logo.size}`} loading="lazy" draggable="false" />
+								<Picture src={item.logo.src} alt={item.logo.alt} class="alumni-logo" style={`--s:${item.logo.size}`} draggable="false" sizes="136px" />
 							</span>
 						)}
 					</li>

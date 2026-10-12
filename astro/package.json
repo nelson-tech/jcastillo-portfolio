@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
+    "images": "node scripts/gen-images.mjs",
+    "prebuild": "node scripts/gen-images.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
@@ -29,6 +31,7 @@
     "prettier-plugin-astro": "^0.8.0",
     "prettier-plugin-svelte": "^2.10.0",
     "prettier-plugin-tailwindcss": "^0.2.7",
+    "sharp": "^0.31.3",
     "svelte-carousel": "^1.0.25",
     "svelte-lightbox": "^1.1.1",
     "swup": "^3.0.6"

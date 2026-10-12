@@ -1,11 +1,14 @@
 <script lang="ts">
 	import Carousel from "svelte-carousel"
+	import Picture from "@components/Picture.svelte"
+	import type { ImageInfo } from "@lib/picture"
 
 	let carousel: any // for calling methods of the carousel instance
 
 	import type { publicDiplomacy } from "@lib/content"
 
-	export let publications: (typeof publicDiplomacy)["publications"]["items"]
+	type Publication = (typeof publicDiplomacy)["publications"]["items"][number]
+	export let publications: (Publication & { image: Publication["image"] & { info?: ImageInfo } })[]
 
 	const handleNextClick = () => {
 		carousel.goToNext()
@@ -21,9 +24,10 @@
 				class="group flex w-96 flex-col items-center justify-center"
 			>
 				<div class="relative overflow-hidden rounded object-contain">
-					<img
+					<Picture
 						src={publication.image.src}
 						alt={publication.label}
+						info={publication.image.info}
 						class="relative rounded object-contain transition-all duration-500 group-hover:grayscale"
 					/>
 					<!-- <div

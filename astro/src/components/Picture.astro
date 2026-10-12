@@ -1,0 +1,67 @@
+---
+// <picture> with AVIF/WebP sources from the image manifest and the original as <img> fallback.
+// Images missing from the manifest (SVG, GIF, un-generated) render as a plain <img>.
+// The <picture> is display:contents, so the <img> lays out exactly as a bare <img> would.
+import type { HTMLAttributes } from "astro/types"
+import { imageInfo } from "@lib/images"
+import { naturalSizes, srcset } from "@lib/picture"
+
+interface Props extends Omit<HTMLAttributes<"img">, "src" | "sizes" | "loading"> {
+	src: string
+	alt?: string
+	/** Must match the rendered width, e.g. "(min-width: 768px) 33vw, 100vw". */
+	sizes?: string
+	/** LCP image: eager + fetchpriority="high". */
+	priority?: boolean
+	/** For images sized only by height (h-16, max-h-[60vh]): width follows the aspect ratio
+	 *  instead of the width attribute, so the box hugs the image as it did without attributes. */
+	fitHeight?: boolean
+	loading?: "lazy" | "eager"
+	/** Art direction: alternate image used when `media` matches. */
+	media?: string
+	mediaSrc?: string
+	mediaSizes?: string
+}
+
+const { src, alt = "", sizes, priority = false, fitHeight = false, loading, media, mediaSrc, mediaSizes, width, height, style, ...attrs } =
+	Astro.props
+const info = imageInfo(src)
+const mediaInfo = mediaSrc ? imageInfo(mediaSrc) : undefined
+const color = info?.avif ? info.color : null
+const imgAttrs = {
+	...attrs,
+	src,
+	alt,
+	width: width ?? info?.width,
+	height: height ?? info?.height,
+	loading: loading ?? (priority ? "eager" : "lazy"),
+	decoding: "async",
+	fetchpriority: priority ? "high" : undefined,
+	style: [style, fitHeight && "width:auto", color && `background-color:${color}`].filter(Boolean).join(";") || undefined,
+	onload: color ? "this.style.backgroundColor=''" : undefined
+}
+---
+
+{
+	info?.avif?.length || mediaSrc ? (
+		<picture style="display:contents">
+			{media && mediaSrc && mediaInfo?.avif?.length ? (
+				<>
+					<source media={media} type="image/avif" srcset={srcset(mediaInfo.avif)} sizes={mediaSizes} />
+					<source media={media} type="image/webp" srcset={srcset(mediaInfo.webp ?? [])} sizes={mediaSizes} />
+				</>
+			) : (
+				media && mediaSrc && <source media={media} srcset={mediaSrc} />
+			)}
+			{info?.avif?.length && (
+				<>
+					<source type="image/avif" srcset={srcset(info.avif)} sizes={sizes ?? naturalSizes(info)} />
+					<source type="image/webp" srcset={srcset(info.webp ?? [])} sizes={sizes ?? naturalSizes(info)} />
+				</>
+			)}
+			<img {...imgAttrs} />
+		</picture>
+	) : (
+		<img {...imgAttrs} />
+	)
+}

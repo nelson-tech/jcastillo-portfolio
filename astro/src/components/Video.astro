@@ -7,14 +7,88 @@ interface Props {
 }
 
 const { video, featured = false } = Astro.props
+
+// Click-to-load facade: only a thumbnail ships with the page; the player iframe (and its
+// ~1MB of third-party JS) is swapped in on click, already playing. The featured tile leads the
+// page (its LCP element), so its thumbnail loads eagerly.
+const embed =
+	video.provider === "youtube"
+		? `https://www.youtube.com/embed/${video.id}?autoplay=1`
+		: `https://player.vimeo.com/video/${video.id}?autoplay=1`
+const thumbnail =
+	video.provider === "youtube"
+		? `https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`
+		: `https://vumbnail.com/${video.id}.jpg`
 ---
 
 <div class:list={["video-js aspect-video w-full overflow-hidden rounded md:min-h-[280px]", featured ? "max-w-none" : "max-w-lg"]}>
-	{
-		video.provider === "youtube" ? (
-			<iframe src={`https://www.youtube.com/embed/${video.id}`} class="h-full w-full" />
-		) : (
-			<iframe allow="autoplay" src={`https://player.vimeo.com/video/${video.id}`} class="h-full w-full" />
-		)
-	}
+	<button type="button" class="video-facade" data-embed={embed} data-title={video.label} aria-label={`Play video: ${video.label}`}>
+		<span class="sizer" aria-hidden="true"></span>
+		<img
+			src={thumbnail}
+			alt=""
+			width="480"
+			height="360"
+			loading={featured ? "eager" : "lazy"}
+			fetchpriority={featured ? "high" : undefined}
+			decoding="async"
+			class="h-full w-full object-cover"
+		/>
+		<svg class="play" viewBox="0 0 68 48" aria-hidden="true">
+			<path d="M66.5 7.7a8.5 8.5 0 0 0-6-6C55.3.3 34 .3 34 .3s-21.3 0-26.6 1.4a8.5 8.5 0 0 0-6 6C0 13 0 24 0 24s0 11 1.4 16.3a8.5 8.5 0 0 0 6 6C12.7 47.7 34 47.7 34 47.7s21.3 0 26.6-1.4a8.5 8.5 0 0 0 6-6C68 35 68 24 68 24s0-11-1.5-16.3z" fill="rgba(10,10,10,0.7)" />
+			<path d="M45 24 27 14v20z" fill="#fff" />
+		</svg>
+	</button>
 </div>
+
+<script is:inline>
+	// One delegated listener per page (re-run safely by swup's scripts plugin).
+	window.__videoFacade ||
+		((window.__videoFacade = true),
+		document.addEventListener("click", (event) => {
+			const button = event.target.closest && event.target.closest(".video-facade")
+			if (!button) return
+			const iframe = document.createElement("iframe")
+			iframe.src = button.dataset.embed
+			iframe.title = button.dataset.title
+			iframe.className = "h-full w-full"
+			iframe.allow = "autoplay; fullscreen; picture-in-picture; encrypted-media"
+			iframe.allowFullscreen = true
+			button.replaceWith(iframe)
+		}))
+</script>
+
+<style>
+	.video-facade {
+		position: relative;
+		display: block;
+		width: 100%;
+		height: 100%;
+		cursor: pointer;
+		background: #0a0a0a;
+	}
+	.video-facade .play {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 68px;
+		height: 48px;
+		transform: translate(-50%, -50%);
+		transition: transform 200ms ease-out;
+	}
+	.video-facade:hover .play,
+	.video-facade:focus-visible .play {
+		transform: translate(-50%, -50%) scale(1.1);
+	}
+	/* Gives the facade the same 300px intrinsic width as the <iframe> it replaces, so
+	   shrink-to-fit wrappers (e.g. the Video page's flex items) keep their size. */
+	.video-facade .sizer {
+		display: block;
+		width: 300px;
+		max-width: 100%;
+	}
+	.video-facade img {
+		position: absolute;
+		inset: 0;
+	}
+</style>

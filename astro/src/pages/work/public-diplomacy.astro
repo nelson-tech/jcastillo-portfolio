@@ -1,6 +1,9 @@
 ---
 import PublicationCarousel from "@components/PublicationCarousel.svelte"
+import Picture from "@components/Picture.astro"
 import Layout from "@layouts/Layout.astro"
+import { lazyIframes } from "@lib/embeds"
+import { withInfo } from "@lib/images"
 import { publicDiplomacy } from "@lib/content"
 
 const { publications, writing, podcasts } = publicDiplomacy
@@ -16,7 +19,10 @@ const { publications, writing, podcasts } = publicDiplomacy
 				)
 			}
 			<div class="mx-auto max-w-2xl">
-				<PublicationCarousel publications={publications.items} client:load />
+				<PublicationCarousel
+					publications={publications.items.map((item) => ({ ...item, image: withInfo(item.image) }))}
+					client:load
+				/>
 			</div>
 		</div>
 		<section id="writing" class="border-highlight mb-8 border-b border-opacity-50 pb-8">
@@ -31,13 +37,13 @@ const { publications, writing, podcasts } = publicDiplomacy
 							aria-label={item.publisher.name}
 							class="flex h-12 w-20 shrink-0 md:w-28 items-center justify-center"
 						>
-							<img
+							<Picture
 								src={item.publisher.logo}
 								alt={item.publisher.name}
 								width={item.publisher.w}
 								height={item.publisher.h}
 								class={`${item.publisher.max ?? "max-h-12"} w-auto max-w-full object-contain`}
-								loading="lazy"
+								sizes="224px"
 							/>
 						</a>
 						<div>
@@ -58,7 +64,7 @@ const { publications, writing, podcasts } = publicDiplomacy
 				{podcasts.items.map((podcast) => (
 					<div class="m-4 md:m-8 md:flex-1">
 						<p class="mb-4 text-lg">{podcast.label}</p>
-						<div set:html={podcast.html} />
+						<div set:html={lazyIframes(podcast.html)} />
 					</div>
 				))}
 			</div>

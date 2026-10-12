@@ -3,6 +3,7 @@ import PageHeader from "@components/PageHeader.astro"
 import Video from "@components/Video.astro"
 import Layout from "@layouts/Layout.astro"
 import { audio } from "@lib/content"
+import { lazyIframes } from "@lib/embeds"
 
 const { page, soundDesign, audioEngineering } = audio
 ---
@@ -31,7 +32,7 @@ const { page, soundDesign, audioEngineering } = audio
 				<div class="flex flex-col items-center justify-center">
 					{audioEngineering.embeds.map((embed) => (
 						<div class="m-4 w-full md:m-8 md:w-1/2">
-							<div set:html={embed.html} />
+							<div set:html={lazyIframes(embed.html)} />
 						</div>
 					))}
 				</div>

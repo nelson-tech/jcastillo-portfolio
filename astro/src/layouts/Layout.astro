@@ -1,5 +1,6 @@
 ---
 import Footer from "@components/Footer.astro"
+import Picture from "@components/Picture.astro"
 import MenuButton from "@components/MenuButton.svelte"
 import MobileMenu from "@components/MobileMenu.svelte"
 import { site } from "@lib/content"
@@ -33,9 +34,26 @@ const faScript = import.meta.env.PUBLIC_FA_SCRIPT
     <meta property="og:image:alt" content="Jose Castillo illustrated avatar" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="https://josecastillocorcuera.com/og-image-v2.png" />
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+    <!-- basic-sans (font-sans) regular + bold: the faces every page renders above the fold -->
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="https://use.typekit.net/af/515e84/00000000000000007735abfc/30/l?subset_id=2&fvd=n3&v=3"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="https://use.typekit.net/af/fa5d28/00000000000000007735abe8/30/l?subset_id=2&fvd=n7&v=3"
+      crossorigin
+    />
     <script
       src={faScript}
       crossorigin="anonymous"
+      defer
     ></script>
     <meta name="generator" content={Astro.generator} />
     <title>Jose Castillo | {title}</title>
@@ -47,7 +65,7 @@ const faScript = import.meta.env.PUBLIC_FA_SCRIPT
       <header>
         <nav class="py-8 px-8 flex items-center justify-between">
           <a href="/" title="Home"
-            ><img src="/Jose Castillo logo.png" class="h-16 md:h-20" /></a
+            ><Picture src="/Jose Castillo logo.png" class="h-16 md:h-20" sizes="(min-width: 768px) 274px, 220px" loading="eager" fitHeight /></a
           >
           <ul class="hidden md:flex md:gap-4">
             {
@@ -66,7 +84,7 @@ const faScript = import.meta.env.PUBLIC_FA_SCRIPT
             }
           </ul>
           <div class="md:hidden">
-            <MenuButton client:load />
+            <MenuButton client:idle />
           </div>
         </nav>
       </header>
@@ -108,6 +126,11 @@ const faScript = import.meta.env.PUBLIC_FA_SCRIPT
     -webkit-touch-callout: none;
     user-select: none;
   }
+  /* Font Awesome <i> placeholders (swapped for SVGs by the kit) would otherwise make the
+     browser fetch the italic text face; FA's own CSS sets the same. */
+  i[class*="fa-"] {
+    font-style: normal;
+  }
   ::selection {
     background: rgba(85, 146, 181, 0.25);
     color: inherit;
@@ -129,7 +152,7 @@ const faScript = import.meta.env.PUBLIC_FA_SCRIPT
     font-weight: 500;
     font-style: normal;
     font-stretch: normal;
-    font-display: auto;
+    font-display: swap;
   }
   @font-face {
     font-family: aktiv-grotesk-extended;
@@ -142,7 +165,7 @@ const faScript = import.meta.env.PUBLIC_FA_SCRIPT
     font-weight: 700;
     font-style: normal;
     font-stretch: normal;
-    font-display: auto;
+    font-display: swap;
   }
   @font-face {
     font-family: aktiv-grotesk-extended;
@@ -155,7 +178,7 @@ const faScript = import.meta.env.PUBLIC_FA_SCRIPT
     font-weight: 500;
     font-style: italic;
     font-stretch: normal;
-    font-display: auto;
+    font-display: swap;
   }
   @font-face {
     font-family: aktiv-grotesk-extended;
@@ -168,7 +191,7 @@ const faScript = import.meta.env.PUBLIC_FA_SCRIPT
     font-weight: 700;
     font-style: italic;
     font-stretch: normal;
-    font-display: auto;
+    font-display: swap;
   }
   @font-face {
     font-family: basic-sans;
@@ -181,7 +204,7 @@ const faScript = import.meta.env.PUBLIC_FA_SCRIPT
     font-weight: 300;
     font-style: normal;
     font-stretch: normal;
-    font-display: auto;
+    font-display: swap;
   }
   @font-face {
     font-family: basic-sans;
@@ -194,7 +217,7 @@ const faScript = import.meta.env.PUBLIC_FA_SCRIPT
     font-weight: 700;
     font-style: normal;
     font-stretch: normal;
-    font-display: auto;
+    font-display: swap;
   }
   @font-face {
     font-family: basic-sans;
@@ -207,7 +230,7 @@ const faScript = import.meta.env.PUBLIC_FA_SCRIPT
     font-weight: 300;
     font-style: italic;
     font-stretch: normal;
-    font-display: auto;
+    font-display: swap;
   }
   @font-face {
     font-family: basic-sans;
@@ -220,9 +243,12 @@ const faScript = import.meta.env.PUBLIC_FA_SCRIPT
     font-weight: 700;
     font-style: italic;
     font-stretch: normal;
-    font-display: auto;
+    font-display: swap;
   }
 </style>
 <script>
-  import "@lib/swup.js";
+  // Swup only enhances link clicks, so load it off the critical path.
+  const loadSwup = () => import("@lib/swup.js");
+  if ("requestIdleCallback" in window) requestIdleCallback(loadSwup, { timeout: 2000 });
+  else setTimeout(loadSwup, 200);
 </script>

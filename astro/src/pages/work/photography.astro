@@ -2,6 +2,7 @@
 import PageHeader from "@components/PageHeader.astro"
 import Photograph from "@components/Photograph.svelte"
 import Layout from "@layouts/Layout.astro"
+import { withInfo } from "@lib/images"
 import { photography } from "@lib/content"
 ---
 
@@ -16,9 +17,9 @@ import { photography } from "@lib/content"
 		{
 			photography.images.length > 0 && (
 				<div class="flex flex-wrap items-center justify-center">
-					{photography.images.map((image) => (
+					{photography.images.map((image, i) => (
 						<div class="basis-1/1 mx-8 mt-8 md:basis-1/3">
-							<Photograph image={image} client:load />
+							<Photograph image={withInfo(image)} priority={i === 0} client:visible />
 						</div>
 					))}
 				</div>
