@@ -3,8 +3,9 @@ import type { work } from "@lib/content"
 
 export interface Props {
 	category: (typeof work)["categories"][number]
+	index: number
 }
-const { category } = Astro.props
+const { category, index } = Astro.props
 ---
 
 <a href={`/work/${category.slug}`} class={`group block ${category.wide ? "md:col-span-2" : ""}`}>
@@ -20,7 +21,7 @@ const { category } = Astro.props
 		</picture>
 	</div>
 	<div class="mt-3 flex items-baseline justify-between border-b border-rule pb-3">
-		<span class="font-display text-ink text-xl font-semibold tracking-normal">{category.name}</span>
+		<span class="flex items-baseline gap-3"><span class="text-stone text-xs tabular-nums tracking-widest">{String(index + 1).padStart(2, "0")}</span><span class="font-display text-ink text-xl font-semibold tracking-normal">{category.name}</span></span>
 		<span aria-hidden="true" class="text-stone transition-transform duration-200 ease-out group-hover:translate-x-1 group-hover:text-ink">&rarr;</span>
 	</div>
 </a>

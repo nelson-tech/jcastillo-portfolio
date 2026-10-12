@@ -64,10 +64,10 @@
 			"name": "Systems & Data",
 			"slug": "systems-data",
 			"image": {
-				"src": "/media/systems-data-tile.jpg",
-				"alt": "Close-up of illuminated blue and green fibre optics (photo: Atlantic Ambience / Pexels)",
-				"width": 1200,
-				"height": 800
+				"src": "/media/work/systems-data-thumb.webp",
+				"alt": "Systems & Data illustration",
+				"width": 1080,
+				"height": 720
 			}
 		}
 	]

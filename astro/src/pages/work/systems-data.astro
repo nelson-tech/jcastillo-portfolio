@@ -15,14 +15,10 @@ const { page, caseStudies, stack, agents, career, links } = systemsData
 					<h2 class="font-display text-ink mb-8 w-full text-center text-3xl font-semibold tracking-normal">{caseStudies.header}</h2>
 				)
 			}
-			<div class="mx-auto grid max-w-3xl grid-cols-2 gap-6">
+			<div class="mx-auto flex max-w-3xl flex-wrap items-center justify-center gap-x-20 gap-y-10 py-6">
 				{caseStudies.items.map((study) => (
-					<a
-						href={`#${study.logo.slug}`}
-						title={`${study.name} case study`}
-						class={`group flex aspect-[3/2] items-center justify-center rounded-sm border border-rule p-5 md:p-10 transition-colors duration-200 ease-out hover:border-ink bg-white`}
-					>
-						<img src={study.logo.src} alt={study.logo.alt} class="h-16 w-full max-w-[80%] object-contain transition-transform duration-300 ease-out group-hover:scale-105" />
+					<a href={`#${study.logo.slug}`} title={`${study.name} case study`} class="group inline-flex items-center rounded-sm p-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-highlight">
+						<img src={study.logo.src} alt={study.logo.alt} class={`${study.logo.size} w-auto opacity-90 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-100`} />
 					</a>
 				))}
 			</div>

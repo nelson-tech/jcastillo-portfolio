@@ -130,7 +130,7 @@ export const systemsData = z
 				z.object({
 					name: z.string(),
 					image: image.extend({ mobileSrc: mediaPath }),
-					logo: z.object({ src: mediaPath, alt: z.string(), bg: z.enum(["ink", "white"]), slug: z.string() }),
+					logo: z.object({ src: mediaPath, alt: z.string(), size: z.string(), slug: z.string() }),
 					link: z.string().url(),
 					summary: z.string(),
 					problem: text,

@@ -42,8 +42,7 @@ Measure: body copy max ~70ch (`max-w-3xl`).
 ## 5. Cards, tiles and states
 - **Work tile:** image (3:2, `object-cover`, 2 px radius) + label row (Fraunces 20 px + `→` in stone + 1 px `rule` underline).
   - Hover/focus: image scales to 1.03 over 500 ms ease-out; arrow moves 4 px right and turns ink. **No grayscale, no dark overlay, no colored fill.**
-- **Logo tile** (Systems & Data, like Sweet Tiger in Music): 3:2 box with a 1 px `rule` border and a background that fits the brand (`ink` for dark brands like Roy, `white` for light ones). Logo max 96 px tall / 70% wide.
-  - Hover: border becomes `ink`, logo scales to 1.05.
+- **Venture logos** (Systems & Data): bare, with transparent backgrounds and no tile or border, in one row centered on paper, optically balanced (see §9). Each is a link to its case study, with a visible focus ring.
 - **Link card** (`Card.astro`): white, 1 px `rule` border, 4 px radius, no shadow.
   - Hover/focus: border becomes `ink` and the arrow nudges. **The purple→pink `--accent-gradient` is removed.**
 - **Pills:** white, 1 px `rule` border, `stone` text, 14 px.
@@ -52,7 +51,7 @@ Measure: body copy max ~70ch (`max-w-3xl`).
 ## 6. Image treatment
 - Full color, no filters or hover grayscale. Crop with `object-cover`, never `object-fill` (it distorts).
 - Category thumbnails are *photographic or illustrated textures*, not UI screenshots. Product UIs appear inside case studies only, if at all.
-- Stock images: free license only (Unsplash/Pexels), and credit them in the alt text and in `CREDITS.md`.
+- Prefer Jose's own or commissioned illustration. Stock only as a last resort, under a verified free license, credited in `CREDITS.md`.
 - Export JPG at q≈80, 2048 px max; GIFs under 3 MB (convert to MP4/WebM loops when possible).
 
 ## 7. Logo usage
@@ -65,7 +64,13 @@ Measure: body copy max ~70ch (`max-w-3xl`).
 - Bigger and farther moves are slower. Respect `prefers-reduced-motion` (disable the scale).
 - The GIF/character animations carry personality; UI motion stays quiet.
 
-## 9. Don'ts (from the anti-vibe-coded checklist)
+## 9. Remixed from the inspiration pass (see inspiration/README.md)
+- **Numbered index** (after rsms.me, paco.me): Work tiles carry a small `01–07` tabular numeral in `stone` before the Fraunces label. This gives quiet order across very mixed disciplines.
+- **Character over chrome** (after wattenberger.com, joshwcomeau.com): Jose's own illustrated faces and punk/chicha art are the only "decoration". Category thumbnails should be his illustrations (e.g. the skeleton-hand Systems & Data art), never stock.
+- **One signature color with conviction** (after robinsloan.com): steel blue stays the only accent. The illustrations' acid lime and chicha brights live *inside images*, never in UI chrome.
+- **Bare logos** (Jose's feedback): venture logos sit on paper with no box, transparent, and optically balanced (compact marks larger, wide wordmarks shorter; Roy `h-12/14`, SC `h-8/10`). Hover lifts them 2 px and brings opacity to 100%.
+
+## 10. Don'ts (from the anti-vibe-coded checklist)
 - Purple/pink gradients, glassmorphism, drop-shadow-heavy cards.
 - Default Tailwind slate/indigo, or Skeleton theme tokens in the UI.
 - Text over images on hover as the only label.
