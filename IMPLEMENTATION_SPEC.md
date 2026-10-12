@@ -14,7 +14,7 @@ Repo `nelson-tech/jcastillo-portfolio`, app in `astro/`. Reference implementatio
 - Fix: set `--accent: 85, 146, 181` and delete `--accent-gradient`. Rewrite the `Card.astro` styles: white, 1 px `#DEDAD2` border, 4 px radius, no shadow, hover border `#16191C`, arrow `translateX(4px)`. See the branch.
 - Also change `hover:text-green-500` → `hover:text-ink` in `pages/work/systems-data.astro` (#links) and **`pages/work/music.astro:56`** (same pattern).
 
-## a) Systems & Data: clickable logos instead of screenshots and cards
+## a) Data & Engineering: clickable logos instead of screenshots and cards
 *(Superseded: the earlier logo-tile version, with ink/white boxes and borders. See Revision 3 for the current design.)*
 - Logos live in `public/media/logos/`: `roy-ink.svg` and `sensational-concrete-wordmark.png` (both transparent).
 - `src/data/work/systems-data.json`: each case study has `logo: { src, alt, size, slug }`. `src/lib/content.ts` validates it.
@@ -26,7 +26,7 @@ Repo `nelson-tech/jcastillo-portfolio`, app in `astro/`. Reference implementatio
 - Viru Andean House: deferred (Jose's decision).
 
 ## b) The Work thumbnail that doesn't match
-- The Systems & Data tile used to be a collage of UI screenshots, unlike every other tile.
+- The Data & Engineering tile used to be a collage of UI screenshots, unlike every other tile.
 - *(Superseded: the Unsplash fibre photo and then the Pexels fibre photo were both dropped.)*
 - Current: **Jose's SoundCloud team logo (cropped to 3:2, RDAR text removed)** at `public/media/work/systems-data-thumb.webp` (1080×720, 83 KB). Credit in `/CREDITS.md`: "Artwork: Jose's SoundCloud team logo (cropped), used with his permission."
 - `systems-data-tile*.jpg` are deleted. Layout: see Revision 4 (full-width feature tile on desktop).
@@ -42,8 +42,8 @@ Repo `nelson-tech/jcastillo-portfolio`, app in `astro/`. Reference implementatio
 
 ## Acceptance (original, superseded by the current list below)
 - [ ] No `#da62c4`, `124, 58, 237`, `accent-gradient` or `green-500` remain under `astro/src`.
-- [ ] The Systems & Data top shows 2 logo tiles. Clicking one scrolls to its case study, and "Visit site" opens the external site.
-- [ ] The Work grid has visible labels, 32/48 px gaps and no distortion. The Systems & Data tile is the fibre photo.
+- [ ] The Data & Engineering top shows 2 logo tiles. Clicking one scrolls to its case study, and "Visit site" opens the external site.
+- [ ] The Work grid has visible labels, 32/48 px gaps and no distortion. The Data & Engineering tile is the fibre photo.
 - [ ] The About page is byte-identical to `main`.
 - [ ] Lighthouse a11y ≥ 95. Link text uses `accent-deep`, not `highlight`.
 
@@ -61,17 +61,17 @@ Repo `nelson-tech/jcastillo-portfolio`, app in `astro/`. Reference implementatio
 ## Acceptance (current)
 - [ ] No `#da62c4`, `124, 58, 237`, `accent-gradient`, `green-500` (systems-data), pexels or `systems-data-tile` references under `astro/src`.
 - [ ] `/work/systems-data`: two bare logos, roughly equal visual weight; each scrolls to its case study; "Visit site" opens the external site.
-- [ ] `/work` is identical to main's layout and hover (flush 16:9 mosaic, grayscale + overlay + centered title on hover). The Systems & Data tile is full width at 32:9 on desktop with no empty cell, shows the team-logo art undistorted, and is 16:9 on mobile.
+- [ ] `/work` is identical to main's layout and hover (flush 16:9 mosaic, grayscale + overlay + centered title on hover). The Data & Engineering tile is full width at 32:9 on desktop with no empty cell, shows the team-logo art undistorted, and is 16:9 on mobile.
 - [ ] About is byte-identical to `main`.
 
-## Revision 4: Systems & Data as a full-width feature tile
-- `src/data/work.json`: Systems & Data has `"wide": true` and `image.wideSrc: "/media/work/systems-data-thumb-wide.webp"`.
+## Revision 4: Data & Engineering as a full-width feature tile
+- `src/data/work.json`: Data & Engineering has `"wide": true` and `image.wideSrc: "/media/work/systems-data-thumb-wide.webp"`.
 - `public/media/work/systems-data-thumb-wide.webp` (1728×720, 2.4:1, 83 KB): the v4 artwork centred, with its black background extended left and right. There is no stretching or cropping of the art.
 - `src/components/ProjectCard.astro`:
   - Wide tiles use `md:col-span-2 md:aspect-[12/5]` (was `3/1`), and the `<picture>` serves `wideSrc` at ≥768 px.
   - The img is `object-cover object-center`.
   - Below 768 px the tile falls back to the normal 3:2 `systems-data-thumb.webp`.
-- The label row is unchanged (`07 Systems & Data` + arrow).
+- The label row is unchanged (`07 Data & Engineering` + arrow).
 
 ## Revision 5 (current, supersedes Revisions 3–4 for the Work grid): Work grid restored to main
 - `src/components/ProjectCard.astro` and `src/pages/work.astro` are **restored byte-for-byte from `origin/main`**: the flush mosaic with no gutters, 16:9 tiles, main's hover (grayscale + 50% black overlay + centered title) and main's `md:col-span-2 md:aspect-[32/9]` wide support.
@@ -79,4 +79,15 @@ Repo `nelson-tech/jcastillo-portfolio`, app in `astro/`. Reference implementatio
 - Main renders images with `object-fill`, so the artwork is pre-padded with black to the exact tile ratio to avoid distortion:
   - `public/media/work/systems-data-thumb.webp`: 1280×720 (16:9), used on mobile.
   - `public/media/work/systems-data-thumb-wide.webp`: 2560×720 (32:9), used on desktop. The wide tile is the same height as a normal row, so the mosaic has no gap.
-- **Still kept:** the bare logos on Systems & Data, the removed pink gradient, the palette and fonts, About untouched.
+- **Still kept:** the bare logos on Data & Engineering, the removed pink gradient, the palette and fonts, About untouched.
+
+## Revision 6 — branch `design/restore-social-icons`
+
+- **Shared footer:** footer markup moved verbatim from `Layout.astro` into `src/components/Footer.astro`, rendered once by the layout, so the social row is identical on every page (no markup or style change vs. main).
+- **Data & Engineering logos:** Roy, Sensational Concrete and Viru Andean House shown bare (transparent, ink) about 2x the previous size, centered in one row on desktop and wrapping on mobile. The "Case Studies" subheading is gone. Viru links to https://www.andeanhouse.com, with a short factual entry (MVP storefront, Next.js on Vercel, pre-launch).
+- **Rename "Systems & Data" → "Data & Engineering":**
+  - `src/data/work.json`: `name`, `slug` (`data-engineering`), `image.alt`, thumbnails renamed to `/media/work/data-engineering-thumb{,-wide}.webp`.
+  - `src/data/work/systems-data.json` → `src/data/work/data-engineering.json` (page title + header).
+  - `src/pages/work/systems-data.astro` → `src/pages/work/data-engineering.astro`; `src/lib/content.ts` export `systemsData` → `dataEngineering`.
+  - The site has no OG/meta title tags beyond `<title>`, which comes from the page title.
+  - **Redirect:** `vercel.json` → `{"source":"/work/systems-data","destination":"/work/data-engineering","statusCode":301}`. Production is a static Vercel build (`VERCEL=1`), so the redirect lives in Vercel, not Astro. It does nothing under `astro dev` or the Docker/node build, so check it on the Vercel preview or production.

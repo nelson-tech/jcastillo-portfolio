@@ -1,24 +1,19 @@
 ---
 import PageHeader from "@components/PageHeader.astro"
 import Layout from "@layouts/Layout.astro"
-import { systemsData } from "@lib/content"
+import { dataEngineering } from "@lib/content"
 
-const { page, caseStudies, stack, agents, career, links } = systemsData
+const { page, caseStudies, stack, agents, career, links } = dataEngineering
 ---
 
-<Layout title={page.title ?? "Systems & Data"}>
+<Layout title={page.title ?? "Data & Engineering"}>
 	<div class="mx-4 mt-16 md:mx-8">
 		{page.header && <PageHeader header={page.header} description={page.description} />}
 		<div id="case-studies" class="mb-8 mt-8 pb-8">
-			{
-				caseStudies.header && (
-					<h2 class="font-display text-ink mb-8 w-full text-center text-3xl font-semibold tracking-normal">{caseStudies.header}</h2>
-				)
-			}
-			<div class="mx-auto flex max-w-3xl flex-wrap items-center justify-center gap-x-20 gap-y-10 py-6">
+			<div class="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-x-12 gap-y-10 py-6 md:gap-x-16">
 				{caseStudies.items.map((study) => (
 					<a href={`#${study.logo.slug}`} title={`${study.name} case study`} class="group inline-flex items-center rounded-sm p-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-highlight">
-						<img src={study.logo.src} alt={study.logo.alt} class={`${study.logo.size} w-auto opacity-90 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-100`} />
+						<img src={study.logo.src} alt={study.logo.alt} class={`${study.logo.size} w-auto max-w-[80vw] object-contain opacity-90 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-100`} />
 					</a>
 				))}
 			</div>

@@ -1,4 +1,5 @@
 ---
+import Footer from "@components/Footer.astro"
 import MenuButton from "@components/MenuButton.svelte"
 import MobileMenu from "@components/MobileMenu.svelte"
 import { site } from "@lib/content"
@@ -64,24 +65,7 @@ const faScript = import.meta.env.PUBLIC_FA_SCRIPT
         <slot />
       </main>
 
-      <footer class="footer mt-8 py-12">
-        <div class="social flex justify-center gap-4">
-          {
-            footerIcons?.map((icon) => {
-              return (
-                <a
-                  href={icon.link}
-                  target="_blank"
-                  class="hover:text-highlight transition-colors"
-                  title={icon.brand}
-                >
-                  <i class={`fab fa-${icon.brand?.toLowerCase()} fa-2x`} />
-                </a>
-              );
-            })
-          }
-        </div>
-      </footer>
+      <Footer />
       <MobileMenu
         menuItems={menuItems}
         footerItems={footerIcons}

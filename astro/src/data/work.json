@@ -1,14 +1,14 @@
 {
 	"categories": [
 		{
-			"name": "Systems & Data",
-			"slug": "systems-data",
+			"name": "Data & Engineering",
+			"slug": "data-engineering",
 			"image": {
-				"src": "/media/work/systems-data-thumb.webp",
-				"alt": "Systems & Data illustration",
+				"src": "/media/work/data-engineering-thumb.webp",
+				"alt": "Data & Engineering illustration",
 				"width": 1280,
 				"height": 720,
-				"wideSrc": "/media/work/systems-data-thumb-wide.webp"
+				"wideSrc": "/media/work/data-engineering-thumb-wide.webp"
 			},
 			"wide": true
 		},
