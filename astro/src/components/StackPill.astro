@@ -1,0 +1,57 @@
+---
+// One tool pill: logo + label, grey until hover/focus, then the brand colour.
+// Used by the Stack section and the case-study cards (see src/lib/stack.ts).
+import { stackMeta, fallbackIcon } from "@lib/stack"
+export interface Props { name: string }
+const { name } = Astro.props
+const meta = stackMeta[name]
+const icons = meta?.icons ?? [fallbackIcon]
+const Tag = meta ? "a" : "span"
+const linkProps = meta ? { href: meta.href, target: "_blank", rel: "noopener noreferrer" } : {}
+---
+
+<Tag class="pill stack-pill stack-mono" {...linkProps}>
+	{icons.map((ic) => ic.kind === "brand" ? (
+		<svg class="stack-icon" viewBox="0 0 24 24" aria-hidden="true" style={`--brand:${ic.color}`}><path d={ic.d} fill-rule={ic.evenodd ? "evenodd" : undefined} /></svg>
+	) : (
+		<svg class="stack-icon stack-line" viewBox="0 0 24 24" aria-hidden="true" style={`--brand:${ic.color}`} set:html={ic.svg} />
+	))}
+	<span>{name}</span>
+</Tag>
+
+<style>
+	.pill {
+		@apply border-rule text-stone rounded-full border bg-white px-3 py-1 text-sm;
+	}
+
+	.stack-pill {
+		@apply inline-flex items-center gap-1.5 transition-colors;
+	}
+	.stack-icon {
+		width: 0.95em;
+		height: 0.95em;
+		flex: none;
+		fill: currentColor;
+		transition: fill 0.2s, stroke 0.2s, color 0.2s;
+	}
+	.stack-icon + span { margin-left: 0.1em; }
+	.stack-line {
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 2;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+	.stack-mono:hover .stack-icon,
+	.stack-mono:focus-visible .stack-icon {
+		color: var(--brand);
+	}
+	.stack-mono:hover,
+	.stack-mono:focus-visible {
+		@apply border-stone text-ink;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.stack-pill, .stack-icon { transition: none; }
+	}
+
+</style>
