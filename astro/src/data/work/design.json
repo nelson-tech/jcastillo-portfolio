@@ -43,6 +43,12 @@
 				"provider": "youtube",
 				"id": "l8youaDKOsM",
 				"draft": false
+			},
+			{
+				"label": "cerebro",
+				"provider": "youtube",
+				"id": "7oH9z1BtieI",
+				"draft": false
 			}
 		]
 	},

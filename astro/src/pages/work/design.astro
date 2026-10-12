@@ -18,10 +18,10 @@ const { page, motionGraphics, graphicDesign } = design
 				)}
 				{motionGraphics.description && <p class="mt-4 text-lg">{motionGraphics.description}</p>}
 
-				<div class="mt-8 flex flex-wrap items-center justify-center gap-4">
-					{motionGraphics.videos.map((video) => (
-						<div class="overflow-hidden rounded">
-							<Video video={video} />
+				<div class="mx-auto mt-8 grid max-w-[1040px] grid-cols-1 justify-items-center gap-4 md:grid-cols-2">
+					{motionGraphics.videos.map((video, i) => (
+						<div class:list={["w-full overflow-hidden rounded flex justify-center", i === 0 && motionGraphics.videos.length % 2 === 1 && "w-full md:col-span-2"]}>
+							<Video video={video} featured={i === 0 && motionGraphics.videos.length % 2 === 1} />
 						</div>
 					))}
 				</div>
