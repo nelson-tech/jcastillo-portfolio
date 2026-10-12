@@ -20,3 +20,24 @@ jobs:
           cache-dependency-path: astro/package-lock.json
       - run: npm ci
       - run: npm run build
+
+  nav-e2e:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: astro
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+          cache-dependency-path: astro/package-lock.json
+      - run: npm ci
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium webkit
+      - name: Swup navigation regression (chromium + webkit)
+        run: |
+          node dist/server/entry.mjs > /tmp/server.log 2>&1 &
+          npx wait-on -t 30000 http://localhost:3333/work || sleep 5
+          BASE_URL=http://localhost:3333 npm run test:nav

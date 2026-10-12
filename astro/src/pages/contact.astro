@@ -52,6 +52,68 @@ import Layout from "@layouts/Layout.astro"
 			<p class="text-stone mt-4 text-lg leading-loose">Your message is on its way. I'll reply to the email you gave me.</p>
 		</div>
 	</section>
+<script is:inline>
+	// Inline (not hoisted) so swup's scripts plugin re-binds the form after client-side nav.
+	;(() => {
+	const form = document.getElementById("contact-form")
+	if (form) {
+		const t = document.getElementById("cf-t")
+		t.value = String(Date.now())
+		const status = document.getElementById("cf-status")
+		const success = document.getElementById("cf-success")
+		const button = form.querySelector("button[type=submit]")
+		const fields = [
+			["cf-name", (v) => v.trim().length > 0],
+			["cf-email", (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())],
+			["cf-reason", (v) => v !== ""],
+			["cf-message", (v) => v.trim().length > 0],
+		]
+		const validate = () => {
+			let first = null
+			for (const [id, ok] of fields) {
+				const el = document.getElementById(id)
+				const bad = !ok(el.value)
+				el.setAttribute("aria-invalid", String(bad))
+				document.getElementById(`${id}-err`).hidden = !bad
+				if (bad && !first) first = el
+			}
+			first?.focus()
+			return !first
+		}
+		for (const [id, ok] of fields) {
+			const el = document.getElementById(id)
+			el.addEventListener(id === "cf-reason" ? "change" : "input", () => {
+				if (el.getAttribute("aria-invalid") === "true" && ok(el.value)) {
+					el.setAttribute("aria-invalid", "false")
+					document.getElementById(`${id}-err`).hidden = true
+				}
+			})
+		}
+		form.addEventListener("submit", async (e) => {
+			e.preventDefault()
+			status.textContent = ""
+			status.classList.remove("error")
+			if (!validate()) return
+			button.disabled = true
+			button.textContent = "Sending…"
+			try {
+				const res = await fetch(form.action, { method: "POST", body: new FormData(form) })
+				const data = await res.json().catch(() => ({}))
+				if (!res.ok || !data.ok) throw new Error(data.error || "Something went wrong sending your message.")
+				form.hidden = true
+				success.hidden = false
+				success.focus()
+			} catch (err) {
+				status.textContent = `${err.message} Please try again in a moment.`
+				status.classList.add("error")
+			} finally {
+				button.disabled = false
+				button.textContent = "Send message"
+			}
+		})
+	}
+})()
+</script>
 </Layout>
 
 <style>
@@ -105,62 +167,4 @@ import Layout from "@layouts/Layout.astro"
 	}
 </style>
 
-<script>
-	const form = document.getElementById("contact-form") as HTMLFormElement | null
-	if (form) {
-		const t = document.getElementById("cf-t") as HTMLInputElement
-		t.value = String(Date.now())
-		const status = document.getElementById("cf-status")!
-		const success = document.getElementById("cf-success")!
-		const button = form.querySelector("button[type=submit]") as HTMLButtonElement
-		const fields: [string, (v: string) => boolean][] = [
-			["cf-name", (v) => v.trim().length > 0],
-			["cf-email", (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())],
-			["cf-reason", (v) => v !== ""],
-			["cf-message", (v) => v.trim().length > 0],
-		]
-		const validate = () => {
-			let first: HTMLElement | null = null
-			for (const [id, ok] of fields) {
-				const el = document.getElementById(id) as HTMLInputElement
-				const bad = !ok(el.value)
-				el.setAttribute("aria-invalid", String(bad))
-				document.getElementById(`${id}-err`)!.hidden = !bad
-				if (bad && !first) first = el
-			}
-			first?.focus()
-			return !first
-		}
-		for (const [id, ok] of fields) {
-			const el = document.getElementById(id) as HTMLInputElement
-			el.addEventListener(id === "cf-reason" ? "change" : "input", () => {
-				if (el.getAttribute("aria-invalid") === "true" && ok(el.value)) {
-					el.setAttribute("aria-invalid", "false")
-					document.getElementById(`${id}-err`)!.hidden = true
-				}
-			})
-		}
-		form.addEventListener("submit", async (e) => {
-			e.preventDefault()
-			status.textContent = ""
-			status.classList.remove("error")
-			if (!validate()) return
-			button.disabled = true
-			button.textContent = "Sending…"
-			try {
-				const res = await fetch(form.action, { method: "POST", body: new FormData(form) })
-				const data = await res.json().catch(() => ({}))
-				if (!res.ok || !data.ok) throw new Error(data.error || "Something went wrong sending your message.")
-				form.hidden = true
-				success.hidden = false
-				success.focus()
-			} catch (err) {
-				status.textContent = `${(err as Error).message} Please try again in a moment.`
-				status.classList.add("error")
-			} finally {
-				button.disabled = false
-				button.textContent = "Send message"
-			}
-		})
-	}
-</script>
+

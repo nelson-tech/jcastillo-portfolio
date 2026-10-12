@@ -70,7 +70,7 @@ const { page, caseStudies, stack, agents, career, links } = dataEngineering
 			{agents.header && <h2 class="text-highlight mb-8 w-full text-center text-4xl font-bold">{agents.header}</h2>}
 			<p class="mx-auto max-w-2xl text-center text-xl leading-loose tracking-wider text-gray-700">{agents.text}</p>
 			<ul class="agent-tools mx-auto mt-8 grid max-w-2xl grid-cols-2 justify-items-center gap-x-8 gap-y-4 sm:flex sm:flex-wrap sm:justify-center tracking-wider">
-				{["Claude Code", "Cursor", "ChatGPT", "Grok Bot", "Muse"].map((name) => {
+				{["Claude Code", "Cursor", "ChatGPT", "Grok Bot", "Muse Spark"].map((name) => {
 					const meta = stackMeta[name]
 					const ic = meta.icons[0]
 					return (
@@ -110,43 +110,50 @@ const { page, caseStudies, stack, agents, career, links } = dataEngineering
 			))}
 		</div>)}
 	</div>
-</Layout>
-
-<script>
-	// One case study open at a time: opening one closes the others.
-	const toggles = document.querySelectorAll<HTMLButtonElement>(".case-toggle")
-	const setOpen = (btn: HTMLButtonElement, open: boolean) => {
-		const panel = document.getElementById(btn.getAttribute("aria-controls")!)
-		btn.setAttribute("aria-expanded", String(open))
-		btn.querySelector(".sign")!.textContent = open ? "\u2212" : "+"
-		if (panel) {
-			panel.dataset.open = String(open)
-			panel.toggleAttribute("inert", !open)
+<script is:inline>
+	// Swup swaps #swup on client-side nav; Astro's hoisted module scripts run once per
+	// document, so per-element listeners never bound when arriving via swup. Use one
+	// delegated document listener (guarded) and re-init panel state on every run
+	// (swup's scripts plugin re-executes inline scripts after each swap / popstate).
+	;(() => {
+		const setOpen = (btn, open) => {
+			const panel = document.getElementById(btn.getAttribute("aria-controls"))
+			btn.setAttribute("aria-expanded", String(open))
+			const sign = btn.querySelector(".sign")
+			if (sign) sign.textContent = open ? "\u2212" : "+"
+			if (panel) {
+				panel.dataset.open = String(open)
+				panel.toggleAttribute("inert", !open)
+			}
 		}
-	}
-	toggles.forEach((btn) => setOpen(btn, false))
-	// Switching cards: collapse the open one first, then expand the new one, so two
-	// panels are never mid-animation at once (no stacked/overlapping text).
-	const reduce = window.matchMedia("(prefers-reduced-motion: reduce)")
-	const CLOSE_MS = 240
-	let pending: number | undefined
-	toggles.forEach((btn) =>
-		btn.addEventListener("click", () => {
+		document.querySelectorAll(".case-toggle").forEach((btn) => setOpen(btn, false))
+		if (window.__caseToggles) return
+		window.__caseToggles = true
+		const reduce = window.matchMedia("(prefers-reduced-motion: reduce)")
+		const CLOSE_MS = 240
+		let pending
+		document.addEventListener("click", (event) => {
+			const btn = event.target.closest && event.target.closest(".case-toggle")
+			if (!btn) return
+			const toggles = [...document.querySelectorAll(".case-toggle")]
 			const open = btn.getAttribute("aria-expanded") !== "true"
 			window.clearTimeout(pending)
-			const others = [...toggles].filter((o) => o !== btn)
+			const others = toggles.filter((o) => o !== btn)
 			const wasOpen = others.some((o) => o.getAttribute("aria-expanded") === "true")
 			others.forEach((other) => setOpen(other, false))
 			if (open && wasOpen && !reduce.matches) {
 				btn.setAttribute("aria-expanded", "true")
-				btn.querySelector(".sign")!.textContent = "\u2212"
+				btn.querySelector(".sign").textContent = "\u2212"
 				pending = window.setTimeout(() => setOpen(btn, true), CLOSE_MS)
 			} else {
 				setOpen(btn, open)
 			}
 		})
-	)
+	})()
 </script>
+</Layout>
+
+
 
 <style>
 	.case-toggle {

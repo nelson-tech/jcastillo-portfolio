@@ -1,6 +1,6 @@
 // Brand marks from simple-icons (CC0 SVG paths; trademarks belong to their owners).
 // Tableau, OpenAI, AWS, dbt and Playwright come from simple-icons@11 (later removed from the set).
-// Grok mark from @lobehub/icons-static-svg (MIT). Muse uses the Meta mark (no standalone Muse logo published).
+// Grok mark from @lobehub/icons-static-svg (MIT). Muse Spark uses the Meta mark (no standalone Muse Spark logo published).
 const raw = import.meta.glob("../data/stack-icons/*.svg", { as: "raw", eager: true }) as Record<string, string>
 const path = (slug: string) => {
 	const svg = raw[`../data/stack-icons/${slug}.svg`] ?? ""
@@ -36,7 +36,7 @@ export const stackMeta: Record<string, { href: string; icons: StackIcon[] }> = {
 	Cursor: { href: "https://cursor.com", icons: [b("cursor", "#000000", "Cursor")] },
 	ChatGPT: { href: "https://chatgpt.com", icons: [b("openai", "#10A37F", "OpenAI")] },
 	"Grok Bot": { href: "https://grok.com", icons: [{ ...b("grok", "#000000", "Grok"), evenodd: true }] },
-	Muse: { href: "https://ai.meta.com/muse/", icons: [b("meta", "#0467DF", "Meta")] },
+	"Muse Spark": { href: "https://ai.meta.com/muse/", icons: [b("meta", "#0467DF", "Meta")] },
 	// Case-study card tools (not in the main, resume-only Stack list)
 	Clerk: { href: "https://clerk.com", icons: [b("clerk", "#6C47FF", "Clerk")] },
 	Gemini: { href: "https://gemini.google.com", icons: [b("googlegemini", "#8E75B2", "Gemini")] },
