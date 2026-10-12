@@ -128,31 +128,70 @@
 		"text": "I run a small team of AI agents across engineering, finance and marketing. Every change goes through pull requests, automated tests and CI guardrails, and I verify the results myself before anything ships."
 	},
 	"career": {
-		"header": "Career Highlights",
+		"header": "Alumni",
 		"items": [
 			{
-				"company": "Warner Chappell Music",
-				"logo": { "src": "/media/logos/career/warner-chappell-music.svg", "alt": "Warner Chappell Music", "url": "https://warnerchappell.com", "size": "h-10" },
-				"text": "Music publishing royalty operations and data.",
-				"confirmed": false
+				"company": "Warner Bros.",
+				"logo": {
+					"src": "/media/logos/career/warner-bros.svg",
+					"alt": "Warner Bros. (WarnerMedia)",
+					"url": "https://www.warnerbros.com",
+					"size": "1.4"
+				}
+			},
+			{
+				"company": "Music Reports",
+				"logo": {
+					"src": "/media/logos/career/music-reports.webp",
+					"alt": "Music Reports",
+					"url": "https://www.musicreports.com",
+					"size": "0.9"
+				}
 			},
 			{
 				"company": "SoundCloud",
-				"logo": { "src": "/media/logos/career/soundcloud.png", "alt": "SoundCloud", "url": "https://soundcloud.com", "size": "h-5" },
-				"text": "Royalty operations and data for creator services.",
-				"confirmed": false
+				"logo": {
+					"src": "/media/logos/career/soundcloud.png",
+					"alt": "SoundCloud",
+					"url": "https://soundcloud.com",
+					"size": "1.3"
+				}
 			},
 			{
 				"company": "Meta",
-				"logo": { "src": "/media/logos/career/meta.webp", "alt": "Meta", "url": "https://www.meta.com", "size": "h-6" },
-				"text": "Data engineering and analytics for music partnerships.",
-				"confirmed": false
+				"logo": {
+					"src": "/media/logos/career/meta.webp",
+					"alt": "Meta",
+					"url": "https://www.meta.com",
+					"size": "0.82"
+				}
+			},
+			{
+				"company": "Warner Chappell Music",
+				"logo": {
+					"src": "/media/logos/career/warner-chappell-music.svg",
+					"alt": "Warner Chappell Music",
+					"url": "https://warnerchappell.com",
+					"size": "1"
+				}
 			},
 			{
 				"company": "Spark Networks",
-				"logo": { "src": "/media/logos/career/spark-networks.png", "alt": "Spark Networks", "size": "h-10" },
-				"text": "Data analytics and engineering.",
-				"confirmed": false
+				"logo": {
+					"src": "/media/logos/career/spark-networks.png",
+					"alt": "Spark Networks",
+					"url": "https://www.spark.net",
+					"size": "0.95"
+				}
+			},
+			{
+				"company": "Mogul",
+				"logo": {
+					"src": "/media/logos/career/mogul.svg",
+					"alt": "Mogul",
+					"url": "https://usemogul.com",
+					"size": "0.8"
+				}
 			}
 		]
 	},

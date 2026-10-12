@@ -88,6 +88,31 @@ const faScript = import.meta.env.PUBLIC_FA_SCRIPT
     --accent: 85, 146, 181;
   }
 
+  /* Links: no browser/OS-accent tap or click highlight (on Apple devices the
+     default focus ring, selection and tap colour follow the system accent, e.g. pink).
+     Keyboard users still get a neutral focus-visible ring. */
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+  a:focus:not(:focus-visible) {
+    outline: none;
+  }
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid #6b7176;
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+  a img {
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+    user-select: none;
+  }
+  ::selection {
+    background: rgba(85, 146, 181, 0.25);
+    color: inherit;
+  }
+
   .swup-progress-bar {
     height: 4px;
     @apply bg-highlight;
