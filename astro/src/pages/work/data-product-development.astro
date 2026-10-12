@@ -68,7 +68,7 @@ const { page, caseStudies, stack, agents, career, links } = dataEngineering
 					return (
 						<a class={`pill stack-pill stack-${stackVariant}`} href={meta.href} target="_blank" rel="noopener noreferrer">
 							{meta.icons.map((ic) => ic.kind === "brand" ? (
-								<svg class="stack-icon" viewBox="0 0 24 24" aria-hidden="true" style={`--brand:${ic.color}`}><path d={ic.d} /></svg>
+								<svg class="stack-icon" viewBox="0 0 24 24" aria-hidden="true" style={`--brand:${ic.color}`}><path d={ic.d} fill-rule={ic.evenodd ? "evenodd" : undefined} /></svg>
 							) : (
 								<svg class="stack-icon stack-line" viewBox="0 0 24 24" aria-hidden="true" style={`--brand:${ic.color}`} set:html={ic.svg} />
 							))}

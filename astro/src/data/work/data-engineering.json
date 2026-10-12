@@ -115,7 +115,10 @@
 			"Supabase",
 			"Tableau",
 			"Vercel",
-			"AI agents"
+			"Claude",
+			"ChatGPT",
+			"Grok Bot",
+			"Muse"
 		]
 	},
 	"agents": {
