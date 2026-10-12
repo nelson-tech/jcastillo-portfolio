@@ -1,5 +1,7 @@
 ---
 import type { Video } from "@lib/content"
+import Picture from "@components/Picture.astro"
+import { imageInfo } from "@lib/images"
 
 interface Props {
 	video: Video
@@ -19,12 +21,17 @@ const thumbnail =
 	video.provider === "youtube"
 		? `https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`
 		: `https://vumbnail.com/${video.id}.jpg`
+const local = video.provider === "youtube" ? `/media/thumbs/${video.id}.jpg` : undefined
+const hasLocal = local && imageInfo(local)
 ---
 
 <div class:list={["video-js aspect-video w-full overflow-hidden rounded md:min-h-[280px]", featured ? "max-w-none" : "max-w-lg"]}>
 	<button type="button" class="video-facade" data-embed={embed} data-title={video.label} aria-label={`Play video: ${video.label}`}>
 		<span class="sizer" aria-hidden="true"></span>
-		<img
+		{hasLocal ? (
+			<Picture src={local} alt="" sizes={featured ? "(min-width: 1072px) 1040px, calc(100vw - 32px)" : "(min-width: 768px) 512px, calc(100vw - 32px)"} priority={featured} class="h-full w-full object-cover" />
+		) : (
+			<img
 			src={thumbnail}
 			alt=""
 			width="480"
@@ -34,6 +41,7 @@ const thumbnail =
 			decoding="async"
 			class="h-full w-full object-cover"
 		/>
+		)}
 		<svg class="play" viewBox="0 0 68 48" aria-hidden="true">
 			<path d="M66.5 7.7a8.5 8.5 0 0 0-6-6C55.3.3 34 .3 34 .3s-21.3 0-26.6 1.4a8.5 8.5 0 0 0-6 6C0 13 0 24 0 24s0 11 1.4 16.3a8.5 8.5 0 0 0 6 6C12.7 47.7 34 47.7 34 47.7s21.3 0 26.6-1.4a8.5 8.5 0 0 0 6-6C68 35 68 24 68 24s0-11-1.5-16.3z" fill="rgba(10,10,10,0.7)" />
 			<path d="M45 24 27 14v20z" fill="#fff" />
