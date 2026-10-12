@@ -1,6 +1,18 @@
 {
 	"categories": [
 		{
+			"name": "Systems & Data",
+			"slug": "systems-data",
+			"image": {
+				"src": "/media/work/systems-data-thumb.webp",
+				"alt": "Systems & Data illustration",
+				"width": 1280,
+				"height": 720,
+				"wideSrc": "/media/work/systems-data-thumb-wide.webp"
+			},
+			"wide": true
+		},
+		{
 			"name": "Music",
 			"slug": "music",
 			"image": {
@@ -59,18 +71,6 @@
 				"width": 1334,
 				"height": 750
 			}
-		},
-		{
-			"name": "Systems & Data",
-			"slug": "systems-data",
-			"image": {
-				"src": "/media/work/systems-data-thumb.webp",
-				"alt": "Systems & Data illustration",
-				"width": 1280,
-				"height": 720,
-				"wideSrc": "/media/work/systems-data-thumb-wide.webp"
-			},
-			"wide": true
 		}
 	]
 }
