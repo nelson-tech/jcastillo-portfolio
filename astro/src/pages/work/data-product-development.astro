@@ -101,9 +101,15 @@ const { page, caseStudies, stack, agents, career, links } = dataEngineering
 			<ul class="alumni mx-auto grid px-6 md:px-0 max-w-4xl grid-cols-6 items-center gap-x-4 gap-y-8 md:grid-cols-12 md:gap-x-10">
 				{career.items.map((item) => (
 					<li class="flex justify-center">
-						<a href={item.logo.url} target="_blank" rel="noopener" title={`${item.company} (opens in a new tab)`} class="logo-link inline-flex rounded-sm p-1">
-							<img src={item.logo.src} alt={item.logo.alt} class="alumni-logo" style={`--s:${item.logo.size}`} loading="lazy" draggable="false" />
-						</a>
+						{item.logo.url ? (
+							<a href={item.logo.url} target="_blank" rel="noopener" title={`${item.company} (opens in a new tab)`} class="logo-link inline-flex rounded-sm p-1">
+								<img src={item.logo.src} alt={item.logo.alt} class="alumni-logo" style={`--s:${item.logo.size}`} loading="lazy" draggable="false" />
+							</a>
+						) : (
+							<span title={item.company} class="logo-link inline-flex rounded-sm p-1">
+								<img src={item.logo.src} alt={item.logo.alt} class="alumni-logo" style={`--s:${item.logo.size}`} loading="lazy" draggable="false" />
+							</span>
+						)}
 					</li>
 				))}
 			</ul>
