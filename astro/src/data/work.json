@@ -1,11 +1,11 @@
 {
 	"categories": [
 		{
-			"name": "Data & Engineering",
-			"slug": "data-engineering",
+			"name": "Data, Product & Development",
+			"slug": "data-product-development",
 			"image": {
 				"src": "/media/work/data-engineering-thumb.webp",
-				"alt": "Data & Engineering illustration",
+				"alt": "Data, Product & Development illustration",
 				"width": 1280,
 				"height": 720,
 				"wideSrc": "/media/work/data-engineering-thumb-wide.webp"
