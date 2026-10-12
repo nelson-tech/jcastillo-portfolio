@@ -61,13 +61,13 @@ const { page, caseStudies, stack, agents, career, links } = systemsData
 				))}
 			</div>
 		</div>
-		<div id="links" class="mb-8 flex flex-wrap justify-center gap-8 text-xl font-bold">
+		{links.length > 0 && (<div id="links" class="mb-8 flex flex-wrap justify-center gap-8 text-xl font-bold">
 			{links.map((link) => (
 				<a href={link.url} target="_blank" rel="noopener">
 					{link.label}
 				</a>
 			))}
-		</div>
+		</div>)}
 	</div>
 </Layout>
 
