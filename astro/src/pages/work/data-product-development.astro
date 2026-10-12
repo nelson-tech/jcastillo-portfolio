@@ -98,7 +98,7 @@ const { page, caseStudies, stack, agents, career, links } = dataEngineering
 		</div>
 		<div id="career" class="border-rule mb-8 border-t pt-12 pb-8">
 			{career.header && <h2 class="text-highlight mb-8 w-full text-center text-4xl font-bold">{career.header}</h2>}
-			<div class="mx-auto grid max-w-4xl grid-cols-1 gap-8 text-center md:grid-cols-2">
+			<div class="mx-auto grid max-w-4xl grid-cols-1 gap-8 text-center md:grid-cols-2 md:[&>*:last-child:nth-child(odd)]:col-span-2 md:[&>*:last-child:nth-child(odd)]:mx-auto md:[&>*:last-child:nth-child(odd)]:max-w-md">
 				{career.items.map((item) => (
 					<div>
 						<div class="mb-4 flex h-10 items-center justify-center">
