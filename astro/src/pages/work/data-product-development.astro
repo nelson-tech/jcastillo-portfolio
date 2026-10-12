@@ -70,7 +70,7 @@ const { page, caseStudies, stack, agents, career, links } = dataEngineering
 			{agents.header && <h2 class="text-highlight mb-8 w-full text-center text-4xl font-bold">{agents.header}</h2>}
 			<p class="mx-auto max-w-2xl text-center text-xl leading-loose tracking-wider text-gray-700">{agents.text}</p>
 			<ul class="agent-tools mx-auto mt-8 grid max-w-2xl grid-cols-2 justify-items-center gap-x-8 gap-y-4 sm:flex sm:flex-wrap sm:justify-center tracking-wider">
-				{["Claude Code", "Cursor", "ChatGPT", "Grok Bot", "Muse"].map((name) => {
+				{["Claude Code", "Cursor", "ChatGPT", "Grok Bot", "Muse Spark"].map((name) => {
 					const meta = stackMeta[name]
 					const ic = meta.icons[0]
 					return (
