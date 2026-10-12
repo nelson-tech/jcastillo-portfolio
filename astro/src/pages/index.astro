@@ -7,7 +7,7 @@ import Layout from "@layouts/Layout.astro"
 	<div class="flex items-center justify-center">
 		<a href="/about" title="About me">
 			<!-- LCP: capped at 60vh tall, ~1:1 aspect -->
-			<Picture src="/Jose Alejandro_low res.png" class="max-h-[60vh] object-contain" sizes="(min-width: 768px) 57vh, 100vw" priority fitHeight />
+			<Picture src="/Jose Alejandro_low res.png" class="max-h-[60vh] object-contain" sizes="(min-width: 768px) 57vh, 100vw" priority fitHeight style="height:min(60vh, calc(100vw * 1076 / 1024))" />
 		</a>
 	</div>
 </Layout>
