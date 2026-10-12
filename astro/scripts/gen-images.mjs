@@ -28,6 +28,11 @@ const SETTINGS = JSON.stringify({ v: 1, WIDTHS, AVIF, WEBP })
 const RASTER = new Set([".jpg", ".jpeg", ".png", ".webp", ".tif", ".tiff"])
 // Recorded for width/height only: SVGs are already small, and GIFs are animated.
 const SIZE_ONLY = new Set([".svg", ".gif"])
+// Photography lightbox: one larger, higher-quality AVIF per photo (long edge <= 2000, never upscaled).
+const LIGHTBOX = { long: 2000, avif: { quality: 72, effort: 4, chromaSubsampling: "4:2:0" } }
+const LIGHTBOX_SRCS = new Set(
+	(JSON.parse(await readFile(path.join(root, "src/data/work/photography.json"), "utf8")).images ?? []).map((i) => i.src)
+)
 const EXTRA = ["Jose Alejandro_low res.png", "Jose Castillo logo.png"]
 
 async function walk(dir) {
@@ -98,6 +103,18 @@ async function processFile(file, previous, written) {
 					? img.avif({ ...AVIF, chromaSubsampling: isPhoto ? "4:2:0" : "4:4:4" })
 					: img.webp(WEBP)
 			await encoded.toFile(cached)
+			await copyFile(cached, out)
+		}
+	}
+	if (LIGHTBOX_SRCS.has(toUrl(file))) {
+		const scale = Math.min(1, LIGHTBOX.long / Math.max(entry.width, entry.height))
+		const lw = Math.round(entry.width * scale), lh = Math.round(entry.height * scale)
+		const name = `${base}-lb${LIGHTBOX.long}q${LIGHTBOX.avif.quality}.avif`
+		written.add(name)
+		result.lightbox = { src: `/media-opt/${name}`, width: lw, height: lh }
+		const out = path.join(outDir, name), cached = path.join(cacheDir, name)
+		if (!existsSync(out)) {
+			if (!existsSync(cached)) await sharp(buffer).rotate().resize({ width: lw, height: lh, fit: "inside", withoutEnlargement: true }).avif(LIGHTBOX.avif).toFile(cached)
 			await copyFile(cached, out)
 		}
 	}
