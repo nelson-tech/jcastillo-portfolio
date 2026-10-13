@@ -187,13 +187,15 @@ const synthNote = "Recreated with synthetic data to protect confidential informa
 		}
 		const current = (car) => {
 			const t = car.querySelector(".sc-track")
-			return Math.round(t.scrollLeft / t.clientWidth)
+			if (!t.clientWidth) return 0
+			return Math.max(0, Math.min(t.children.length - 1, Math.round(t.scrollLeft / t.clientWidth)))
 		}
 		document.querySelectorAll(".sc-carousel").forEach((car) => {
 			const track = car.querySelector(".sc-track")
 			const dots = [...car.querySelectorAll(".sc-dot")]
 			const arrows = car.querySelectorAll(".sc-arrow")
 			const sync = () => {
+				if (!track.isConnected || !track.clientWidth) return
 				const i = current(car)
 				dots.forEach((d, j) => d.setAttribute("aria-current", String(j === i)))
 				// Track follows the visible slide's height so short slides don't leave a gap under them.
