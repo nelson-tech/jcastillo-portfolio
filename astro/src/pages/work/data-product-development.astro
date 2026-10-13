@@ -64,11 +64,11 @@ const synthNote = "Recreated with synthetic data to protect confidential informa
 		</div>
 		<div id="showcase" class="border-rule mb-8 border-t pt-12 pb-8">
 			<div class="mx-auto flex max-w-5xl flex-col gap-10">
-				{showcase.map((item) => (
+				{showcase.map((item, i) => (
 					<figure class="synth border-rule border" tabindex="0">
 						<picture>
-							<source media="(max-width: 700px)" srcset={`/media/showcase/${item.slug}-390.webp`} width="780" height={item.mh} />
-							<img src={`/media/showcase/${item.slug}-1440.webp`} loading="lazy" decoding="async" width="2880" height={item.h} alt={`${item.label}. ${synthNote}`} class="block h-auto w-full" />
+							<source media="(max-width: 700px)" srcset={i === 0 ? `/media/showcase/${item.slug}-390-1x.webp 1x, /media/showcase/${item.slug}-390.webp 2x` : `/media/showcase/${item.slug}-390.webp`} width="780" height={item.mh} />
+							<img src={`/media/showcase/${item.slug}-1440.webp`} loading={i === 0 ? "eager" : "lazy"} decoding="async" fetchpriority={i === 0 ? "high" : undefined} width="2880" height={item.h} alt={`${item.label}. ${synthNote}`} class="block h-auto w-full" />
 						</picture>
 						<span class="synth-note" aria-hidden="true">{synthNote}</span>
 					</figure>
