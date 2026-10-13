@@ -7,6 +7,8 @@ import { dataEngineering } from "@lib/content"
 import { stackMeta } from "@lib/stack"
 import StackPill from "@components/StackPill.astro"
 const { page, caseStudies, stack, agents, career, links } = dataEngineering
+const showcase = [{"slug": "label-performance", "label": "Label performance dashboard", "h": 1800, "mh": 1688}, {"slug": "market-share", "label": "Market share dashboard", "h": 1800, "mh": 1688}, {"slug": "kpi-funnel", "label": "KPI funnel dashboard", "h": 1822, "mh": 3016}, {"slug": "plan-revenue", "label": "Plan revenue dashboard", "h": 1800, "mh": 1688}, {"slug": "creator-cohorts", "label": "Creator cohorts dashboard", "h": 1980, "mh": 2258}]
+const synthNote = "Recreated with synthetic data to protect confidential information."
 ---
 
 <Layout title={page.title ?? "Data, Product & Development"}>
@@ -57,6 +59,19 @@ const { page, caseStudies, stack, agents, career, links } = dataEngineering
 							</section>
 						</div>
 					</div>
+				))}
+			</div>
+		</div>
+		<div id="showcase" class="border-rule mb-8 border-t pt-12 pb-8">
+			<div class="mx-auto flex max-w-5xl flex-col gap-10">
+				{showcase.map((item) => (
+					<figure class="synth border-rule border" tabindex="0">
+						<picture>
+							<source media="(max-width: 700px)" srcset={`/media/showcase/${item.slug}-390.webp`} width="780" height={item.mh} />
+							<img src={`/media/showcase/${item.slug}-1440.webp`} loading="lazy" decoding="async" width="2880" height={item.h} alt={`${item.label}. ${synthNote}`} class="block h-auto w-full" />
+						</picture>
+						<span class="synth-note" aria-hidden="true">{synthNote}</span>
+					</figure>
 				))}
 			</div>
 		</div>
@@ -150,12 +165,50 @@ const { page, caseStudies, stack, agents, career, links } = dataEngineering
 			}
 		})
 	})()
+	;(() => {
+		document.querySelectorAll(".synth.is-open").forEach((f) => f.classList.remove("is-open"))
+		if (window.__synthNotes) return
+		window.__synthNotes = true
+		document.addEventListener("click", (event) => {
+			const fig = event.target.closest && event.target.closest(".synth")
+			document.querySelectorAll(".synth.is-open").forEach((f) => { if (f !== fig) f.classList.remove("is-open") })
+			if (fig) fig.classList.toggle("is-open")
+		})
+	})()
 </script>
 </Layout>
 
 
 
 <style>
+	.synth {
+		position: relative;
+		-webkit-tap-highlight-color: transparent;
+		outline-offset: 3px;
+	}
+	.synth:focus { outline: none; }
+	.synth:focus-visible { outline: 2px solid #6b7176; outline-offset: 4px; }
+	.synth-note {
+		position: absolute;
+		right: 12px;
+		bottom: 12px;
+		max-width: calc(100% - 24px);
+		box-sizing: border-box;
+		font: 12px/1.35 basic-sans, system-ui, sans-serif;
+		color: rgb(22 25 28 / 0.7);
+		background: rgb(245 243 238 / 0.9);
+		border: 1px solid #dedad2;
+		border-radius: 4px;
+		padding: 4px 8px;
+		opacity: 0;
+		transition: opacity 150ms ease;
+		pointer-events: none;
+	}
+	.synth:hover .synth-note,
+	.synth:focus-visible .synth-note,
+	.synth:focus-within .synth-note,
+	.synth.is-open .synth-note { opacity: 1; }
+	@media (prefers-reduced-motion: reduce) { .synth-note { transition: none; } }
 	.case-toggle {
 		@apply text-highlight rounded-sm text-base underline-offset-4 hover:underline;
 	}
