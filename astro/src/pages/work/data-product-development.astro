@@ -63,9 +63,12 @@ const synthNote = "Recreated with synthetic data to protect confidential informa
 			</div>
 		</div>
 		<div id="showcase" class="border-rule mb-8 border-t pt-12 pb-8">
-			<div class="mx-auto flex max-w-5xl flex-col gap-10">
+			<h2 class="text-highlight mb-2 w-full text-center text-4xl font-bold">Business Intelligence</h2>
+			<p class="text-stone mb-8 text-center text-base tracking-wider">Sample dashboards · synthetic data</p>
+			<div class="sc-carousel mx-auto max-w-5xl" role="region" aria-roledescription="carousel" aria-label="Dashboard showcase">
+				<div class="sc-track" tabindex="-1">
 				{showcase.map((item, i) => (
-					<figure class="synth border-rule border" tabindex="0">
+					<figure class="synth sc-slide border-rule border" tabindex="0" role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${showcase.length}: ${item.label}`}>
 						<picture>
 							<source media="(max-width: 700px)" srcset={i === 0 ? `/media/showcase/${item.slug}-390-1x.webp 1x, /media/showcase/${item.slug}-390.webp 2x` : `/media/showcase/${item.slug}-390.webp`} width="780" height={item.mh} />
 							<img src={`/media/showcase/${item.slug}-1440.webp`} loading={i === 0 ? "eager" : "lazy"} decoding="async" fetchpriority={i === 0 ? "high" : undefined} width="2880" height={item.h} alt={`${item.label}. ${synthNote}`} class="block h-auto w-full" />
@@ -73,6 +76,16 @@ const synthNote = "Recreated with synthetic data to protect confidential informa
 						<span class="synth-note" aria-hidden="true">{synthNote}</span>
 					</figure>
 				))}
+				</div>
+				<div class="sc-controls">
+					<button type="button" class="sc-arrow" data-dir="-1" aria-label="Previous slide">&#8592;</button>
+					<div class="sc-dots">
+						{showcase.map((item, i) => (
+							<button type="button" class="sc-dot" data-i={i} aria-label={`Show slide ${i + 1}: ${item.label}`} aria-current={i === 0 ? "true" : "false"}></button>
+						))}
+					</div>
+					<button type="button" class="sc-arrow" data-dir="1" aria-label="Next slide">&#8594;</button>
+				</div>
 			</div>
 		</div>
 		<div id="stack" class="border-rule mb-8 border-t pt-12 pb-8">
@@ -166,6 +179,66 @@ const synthNote = "Recreated with synthetic data to protect confidential informa
 		})
 	})()
 	;(() => {
+		const go = (car, i) => {
+			const track = car.querySelector(".sc-track")
+			const slides = track.children
+			i = Math.max(0, Math.min(slides.length - 1, i))
+			track.scrollTo({ left: slides[i].offsetLeft - track.offsetLeft, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" })
+		}
+		const current = (car) => {
+			const t = car.querySelector(".sc-track")
+			if (!t.clientWidth) return 0
+			return Math.max(0, Math.min(t.children.length - 1, Math.round(t.scrollLeft / t.clientWidth)))
+		}
+		document.querySelectorAll(".sc-carousel").forEach((car) => {
+			const track = car.querySelector(".sc-track")
+			const dots = [...car.querySelectorAll(".sc-dot")]
+			const arrows = car.querySelectorAll(".sc-arrow")
+			const sync = () => {
+				if (!track.isConnected || !track.clientWidth) return
+				const i = current(car)
+				dots.forEach((d, j) => d.setAttribute("aria-current", String(j === i)))
+				// Track follows the visible slide's height so short slides don't leave a gap under them.
+				// Never move the page: pin scrollY across the height change (no scroll anchoring jump).
+				const y = window.scrollY
+				track.style.height = track.children[i].offsetHeight + "px"
+				// Scroll anchoring can still nudge the page while the height animates; hold it for the transition.
+				const until = performance.now() + 300
+				const pin = () => {
+					if (window.scrollY !== y) window.scrollTo(0, y)
+					if (performance.now() < until) requestAnimationFrame(pin)
+				}
+				pin()
+				arrows[0].disabled = i === 0
+				arrows[1].disabled = i === dots.length - 1
+			}
+			let raf
+			track.addEventListener("scroll", () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(sync) }, { passive: true })
+			sync()
+			if (window.ResizeObserver) new ResizeObserver(sync).observe(track.children[0])
+		})
+		if (window.__scCarousel) return
+		window.__scCarousel = true
+		document.addEventListener("click", (event) => {
+			const car = event.target.closest && event.target.closest(".sc-carousel")
+			if (!car) return
+			const arrow = event.target.closest(".sc-arrow")
+			const dot = event.target.closest(".sc-dot")
+			if (arrow) go(car, current(car) + Number(arrow.dataset.dir))
+			else if (dot) go(car, Number(dot.dataset.i))
+		})
+		document.addEventListener("keydown", (event) => {
+			if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return
+			const car = event.target.closest && event.target.closest(".sc-carousel")
+			if (!car) return
+			event.preventDefault()
+			const i = current(car) + (event.key === "ArrowRight" ? 1 : -1)
+			go(car, i)
+			const slide = car.querySelector(".sc-track").children[Math.max(0, Math.min(4, i))]
+			if (event.target.classList.contains("sc-slide")) slide.focus({ preventScroll: true })
+		})
+	})()
+	;(() => {
 		document.querySelectorAll(".synth.is-open").forEach((f) => f.classList.remove("is-open"))
 		if (window.__synthNotes) return
 		window.__synthNotes = true
@@ -209,6 +282,40 @@ const synthNote = "Recreated with synthetic data to protect confidential informa
 	.synth:focus-within .synth-note,
 	.synth.is-open .synth-note { opacity: 1; }
 	@media (prefers-reduced-motion: reduce) { .synth-note { transition: none; } }
+	.sc-track {
+		overflow-anchor: none;
+		display: flex;
+		align-items: flex-start;
+		gap: 16px;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		overscroll-behavior-x: contain;
+		scrollbar-width: none;
+		-webkit-overflow-scrolling: touch;
+		transition: height 200ms ease;
+	}
+	.sc-track::-webkit-scrollbar { display: none; }
+	.sc-slide:focus-visible { outline-offset: -2px; }
+	.sc-slide { flex: 0 0 100%; scroll-snap-align: start; scroll-snap-stop: always; margin: 0; }
+	.sc-controls { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 16px; }
+	.sc-arrow {
+		width: 32px; height: 32px; border: 1px solid #dedad2; border-radius: 4px; background: transparent;
+		color: #16191c; font-size: 14px; line-height: 1; -webkit-tap-highlight-color: transparent;
+		transition: border-color 150ms ease;
+	}
+	.sc-arrow:hover:not(:disabled) { border-color: #6b7176; }
+	.sc-arrow:disabled { opacity: 0.35; cursor: default; }
+	.sc-dots { display: flex; gap: 4px; }
+	.sc-dot {
+		width: 24px; height: 24px; padding: 0; border: 0; background: transparent; position: relative;
+		-webkit-tap-highlight-color: transparent;
+	}
+	.sc-dot::after {
+		content: ""; position: absolute; inset: 8px; border-radius: 50%; border: 1px solid #dedad2; background: transparent;
+		transition: background-color 150ms ease;
+	}
+	.sc-dot[aria-current="true"]::after { background: #16191c; border-color: #16191c; }
+	@media (prefers-reduced-motion: reduce) { .sc-track, .sc-arrow, .sc-dot::after { transition: none; } }
 	.case-toggle {
 		@apply text-highlight rounded-sm text-base underline-offset-4 hover:underline;
 	}
