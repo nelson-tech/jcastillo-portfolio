@@ -199,7 +199,16 @@ const synthNote = "Recreated with synthetic data to protect confidential informa
 				const i = current(car)
 				dots.forEach((d, j) => d.setAttribute("aria-current", String(j === i)))
 				// Track follows the visible slide's height so short slides don't leave a gap under them.
+				// Never move the page: pin scrollY across the height change (no scroll anchoring jump).
+				const y = window.scrollY
 				track.style.height = track.children[i].offsetHeight + "px"
+				// Scroll anchoring can still nudge the page while the height animates; hold it for the transition.
+				const until = performance.now() + 300
+				const pin = () => {
+					if (window.scrollY !== y) window.scrollTo(0, y)
+					if (performance.now() < until) requestAnimationFrame(pin)
+				}
+				pin()
 				arrows[0].disabled = i === 0
 				arrows[1].disabled = i === dots.length - 1
 			}
@@ -274,6 +283,7 @@ const synthNote = "Recreated with synthetic data to protect confidential informa
 	.synth.is-open .synth-note { opacity: 1; }
 	@media (prefers-reduced-motion: reduce) { .synth-note { transition: none; } }
 	.sc-track {
+		overflow-anchor: none;
 		display: flex;
 		align-items: flex-start;
 		gap: 16px;
