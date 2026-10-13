@@ -21,7 +21,7 @@ import { about as aboutData } from "@lib/content"
 		>
 			<div
 				set:html={aboutData.content}
-				class="[&>h2]:mb-4 [&>h2]:text-4xl [&>h2]:font-bold [&>p]:text-xl"
+				class="[&>h2]:mb-4 [&>h2]:text-4xl max-md:[&>h2]:text-[length:clamp(20px,calc(10.4vw_-_15.6px),36px)] [&>h2]:font-bold [&>p]:text-xl"
 			/>
 			{
 				aboutData.resume && (
