@@ -107,7 +107,7 @@
 				"logo": {
 					"src": "/media/logos/juega-sapo.webp",
 					"alt": "Juega Sapo",
-					"size": "h-24 md:h-44",
+					"size": "h-20 md:h-40",
 					"slug": "juega-sapo"
 				},
 				"link": "https://juegasapo.com",
