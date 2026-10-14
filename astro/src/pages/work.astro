@@ -1,17 +1,15 @@
 ---
-import JustifiedGallery from "@components/JustifiedGallery.astro"
+import ProjectCard from "@components/ProjectCard.astro"
 import Layout from "@layouts/Layout.astro"
 import { work } from "@lib/content"
 
 const { categories } = work
-const tile = (c: (typeof categories)[number]) => ({ ...c.image, title: c.name, href: `/work/${c.slug}` })
-const heroCategory = categories.find((c) => c.wide)
-const hero = heroCategory && tile(heroCategory)
-const items = categories.filter((c) => c !== heroCategory).map(tile)
 ---
 
 <Layout title="Work">
-	<div class="mx-4 md:mt-8">
-		<JustifiedGallery items={items} hero={hero} priority />
+	<div class="mx-4 grid grid-cols-1 overflow-hidden rounded md:mt-8 md:grid-cols-2">
+		{
+			categories.map((category) => <ProjectCard category={category} />)
+		}
 	</div>
 </Layout>
