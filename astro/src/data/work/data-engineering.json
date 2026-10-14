@@ -131,6 +131,34 @@
 				"results": [
 					"On a phone, the page went from 17.2 s to 2.9 s to look complete, with the main content appearing in 1.1 s."
 				]
+			},
+			{
+				"name": "Somx",
+				"logo": {
+					"src": "/media/logos/somx-wordmark-light.svg",
+					"alt": "Somx",
+					"size": "h-9 md:h-[4.5rem]",
+					"slug": "somx"
+				},
+				"link": "https://somxhealth.com",
+				"summary": "Somx is a recordkeeping aid for anesthesia controlled-substance logs. I designed and built it as a clickable demo that runs on synthetic charts.",
+				"note": "Demo only. It has never been used with real patient data and is not a certified compliance tool.",
+				"problem": "Anesthesia providers log controlled-substance doses and waste by hand on paper charts. At the end of the day, someone has to match those handwritten records against what was dispensed.",
+				"built": [
+					"A chart reader that turns a chart image into draft log entries and marks how sure it is about each field. If it isn't sure, it leaves the field blank and highlights it in amber instead of guessing. The provider reviews and signs every entry before it counts.",
+					"The demo at somxhealth.com covers chart review and sign-off, witnessed waste, end-of-day reconciliation with CSV and PDF export, a printable records view and an audit trail, all on synthetic charts.",
+					"Automated checks run on every change: linting, unit tests for the ledger math and chart-reading rules, a production build and click-through tests."
+				],
+				"stack": [
+					"Next.js",
+					"TypeScript",
+					"Gemini",
+					"Python",
+					"Vercel",
+					"Vitest",
+					"Playwright"
+				],
+				"results": []
 			}
 		]
 	},

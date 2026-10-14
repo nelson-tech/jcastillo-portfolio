@@ -87,7 +87,7 @@ const tileSizes = (t: { ar: number }, row: number[]) => {
 </div>
 
 <style>
-	.jg { overflow: hidden; border-radius: 0.25rem; }
+	.jg { overflow: hidden; }
 	.jg-row { display: flex; }
 	.jg-tile {
 		position: relative;
@@ -133,7 +133,7 @@ const tileSizes = (t: { ar: number }, row: number[]) => {
 	.jg-tile:has(.jg-scrim):hover :global(img) { filter: grayscale(1); }
 	@media (max-width: 640px) {
 		/* Edge to edge: cancel the page's mx-4 gutter. */
-		.jg { border-radius: 0; margin-inline: -1rem; }
+		.jg { margin-inline: -1rem; }
 		.jg-row { display: block; }
 		.jg-hero { aspect-ratio: var(--ar-m); }
 	}

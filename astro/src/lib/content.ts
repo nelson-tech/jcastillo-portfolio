@@ -152,6 +152,7 @@ export const dataEngineering = z
 					logo: z.object({ src: mediaPath, alt: z.string(), size: z.string(), scale: z.number().optional(), slug: z.string() }),
 					link: z.string().url(),
 					summary: z.string(),
+					note: z.string().optional(),
 					problem: text,
 					built: z.array(z.string()),
 					stack: z.array(z.string()),

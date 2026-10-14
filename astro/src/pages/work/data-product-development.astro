@@ -23,7 +23,7 @@ const synthNote = "Illustrative visual recreated with synthetic data to protect 
 		{page.header && <PageHeader header={page.header} description={page.description} />}
 		<script is:inline>document.documentElement.classList.add("js")</script>
 		<div id="case-studies" class="mb-8 mt-8 pb-8">
-			<!-- Two rows of two: logo links to the live site; the toggle under it opens that case study below (one open at a time) -->
+			<!-- Rows of two, then the fifth centred: logo links to the live site; the toggle under it opens that case study below (one open at a time) -->
 			<div class="mx-auto flex max-w-5xl flex-col items-center gap-y-6 py-6 md:gap-y-10">
 				<div class="flex flex-nowrap items-start justify-center gap-x-5 md:gap-x-20">
 					{caseStudies.items.slice(0, 2).map((study) => (
@@ -53,6 +53,20 @@ const synthNote = "Illustrative visual recreated with synthetic data to protect 
 						</div>
 					))}
 				</div>
+				<div class="flex flex-nowrap items-start justify-center gap-x-5 md:gap-x-20">
+					{caseStudies.items.slice(4).map((study) => (
+						<div class="flex flex-col items-center gap-2">
+							<div class="flex h-[88px] items-center md:h-[176px]">
+							<a href={study.link} target="_blank" rel="noopener" title={`${study.name} (opens in a new tab)`} class="logo-link group inline-flex items-center rounded-sm p-1 md:p-2">
+								<Picture src={study.logo.src} alt={study.logo.alt} style={`--s:${study.logo.scale ?? 1}`} class={`case-logo ${study.logo.size} w-auto max-w-full object-contain opacity-90 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-100`} />
+							</a>
+							</div>
+							<button type="button" class="case-toggle" aria-expanded="false" aria-controls={`case-${study.logo.slug}`} data-case={study.logo.slug}>
+								Case study <span class="sign" aria-hidden="true">+</span>
+							</button>
+						</div>
+					))}
+				</div>
 			</div>
 			<div class="mx-auto max-w-3xl">
 				{caseStudies.items.map((study) => (
@@ -61,10 +75,11 @@ const synthNote = "Illustrative visual recreated with synthetic data to protect 
 							<section class="case-study border-rule border-t py-8 text-lg">
 								<h3 class="text-highlight !mt-0 text-2xl font-bold">{study.name}</h3>
 								<p class="text-stone mt-2">{study.summary}</p>
+								{study.note && <p class="text-stone mt-2 text-base italic">{study.note}</p>}
 								{study.problem && (<><h4>Problem</h4><p>{study.problem}</p></>)}
 								{study.built.length > 0 && (<><h4>Built</h4><ul>{study.built.map((item) => <li>{item}</li>)}</ul></>)}
 								{study.results.length > 0 && (<><h4>Results</h4><ul>{study.results.map((item) => <li>{item}</li>)}</ul></>)}
-								<div class="mt-6 flex flex-wrap gap-2">{study.stack.map((item) => <StackPill name={item} />)}</div>
+								<div class="mt-6 flex flex-wrap gap-1.5">{study.stack.map((item) => <StackPill name={item} />)}</div>
 							</section>
 						</div>
 					</div>
