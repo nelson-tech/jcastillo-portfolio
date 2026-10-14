@@ -88,7 +88,7 @@
           "logo": "/media/logos/publications/ipba.png",
           "w": 386,
           "h": 114,
-          "max": "max-h-7"
+          "s": 0.85
         },
         "label": "Conference Proceedings, Macao 2018"
       },
@@ -153,7 +153,7 @@
           "logo": "/media/logos/publications/jovrnalism.png",
           "w": 240,
           "h": 232,
-          "max": "max-h-10"
+          "s": 1.25
         },
         "label": "360° VR",
         "year": "2021"

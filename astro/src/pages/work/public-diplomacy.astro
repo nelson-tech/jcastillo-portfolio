@@ -1,4 +1,5 @@
 ---
+import CompanyLogo from "@components/CompanyLogo.astro"
 import PublicationCarousel from "@components/PublicationCarousel.svelte"
 import Picture from "@components/Picture.astro"
 import Layout from "@layouts/Layout.astro"
@@ -12,7 +13,7 @@ const { publications, writing, podcasts } = publicDiplomacy
 
 <Layout title="Public Diplomacy">
 	<div class="mx-4 mt-16 md:mx-8">
-		<div id="publications" class="border-highlight mb-8 border-b border-opacity-50 pb-8">
+		<div id="publications" class="border-rule mb-8 border-t pt-12 pb-8">
 			{
 				publications.header && (
 					<h2 class="text-highlight mb-8 w-full text-center text-4xl font-bold">{publications.header}</h2>
@@ -25,27 +26,14 @@ const { publications, writing, podcasts } = publicDiplomacy
 				/>
 			</div>
 		</div>
-		<section id="writing" class="border-highlight mb-8 border-b border-opacity-50 pb-8">
+		<section id="writing" class="border-rule mb-8 border-t pt-12 pb-8">
 			<h2 class="text-highlight mb-8 w-full text-center text-4xl font-bold">{writing.header}</h2>
 			<ul class="mx-auto max-w-2xl">
 				{writing.items.map((item) => (
 					<li class="border-rule flex items-center gap-6 border-t py-5 first:border-t-0">
-						<a
-							href={item.publisher.url}
-							target="_blank"
-							rel="noopener"
-							aria-label={item.publisher.name}
-							class="flex h-12 w-20 shrink-0 md:w-28 items-center justify-center"
-						>
-							<Picture
-								src={item.publisher.logo}
-								alt={item.publisher.name}
-								width={item.publisher.w}
-								height={item.publisher.h}
-								class={`${item.publisher.max ?? "max-h-12"} w-auto max-w-full object-contain`}
-								sizes="224px"
-							/>
-						</a>
+						<div class="flex w-24 shrink-0 justify-center md:w-36">
+							<CompanyLogo src={item.publisher.logo} alt={item.publisher.name} href={item.publisher.url} width={item.publisher.w} height={item.publisher.h} scale={item.publisher.s ?? 1} />
+						</div>
 						<div>
 							<a href={item.link} target="_blank" rel="noopener" class="text-lg font-bold underline-offset-4 hover:underline">
 								{item.title}
@@ -58,7 +46,7 @@ const { publications, writing, podcasts } = publicDiplomacy
 				))}
 			</ul>
 		</section>
-		<div id="podcasts">
+		<div id="podcasts" class="border-rule mb-8 border-t pt-12 pb-8">
 			<h2 class="text-highlight mb-8 w-full text-center text-4xl font-bold">Podcasts</h2>
 			<div class="flex flex-wrap">
 				{podcasts.items.map((podcast) => (

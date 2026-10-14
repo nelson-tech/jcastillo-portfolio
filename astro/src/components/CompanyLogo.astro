@@ -1,0 +1,38 @@
+---
+// Shared company/publisher logo: one fixed box for every logo, with --s as the per-logo optical-weight correction.
+// Always opens the company site in a new tab with rel="noopener" when a link is given.
+import Picture from "@components/Picture.astro"
+
+interface Props {
+	src: string
+	alt: string
+	href?: string
+	title?: string
+	scale?: number | string
+	width?: number
+	height?: number
+}
+const { src, alt, href, title, scale = 1, width, height } = Astro.props
+---
+
+{href ? (
+	<a href={href} target="_blank" rel="noopener" title={title ?? `${alt} (opens in a new tab)`} class="logo-link inline-flex rounded-sm p-1">
+		<Picture src={src} alt={alt} width={width} height={height} class="company-logo" style={`--s:${scale}`} draggable="false" sizes="136px" />
+	</a>
+) : (
+	<span title={title ?? alt} class="logo-link inline-flex rounded-sm p-1">
+		<Picture src={src} alt={alt} width={width} height={height} class="company-logo" style={`--s:${scale}`} draggable="false" sizes="136px" />
+	</span>
+)}
+
+<style>
+	:global(.company-logo) {
+		height: 2.5rem;
+		width: 8.5rem;
+		object-fit: contain;
+		transform: scale(var(--s, 1));
+	}
+	@media (max-width: 767px) {
+		:global(.company-logo) { height: 2rem; width: 6rem; transform: scale(min(var(--s, 1), 1.15)); }
+	}
+</style>
