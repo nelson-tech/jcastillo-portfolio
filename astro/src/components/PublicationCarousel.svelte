@@ -59,7 +59,7 @@
 						src={publication.image.src}
 						alt={publication.label}
 						info={publication.image.info}
-						class="relative rounded object-contain transition-all duration-500 group-hover:grayscale"
+						class="relative rounded object-contain"
 					/>
 					<!-- <div
             class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-80 transition-all flex justify-center items-center duration-500"
