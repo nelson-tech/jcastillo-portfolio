@@ -8,6 +8,7 @@ import { stackMeta } from "@lib/stack"
 import StackPill from "@components/StackPill.astro"
 import CompanyLogo from "@components/CompanyLogo.astro"
 import PublicationCarousel from "@components/PublicationCarousel.svelte"
+import SynthNote from "@components/SynthNote.svelte"
 const { page, caseStudies, stack, agents, career, links } = dataEngineering
 const showcase = [{"slug": "royalties", "label": "Royalty statements overview", "h": 3922, "mh": 4895}, {"slug": "reels-boxplots", "label": "Music vs non-music reels box plots", "h": 2076, "mh": 3870}, {"slug": "kpi-funnel", "label": "KPI funnel dashboard", "h": 1822, "mh": 3016}, {"slug": "label-performance", "label": "Label performance dashboard", "h": 1487, "mh": 2275}, {"slug": "creator-cohorts", "label": "Creator cohorts dashboard", "h": 1980, "mh": 2258}, {"slug": "market-share", "label": "Market share dashboard", "h": 1341, "mh": 1152}, {"slug": "plan-revenue", "label": "Plan revenue dashboard", "h": 1385, "mh": 1190}]
 const studies = [
@@ -96,7 +97,7 @@ const synthNote = "Recreated with synthetic data to protect confidential informa
 									</picture>
 								</template>
 								<noscript><img src={`/media/showcase/${study.slug}-1440.webp`} loading="lazy" width="2880" height={study.h} alt={`${study.title}${/[.?!]$/.test(study.title) ? "" : "."} ${synthNote}`} class="block h-auto w-full" /></noscript>
-								<span class="synth-note" aria-hidden="true">{synthNote}</span>
+								<SynthNote note={synthNote} />
 							</figure>
 						</div>
 					</div>
@@ -210,21 +211,6 @@ const synthNote = "Recreated with synthetic data to protect confidential informa
 
 
 <style>
-	/* Synthetic-data pill: same spec as the carousel slides (PublicationCarousel) */
-	.synth { position: relative; margin: 0; -webkit-tap-highlight-color: transparent; outline-offset: 3px; }
-	.synth:focus { outline: none; }
-	.synth:focus-visible { outline: 2px solid #6b7176; outline-offset: 4px; }
-	.synth-note {
-		position: absolute; right: 12px; bottom: 12px; max-width: calc(100% - 24px); box-sizing: border-box;
-		font: 12px/1.35 basic-sans, system-ui, sans-serif; color: rgb(22 25 28 / 0.7);
-		background: rgb(245 243 238 / 0.9); border: 1px solid #dedad2; border-radius: 4px; padding: 4px 8px;
-		opacity: 0; transition: opacity 150ms ease; pointer-events: none;
-	}
-	.synth:hover .synth-note,
-	.synth:focus-visible .synth-note,
-	.synth:focus-within .synth-note,
-	.synth.is-open .synth-note { opacity: 1; }
-	@media (prefers-reduced-motion: reduce) { .synth-note { transition: none; } }
 	/* Case-study logos stay large heroes; weight correction uses the same --s as CompanyLogo */
 	:global(.case-logo) { transform: scale(var(--s, 1)); }
 	.case-toggle {

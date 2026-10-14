@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Carousel from "svelte-carousel"
 	import Picture from "@components/Picture.svelte"
+	import SynthNote from "@components/SynthNote.svelte"
 	import type { ImageInfo } from "@lib/picture"
 
 	let carousel: any // for calling methods of the carousel instance
@@ -105,7 +106,7 @@
 						draggable="false"
 					/>
 				</picture>
-				<span class="synth-note" aria-hidden="true">{note}</span>
+				<SynthNote {note} />
 			</figure>
 		{/each}
 		{#each publications as publication, j}
@@ -158,21 +159,6 @@
 	@media (max-width: 700px) {
 		.pc :global(.sc-carousel__arrow-container) { align-items: flex-start; padding-top: var(--pc-arrow-top, 160px); }
 	}
-	/* Synthetic-data pill: same spec as the BI slides from #34/#36 */
-	.synth { position: relative; margin: 0; -webkit-tap-highlight-color: transparent; outline-offset: 3px; }
-	.synth:focus { outline: none; }
-	.synth:focus-visible { outline: 2px solid #6b7176; outline-offset: 4px; }
-	.synth-note {
-		position: absolute; right: 12px; bottom: 12px; max-width: calc(100% - 24px); box-sizing: border-box;
-		font: 12px/1.35 basic-sans, system-ui, sans-serif; color: rgb(22 25 28 / 0.7);
-		background: rgb(245 243 238 / 0.9); border: 1px solid #dedad2; border-radius: 4px; padding: 4px 8px;
-		opacity: 0; transition: opacity 150ms ease; pointer-events: none;
-	}
-	.synth:hover .synth-note,
-	.synth:focus-visible .synth-note,
-	.synth:focus-within .synth-note,
-	:global(.synth.is-open) .synth-note { opacity: 1; }
-	@media (prefers-reduced-motion: reduce) { .synth-note { transition: none; } }
 	:global(.sc-carousel-button) {
 		background-color: transparent !important;
 	}
