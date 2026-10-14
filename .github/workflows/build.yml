@@ -6,6 +6,22 @@ on:
     branches: [main]
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: astro
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          # ESLint 10 and the Astro parser need Node 20.19+; the build jobs stay on 18.
+          node-version: 22
+          cache: npm
+          cache-dependency-path: astro/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+
   astro:
     runs-on: ubuntu-latest
     defaults:
