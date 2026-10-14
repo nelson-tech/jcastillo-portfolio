@@ -45,5 +45,9 @@ export const stackMeta: Record<string, { href: string; icons: StackIcon[] }> = {
 	Resend: { href: "https://resend.com", icons: [b("resend", "#000000", "Resend")] },
 	"Tailwind CSS": { href: "https://tailwindcss.com", icons: [b("tailwindcss", "#06B6D4", "Tailwind CSS")] },
 	Shopify: { href: "https://www.shopify.com", icons: [b("shopify", "#7AB55C", "Shopify")] },
+	"Three.js": { href: "https://threejs.org", icons: [b("threedotjs", "#000000", "Three.js")] },
+	Rapier: { href: "https://rapier.rs", icons: [{ kind: "line", svg: lucide.box, color: "#2E6584", title: "Rapier" }] },
+	Vite: { href: "https://vite.dev", icons: [b("vite", "#646CFF", "Vite")] },
+	Blender: { href: "https://www.blender.org", icons: [b("blender", "#E87D0D", "Blender")] },
 	Sanity: { href: "https://www.sanity.io", icons: [b("sanity", "#0D0E12", "Sanity")] },
 }

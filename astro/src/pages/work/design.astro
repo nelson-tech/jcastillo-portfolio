@@ -1,10 +1,9 @@
 ---
 import PageHeader from "@components/PageHeader.astro"
 import Video from "@components/Video.astro"
-import Photograph from "@components/Photograph.svelte"
+import JustifiedGallery from "@components/JustifiedGallery.astro"
 import Layout from "@layouts/Layout.astro"
 import { imageInfo } from "@lib/images"
-import { withInfo } from "@lib/images"
 import { design } from "@lib/content"
 
 const { page, motionGraphics, graphicDesign } = design
@@ -36,19 +35,9 @@ const preload = thumbInfo
 			<div id="graphic_design" class="border-rule mb-8 border-t pt-12 pb-8 text-center">
 				{graphicDesign.header && <h2 class="text-highlight mb-8 w-full text-center text-4xl font-bold">{graphicDesign.header}</h2>}
 				{graphicDesign.description && <p class="mt-4 text-lg">{graphicDesign.description}</p>}
-				<div class="flush-grid mt-8 grid grid-cols-1 overflow-hidden rounded md:grid-cols-3">
-					{graphicDesign.images.map((image) => (
-						<div class="photo-tile">
-							<Photograph image={withInfo(image)} sizes="(min-width: 768px) 31vw, calc(100vw - 6rem)" client:visible />
-						</div>
-					))}
-				</div>
+				<div class="mt-8 text-left"><JustifiedGallery items={graphicDesign.images} /></div>
 			</div>
 		</div>
 	</div>
 </Layout>
 
-<style>
-	/* Flush grid (Work index pattern): uniform 4:3 tiles, no gutters */
-	.flush-grid :global(.photo-tile img.photo) { display: block; width: 100%; aspect-ratio: 4 / 3; height: auto; object-fit: cover; border-radius: 0; }
-</style>

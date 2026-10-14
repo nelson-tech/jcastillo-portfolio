@@ -1,8 +1,7 @@
 ---
 import PageHeader from "@components/PageHeader.astro"
-import Photograph from "@components/Photograph.svelte"
+import JustifiedGallery from "@components/JustifiedGallery.astro"
 import Layout from "@layouts/Layout.astro"
-import { withInfo } from "@lib/images"
 import { photography } from "@lib/content"
 ---
 
@@ -16,19 +15,9 @@ import { photography } from "@lib/content"
 
 		{
 			photography.images.length > 0 && (
-				<div class="flush-grid mt-8 grid grid-cols-1 overflow-hidden rounded md:grid-cols-3">
-					{photography.images.map((image, i) => (
-						<div class="photo-tile">
-							<Photograph image={withInfo(image)} priority={i === 0} client:visible />
-						</div>
-					))}
-				</div>
+				<div class="mt-8"><JustifiedGallery items={photography.images} priority /></div>
 			)
 		}
 	</div>
 </Layout>
 
-<style>
-	/* Flush grid (Work index pattern): uniform 4:3 tiles, no gutters */
-	.flush-grid :global(.photo-tile img.photo) { display: block; width: 100%; aspect-ratio: 4 / 3; height: auto; object-fit: cover; border-radius: 0; }
-</style>

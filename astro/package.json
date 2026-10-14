@@ -12,7 +12,8 @@
     "astro": "astro",
     "postbuild": "node scripts/inline-css.mjs",
     "test:nav": "node tests/nav.e2e.mjs",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:gallery": "node tests/justify.test.mjs"
   },
   "dependencies": {
     "@astrojs/node": "^5.1.1",
