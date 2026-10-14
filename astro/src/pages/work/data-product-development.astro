@@ -28,8 +28,8 @@ const synthNote = "Illustrative visual recreated with synthetic data to protect 
 				<div class="flex flex-nowrap items-start justify-center gap-x-5 md:gap-x-20">
 					{caseStudies.items.slice(0, 2).map((study) => (
 						<div class="flex flex-col items-center gap-2">
-							<div class="flex h-[88px] items-center md:h-[176px]">
-							<a href={study.link} target="_blank" rel="noopener" title={`${study.name} (opens in a new tab)`} class="logo-link group inline-flex items-center rounded-sm p-1 md:p-2">
+							<div class="flex h-[88px] items-end md:h-[176px]">
+							<a href={study.link} target="_blank" rel="noopener" title={`${study.name} (opens in a new tab)`} class="logo-link group inline-flex items-end rounded-sm p-1 pb-0 md:p-2 md:pb-0">
 								<Picture src={study.logo.src} alt={study.logo.alt} style={`--s:${study.logo.scale ?? 1}`} class={`case-logo ${study.logo.size} w-auto max-w-full object-contain opacity-90 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-100`} />
 							</a>
 							</div>
@@ -42,8 +42,8 @@ const synthNote = "Illustrative visual recreated with synthetic data to protect 
 				<div class="flex flex-nowrap items-start justify-center gap-x-5 md:gap-x-20">
 					{caseStudies.items.slice(2, 4).map((study) => (
 						<div class="flex flex-col items-center gap-2">
-							<div class="flex h-[104px] items-center md:h-[192px]">
-							<a href={study.link} target="_blank" rel="noopener" title={`${study.name} (opens in a new tab)`} class="logo-link group inline-flex items-center rounded-sm p-1 md:p-2">
+							<div class="flex h-[104px] items-end md:h-[192px]">
+							<a href={study.link} target="_blank" rel="noopener" title={`${study.name} (opens in a new tab)`} class="logo-link group inline-flex items-end rounded-sm p-1 pb-0 md:p-2 md:pb-0">
 								<Picture src={study.logo.src} alt={study.logo.alt} style={`--s:${study.logo.scale ?? 1}`} class={`case-logo ${study.logo.size} w-auto max-w-full object-contain opacity-90 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-100`} />
 							</a>
 							</div>
@@ -56,8 +56,8 @@ const synthNote = "Illustrative visual recreated with synthetic data to protect 
 				<div class="flex flex-nowrap items-start justify-center gap-x-5 md:gap-x-20">
 					{caseStudies.items.slice(4).map((study) => (
 						<div class="flex flex-col items-center gap-2">
-							<div class="flex h-[88px] items-center md:h-[176px]">
-							<a href={study.link} target="_blank" rel="noopener" title={`${study.name} (opens in a new tab)`} class="logo-link group inline-flex items-center rounded-sm p-1 md:p-2">
+							<div class="flex h-[88px] items-end md:h-[176px]">
+							<a href={study.link} target="_blank" rel="noopener" title={`${study.name} (opens in a new tab)`} class="logo-link group inline-flex items-end rounded-sm p-1 pb-0 md:p-2 md:pb-0">
 								<Picture src={study.logo.src} alt={study.logo.alt} style={`--s:${study.logo.scale ?? 1}`} class={`case-logo ${study.logo.size} w-auto max-w-full object-contain opacity-90 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-100`} />
 							</a>
 							</div>
@@ -227,7 +227,7 @@ const synthNote = "Illustrative visual recreated with synthetic data to protect 
 
 <style>
 	/* Case-study logos stay large heroes; weight correction uses the same --s as CompanyLogo */
-	:global(.case-logo) { transform: scale(var(--s, 1)); }
+	:global(.case-logo) { transform: scale(var(--s, 1)); transform-origin: bottom center; }
 	.case-toggle {
 		@apply text-highlight rounded-sm text-base underline-offset-4 hover:underline;
 	}
