@@ -8,8 +8,13 @@ import { stackMeta } from "@lib/stack"
 import StackPill from "@components/StackPill.astro"
 import CompanyLogo from "@components/CompanyLogo.astro"
 import PublicationCarousel from "@components/PublicationCarousel.svelte"
+import SynthNote from "@components/SynthNote.svelte"
 const { page, caseStudies, stack, agents, career, links } = dataEngineering
 const showcase = [{"slug": "royalties", "label": "Royalty statements overview", "h": 3922, "mh": 4895}, {"slug": "reels-boxplots", "label": "Music vs non-music reels box plots", "h": 2076, "mh": 3870}, {"slug": "kpi-funnel", "label": "KPI funnel dashboard", "h": 1822, "mh": 3016}, {"slug": "label-performance", "label": "Label performance dashboard", "h": 1487, "mh": 2275}, {"slug": "creator-cohorts", "label": "Creator cohorts dashboard", "h": 1980, "mh": 2258}, {"slug": "market-share", "label": "Market share dashboard", "h": 1341, "mh": 1152}, {"slug": "plan-revenue", "label": "Plan revenue dashboard", "h": 1385, "mh": 1190}]
+const studies = [
+	{ slug: "creator-churn", title: "What keeps creators subscribed?", summary: "A 12-month churn study of 6,000 new subscribers: sending a release to stores early was the strongest sign a creator stays.", h: 4318, mh: 7855 },
+	{ slug: "personas", title: "Eight kinds of subscribers", summary: "20,000 subscribers clustered into 8 behavior personas, compared on paid-feature use, monthly revenue and churn.", h: 2995, mh: 5566 }
+]
 const synthNote = "Recreated with synthetic data to protect confidential information."
 ---
 
@@ -61,6 +66,39 @@ const synthNote = "Recreated with synthetic data to protect confidential informa
 								{study.results.length > 0 && (<><h4>Results</h4><ul>{study.results.map((item) => <li>{item}</li>)}</ul></>)}
 								<div class="mt-6 flex flex-wrap gap-2">{study.stack.map((item) => <StackPill name={item} />)}</div>
 							</section>
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+		<div id="studies" class="border-rule mb-8 border-t pt-12 pb-8">
+			<h2 class="text-highlight mb-8 w-full text-center text-4xl font-bold">Case Studies</h2>
+			<p class="text-stone -mt-6 mb-8 text-center text-base tracking-wider">Analytics studies · synthetic data</p>
+			<ul class="mx-auto max-w-3xl">
+				{studies.map((study) => (
+					<li class="border-rule border-t py-5 first:border-t-0">
+						<h3 class="text-highlight text-2xl font-bold">{study.title}</h3>
+						<p class="text-stone mt-1 text-lg">{study.summary}</p>
+						<button type="button" class="case-toggle mt-2" aria-expanded="false" aria-controls={`case-${study.slug}`} data-case={study.slug}>
+							View study <span class="sign" aria-hidden="true">+</span>
+						</button>
+					</li>
+				))}
+			</ul>
+			<div class="mx-auto max-w-5xl">
+				{studies.map((study) => (
+					<div id={`case-${study.slug}`} class="case-panel" data-open="false" role="region" aria-label={study.title}>
+						<div class="case-inner">
+							<figure class="synth border-rule mt-4 border" tabindex="0">
+								<template data-defer>
+									<picture>
+										<source media="(max-width: 700px)" srcset={`/media/showcase/${study.slug}-390.webp`} width="780" height={study.mh} />
+										<img src={`/media/showcase/${study.slug}-1440.webp`} loading="lazy" decoding="async" width="2880" height={study.h} alt={`${study.title}${/[.?!]$/.test(study.title) ? "" : "."} ${synthNote}`} class="block h-auto w-full" />
+									</picture>
+								</template>
+								<noscript><img src={`/media/showcase/${study.slug}-1440.webp`} loading="lazy" width="2880" height={study.h} alt={`${study.title}${/[.?!]$/.test(study.title) ? "" : "."} ${synthNote}`} class="block h-auto w-full" /></noscript>
+								<SynthNote note={synthNote} />
+							</figure>
 						</div>
 					</div>
 				))}
@@ -127,6 +165,8 @@ const synthNote = "Recreated with synthetic data to protect confidential informa
 			const sign = btn.querySelector(".sign")
 			if (sign) sign.textContent = open ? "\u2212" : "+"
 			if (panel) {
+				// Deferred images (case-study dashboards): the <picture> is only created on first open.
+				if (open) panel.querySelectorAll("template[data-defer]").forEach((t) => t.replaceWith(t.content.cloneNode(true)))
 				panel.dataset.open = String(open)
 				panel.toggleAttribute("inert", !open)
 			}
