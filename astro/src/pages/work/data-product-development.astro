@@ -6,6 +6,7 @@ import { dataEngineering } from "@lib/content"
 
 import { stackMeta } from "@lib/stack"
 import StackPill from "@components/StackPill.astro"
+import CompanyLogo from "@components/CompanyLogo.astro"
 const { page, caseStudies, stack, agents, career, links } = dataEngineering
 const showcase = [{"slug": "label-performance", "label": "Label performance dashboard", "h": 1800, "mh": 1688}, {"slug": "market-share", "label": "Market share dashboard", "h": 1800, "mh": 1688}, {"slug": "kpi-funnel", "label": "KPI funnel dashboard", "h": 1822, "mh": 3016}, {"slug": "plan-revenue", "label": "Plan revenue dashboard", "h": 1800, "mh": 1688}, {"slug": "creator-cohorts", "label": "Creator cohorts dashboard", "h": 1980, "mh": 2258}]
 const synthNote = "Recreated with synthetic data to protect confidential information."
@@ -23,7 +24,7 @@ const synthNote = "Recreated with synthetic data to protect confidential informa
 						<div class="flex flex-col items-center gap-2">
 							<div class="flex h-[88px] items-center md:h-[176px]">
 							<a href={study.link} target="_blank" rel="noopener" title={`${study.name} (opens in a new tab)`} class="logo-link group inline-flex items-center rounded-sm p-1 md:p-2">
-								<Picture src={study.logo.src} alt={study.logo.alt} class={`${study.logo.size} w-auto max-w-full object-contain opacity-90 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-100`} />
+								<Picture src={study.logo.src} alt={study.logo.alt} style={`--s:${study.logo.scale ?? 1}`} class={`case-logo ${study.logo.size} w-auto max-w-full object-contain opacity-90 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-100`} />
 							</a>
 							</div>
 							<button type="button" class="case-toggle" aria-expanded="false" aria-controls={`case-${study.logo.slug}`} data-case={study.logo.slug}>
@@ -37,7 +38,7 @@ const synthNote = "Recreated with synthetic data to protect confidential informa
 						<div class="flex flex-col items-center gap-2">
 							<div class="flex h-[104px] items-center md:h-[192px]">
 							<a href={study.link} target="_blank" rel="noopener" title={`${study.name} (opens in a new tab)`} class="logo-link group inline-flex items-center rounded-sm p-1 md:p-2">
-								<Picture src={study.logo.src} alt={study.logo.alt} class={`${study.logo.size} w-auto max-w-full object-contain opacity-90 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-100`} />
+								<Picture src={study.logo.src} alt={study.logo.alt} style={`--s:${study.logo.scale ?? 1}`} class={`case-logo ${study.logo.size} w-auto max-w-full object-contain opacity-90 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-100`} />
 							</a>
 							</div>
 							<button type="button" class="case-toggle" aria-expanded="false" aria-controls={`case-${study.logo.slug}`} data-case={study.logo.slug}>
@@ -119,15 +120,7 @@ const synthNote = "Recreated with synthetic data to protect confidential informa
 			<ul class="alumni mx-auto grid px-6 md:px-0 max-w-4xl grid-cols-6 items-center gap-x-4 gap-y-8 md:grid-cols-12 md:gap-x-10">
 				{career.items.map((item) => (
 					<li class="flex justify-center">
-						{item.logo.url ? (
-							<a href={item.logo.url} target="_blank" rel="noopener" title={`${item.company} (opens in a new tab)`} class="logo-link inline-flex rounded-sm p-1">
-								<Picture src={item.logo.src} alt={item.logo.alt} class="alumni-logo" style={`--s:${item.logo.size}`} draggable="false" sizes="136px" />
-							</a>
-						) : (
-							<span title={item.company} class="logo-link inline-flex rounded-sm p-1">
-								<Picture src={item.logo.src} alt={item.logo.alt} class="alumni-logo" style={`--s:${item.logo.size}`} draggable="false" sizes="136px" />
-							</span>
-						)}
+						<CompanyLogo src={item.logo.src} alt={item.logo.alt} href={item.logo.url} title={item.logo.url ? `${item.company} (opens in a new tab)` : item.company} scale={item.logo.size} />
 					</li>
 				))}
 			</ul>
@@ -256,6 +249,8 @@ const synthNote = "Recreated with synthetic data to protect confidential informa
 
 
 <style>
+	/* Case-study logos stay large heroes; weight correction uses the same --s as CompanyLogo */
+	:global(.case-logo) { transform: scale(var(--s, 1)); }
 	.synth {
 		position: relative;
 		-webkit-tap-highlight-color: transparent;
@@ -386,15 +381,6 @@ const synthNote = "Recreated with synthetic data to protect confidential informa
 	}
 
 	/* Every logo gets the same box; --s is an optical-weight correction per logo. */
-	.alumni-logo {
-		height: 2.5rem;
-		width: 8.5rem;
-		object-fit: contain;
-		transform: scale(var(--s, 1));
-	}
-	@media (max-width: 767px) {
-		.alumni-logo { height: 2rem; width: 6rem; transform: scale(min(var(--s, 1), 1.15)); }
-	}
 	/* 7 logos: 3 + 2 + 2 on mobile, 4 + 3 on desktop (no lone orphan) */
 	.alumni > li { grid-column: span 2; }
 	.alumni > li:nth-child(n + 4) { grid-column: span 3; }

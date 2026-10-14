@@ -131,7 +131,7 @@ export const publicDiplomacy = z
 						logo: mediaPath,
 						w: z.number(),
 						h: z.number(),
-						max: z.string().optional()
+						s: z.number().optional()
 					})
 				})
 			)
@@ -149,7 +149,7 @@ export const dataEngineering = z
 				z.object({
 					name: z.string(),
 					image: image.extend({ mobileSrc: mediaPath }).optional(),
-					logo: z.object({ src: mediaPath, alt: z.string(), size: z.string(), slug: z.string() }),
+					logo: z.object({ src: mediaPath, alt: z.string(), size: z.string(), scale: z.number().optional(), slug: z.string() }),
 					link: z.string().url(),
 					summary: z.string(),
 					problem: text,
