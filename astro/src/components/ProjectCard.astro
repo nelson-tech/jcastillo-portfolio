@@ -1,0 +1,40 @@
+---
+import Picture from "@components/Picture.astro"
+import type { work } from "@lib/content"
+
+export interface Props {
+	category: (typeof work)["categories"][number]
+}
+const { category } = Astro.props
+---
+
+<div class={`group relative aspect-video ${category.wide ? "md:col-span-2 md:aspect-[32/9]" : ""}`}>
+	<Picture
+		src={category.image.src}
+		alt={category.image.alt}
+		class="h-full w-full object-fill transition-all duration-500 group-hover:grayscale"
+		sizes="(min-width: 1312px) 624px, (min-width: 768px) 50vw, 100vw"
+		media={category.wide && category.image.wideSrc ? "(min-width: 768px)" : undefined}
+		mediaSrc={category.wide ? category.image.wideSrc : undefined}
+		mediaSizes="(min-width: 1312px) 1248px, 100vw"
+	/>
+	<div
+		class="scrim absolute inset-0 z-10 opacity-0 transition-all duration-500 group-hover:opacity-100"
+	>
+		<a href={`/work/${category.slug}`} class="flex h-full w-full items-center justify-center">
+			<span
+				class="-translate-y-4 text-center text-4xl font-medium text-white transition-all duration-500 group-hover:translate-y-0"
+				>{category.name}</span
+			>
+		</a>
+	</div>
+</div>
+
+<style>
+	/* Dark, lightly blurred scrim keeps the white hover title at WCAG AA over busy art. */
+	.scrim {
+		background-color: rgba(10, 10, 10, 0.55);
+		-webkit-backdrop-filter: blur(6px);
+		backdrop-filter: blur(6px);
+	}
+</style>
