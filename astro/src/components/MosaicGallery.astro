@@ -1,0 +1,169 @@
+---
+// Shared photo gallery: a gapless, edge-to-edge mosaic (Jose: "Tetris-like"). Portraits and
+// landscapes get about the same area, so strong verticals are as prominent as wides. Blocks are
+// packed at build time for each breakpoint (src/lib/mosaic.js) into a grid of square cells, and
+// each tile's shape follows its photo's aspect ratio, so cropping (object-fit: cover) stays small.
+// Data-driven: `feature: true` gives a photo a big tile; `order` (lower first) moves it up.
+// Optional hero tile (Work index): full width on top.
+import Picture from "@components/Picture.astro"
+import Photograph from "@components/Photograph.svelte"
+import { imageInfo, withInfo } from "@lib/images"
+import { BREAKPOINTS, byOrder, packMosaic } from "@lib/mosaic.js"
+
+type Item = {
+	src: string
+	alt: string
+	width?: number
+	height?: number
+	/** Hover title + link (Work index). Without href the tile opens the lightbox. */
+	title?: string
+	href?: string
+	/** Give this photo a big tile (about 2.5x the area). */
+	feature?: boolean
+	/** Sort key; lower comes first. Items without one keep their order after the ordered ones. */
+	order?: number
+}
+export interface Props {
+	items: Item[]
+	/** Full-width tile above the mosaic. wideSrc is its desktop art direction. */
+	hero?: Item & { wideSrc?: string }
+	/** Eager-load the first tile (LCP). */
+	priority?: boolean
+}
+const { items, hero, priority = false } = Astro.props
+
+const dims = (src: string, width?: number, height?: number) => {
+	const info = imageInfo(src)
+	const w = width ?? info?.width
+	const h = height ?? info?.height
+	if (!w || !h) throw new Error(`MosaicGallery: ${src} needs width and height`)
+	return { w, h }
+}
+const tiles = byOrder(items).map((it) => ({ ...it, ...dims(it.src, it.width, it.height) })).map((t) => ({ ...t, ar: t.w / t.h }))
+const bps = Object.entries(BREAKPOINTS) as [keyof typeof BREAKPOINTS, (typeof BREAKPOINTS)["lg"]][]
+const layouts = Object.fromEntries(bps.map(([k, bp]) => [k, packMosaic(tiles, bp)]))
+const gridStyle = bps.map(([k]) => `--rows-${k}:${layouts[k].rows}`).join(";")
+const tileStyle = (i: number) =>
+	bps
+		.map(([k]) => {
+			const c = layouts[k].cells[i]
+			return `--c-${k}:${c.x + 1}/span ${c.w};--r-${k}:${c.y + 1}/span ${c.h}`
+		})
+		.join(";")
+const tileSizes = (i: number) =>
+	bps
+		.map(([k, bp]) => {
+			const vw = Math.ceil((layouts[k].cells[i].w / bp.cols) * 100)
+			return bp.min ? `(min-width: ${bp.min}px) ${vw}vw` : `${vw}vw`
+		})
+		.join(", ")
+const heroBox = hero && dims(hero.src, hero.width, hero.height)
+const heroWide = hero?.wideSrc ? imageInfo(hero.wideSrc) : undefined
+const heroAr = heroBox && heroBox.w / heroBox.h
+const heroArWide = heroWide ? heroWide.width / heroWide.height : heroAr
+---
+
+<div class="jg">
+	{hero && heroBox && (
+		<div class="jg-hero jg-tile group" style={`--ar:${heroArWide};--ar-m:${heroAr}`}>
+			<Picture
+				src={hero.src}
+				alt={hero.alt}
+				class="jg-img"
+				sizes="100vw"
+				priority={priority}
+				media={hero.wideSrc ? "(min-width: 641px)" : undefined}
+				mediaSrc={hero.wideSrc}
+				mediaSizes="100vw"
+			/>
+			{hero.title && hero.href && <a href={hero.href} class="jg-scrim"><span class="jg-title">{hero.title}</span></a>}
+		</div>
+	)}
+	<div class="jg-grid" style={gridStyle}>
+		{tiles.map((t, i) => {
+			const first = priority && !hero && i === 0
+			return (
+				<div class="jg-tile jg-cell group" style={tileStyle(i)}>
+					{t.href ? (
+						<>
+							<Picture src={t.src} alt={t.alt} class="jg-img" sizes={tileSizes(i)} priority={first} />
+							<a href={t.href} class="jg-scrim"><span class="jg-title">{t.title ?? t.alt}</span></a>
+						</>
+					) : (
+						<Photograph image={withInfo(t)} sizes={tileSizes(i)} priority={first} client:visible />
+					)}
+				</div>
+			)
+		})}
+	</div>
+</div>
+
+<style>
+	/* Full bleed at every width: break out of the page's content column to the viewport edges. */
+	.jg { overflow: hidden; width: 100vw; margin-left: calc(50% - 50vw); }
+	/* Tile edges land on fractional pixels, and browsers snap the image inside them, which leaves
+	   sub-pixel slivers of page background between photos. Each image bleeds 1px right and down
+	   under its neighbours (later tiles paint on top; .jg clips the outer edge). */
+	/* Square cells: the row height is one column width, so a block's shape is exactly w:h. The
+	   cell counts and media queries match BREAKPOINTS in src/lib/mosaic.js. */
+	.jg-grid {
+		--cols: 4;
+		display: grid;
+		grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+		grid-template-rows: repeat(var(--rows-sm), calc(100vw / var(--cols)));
+		gap: 0;
+	}
+	.jg-tile { position: relative; min-width: 0; overflow: visible; }
+	.jg-cell { grid-column: var(--c-sm); grid-row: var(--r-sm); }
+	@media (min-width: 641px) {
+		.jg-grid { --cols: 12; grid-template-rows: repeat(var(--rows-md), calc(100vw / var(--cols))); }
+		.jg-cell { grid-column: var(--c-md); grid-row: var(--r-md); }
+	}
+	@media (min-width: 1024px) {
+		.jg-grid { --cols: 16; grid-template-rows: repeat(var(--rows-lg), calc(100vw / var(--cols))); }
+		.jg-cell { grid-column: var(--c-lg); grid-row: var(--r-lg); }
+	}
+	.jg-hero { aspect-ratio: var(--ar); }
+	.jg-tile :global(img) {
+		display: block;
+		width: calc(100% + 1px);
+		height: calc(100% + 1px);
+		max-width: none;
+		border-radius: 0;
+		object-fit: cover;
+	}
+	.jg-tile :global(astro-island),
+	.jg-tile :global(.svelte-lightbox-thumbnail),
+	.jg-tile :global(.svelte-lightbox-thumbnail > *) { display: block; width: 100%; height: 100%; }
+	/* Dark, lightly blurred scrim keeps the white hover title at WCAG AA over busy art. */
+	.jg-scrim {
+		position: absolute;
+		inset: 0;
+		z-index: 10;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		opacity: 0;
+		background-color: rgba(10, 10, 10, 0.55);
+		-webkit-backdrop-filter: blur(6px);
+		backdrop-filter: blur(6px);
+		transition: opacity 0.5s;
+	}
+	.jg-title {
+		@apply text-center text-4xl font-medium text-white;
+		transform: translateY(-1rem);
+		transition: transform 0.5s;
+	}
+	.jg-tile:hover .jg-scrim,
+	.jg-scrim:focus-visible { opacity: 1; }
+	.jg-tile:hover .jg-title,
+	.jg-scrim:focus-visible .jg-title { transform: none; }
+	.jg-tile:has(.jg-scrim) :global(img) { transition: filter 0.5s; }
+	.jg-tile:has(.jg-scrim):hover :global(img) { filter: grayscale(1); }
+	@media (max-width: 640px) {
+		.jg-hero { aspect-ratio: var(--ar-m); }
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.jg-scrim, .jg-title, .jg-tile :global(img) { transition: none; }
+	}
+</style>

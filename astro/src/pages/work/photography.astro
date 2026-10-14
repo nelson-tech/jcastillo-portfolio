@@ -1,6 +1,6 @@
 ---
 import PageHeader from "@components/PageHeader.astro"
-import JustifiedGallery from "@components/JustifiedGallery.astro"
+import MosaicGallery from "@components/MosaicGallery.astro"
 import Layout from "@layouts/Layout.astro"
 import { photography } from "@lib/content"
 ---
@@ -15,7 +15,7 @@ import { photography } from "@lib/content"
 
 		{
 			photography.images.length > 0 && (
-				<div class="mt-8"><JustifiedGallery items={photography.images} priority /></div>
+				<div class="mt-8"><MosaicGallery items={photography.images} priority /></div>
 			)
 		}
 	</div>
