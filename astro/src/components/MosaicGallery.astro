@@ -3,7 +3,8 @@
 // landscapes get about the same area, so strong verticals are as prominent as wides. Blocks are
 // packed at build time for each breakpoint (src/lib/mosaic.js) into a grid of square cells, and
 // each tile's shape follows its photo's aspect ratio, so cropping (object-fit: cover) stays small.
-// Data-driven: `feature: true` gives a photo a big tile; `order` (lower first) moves it up.
+// Data-driven: `feature: true` gives a photo a big tile (alternating left and right edges);
+// `order` (lower first) sets the sequence; `anchor: "top"` keeps a screenshot's top in view.
 // Optional hero tile (Work index): full width on top.
 import Picture from "@components/Picture.astro"
 import Photograph from "@components/Photograph.svelte"
@@ -22,6 +23,8 @@ type Item = {
 	feature?: boolean
 	/** Sort key; lower comes first. Items without one keep their order after the ordered ones. */
 	order?: number
+	/** Crop anchor when the tile crops the photo, e.g. "top" for website screenshots. */
+	anchor?: "top" | "bottom" | "left" | "right" | "center"
 }
 export interface Props {
 	items: Item[]
@@ -49,6 +52,7 @@ const tileStyle = (i: number) =>
 			const c = layouts[k].cells[i]
 			return `--c-${k}:${c.x + 1}/span ${c.w};--r-${k}:${c.y + 1}/span ${c.h}`
 		})
+		.concat(tiles[i].anchor ? [`--pos:${tiles[i].anchor}`] : [])
 		.join(";")
 const tileSizes = (i: number) =>
 	bps
@@ -131,6 +135,7 @@ const heroArWide = heroWide ? heroWide.width / heroWide.height : heroAr
 		max-width: none;
 		border-radius: 0;
 		object-fit: cover;
+		object-position: var(--pos, center);
 	}
 	.jg-tile :global(astro-island),
 	.jg-tile :global(.svelte-lightbox-thumbnail),
