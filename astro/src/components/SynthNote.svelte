@@ -1,7 +1,7 @@
 <script lang="ts">
 	// Shared synthetic-data pill. Put it inside an element with class "synth" (the figure);
 	// it shows on hover, keyboard focus, or tap (.is-open, toggled by the page script).
-	export let note = "Recreated with synthetic data to protect confidential information."
+	export let note = "Illustrative visual recreated with synthetic data to protect confidential information. Figures shown are not real findings."
 </script>
 
 <span class="synth-note" aria-hidden="true">{note}</span>
