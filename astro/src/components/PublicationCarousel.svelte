@@ -42,6 +42,13 @@
 		const h = slide.offsetHeight
 		// Arrows: about 160px from the top of the slide (or centered on a short slide).
 		root.style.setProperty("--pc-arrow-top", `${Math.max(0, Math.min(160, h / 2 - 20))}px`)
+		// Watch the active slide before any early return, so a late image load (or a
+		// source/aspect change) always re-fits the frame instead of clipping it.
+		if (ro && watched !== slide) {
+			if (watched) ro.unobserve(watched)
+			ro.observe(slide)
+			watched = slide
+		}
 		if (win.style.height === `${h}px`) return
 		const y = window.scrollY
 		win.style.height = `${h}px`
@@ -51,11 +58,6 @@
 			if (performance.now() < until) requestAnimationFrame(pin)
 		}
 		pin()
-		if (ro && watched !== slide) {
-			if (watched) ro.unobserve(watched)
-			ro.observe(slide)
-			watched = slide
-		}
 	}
 
 	const onPageChange = (event: CustomEvent<number>) => {
@@ -150,6 +152,8 @@
 	/* Before the first measure, only slide 1 sets the height (no shrink-on-hydrate layout shift) */
 	.pc:not(.ready) :global(.sc-carousel__pages-container > :not([data-first])) { display: none; }
 	.pc:not(.ready) :global(.sc-carousel__pages-container > [data-first]) { flex: 0 0 100%; max-width: 100%; }
+	/* Slides always show their full image: natural aspect, never cropped by a fixed box */
+	.pc :global(.synth img) { height: auto; max-height: none; }
 	/* Phones: pin arrows near the top of the slide so they stay on screen on tall slides */
 	@media (max-width: 700px) {
 		.pc :global(.sc-carousel__arrow-container) { align-items: flex-start; padding-top: var(--pc-arrow-top, 160px); }
