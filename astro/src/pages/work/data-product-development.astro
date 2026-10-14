@@ -106,7 +106,7 @@ const synthNote = "Recreated with synthetic data to protect confidential informa
 					const ic = meta.icons[0]
 					return (
 						<li>
-							<a href={meta.href} target="_blank" rel="noopener noreferrer" style={`--brand:${ic.color}`}>
+							<a href={meta.href} target="_blank" rel="noopener" style={`--brand:${ic.color}`}>
 								{ic.kind === "brand" && <svg viewBox="0 0 24 24" aria-hidden="true"><path d={ic.d} fill-rule={ic.evenodd ? "evenodd" : undefined} /></svg>}
 								<span>{name}</span>
 							</a>

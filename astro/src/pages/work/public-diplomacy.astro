@@ -1,5 +1,6 @@
 ---
 import CompanyLogo from "@components/CompanyLogo.astro"
+import PageHeader from "@components/PageHeader.astro"
 import PublicationCarousel from "@components/PublicationCarousel.svelte"
 import Picture from "@components/Picture.astro"
 import Layout from "@layouts/Layout.astro"
@@ -7,15 +8,16 @@ import { lazyIframes } from "@lib/embeds"
 import { withInfo } from "@lib/images"
 import { publicDiplomacy } from "@lib/content"
 
-const { publications, writing, podcasts } = publicDiplomacy
+const { page, publications, writing, podcasts } = publicDiplomacy
 // Logo height overrides from JSON (kept here so Tailwind generates them): max-h-7 max-h-10 max-h-12
 ---
 
 <Layout title="Public Diplomacy">
 	<div class="mx-4 mt-16 md:mx-8">
+		{page.header && <PageHeader header={page.header} description={page.description} />}
 		<div id="publications" class="border-rule mb-8 border-t pt-12 pb-8">
 			{
-				publications.header && (
+				publications.header && publications.header !== page.header && (
 					<h2 class="text-highlight mb-8 w-full text-center text-4xl font-bold">{publications.header}</h2>
 				)
 			}

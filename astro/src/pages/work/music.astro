@@ -8,12 +8,12 @@ const { page, hero, spotifyArtists, press } = music
 ---
 
 <Layout title={page.title ?? "Music"}>
-	<div class="mx-4 md:mx-8">
+	<div class="mx-4 mt-16 md:mx-8">
 		{page.header && <PageHeader header={page.header} description={page.description} />}
 		{
 			hero && (
 				<div class="flex justify-center">
-					<a href={hero.link} target="_blank" title={hero.image.alt}>
+					<a href={hero.link} target="_blank" rel="noopener" title={hero.image.alt}>
 						<Picture src={hero.image.src} alt={hero.image.alt} priority />
 					</a>
 				</div>
