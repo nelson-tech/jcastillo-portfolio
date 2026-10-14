@@ -118,7 +118,16 @@
 					"Solo play, plus pass-the-phone play for 2–4 players on one device, with no login.",
 					"In progress: a real-physics skill throw with speed and angle meters, and online multiplayer through a shareable family link."
 				],
-				"stack": [],
+				"stack": [
+					"TypeScript",
+					"Three.js",
+					"Rapier",
+					"Vite",
+					"Vercel",
+					"Vitest",
+					"Playwright",
+					"Blender"
+				],
 				"results": [
 					"On a phone, the page went from 17.2 s to 2.9 s to look complete, with the main content appearing in 1.1 s."
 				]

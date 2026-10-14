@@ -1,0 +1,143 @@
+---
+// Shared photo gallery (Ive's spec): justified rows with no gaps on desktop, every image at its
+// native aspect ratio so nothing is cropped, rows (the last included) filling the full width.
+// Rows are split at build time (src/lib/justify.js); CSS flex does the scaling, with
+// flex-grow = aspect and basis = aspect x row height, so boxes are sized before images load.
+// Phones (<=640px) get one edge-to-edge column. Optional hero tile: full width on top.
+import Picture from "@components/Picture.astro"
+import Photograph from "@components/Photograph.svelte"
+import { imageInfo, withInfo } from "@lib/images"
+import { justifyRows } from "@lib/justify.js"
+
+type Item = {
+	src: string
+	alt: string
+	width?: number
+	height?: number
+	/** Hover title + link (Work index). Without href the tile opens the lightbox. */
+	title?: string
+	href?: string
+}
+export interface Props {
+	items: Item[]
+	/** Full-width tile above the rows. wideSrc is its desktop art direction. */
+	hero?: Item & { wideSrc?: string }
+	/** Gallery width at a 1440px viewport (the page's max-width container), used to split the rows. */
+	refWidth?: number
+	/** Eager-load the first tile (LCP). */
+	priority?: boolean
+}
+const { items, hero, refWidth = 1216, priority = false } = Astro.props
+
+const dims = (src: string, width?: number, height?: number) => {
+	const info = imageInfo(src)
+	const w = width ?? info?.width
+	const h = height ?? info?.height
+	if (!w || !h) throw new Error(`JustifiedGallery: ${src} needs width and height`)
+	return { w, h }
+}
+const tiles = items.map((it) => ({ ...it, ...dims(it.src, it.width, it.height) })).map((t) => ({ ...t, ar: t.w / t.h }))
+const rows = justifyRows(tiles.map((t) => t.ar), { width: refWidth })
+const heroBox = hero && dims(hero.src, hero.width, hero.height)
+const heroWide = hero?.wideSrc ? imageInfo(hero.wideSrc) : undefined
+const heroAr = heroBox && heroBox.w / heroBox.h
+const heroArWide = heroWide ? heroWide.width / heroWide.height : heroAr
+const tileSizes = (t: { ar: number }, row: number[]) => {
+	const share = t.ar / row.reduce((s, i) => s + tiles[i].ar, 0)
+	return `(min-width: ${refWidth + 64}px) ${Math.ceil(share * refWidth)}px, (min-width: 641px) ${Math.ceil(share * 100)}vw, 100vw`
+}
+---
+
+<div class="jg">
+	{hero && heroBox && (
+		<div class="jg-hero jg-tile group" style={`--ar:${heroArWide};--ar-m:${heroAr}`}>
+			<Picture
+				src={hero.src}
+				alt={hero.alt}
+				class="jg-img"
+				sizes="100vw"
+				priority={priority}
+				media={hero.wideSrc ? "(min-width: 641px)" : undefined}
+				mediaSrc={hero.wideSrc}
+				mediaSizes="100vw"
+			/>
+			{hero.title && hero.href && <a href={hero.href} class="jg-scrim"><span class="jg-title">{hero.title}</span></a>}
+		</div>
+	)}
+	{rows.map((row) => (
+		<div class="jg-row">
+			{row.map((i) => {
+				const t = tiles[i]
+				const first = priority && !hero && i === 0
+				return (
+					<div class="jg-tile group" style={`--ar:${t.ar}`}>
+						{t.href ? (
+							<>
+								<Picture src={t.src} alt={t.alt} class="jg-img" sizes={tileSizes(t, row)} priority={first} />
+								<a href={t.href} class="jg-scrim"><span class="jg-title">{t.title ?? t.alt}</span></a>
+							</>
+						) : (
+							<Photograph image={withInfo(t)} sizes={tileSizes(t, row)} priority={first} client:visible />
+						)}
+					</div>
+				)
+			})}
+		</div>
+	))}
+</div>
+
+<style>
+	.jg { overflow: hidden; border-radius: 0.25rem; }
+	.jg-row { display: flex; }
+	.jg-tile {
+		position: relative;
+		flex: var(--ar) 1 calc(var(--ar) * 360px);
+		min-width: 0;
+		aspect-ratio: var(--ar);
+	}
+	.jg-hero { aspect-ratio: var(--ar); }
+	.jg-tile :global(img) {
+		display: block;
+		width: 100%;
+		height: 100%;
+		border-radius: 0;
+		object-fit: contain;
+	}
+	.jg-tile :global(astro-island),
+	.jg-tile :global(.svelte-lightbox-thumbnail),
+	.jg-tile :global(.svelte-lightbox-thumbnail > *) { display: block; width: 100%; height: 100%; }
+	/* Dark, lightly blurred scrim keeps the white hover title at WCAG AA over busy art. */
+	.jg-scrim {
+		position: absolute;
+		inset: 0;
+		z-index: 10;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		opacity: 0;
+		background-color: rgba(10, 10, 10, 0.55);
+		-webkit-backdrop-filter: blur(6px);
+		backdrop-filter: blur(6px);
+		transition: opacity 0.5s;
+	}
+	.jg-title {
+		@apply text-center text-4xl font-medium text-white;
+		transform: translateY(-1rem);
+		transition: transform 0.5s;
+	}
+	.jg-tile:hover .jg-scrim,
+	.jg-scrim:focus-visible { opacity: 1; }
+	.jg-tile:hover .jg-title,
+	.jg-scrim:focus-visible .jg-title { transform: none; }
+	.jg-tile:has(.jg-scrim) :global(img) { transition: filter 0.5s; }
+	.jg-tile:has(.jg-scrim):hover :global(img) { filter: grayscale(1); }
+	@media (max-width: 640px) {
+		/* Edge to edge: cancel the page's mx-4 gutter. */
+		.jg { border-radius: 0; margin-inline: -1rem; }
+		.jg-row { display: block; }
+		.jg-hero { aspect-ratio: var(--ar-m); }
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.jg-scrim, .jg-title, .jg-tile :global(img) { transition: none; }
+	}
+</style>
