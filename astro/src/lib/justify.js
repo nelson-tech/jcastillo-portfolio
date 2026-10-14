@@ -8,7 +8,7 @@
  * @param {{ width?: number, target?: number, min?: number, max?: number }} [opts]
  * @returns {number[][]} rows of item indexes, in order
  */
-export function justifyRows(aspects, { width = 1216, target = 360, min = 260, max = 480 } = {}) {
+export function justifyRows(aspects, { width = 1440, target = 360, min = 260, max = 480 } = {}) {
 	const n = aspects.length
 	if (n === 0) return []
 	const best = new Array(n + 1).fill(Infinity)
@@ -34,4 +34,4 @@ export function justifyRows(aspects, { width = 1216, target = 360, min = 260, ma
 }
 
 /** Row height in px at the reference width, for checks and tests. */
-export const rowHeight = (aspects, row, width = 1216) => width / row.reduce((s, i) => s + aspects[i], 0)
+export const rowHeight = (aspects, row, width = 1440) => width / row.reduce((s, i) => s + aspects[i], 0)

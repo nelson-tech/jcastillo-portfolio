@@ -22,12 +22,12 @@ export interface Props {
 	items: Item[]
 	/** Full-width tile above the rows. wideSrc is its desktop art direction. */
 	hero?: Item & { wideSrc?: string }
-	/** Gallery width at a 1440px viewport (the page's max-width container), used to split the rows. */
+	/** Gallery width at a 1440px viewport (full bleed, so the viewport width), used to split the rows. */
 	refWidth?: number
 	/** Eager-load the first tile (LCP). */
 	priority?: boolean
 }
-const { items, hero, refWidth = 1216, priority = false } = Astro.props
+const { items, hero, refWidth = 1440, priority = false } = Astro.props
 
 const dims = (src: string, width?: number, height?: number) => {
 	const info = imageInfo(src)
@@ -44,7 +44,7 @@ const heroAr = heroBox && heroBox.w / heroBox.h
 const heroArWide = heroWide ? heroWide.width / heroWide.height : heroAr
 const tileSizes = (t: { ar: number }, row: number[]) => {
 	const share = t.ar / row.reduce((s, i) => s + tiles[i].ar, 0)
-	return `(min-width: ${refWidth + 64}px) ${Math.ceil(share * refWidth)}px, (min-width: 641px) ${Math.ceil(share * 100)}vw, 100vw`
+	return `(min-width: 641px) ${Math.ceil(share * 100)}vw, 100vw`
 }
 ---
 
@@ -87,7 +87,11 @@ const tileSizes = (t: { ar: number }, row: number[]) => {
 </div>
 
 <style>
-	.jg { overflow: hidden; }
+	/* Full bleed at every width: break out of the page's content column to the viewport edges. */
+	.jg { overflow: hidden; width: 100vw; margin-left: calc(50% - 50vw); }
+	/* Tile edges land on fractional pixels, and browsers snap the image inside them, which leaves
+	   sub-pixel slivers of page background between photos. Each image bleeds 1px right and down
+	   under its neighbours (later tiles paint on top; .jg clips the outer edge). */
 	.jg-row { display: flex; }
 	.jg-tile {
 		position: relative;
@@ -98,10 +102,11 @@ const tileSizes = (t: { ar: number }, row: number[]) => {
 	.jg-hero { aspect-ratio: var(--ar); }
 	.jg-tile :global(img) {
 		display: block;
-		width: 100%;
-		height: 100%;
+		width: calc(100% + 1px);
+		height: calc(100% + 1px);
+		max-width: none;
 		border-radius: 0;
-		object-fit: contain;
+		object-fit: cover;
 	}
 	.jg-tile :global(astro-island),
 	.jg-tile :global(.svelte-lightbox-thumbnail),
@@ -132,8 +137,6 @@ const tileSizes = (t: { ar: number }, row: number[]) => {
 	.jg-tile:has(.jg-scrim) :global(img) { transition: filter 0.5s; }
 	.jg-tile:has(.jg-scrim):hover :global(img) { filter: grayscale(1); }
 	@media (max-width: 640px) {
-		/* Edge to edge: cancel the page's mx-4 gutter. */
-		.jg { margin-inline: -1rem; }
 		.jg-row { display: block; }
 		.jg-hero { aspect-ratio: var(--ar-m); }
 	}

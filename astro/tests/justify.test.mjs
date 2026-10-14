@@ -13,7 +13,7 @@ for (const [name, images] of Object.entries(galleries)) {
 		assert.ok(im.width && im.height, `${name}: ${im.src} needs width and height`)
 		return im.width / im.height
 	})
-	for (const width of [1216, 1248]) {
+	for (const width of [1440]) {
 		const rows = justifyRows(aspects, { width })
 		assert.deepEqual(rows.flat(), aspects.map((_, i) => i), `${name}: every image once, in order`)
 		for (const row of rows) {
