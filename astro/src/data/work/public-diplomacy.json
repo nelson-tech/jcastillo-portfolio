@@ -71,7 +71,7 @@
           "w": 640,
           "h": 186
         },
-        "label": "Podcast episode · CPD",
+        "label": "Podcast episode",
         "year": "2019"
       },
       {
@@ -84,7 +84,7 @@
           "w": 640,
           "h": 186
         },
-        "label": "Podcast episode · CPD",
+        "label": "Podcast episode",
         "year": "2019"
       },
       {
@@ -97,7 +97,7 @@
           "w": 640,
           "h": 186
         },
-        "label": "Blog post · CPD",
+        "label": "Blog post",
         "year": "2019"
       },
       {
@@ -109,9 +109,9 @@
           "logo": "/media/logos/publications/ipba.png",
           "w": 386,
           "h": 114,
-          "s": 0.85
+          "s": 0.7
         },
-        "label": "Conference paper · IPBA",
+        "label": "Conference paper",
         "year": "2018"
       },
       {
@@ -124,7 +124,7 @@
           "w": 640,
           "h": 186
         },
-        "label": "Blog post · CPD",
+        "label": "Blog post",
         "year": "2018"
       }
     ]
