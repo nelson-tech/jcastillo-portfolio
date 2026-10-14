@@ -15,6 +15,20 @@ export interface Props {
 const { title, preloadImage } = Astro.props
 
 const faScript = import.meta.env.PUBLIC_FA_SCRIPT
+
+const SITE_URL = "https://www.josecastillocorcuera.com"
+const canonicalPath = Astro.url.pathname === "/" ? "/" : Astro.url.pathname.replace(/\/$/, "")
+const canonicalUrl = new URL(canonicalPath, SITE_URL).href
+const personJsonLd = Astro.url.pathname === "/"
+  ? JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: "Jose Castillo",
+      url: SITE_URL,
+      image: `${SITE_URL}/og-image-v2.png`,
+      sameAs: site.social.map((s) => s.link),
+    }).replace(/</g, "\\u003c")
+  : null
 ---
 
 <!DOCTYPE html>
@@ -29,7 +43,8 @@ const faScript = import.meta.env.PUBLIC_FA_SCRIPT
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Jose Castillo" />
     <meta property="og:title" content={`Jose Castillo | ${title}`} />
-    <meta property="og:url" content={new URL(Astro.url.pathname, "https://josecastillocorcuera.com").href} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content="https://josecastillocorcuera.com/og-image-v2.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -45,6 +60,7 @@ const faScript = import.meta.env.PUBLIC_FA_SCRIPT
     ></script>
     <meta name="generator" content={Astro.generator} />
     <title>Jose Castillo | {title}</title>
+    {personJsonLd && <script type="application/ld+json" is:inline set:html={personJsonLd} />}
   </head>
   <body class="font-sans tracking-wide text-ink bg-paper">
     <div
