@@ -56,7 +56,7 @@ const synthNote = "Illustrative visual recreated with synthetic data to protect 
 				<div class="flex flex-nowrap items-start justify-center gap-x-5 md:gap-x-20">
 					{caseStudies.items.slice(4).map((study) => (
 						<div class="flex flex-col items-center gap-2">
-							<div class="flex h-[88px] items-end md:h-[176px]">
+							<div class="mt-1 flex items-end md:mt-2">
 							<a href={study.link} target="_blank" rel="noopener" title={`${study.name} (opens in a new tab)`} class="logo-link group inline-flex items-end rounded-sm p-1 pb-0 md:p-2 md:pb-0">
 								<Picture src={study.logo.src} alt={study.logo.alt} style={`--s:${study.logo.scale ?? 1}`} class={`case-logo ${study.logo.size} w-auto max-w-full object-contain opacity-90 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-100`} />
 							</a>
