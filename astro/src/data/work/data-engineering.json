@@ -105,7 +105,7 @@
 			{
 				"name": "Juega Sapo",
 				"logo": {
-					"src": "/media/logos/juega-sapo.webp",
+					"src": "/media/logos/juega-sapo-a.png",
 					"alt": "Juega Sapo",
 					"size": "h-20 md:h-40",
 					"slug": "juega-sapo"
