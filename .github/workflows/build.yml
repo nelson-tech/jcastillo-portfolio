@@ -19,6 +19,7 @@ jobs:
           cache: npm
           cache-dependency-path: astro/package-lock.json
       - run: npm ci
+      - run: npm run lint
       - run: npm run build
 
   nav-e2e:

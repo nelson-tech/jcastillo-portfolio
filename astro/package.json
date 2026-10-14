@@ -11,7 +11,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "postbuild": "node scripts/inline-css.mjs",
-    "test:nav": "node tests/nav.e2e.mjs"
+    "test:nav": "node tests/nav.e2e.mjs",
+    "lint": "eslint"
   },
   "dependencies": {
     "@astrojs/node": "^5.1.1",
@@ -29,6 +30,9 @@
     "@swup/progress-plugin": "^2.0.0",
     "@swup/scripts-plugin": "^1.1.0",
     "@swup/slide-theme": "^1.0.5",
+    "eslint": "^10.12.0",
+    "eslint-plugin-astro": "^3.2.1",
+    "eslint-plugin-svelte": "^3.23.1",
     "playwright": "1.56",
     "prettier": "^2.8.8",
     "prettier-plugin-astro": "^0.8.0",
@@ -37,6 +41,7 @@
     "sharp": "^0.31.3",
     "svelte-carousel": "^1.0.25",
     "svelte-lightbox": "^1.1.1",
-    "swup": "^3.0.6"
+    "swup": "^3.0.6",
+    "typescript-eslint": "^8.71.2"
   }
 }
