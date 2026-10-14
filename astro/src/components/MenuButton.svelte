@@ -9,6 +9,8 @@
 <button
 	id="menu-icon"
 	class={`z-50 cursor-pointer ${$isMenuOpen ? "close" : ""}`}
+	aria-label={$isMenuOpen ? "Close menu" : "Open menu"}
+	aria-expanded={$isMenuOpen}
 	on:click={toggleMenu}
 >
 	<div class="bar" />

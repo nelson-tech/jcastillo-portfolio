@@ -12,6 +12,8 @@ module.exports = {
     extend: {
       colors: {
         highlight: "#5592b5",
+        // Same hue as highlight, darkened just enough for 4.5:1 body-size text on paper.
+        "highlight-text": "#407594",
         ink: "#16191C",
         paper: "#F5F3EE",
         stone: "#6B7176",
