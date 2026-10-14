@@ -16,7 +16,7 @@ module.exports = {
         "highlight-text": "#407594",
         ink: "#16191C",
         paper: "#F5F3EE",
-        stone: "#6B7176",
+        stone: "#6B7075",
         rule: "#DEDAD2",
         "accent-deep": "#2E6584",
       },
