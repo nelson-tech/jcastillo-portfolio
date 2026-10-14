@@ -9,7 +9,7 @@
 <style>
 	:global(.synth) { position: relative; margin: 0; -webkit-tap-highlight-color: transparent; outline-offset: 3px; }
 	:global(.synth:focus) { outline: none; }
-	:global(.synth:focus-visible) { outline: 2px solid #6b7176; outline-offset: 4px; }
+	:global(.synth:focus-visible) { outline: 2px solid theme("colors.stone"); outline-offset: 4px; }
 	.synth-note {
 		position: absolute; right: 12px; bottom: 12px; max-width: calc(100% - 24px); box-sizing: border-box;
 		font: 12px/1.35 basic-sans, system-ui, sans-serif; color: rgb(22 25 28 / 0.7);

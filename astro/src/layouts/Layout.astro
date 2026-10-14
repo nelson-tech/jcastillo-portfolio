@@ -10,15 +10,31 @@ const { menu: menuItems, social: footerIcons } = site
 export interface Props {
   title: string
   preloadImage?: { src: string; srcset?: string; sizes?: string; type?: string }
+  description?: string
 }
 
-const { title, preloadImage } = Astro.props
+const { title, preloadImage, description } = Astro.props
 
 const faScript = import.meta.env.PUBLIC_FA_SCRIPT
 
 const SITE_URL = "https://www.josecastillocorcuera.com"
+// One plain sentence per page for search results and link previews.
+const descriptions: Record<string, string> = {
+  "/": "Portfolio of Jose Castillo: data, product and development work, plus music, audio, video, design, photography and public diplomacy.",
+  "/about": "About Jose Castillo and his background.",
+  "/contact": "How to get in touch with Jose Castillo.",
+  "/work": "An index of Jose Castillo's work, from data and product projects to music, video, design and photography.",
+  "/work/data-product-development": "Projects Jose Castillo has designed and built, with case studies, the tools he uses and analytics samples on synthetic data.",
+  "/work/music": "Music by Jose Castillo.",
+  "/work/audio": "Audio work by Jose Castillo.",
+  "/work/video": "Video work by Jose Castillo.",
+  "/work/design": "Motion graphics and graphic design by Jose Castillo.",
+  "/work/photography": "Travel photography by Jose Castillo.",
+  "/work/public-diplomacy": "Public diplomacy work by Jose Castillo.",
+}
 const canonicalPath = Astro.url.pathname === "/" ? "/" : Astro.url.pathname.replace(/\/$/, "")
 const canonicalUrl = new URL(canonicalPath, SITE_URL).href
+const metaDescription = description ?? descriptions[canonicalPath]
 const personJsonLd = Astro.url.pathname === "/"
   ? JSON.stringify({
       "@context": "https://schema.org",
@@ -37,6 +53,8 @@ const personJsonLd = Astro.url.pathname === "/"
     {preloadImage && <link rel="preload" as="image" href={preloadImage.src} imagesrcset={preloadImage.srcset} imagesizes={preloadImage.sizes} type={preloadImage.type} fetchpriority="high" />}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+    {metaDescription && <meta name="description" content={metaDescription} />}
+    {metaDescription && <meta property="og:description" content={metaDescription} />}
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32-v2.png" />
     <link rel="icon" href="/favicon-v2.ico" sizes="any" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-v2.png" />
@@ -121,7 +139,7 @@ const personJsonLd = Astro.url.pathname === "/"
   }
   a:focus-visible,
   button:focus-visible {
-    outline: 2px solid #6b7176;
+    outline: 2px solid theme("colors.stone");
     outline-offset: 4px;
     border-radius: 2px;
   }

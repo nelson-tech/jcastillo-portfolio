@@ -79,6 +79,20 @@
 		ro?.disconnect()
 		if (typeof window !== "undefined") window.removeEventListener("resize", sync)
 	})
+	// svelte-carousel renders its arrows and dots as unlabelled buttons; name them for screen readers.
+	const labelControls = () => {
+		const arrows = root?.querySelectorAll(".sc-carousel-arrow__circle")
+		arrows?.[0]?.setAttribute("aria-label", "Previous slide")
+		arrows?.[1]?.setAttribute("aria-label", "Next slide")
+		root?.querySelectorAll(".sc-carousel-dot__dot").forEach((d, n) => d.setAttribute("aria-label", `Go to slide ${n + 1}`))
+	}
+	let labelObserver: MutationObserver | undefined
+	onMount(() => {
+		labelControls()
+		labelObserver = new MutationObserver(labelControls)
+		if (root) labelObserver.observe(root, { childList: true, subtree: true })
+		return () => labelObserver?.disconnect()
+	})
 </script>
 
 <div class="pc" class:ready bind:this={root}>
@@ -162,6 +176,14 @@
 	:global(.sc-carousel-button) {
 		background-color: transparent !important;
 	}
+	/* 24px tap target per dot: same dot, drawn in the content box; padding is the extra hit area. */
+	.pc :global(.sc-carousel-dots__dot-container) { width: 24px; height: 24px; }
+	.pc :global(.sc-carousel-dot__dot) {
+		box-sizing: content-box;
+		padding: calc((24px - var(--sc-dot-size)) / 2);
+		background-clip: content-box;
+	}
+	.pc :global(.sc-carousel-dot__dot_active) { padding: calc((24px - var(--sc-active-dot-size)) / 2); }
 	:root {
 		--sc-arrow-size: 4px !important;
 	}
