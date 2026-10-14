@@ -25,7 +25,7 @@ const swupReady = (page) => page.waitForFunction(() => document.documentElement.
 async function testCases(page, tag, browser) {
 	const toggles = page.locator(".case-toggle")
 	const n = await toggles.count()
-	assert(n === 3, `expected 3 case toggles, got ${n}`)
+	assert(n === 4, `expected 4 case toggles, got ${n}`)
 	for (let i = 0; i < n; i++) {
 		const btn = toggles.nth(i)
 		const id = await btn.getAttribute("aria-controls")

@@ -101,6 +101,27 @@
 					"Playwright"
 				],
 				"results": []
+			},
+			{
+				"name": "Juega Sapo",
+				"logo": {
+					"src": "/media/logos/juega-sapo.webp",
+					"alt": "Juega Sapo",
+					"size": "h-20 md:h-40",
+					"slug": "juega-sapo"
+				},
+				"link": "https://juegasapo.com",
+				"summary": "A browser version of sapo, the Peruvian coin-toss game, that I conceived and directed, working across product, design direction and engineering with AI tooling.",
+				"problem": null,
+				"built": [
+					"A 3D sapo box scene with swipe-to-throw.",
+					"Solo play, plus pass-the-phone play for 2–4 players on one device, with no login.",
+					"In progress: a real-physics skill throw with speed and angle meters, and online multiplayer through a shareable family link."
+				],
+				"stack": [],
+				"results": [
+					"On a phone, the page went from 17.2 s to 2.9 s to look complete, with the main content appearing in 1.1 s."
+				]
 			}
 		]
 	},

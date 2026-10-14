@@ -16,7 +16,7 @@ const synthNote = "Recreated with synthetic data to protect confidential informa
 		{page.header && <PageHeader header={page.header} description={page.description} />}
 		<script is:inline>document.documentElement.classList.add("js")</script>
 		<div id="case-studies" class="mb-8 mt-8 pb-8">
-			<!-- Inverted triangle: logo links to the live site; the toggle under it opens that case study below (one open at a time) -->
+			<!-- Two rows of two: logo links to the live site; the toggle under it opens that case study below (one open at a time) -->
 			<div class="mx-auto flex max-w-5xl flex-col items-center gap-y-6 py-6 md:gap-y-10">
 				<div class="flex flex-nowrap items-start justify-center gap-x-5 md:gap-x-20">
 					{caseStudies.items.slice(0, 2).map((study) => (
@@ -32,12 +32,14 @@ const synthNote = "Recreated with synthetic data to protect confidential informa
 						</div>
 					))}
 				</div>
-				<div class="flex justify-center">
-					{caseStudies.items.slice(2).map((study) => (
+				<div class="flex flex-nowrap items-start justify-center gap-x-5 md:gap-x-20">
+					{caseStudies.items.slice(2, 4).map((study) => (
 						<div class="flex flex-col items-center gap-2">
+							<div class="flex h-[104px] items-center md:h-[192px]">
 							<a href={study.link} target="_blank" rel="noopener" title={`${study.name} (opens in a new tab)`} class="logo-link group inline-flex items-center rounded-sm p-1 md:p-2">
 								<Picture src={study.logo.src} alt={study.logo.alt} class={`${study.logo.size} w-auto max-w-full object-contain opacity-90 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-100`} />
 							</a>
+							</div>
 							<button type="button" class="case-toggle" aria-expanded="false" aria-controls={`case-${study.logo.slug}`} data-case={study.logo.slug}>
 								Case study <span class="sign" aria-hidden="true">+</span>
 							</button>
