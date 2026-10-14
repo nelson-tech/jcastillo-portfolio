@@ -173,9 +173,13 @@
 	@media (max-width: 700px) {
 		.pc :global(.sc-carousel__arrow-container) { align-items: flex-start; padding-top: var(--pc-arrow-top, 160px); }
 	}
-	:global(.sc-carousel-button) {
+	/* Arrows only: the dots keep a fill so they stay visible. */
+	:global(.sc-carousel-arrow__circle) {
 		background-color: transparent !important;
 	}
+	.pc :global(.sc-carousel-dot__dot) { background-color: theme("colors.stone"); opacity: 0.5; }
+	.pc :global(.sc-carousel-dot__dot:hover) { opacity: 0.8; }
+	.pc :global(.sc-carousel-dot__dot_active) { background-color: theme("colors.highlight-text"); opacity: 1; }
 	/* 24px tap target per dot: same dot, drawn in the content box; padding is the extra hit area. */
 	.pc :global(.sc-carousel-dots__dot-container) { width: 24px; height: 24px; }
 	.pc :global(.sc-carousel-dot__dot) {
