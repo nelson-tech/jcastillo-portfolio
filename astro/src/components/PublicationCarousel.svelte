@@ -21,6 +21,7 @@
 			<a
 				href={publication.link}
 				target="_blank"
+				rel="noopener"
 				class="group flex w-96 flex-col items-center justify-center"
 			>
 				<div class="relative overflow-hidden rounded object-contain">

@@ -1,10 +1,11 @@
 ---
 import Layout from "@layouts/Layout.astro"
+import PageHeader from "@components/PageHeader.astro"
 ---
 
 <Layout title="Contact">
-	<section class="text-ink mx-auto w-full max-w-xl px-8 pb-16 pt-4 tracking-wider" aria-labelledby="contact-title">
-		<h1 id="contact-title" class="text-highlight text-center text-4xl font-bold">Contact</h1>
+	<section class="text-ink mx-auto w-full max-w-xl px-8 pb-16 pt-4 tracking-wider" aria-label="Contact">
+		<PageHeader header="Contact" />
 		<p class="text-stone mt-6 text-center text-xl leading-loose">Interested in working together? Send me a note and I'll get back to you.</p>
 
 		<form id="contact-form" class="mt-10 space-y-6" method="post" action="/api/contact" novalidate>

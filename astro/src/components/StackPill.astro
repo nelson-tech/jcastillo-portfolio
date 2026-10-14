@@ -7,7 +7,7 @@ const { name } = Astro.props
 const meta = stackMeta[name]
 const icons = meta?.icons ?? [fallbackIcon]
 const Tag = meta ? "a" : "span"
-const linkProps = meta ? { href: meta.href, target: "_blank", rel: "noopener noreferrer" } : {}
+const linkProps = meta ? { href: meta.href, target: "_blank", rel: "noopener" } : {}
 ---
 
 <Tag class="pill stack-pill stack-mono" {...linkProps}>
