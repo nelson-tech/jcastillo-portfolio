@@ -6,7 +6,6 @@ const load = (p) => JSON.parse(readFileSync(new URL(p, import.meta.url)))
 const galleries = {
 	photography: load("../src/data/work/photography.json").images,
 	graphicDesign: load("../src/data/work/design.json").graphicDesign.images,
-	workIndex: load("../src/data/work.json").categories.filter((c) => !c.wide).map((c) => c.image),
 }
 for (const [name, images] of Object.entries(galleries)) {
 	const aspects = images.map((im) => {
