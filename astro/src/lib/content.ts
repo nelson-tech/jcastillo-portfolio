@@ -32,7 +32,11 @@ const image = z.object({
 	src: mediaPath,
 	alt: z.string(),
 	width: z.number().int().positive().optional(),
-	height: z.number().int().positive().optional()
+	height: z.number().int().positive().optional(),
+	// Mosaic gallery (photography, design): big tile, sort key, crop anchor.
+	feature: z.boolean().optional(),
+	order: z.number().int().positive().optional(),
+	anchor: z.enum(["top", "bottom", "left", "right", "center"]).optional()
 })
 
 const video = z.object({
