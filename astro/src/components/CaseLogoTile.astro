@@ -1,0 +1,78 @@
+---
+// One case-study logo tile: a fixed box (240×144 desktop, 112×80 mobile) with the logo centred both ways,
+// sized to an equal visible area (≈120² desktop, ≈72² mobile) via h = √(area ÷ ratio) × weight,
+// capped by the logo limits (128×224 desktop, 64×104 mobile). Dense marks pass weight 0.9.
+import Picture from "@components/Picture.astro"
+
+interface Props {
+	src: string
+	alt: string
+	href: string
+	title?: string
+	/** Logo aspect ratio, width ÷ height. */
+	ratio: number
+	/** Optical-density factor, e.g. 0.9 for solid or heavy marks. */
+	weight?: number
+}
+const { src, alt, href, title, ratio, weight = 1 } = Astro.props
+const fit = (side: number, maxH: number, maxW: number) => {
+	const h = Math.min((weight * side) / Math.sqrt(ratio), maxH, maxW / ratio)
+	return { h: Math.round(h * 10) / 10, w: Math.round(h * ratio * 10) / 10 }
+}
+const d = fit(120, 128, 224)
+const m = fit(72, 64, 104)
+---
+
+<div class="case-tile">
+	<a href={href} target="_blank" rel="noopener" title={title ?? `${alt} (opens in a new tab)`} class="case-tile-link logo-link rounded-sm">
+		<Picture src={src} alt={alt} class="case-tile-logo" style={`--dh:${d.h}px;--dw:${d.w}px;--dhf:${(d.h / 720).toFixed(4)};--dwf:${(d.w / 720).toFixed(4)};--mh:${m.h}px;--mw:${m.w}px`} sizes={`${Math.ceil(d.w)}px`} draggable="false" />
+	</a>
+	<slot />
+</div>
+
+<style>
+	.case-tile {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 8px;
+	}
+	.case-tile-link {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		/* Full size once a row of three fits (3 × 240 + 2 × 48 = 816px); between 641px and that,
+		   tile, logo and gap shrink together (--fit = row width available, 720px at full size). */
+		--fit: calc(100vw - 176px);
+		width: min(240px, calc(var(--fit) / 3));
+		height: min(144px, calc(var(--fit) * 0.2));
+		opacity: 0.9;
+		transition: opacity 300ms ease-out, transform 300ms ease-out;
+		-webkit-tap-highlight-color: transparent;
+	}
+	.case-tile-link:hover {
+		opacity: 1;
+		transform: translateY(-2px);
+	}
+	:global(.case-tile-logo) {
+		--fit: calc(100vw - 176px);
+		height: min(var(--dh), calc(var(--fit) * var(--dhf)));
+		width: min(var(--dw), calc(var(--fit) * var(--dwf)));
+		max-width: none;
+		object-fit: contain;
+	}
+	@media (max-width: 640px) {
+		.case-tile-link {
+			width: 112px;
+			height: 80px;
+		}
+		:global(.case-tile-logo) {
+			height: var(--mh);
+			width: var(--mw);
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.case-tile-link { transition: none; }
+		.case-tile-link:hover { transform: none; }
+	}
+</style>

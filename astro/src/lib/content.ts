@@ -153,7 +153,7 @@ export const dataEngineering = z
 				z.object({
 					name: z.string(),
 					image: image.extend({ mobileSrc: mediaPath }).optional(),
-					logo: z.object({ src: mediaPath, alt: z.string(), size: z.string(), scale: z.number().optional(), slug: z.string() }),
+					logo: z.object({ src: mediaPath, alt: z.string(), ratio: z.number().positive(), weight: z.number().optional(), slug: z.string() }),
 					link: z.string().url(),
 					summary: z.string(),
 					note: z.string().optional(),

@@ -41,7 +41,8 @@
 					"src": "/media/logos/roy-green.svg",
 					"alt": "Roy",
 					"slug": "roy",
-					"size": "h-20 md:h-40"
+					"ratio": 1.096,
+					"weight": 0.9
 				}
 			},
 			{
@@ -72,7 +73,7 @@
 					"src": "/media/logos/sensational-concrete-stacked.png",
 					"alt": "Sensational Concrete",
 					"slug": "sensational-concrete",
-					"size": "h-11 md:h-24"
+					"ratio": 4.976
 				}
 			},
 			{
@@ -80,7 +81,7 @@
 				"logo": {
 					"src": "/media/logos/viru-andean-house.png",
 					"alt": "Viru Andean House",
-					"size": "h-24 md:h-44",
+					"ratio": 0.794,
 					"slug": "viru-andean-house"
 				},
 				"link": "https://www.andeanhouse.com",
@@ -107,7 +108,8 @@
 				"logo": {
 					"src": "/media/logos/juega-sapo-a.png",
 					"alt": "Juega Sapo",
-					"size": "h-20 md:h-40",
+					"ratio": 1,
+					"weight": 0.9,
 					"slug": "juega-sapo"
 				},
 				"link": "https://juegasapo.com",
@@ -137,7 +139,7 @@
 				"logo": {
 					"src": "/media/logos/somx-wordmark-light.svg",
 					"alt": "Somx",
-					"size": "h-9 md:h-[4.5rem]",
+					"ratio": 3.279,
 					"slug": "somx"
 				},
 				"link": "https://somxhealth.com",
