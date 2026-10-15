@@ -92,14 +92,4 @@ Open http://localhost:3333. There is no `.dockerignore`, so `astro/.env` is copi
 
 ## Contact form
 
-`/contact` posts to the Vercel Function `astro/api/contact.ts`. It uses the same approach as Sensational Concrete's `/api/estimate`: a honeypot field, a best-effort per-IP rate limit and the Resend REST API, plus a 3-second time trap. There's no Turnstile, because Sensational Concrete doesn't use it.
-
-Set these in Vercel → Project Settings → Environment Variables (Production + Preview):
-
-| Variable | Required | Value |
-|---|---|---|
-| `RESEND_API_KEY` | yes | Resend API key. Without it, submissions are only logged and no email is sent. |
-| `CONTACT_FROM_EMAIL` | recommended | Sender on a Resend-verified domain, e.g. `Jose Castillo <contact@josecastillocorcuera.com>`. Defaults to `onboarding@resend.dev`, which only delivers to the Resend account owner's address. |
-| `CONTACT_TO_EMAIL` | no | Defaults to `josecastillo@alumni.usc.edu`. |
-
-The function only runs on Vercel. The Docker/Node deploy doesn't serve `/api/contact`.
+`/contact` is a direct email link (`mailto:`) to the address in `astro/src/data/contact.json`. There's no server function or email provider, so nothing to configure.
