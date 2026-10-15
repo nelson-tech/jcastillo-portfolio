@@ -74,13 +74,12 @@ for (const name of wanted) {
 		await page.goBack(); await page.waitForTimeout(900)
 		await testCases(page, "after bfcache restore", name)
 	})
-	await check(T("Contact via swup: JS validation runs (no native submit)"), async () => {
+	await check(T("Contact via swup: email link present"), async () => {
 		await fresh()
 		await page.goto(`${BASE}/work`); await swupReady(page); await mark(page)
 		await page.click('a[href="/contact"]'); await settle(page, "/contact"); await noReload(page)
-		await page.click('#contact-form button[type=submit]'); await page.waitForTimeout(300)
-		await noReload(page)
-		assert((await page.getAttribute("#cf-name", "aria-invalid")) === "true", "validation did not run")
+		const href = await page.getAttribute('a.submit[href^="mailto:"]', "href")
+		assert(href && href.startsWith("mailto:josecastillo@alumni.usc.edu"), `bad mailto: ${href}`)
 	})
 	await check(T("no page errors"), async () => assert(!errors.length, errors.join(" | ")))
 	await browser.close()
