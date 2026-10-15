@@ -10,8 +10,8 @@
 /** @typedef {{ x: number, y: number, w: number, h: number }} Cell  0-based column/row, spans */
 
 export const MAX_CROP = Math.log(1.3) // allowed shape vs. photo aspect mismatch, either way
-export const FEATURE_SCALE = 2.5 // a featured tile targets 2.5x the normal area
-export const FEATURE_MIN = 2 // and is never under 2x the normal target area
+export const FEATURE_SCALE = 4 // a featured tile targets 2x2 normal tiles (Ive: clearly reads as featured)
+export const FEATURE_MIN = 2.5 // and is never under 2.5x the normal target area
 
 /**
  * @param {MosaicItem[]} items in display order
@@ -35,14 +35,14 @@ function search(items, opts) {
 	for (let lookahead = 2; lookahead <= 8; lookahead++)
 		for (const narrow of [0.25, 0.6, 1])
 			for (const flush of [0.3, 0.6])
-			for (const scale of [1, 0.75, 1.33]) {
+			for (const scale of [1, 1.33, 0.75]) {
 				const r = packOnce(items, { ...opts, area: opts.area * scale, lookahead, narrow, flush })
 				if (!isGapless(r.cells, opts.cols, r.rows)) continue
 				const crops = r.cells.map((c, i) => cropOf(c, items[i].ar))
 				if (Math.max(...crops) > MAX_CROP + 1e-9) continue // levelling may never over-crop
 				if (!featuresOk(items, r.cells, { ...opts, area: opts.area * scale })) continue
 				const small = r.cells.filter((c, i) => c.w * c.h < opts.area * (items[i].feature ? FEATURE_SCALE : 1) * 0.5).length
-				r.score = 3 * Math.max(...crops) + crops.reduce((a, b) => a + b, 0) / crops.length + small + Math.abs(Math.log(scale)) * 0.3
+				r.score = 3 * Math.max(...crops) + crops.reduce((a, b) => a + b, 0) / crops.length + small + Math.abs(Math.log(scale)) * 1.5
 				if (!best || r.score < best.score) best = r
 				if (++found >= 16) return { cells: best.cells, rows: best.rows }
 			}
@@ -210,10 +210,13 @@ export function sideOf(items, cols = 16) {
 export function featuresOk(items, cells, { cols, area }) {
 	const side = sideOf(items, cols)
 	const normal = Math.max(0, ...cells.filter((_, i) => !items[i].feature).map((c) => c.w * c.h))
+	const sizes = cells.filter((_, i) => !items[i].feature).map((c) => c.w * c.h).sort((x, y) => x - y)
+	const median = sizes.length ? sizes[sizes.length >> 1] : 0
 	return cells.every((c, i) => {
 		if (!items[i].feature) return true
 		const a = c.w * c.h
 		if (a < normal || a < Math.min(FEATURE_MIN * area, cols * cols * 1.25)) return false
+		if (cols >= 8 && a < FEATURE_MIN * median) return false
 		return c.w === cols || (side[i] === "left" ? c.x === 0 : c.x + c.w === cols)
 	})
 }
@@ -235,7 +238,7 @@ export const cropOf = (cell, ar) => Math.abs(Math.log(cell.w / cell.h / ar))
 
 /** The breakpoints the gallery uses; keep in sync with JustifiedGallery.astro's media queries. */
 export const BREAKPOINTS = {
-	lg: { min: 1024, cols: 16, area: 24 },
+	lg: { min: 1024, cols: 20, area: 24 },
 	md: { min: 641, cols: 12, area: 24 },
 	sm: { min: 0, cols: 4, area: 12 },
 }

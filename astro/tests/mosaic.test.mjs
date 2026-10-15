@@ -28,6 +28,12 @@ for (const [name, images] of Object.entries(galleries)) {
 		// Rule 3: a featured tile is never smaller than any normal tile.
 		const normal = Math.max(...cells.filter((_, i) => !items[i].feature).map((c) => c.w * c.h))
 		cells.forEach((c, i) => items[i].feature && assert.ok(c.w * c.h >= normal, `${tag}: feature ${sorted[i].src} smaller than a normal tile`))
+		// Featured tiles read as featured: >= 2.5x the median normal tile on 8+ column grids.
+		if (bp.cols >= 8) {
+			const sizes = cells.filter((_, i) => !items[i].feature).map((c) => c.w * c.h).sort((x, y) => x - y)
+			const median = sizes[sizes.length >> 1]
+			cells.forEach((c, i) => items[i].feature && assert.ok(c.w * c.h >= 2.5 * median, `${tag}: feature ${sorted[i].src} is ${(c.w * c.h / median).toFixed(1)}x the median tile`))
+		}
 		// Rule 1: big tiles alternate left / right edges (narrow grids: full width).
 		const side = sideOf(items, bp.cols)
 		cells.forEach((c, i) => {
@@ -40,6 +46,21 @@ for (const [name, images] of Object.entries(galleries)) {
 		const l = cells.filter((_, i) => items[i].ar > 1.1 && !items[i].feature).map((c) => c.w * c.h)
 		if (p.length && l.length && bp.cols >= 8) assert.ok(avg(p) >= avg(l) * 0.75, `${tag}: portraits look minor`)
 		console.log(`ok ${tag}: ${rows} rows, max crop ${Math.max(...cells.map((c, i) => cropOf(c, items[i].ar))).toFixed(2)}`)
+	}
+}
+// Pairs Ive keeps apart (B&W Merlion/kangaroo, night pair, character heads) never touch.
+const touch = (a, b) => {
+	const h = a.x < b.x + b.w && b.x < a.x + a.w
+	const v = a.y < b.y + b.h && b.y < a.y + a.h
+	return (h && (a.y + a.h === b.y || b.y + b.h === a.y)) || (v && (a.x + a.w === b.x || b.x + b.w === a.x))
+}
+for (const [name, pairs] of [["photography", [["8c45031a", "ab684da1"], ["42918015", "b9941f03"]]], ["graphicDesign", [["f7d01920", "f0709fa1"], ["7cd2863f", "f7d01920"], ["7cd2863f", "f0709fa1"]]]]) {
+	const sorted = byOrder(galleries[name])
+	const items = sorted.map((im) => ({ ar: im.width / im.height, feature: im.feature }))
+	const at = (id) => sorted.findIndex((im) => im.src.includes(id))
+	for (const [k, bp] of Object.entries(BREAKPOINTS)) {
+		const { cells } = packMosaic(items, bp)
+		for (const [a, b] of pairs) assert.ok(!touch(cells[at(a)], cells[at(b)]), `${name}@${k}: ${a} touches ${b}`)
 	}
 }
 // Website screenshots are anchored to the top.

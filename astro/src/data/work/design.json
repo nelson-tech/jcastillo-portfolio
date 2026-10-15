@@ -84,14 +84,15 @@
 				"alt": "Untitled Artwork 2 Orig",
 				"width": 1100,
 				"height": 768,
-				"order": 17
+				"order": 16
 			},
 			{
 				"src": "/media/f7d01920-54da-4758-9884-dcad314b9fc7.jpg",
 				"alt": "Monk Orig",
 				"width": 800,
 				"height": 800,
-				"order": 12
+				"order": 12,
+				"anchor": "top"
 			},
 			{
 				"src": "/media/a51ff4e4-44d0-4724-8d53-22371116c5d7.jpg",
@@ -106,21 +107,24 @@
 				"alt": "Jose Alejandro Orig",
 				"width": 761,
 				"height": 800,
-				"order": 21
+				"order": 21,
+				"anchor": "top"
 			},
 			{
 				"src": "/media/f0709fa1-fcbe-41d9-a293-7a534792f84b.jpg",
 				"alt": "Img 0035 Orig",
 				"width": 559,
 				"height": 800,
-				"order": 14
+				"order": 18,
+				"anchor": "top"
 			},
 			{
 				"src": "/media/c9663a66-7120-43ba-b8ac-99c7063c8def.jpg",
 				"alt": "Girl Pain Splatters Orig Orig",
 				"width": 858,
 				"height": 720,
-				"order": 3
+				"order": 3,
+				"anchor": "top"
 			},
 			{
 				"src": "/media/f989c7ff-c366-4983-9878-81c1d79c51af.jpg",
@@ -128,7 +132,8 @@
 				"width": 618,
 				"height": 800,
 				"order": 20,
-				"feature": true
+				"feature": true,
+				"anchor": "top"
 			},
 			{
 				"src": "/media/e015c412-3794-4587-9c36-f589f7ebb59a.jpg",
@@ -156,7 +161,8 @@
 				"alt": "6175210 Orig",
 				"width": 1100,
 				"height": 621,
-				"order": 15
+				"order": 14,
+				"anchor": "top"
 			},
 			{
 				"src": "/media/9f89ddc9-4983-4f1a-8bd7-837652b793d3.jpg",
@@ -177,14 +183,15 @@
 				"alt": "4135959 Orig",
 				"width": 812,
 				"height": 800,
-				"order": 18
+				"order": 17
 			},
 			{
 				"src": "/media/0f338d4c-b6d1-4a51-ba9d-a009085bc966.jpg",
 				"alt": "2263902 Orig",
 				"width": 800,
 				"height": 800,
-				"order": 11
+				"order": 11,
+				"anchor": "top"
 			},
 			{
 				"src": "/media/b8082e3c-22fa-444f-8ea6-a33c310735ec.png",
@@ -207,7 +214,7 @@
 				"alt": "1778240 Orig",
 				"width": 581,
 				"height": 800,
-				"order": 16
+				"order": 15
 			}
 		]
 	}
