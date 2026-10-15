@@ -26,15 +26,6 @@
         }
       },
       {
-        "text": "The Marginalized Sounds of Peru - Paper in the Conference Proceedings of the International Place Branding Association, Macao 2018.",
-        "label": "The Marginalized Sounds of Peru",
-        "link": "https://placebranding.org/wp-content/uploads/2020/10/3rd-IPBA-and-DBM-VI-Conference-Proceedings-5-7-December-2018.pdf",
-        "image": {
-          "src": "/media/09ec2a7b-69bc-4201-8300-5caf662f917d.jpg",
-          "alt": "The Marginalized Sounds of Peru"
-        }
-      },
-      {
         "text": "Trashed - VR production on transborder water pollution. 1st & 2nd place - 62nd Los Angeles Press Club's Annual Southern California Journalism Awards.",
         "label": "Trashed: The Tijuana River Valley Pollution Crisis",
         "link": "http://trashed.jovrnalism.io/",
@@ -47,15 +38,6 @@
         "text": "Multimedia producer & contributor: CPD Blog, PD features, and the Resonance music-diplomacy podcast.",
         "label": "USC Center on Public Diplomacy",
         "link": "https://uscpublicdiplomacy.org/users/jose_castillo",
-        "image": {
-          "src": "/media/f924ffd3-746e-4391-9709-821ddb542e72.png",
-          "alt": "USC Center on Public Diplomacy"
-        }
-      },
-      {
-        "text": "Resonance episode with Nicholas J. Cull on jazz diplomacy and musical propaganda (USC CPD, 2019).",
-        "label": "Resonance: Music Diplomacy in Times of Conflict",
-        "link": "https://uscpublicdiplomacy.org/story/music-diplomacy-times-conflict",
         "image": {
           "src": "/media/f924ffd3-746e-4391-9709-821ddb542e72.png",
           "alt": "USC Center on Public Diplomacy"
@@ -77,24 +59,11 @@
     ]
   },
   "writing": {
-    "header": "Publications",
+    "header": "Published Work",
     "items": [
       {
-        "title": "The Marginalized Sounds of Peru: Peruvian Music Diplomacy",
-        "link": "https://placebranding.org/wp-content/uploads/2020/10/3rd-IPBA-and-DBM-VI-Conference-Proceedings-5-7-December-2018.pdf",
-        "publisher": {
-          "url": "https://placebranding.org",
-          "name": "International Place Branding Association",
-          "logo": "/media/logos/publications/ipba.png",
-          "w": 386,
-          "h": 114,
-          "s": 0.85
-        },
-        "label": "Conference Proceedings, Macao 2018"
-      },
-      {
-        "title": "Cuban Public Diplomacy",
-        "link": "https://uscpublicdiplomacy.org/blog/cuban-public-diplomacy",
+        "title": "Music Diplomacy in Times of Conflict",
+        "link": "https://uscpublicdiplomacy.org/story/music-diplomacy-times-conflict",
         "publisher": {
           "url": "https://uscpublicdiplomacy.org",
           "name": "USC Center on Public Diplomacy",
@@ -102,20 +71,7 @@
           "w": 640,
           "h": 186
         },
-        "label": "CPD Blog",
-        "year": "2018"
-      },
-      {
-        "title": "Internationalists Unite! PD and the Transnational Progressive Movement",
-        "link": "https://uscpublicdiplomacy.org/blog/internationalists-unite-pd-and-transnational-progressive-movement",
-        "publisher": {
-          "url": "https://uscpublicdiplomacy.org",
-          "name": "USC Center on Public Diplomacy",
-          "logo": "/media/logos/publications/usc-cpd.png",
-          "w": 640,
-          "h": 186
-        },
-        "label": "CPD Blog",
+        "label": "Podcast episode",
         "year": "2019"
       },
       {
@@ -128,12 +84,12 @@
           "w": 640,
           "h": 186
         },
-        "label": "Resonance podcast",
+        "label": "Podcast episode",
         "year": "2019"
       },
       {
-        "title": "Music Diplomacy in Times of Conflict",
-        "link": "https://uscpublicdiplomacy.org/story/music-diplomacy-times-conflict",
+        "title": "Internationalists Unite! PD and the Transnational Progressive Movement",
+        "link": "https://uscpublicdiplomacy.org/blog/internationalists-unite-pd-and-transnational-progressive-movement",
         "publisher": {
           "url": "https://uscpublicdiplomacy.org",
           "name": "USC Center on Public Diplomacy",
@@ -141,22 +97,35 @@
           "w": 640,
           "h": 186
         },
-        "label": "Resonance podcast",
+        "label": "Blog post",
         "year": "2019"
       },
       {
-        "title": "Trashed: The Tijuana River Valley Pollution Crisis",
-        "link": "https://morethanasurvivor.jovrnalism.io/project/trashed/",
+        "title": "The Marginalized Sounds of Peru: Peruvian Music Diplomacy",
+        "link": "https://placebranding.org/wp-content/uploads/2020/10/3rd-IPBA-and-DBM-VI-Conference-Proceedings-5-7-December-2018.pdf",
         "publisher": {
-          "url": "https://www.jovrnalism.io",
-          "name": "JOVRNALISM",
-          "logo": "/media/logos/publications/jovrnalism.png",
-          "w": 240,
-          "h": 232,
-          "s": 1.25
+          "url": "https://placebranding.org",
+          "name": "International Place Branding Association",
+          "logo": "/media/logos/publications/ipba.png",
+          "w": 386,
+          "h": 114,
+          "s": 0.7
         },
-        "label": "360° VR",
-        "year": "2021"
+        "label": "Conference paper",
+        "year": "2018"
+      },
+      {
+        "title": "Cuban Public Diplomacy",
+        "link": "https://uscpublicdiplomacy.org/blog/cuban-public-diplomacy",
+        "publisher": {
+          "url": "https://uscpublicdiplomacy.org",
+          "name": "USC Center on Public Diplomacy",
+          "logo": "/media/logos/publications/usc-cpd.png",
+          "w": 640,
+          "h": 186
+        },
+        "label": "Blog post",
+        "year": "2018"
       }
     ]
   }

@@ -28,7 +28,7 @@ const { page, publications, writing, podcasts } = publicDiplomacy
 				/>
 			</div>
 		</div>
-		<section id="writing" class="border-rule mb-8 border-t pt-12 pb-8">
+		<section id="published-work" class="border-rule mb-8 border-t pt-12 pb-8">
 			<h2 class="text-highlight mb-8 w-full text-center text-4xl font-bold">{writing.header}</h2>
 			<ul class="mx-auto max-w-2xl">
 				{writing.items.map((item) => (
@@ -37,11 +37,12 @@ const { page, publications, writing, podcasts } = publicDiplomacy
 							<CompanyLogo src={item.publisher.logo} alt={item.publisher.name} href={item.publisher.url} width={item.publisher.w} height={item.publisher.h} scale={item.publisher.s ?? 1} />
 						</div>
 						<div>
+							<p class="text-stone mb-1 text-sm tracking-wider">{item.label}</p>
 							<a href={item.link} target="_blank" rel="noopener" class="text-lg font-bold underline-offset-4 hover:underline">
 								{item.title}
 							</a>
 							<p class="text-stone mt-1 text-base">
-								{[item.publisher.name, item.label, item.year].filter(Boolean).join(" · ")}
+								{[item.publisher.name, item.year].filter(Boolean).join(" · ")}
 							</p>
 						</div>
 					</li>
