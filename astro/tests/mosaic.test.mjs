@@ -63,6 +63,14 @@ for (const [name, pairs] of [["photography", [["8c45031a", "ab684da1"], ["429180
 		for (const [a, b] of pairs) assert.ok(!touch(cells[at(a)], cells[at(b)]), `${name}@${k}: ${a} touches ${b}`)
 	}
 }
+// Phones follow the data order exactly: reading order (top to bottom, left to right) is 1..N.
+for (const [name, images] of Object.entries(galleries)) {
+	const items = byOrder(images).map((im) => ({ ar: im.width / im.height, feature: im.feature }))
+	const { cells } = packMosaic(items, BREAKPOINTS.sm)
+	const visual = cells.map((c, i) => ({ c, i })).sort((a, b) => a.c.y - b.c.y || a.c.x - b.c.x).map((x) => x.i)
+	assert.deepEqual(visual, items.map((_, i) => i), `${name}@sm: visual order equals data order`)
+	assert.equal(byOrder(images)[0].order, 1)
+}
 // Website screenshots are anchored to the top.
 for (const im of galleries.graphicDesign) if (im.width / im.height > 1.8 && im.src.endsWith(".png")) assert.equal(im.anchor, "top", `${im.src} anchor top`)
 assert.deepEqual(byOrder([{ a: 1 }, { a: 2, order: 1 }, { a: 3 }]).map((x) => x.a), [2, 1, 3])

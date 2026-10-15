@@ -23,7 +23,7 @@ const cache = new Map()
 /** Memoised: the search takes seconds, and SSR (Docker) would otherwise repeat it per request. */
 export function packMosaic(items, opts) {
 	const key = JSON.stringify([items.map((it) => [it.ar, !!it.feature]), opts])
-	if (!cache.has(key)) cache.set(key, search(items, opts))
+	if (!cache.has(key)) cache.set(key, opts.sequential ? sequential(items, opts) : search(items, opts))
 	const { cells, rows } = cache.get(key)
 	return { cells: cells.map((c) => ({ ...c })), rows }
 }
@@ -199,6 +199,43 @@ function levelBottom(items, cells, sky, minArea, maxArea) {
 	return best.H
 }
 
+/**
+ * Phones: follow `order` exactly (Ive). Rows run top to bottom in data order; a portrait pairs
+ * two-up with the next item only when that one is a portrait too, otherwise it (and every
+ * landscape or featured photo) spans the full width. Gapless with a flush end by construction.
+ */
+export function sequential(items, { cols }) {
+	const cells = []
+	let y = 0
+	// Full-width tiles: normal ones at most 5/4 of the width tall, featured ones at least that, so a
+	// featured photo is never the smaller tile.
+	const tall = Math.round(cols * 1.25)
+	const bestH = (w, ars, lo = 2, hi = 3 * w) => {
+		let best = lo
+		for (let h = lo; h <= hi; h++) {
+			const err = (hh) => Math.max(...ars.map((ar) => Math.abs(Math.log(w / hh / ar))))
+			if (err(h) < err(best)) best = h
+		}
+		return best
+	}
+	for (let i = 0; i < items.length; i++) {
+		const it = items[i]
+		const next = items[i + 1]
+		const portrait = (x) => x && !x.feature && x.ar < 0.9
+		if (portrait(it) && portrait(next)) {
+			const h = bestH(cols / 2, [it.ar, next.ar])
+			cells.push({ x: 0, y, w: cols / 2, h }, { x: cols / 2, y, w: cols / 2, h })
+			i++
+			y += h
+		} else {
+			const h = it.feature ? bestH(cols, [it.ar], tall, 3 * cols) : bestH(cols, [it.ar], 2, tall)
+			cells.push({ x: 0, y, w: cols, h })
+			y += h
+		}
+	}
+	return { cells, rows: y }
+}
+
 /** Which edge each featured item must touch: alternating left, right, left, ... */
 export function sideOf(items, cols = 16) {
 	let n = 0
@@ -240,7 +277,7 @@ export const cropOf = (cell, ar) => Math.abs(Math.log(cell.w / cell.h / ar))
 export const BREAKPOINTS = {
 	lg: { min: 1024, cols: 20, area: 24 },
 	md: { min: 641, cols: 12, area: 24 },
-	sm: { min: 0, cols: 4, area: 12 },
+	sm: { min: 0, cols: 4, area: 12, sequential: true },
 }
 
 /** Sorts by optional `order` (stable; items without one keep their place after ordered ones). */
