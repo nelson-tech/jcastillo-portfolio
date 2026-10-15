@@ -7,6 +7,7 @@ import { dataEngineering } from "@lib/content"
 import { stackMeta } from "@lib/stack"
 import StackPill from "@components/StackPill.astro"
 import CompanyLogo from "@components/CompanyLogo.astro"
+import CaseLogoTile from "@components/CaseLogoTile.astro"
 import PublicationCarousel from "@components/PublicationCarousel.svelte"
 import SynthNote from "@components/SynthNote.svelte"
 const { page, caseStudies, stack, agents, career, links } = dataEngineering
@@ -23,50 +24,19 @@ const synthNote = "Illustrative visual recreated with synthetic data to protect 
 		{page.header && <PageHeader header={page.header} description={page.description} />}
 		<script is:inline>document.documentElement.classList.add("js")</script>
 		<div id="case-studies" class="mb-8 mt-8 pb-8">
-			<!-- Rows of two, then the fifth centred: logo links to the live site; the toggle under it opens that case study below (one open at a time) -->
-			<div class="mx-auto flex max-w-5xl flex-col items-center gap-y-6 py-6 md:gap-y-10">
-				<div class="flex flex-nowrap items-start justify-center gap-x-5 md:gap-x-20">
-					{caseStudies.items.slice(0, 2).map((study) => (
-						<div class="flex flex-col items-center gap-2">
-							<div class="flex h-[88px] items-end md:h-[176px]">
-							<a href={study.link} target="_blank" rel="noopener" title={`${study.name} (opens in a new tab)`} class="logo-link group inline-flex items-end rounded-sm p-1 pb-0 md:p-2 md:pb-0">
-								<Picture src={study.logo.src} alt={study.logo.alt} style={`--s:${study.logo.scale ?? 1}`} class={`case-logo ${study.logo.size} w-auto max-w-full object-contain opacity-90 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-100`} />
-							</a>
-							</div>
-							<button type="button" class="case-toggle" aria-expanded="false" aria-controls={`case-${study.logo.slug}`} data-case={study.logo.slug}>
-								Case study <span class="sign" aria-hidden="true">+</span>
-							</button>
-						</div>
-					))}
-				</div>
-				<div class="flex flex-nowrap items-start justify-center gap-x-5 md:gap-x-20">
-					{caseStudies.items.slice(2, 4).map((study) => (
-						<div class="flex flex-col items-center gap-2">
-							<div class="flex h-[104px] items-end md:h-[192px]">
-							<a href={study.link} target="_blank" rel="noopener" title={`${study.name} (opens in a new tab)`} class="logo-link group inline-flex items-end rounded-sm p-1 pb-0 md:p-2 md:pb-0">
-								<Picture src={study.logo.src} alt={study.logo.alt} style={`--s:${study.logo.scale ?? 1}`} class={`case-logo ${study.logo.size} w-auto max-w-full object-contain opacity-90 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-100`} />
-							</a>
-							</div>
-							<button type="button" class="case-toggle" aria-expanded="false" aria-controls={`case-${study.logo.slug}`} data-case={study.logo.slug}>
-								Case study <span class="sign" aria-hidden="true">+</span>
-							</button>
-						</div>
-					))}
-				</div>
-				<div class="flex flex-nowrap items-start justify-center gap-x-5 md:gap-x-20">
-					{caseStudies.items.slice(4).map((study) => (
-						<div class="flex flex-col items-center gap-2">
-							<div class="mt-1 flex items-end md:mt-2">
-							<a href={study.link} target="_blank" rel="noopener" title={`${study.name} (opens in a new tab)`} class="logo-link group inline-flex items-end rounded-sm p-1 pb-0 md:p-2 md:pb-0">
-								<Picture src={study.logo.src} alt={study.logo.alt} style={`--s:${study.logo.scale ?? 1}`} class={`case-logo ${study.logo.size} w-auto max-w-full object-contain opacity-90 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-100`} />
-							</a>
-							</div>
-							<button type="button" class="case-toggle" aria-expanded="false" aria-controls={`case-${study.logo.slug}`} data-case={study.logo.slug}>
-								Case study <span class="sign" aria-hidden="true">+</span>
-							</button>
-						</div>
-					))}
-				</div>
+			<!-- 2 + 3 at every size: each logo links to the live site; the toggle under it opens that case study below (one open at a time) -->
+			<div class="case-logos">
+				{[caseStudies.items.slice(0, 2), caseStudies.items.slice(2)].map((row) => (
+					<div class="case-logo-row">
+						{row.map((study) => (
+							<CaseLogoTile src={study.logo.src} alt={study.logo.alt} href={study.link} title={`${study.name} (opens in a new tab)`} ratio={study.logo.ratio} weight={study.logo.weight}>
+								<button type="button" class="case-toggle" aria-expanded="false" aria-controls={`case-${study.logo.slug}`} data-case={study.logo.slug}>
+									Case study <span class="sign" aria-hidden="true">+</span>
+								</button>
+							</CaseLogoTile>
+						))}
+					</div>
+				))}
 			</div>
 			<div class="mx-auto max-w-3xl">
 				{caseStudies.items.map((study) => (
@@ -226,8 +196,20 @@ const synthNote = "Illustrative visual recreated with synthetic data to protect 
 
 
 <style>
-	/* Case-study logos stay large heroes; weight correction uses the same --s as CompanyLogo */
-	:global(.case-logo) { transform: scale(var(--s, 1)); transform-origin: bottom center; }
+	/* Case-study logos: 2 + 3 centred rows at every size; each tile is CaseLogoTile */
+	.case-logos {
+		@apply mx-auto flex max-w-5xl flex-col items-center py-6;
+		gap: 40px;
+	}
+	.case-logo-row {
+		@apply flex flex-nowrap justify-center;
+		gap: min(38px, calc((100vw - 176px) * 0.0528));
+	}
+	@media (max-width: 640px) {
+		.case-logos { gap: 28px; }
+		.case-logo-row { gap: 8px; }
+		.case-logos .case-toggle { font-size: 13px; }
+	}
 	.case-toggle {
 		@apply text-highlight-text rounded-sm text-base underline-offset-4 hover:underline;
 	}
