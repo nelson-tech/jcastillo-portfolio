@@ -10,9 +10,10 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "postbuild": "node scripts/inline-css.mjs",
+    "postbuild": "node scripts/inline-css.mjs && (test -z \"$VERCEL\" || node tests/contact-no-email.test.mjs)",
     "test:nav": "node tests/nav.e2e.mjs",
     "lint": "eslint",
+    "test:contact": "node tests/contact-no-email.test.mjs",
     "test:gallery": "node tests/justify.test.mjs && node tests/work-grid.test.mjs && node tests/mosaic.test.mjs"
   },
   "dependencies": {
