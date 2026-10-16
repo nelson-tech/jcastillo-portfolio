@@ -14,9 +14,7 @@ const mailto = `mailto:${contact.email}?subject=${subject}`
 
 		<div class="mt-10 flex flex-col items-center gap-4">
 			<a href={mailto} class="submit">Email me</a>
-			<p class="text-stone text-lg tracking-wide">
-				<a href={mailto} class="text-highlight hover:underline">{contact.email}</a>
-			</p>
+			<!-- Do not show the email address as text here (Jose's call). tests/contact-no-email.test.mjs enforces it. -->
 		</div>
 	</section>
 </Layout>
