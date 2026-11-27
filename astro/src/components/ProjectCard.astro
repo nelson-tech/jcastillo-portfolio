@@ -37,4 +37,14 @@ const { category } = Astro.props
 		-webkit-backdrop-filter: blur(6px);
 		backdrop-filter: blur(6px);
 	}
+
+	/* Devices with no hover never reveal group-hover titles, so show the name at rest. */
+	@media (hover: none) {
+		div.scrim {
+			opacity: 1;
+		}
+		div.scrim span {
+			transform: none;
+		}
+	}
 </style>
