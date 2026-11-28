@@ -10,7 +10,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "postbuild": "node scripts/inline-css.mjs && (test -z \"$VERCEL\" || node tests/contact-no-email.test.mjs)",
+    "postbuild": "node scripts/inline-css.mjs && node tests/no-heavy-originals.test.mjs && (test -z \"$VERCEL\" || node tests/contact-no-email.test.mjs)",
     "test:nav": "node tests/nav.e2e.mjs",
     "lint": "eslint",
     "test:contact": "node tests/contact-no-email.test.mjs",

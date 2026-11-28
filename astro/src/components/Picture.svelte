@@ -2,7 +2,7 @@
 	// Svelte twin of Picture.astro. Islands can't read the manifest, so the page passes `info`
 	// (from imageInfo() in @lib/images) as a prop.
 	import { onMount } from "svelte"
-	import { naturalSizes, srcset } from "@lib/picture"
+	import { fallbackSrc, naturalSizes, srcset } from "@lib/picture"
 	import type { ImageInfo } from "@lib/picture"
 
 	export let src: string
@@ -22,6 +22,7 @@
 
 	$: color = info?.avif?.length && !loaded ? info.color : null
 	$: resolvedSizes = sizes ?? (info ? naturalSizes(info) : undefined)
+	$: imgSrc = fallbackSrc(src, info)
 </script>
 
 {#if info?.avif?.length}
@@ -30,7 +31,7 @@
 		<source type="image/webp" srcset={srcset(info.webp ?? [])} sizes={resolvedSizes} />
 		<img
 			bind:this={img}
-			{src}
+			src={imgSrc}
 			{alt}
 			class={className}
 			width={info.width}
@@ -45,7 +46,7 @@
 {:else}
 	<img
 		bind:this={img}
-		{src}
+		src={imgSrc}
 		{alt}
 		class={className}
 		width={info?.width}

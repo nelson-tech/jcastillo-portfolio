@@ -1,10 +1,10 @@
 ---
-// <picture> with AVIF/WebP sources from the image manifest and the original as <img> fallback.
+// <picture> with AVIF/WebP sources from the image manifest and the largest WebP as <img> fallback.
 // Images missing from the manifest (SVG, GIF, un-generated) render as a plain <img>.
 // The <picture> is display:contents, so the <img> lays out exactly as a bare <img> would.
 import type { HTMLAttributes } from "astro/types"
 import { imageInfo } from "@lib/images"
-import { naturalSizes, srcset } from "@lib/picture"
+import { fallbackSrc, naturalSizes, srcset } from "@lib/picture"
 
 interface Props extends Omit<HTMLAttributes<"img">, "src" | "sizes" | "loading"> {
 	src: string
@@ -30,7 +30,7 @@ const mediaInfo = mediaSrc ? imageInfo(mediaSrc) : undefined
 const color = info?.avif ? info.color : null
 const imgAttrs = {
 	...attrs,
-	src,
+	src: fallbackSrc(src, info),
 	alt,
 	width: width ?? info?.width,
 	height: height ?? info?.height,
