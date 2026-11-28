@@ -1,23 +1,46 @@
 ---
 import Picture from "@components/Picture.astro"
+import { imageInfo } from "@lib/images"
 import type { work } from "@lib/content"
 
 export interface Props {
 	category: (typeof work)["categories"][number]
 }
 const { category } = Astro.props
+const motion = imageInfo(category.image.src)?.video
+const info = imageInfo(category.image.src)
 ---
 
 <div class={`group relative aspect-video ${category.wide ? "md:col-span-2 md:aspect-[32/9]" : ""}`}>
-	<Picture
-		src={category.image.src}
-		alt={category.image.alt}
-		class="h-full w-full object-fill transition-all duration-500 group-hover:grayscale"
-		sizes="(min-width: 1312px) 624px, (min-width: 768px) 50vw, 100vw"
-		media={category.wide && category.image.wideSrc ? "(min-width: 768px)" : undefined}
-		mediaSrc={category.wide ? category.image.wideSrc : undefined}
-		mediaSizes="(min-width: 1312px) 1248px, 100vw"
-	/>
+	{
+		motion ? (
+			<video
+				class="h-full w-full object-fill transition-all duration-500 group-hover:grayscale"
+				autoplay
+				muted
+				loop
+				playsinline
+				preload="metadata"
+				poster={motion.poster}
+				width={info?.width}
+				height={info?.height}
+				aria-label={category.image.alt}
+			>
+				<source src={motion.webm} type="video/webm" />
+				<source src={motion.mp4} type="video/mp4" />
+			</video>
+		) : (
+			<Picture
+				src={category.image.src}
+				alt={category.image.alt}
+				class="h-full w-full object-fill transition-all duration-500 group-hover:grayscale"
+				sizes="(min-width: 1312px) 624px, (min-width: 768px) 50vw, 100vw"
+				media={category.wide && category.image.wideSrc ? "(min-width: 768px)" : undefined}
+				mediaSrc={category.wide ? category.image.wideSrc : undefined}
+				mediaSizes="(min-width: 1312px) 1248px, 100vw"
+			/>
+		)
+	}
 	<div
 		class="scrim absolute inset-0 z-10 opacity-0 transition-all duration-500 group-hover:opacity-100"
 	>

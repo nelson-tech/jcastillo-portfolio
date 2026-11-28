@@ -5,6 +5,7 @@
 // outputs are reused and only new/changed images are encoded. Runs as `prebuild`.
 import { createHash } from "node:crypto"
 import { existsSync } from "node:fs"
+import { spawnSync } from "node:child_process"
 import { copyFile, mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises"
 import os from "node:os"
 import path from "node:path"
@@ -34,6 +35,41 @@ const LIGHTBOX_SRCS = new Set(
 	(JSON.parse(await readFile(path.join(root, "src/data/work/photography.json"), "utf8")).images ?? []).map((i) => i.src)
 )
 const EXTRA = ["Jose Alejandro_low res.png", "Jose Castillo logo.png"]
+
+const motionDir = path.join(publicDir, "media", "motion")
+const haveFfmpeg = () => spawnSync("ffmpeg", ["-version"], { stdio: "ignore" }).status === 0
+
+/** Attach committed (or freshly encoded) looping video stand-ins for an animated GIF. */
+async function attachGifVideo(file, result) {
+	const stem = path.basename(file, path.extname(file))
+	await mkdir(motionDir, { recursive: true })
+	const mp4 = path.join(motionDir, `${stem}.mp4`)
+	const webm = path.join(motionDir, `${stem}.webm`)
+	const poster = path.join(motionDir, `${stem}-poster.webp`)
+	if (!existsSync(mp4) || !existsSync(webm) || !existsSync(poster)) {
+		if (!haveFfmpeg()) {
+			console.warn(`[gen-images] ffmpeg missing; no video stand-in for ${toUrl(file)}`)
+			return result
+		}
+		const scale = "scale=trunc(iw/2)*2:trunc(ih/2)*2"
+		const run = (args) => {
+			const r = spawnSync("ffmpeg", ["-y", "-i", file, ...args], { encoding: "utf8" })
+			if (r.status !== 0) throw new Error(r.stderr?.slice(-400) || "ffmpeg failed")
+		}
+		if (!existsSync(poster)) run(["-frames:v", "1", poster])
+		if (!existsSync(mp4)) run(["-an", "-c:v", "libx264", "-preset", "slow", "-crf", "18", "-pix_fmt", "yuv420p", "-movflags", "+faststart", "-vf", scale, mp4])
+		if (!existsSync(webm)) run(["-an", "-c:v", "libvpx-vp9", "-b:v", "0", "-crf", "28", "-row-mt", "1", "-vf", scale, webm])
+	}
+	if (existsSync(mp4) && existsSync(webm) && existsSync(poster)) {
+		result.video = {
+			mp4: `/media/motion/${stem}.mp4`,
+			webm: `/media/motion/${stem}.webm`,
+			poster: `/media/motion/${stem}-poster.webp`,
+		}
+	}
+	return result
+}
+
 
 async function walk(dir) {
 	const entries = await readdir(dir, { withFileTypes: true })
@@ -79,6 +115,9 @@ async function processFile(file, previous, written) {
 			// Transparent images (logos, cut-outs) get no placeholder so no box flashes behind them.
 			entry.color = stats.isOpaque ? hex(stats.dominant) : null
 		}
+	}
+	if (ext === ".gif") {
+		return attachGifVideo(file, { hash, width: entry.width, height: entry.height, color: null })
 	}
 	if (!RASTER.has(ext)) return { hash, width: entry.width, height: entry.height, color: null }
 

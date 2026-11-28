@@ -14,7 +14,12 @@ export interface ImageInfo {
 	webp?: Variant[]
 	/** Photography lightbox AVIF (long edge <= 2000, q72). */
 	lightbox?: { src: string; width: number; height: number }
+	/** Looping video stand-in for an animated GIF work tile, plus a still poster. */
+	video?: { mp4: string; webm: string; poster: string }
 }
+
+/** Prefer the largest generated WebP so the <img> fallback never points at a huge original. */
+export const fallbackSrc = (src: string, info?: ImageInfo) => info?.webp?.at(-1)?.src ?? src
 
 export const srcset = (variants: Variant[]) => variants.map((v) => `${v.src} ${v.w}w`).join(", ")
 
